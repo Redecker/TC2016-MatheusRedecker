@@ -6,4 +6,6 @@
 
 - [Planning in BDI agents: a survey of the integration of planning algorithms and agent reasoning](http://journals.cambridge.org/download.php?file=%2FKER%2FKER30_01%2FS0269888913000337a.pdf&code=f7114d6160913887e332fec41a70bb64)
 
+## TC
+
 - Agentes usando aprendizado por reforço aplicados a jogos - TC/Leonardo Rosa Amado
