@@ -10,6 +10,8 @@
 
 - [Documentation for JSHOP2](https://www.ida.liu.se/~TDDD48/labs/2015/lab4/JSHOP2.pdf)
 
+- [Experiments with Game Tree Search in Real-Time Strategy Games](http://arxiv.org/pdf/1208.1940.pdf)
+
 ## TC
 
 - Agentes usando aprendizado por reforço aplicados a jogos - Leonardo Rosa Amado
