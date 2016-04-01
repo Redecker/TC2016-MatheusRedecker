@@ -6,20 +6,16 @@
 
 \section{Planejamento} 
 
-%-Overview de planejamento \cite{ghallab2004automated}\\
-%**O que é em geral \\
-
 Planejamento é o modo racional de agir. Planejamento é a geração de um plano para atingir um objetivo. O processo do planejamento consistem em escolher e gerenciar as ações, antecipando os resultados a fim de atingir um objetivo pré definido \cite{ghallab2004automated}. \\
 Para que alguns objetivos consigam ser alcançados, as ações que são tomadas não necessariamente necessitam de um planejamento, nas atividades do dia-a-dia a maioria das ações que são tomadas não são planejadas. Para fazer um planejamento é avaliado os ganhos de planejar as ações em vista do objetivo, geralmente, os planos nem sempre são os melhores possíveis, pois a busca de planos considerados perfeitos são mais demorados para construir, fazendo com que planos razoáveis ou bons sejam escolhidos ao invés dos perfeitos \cite{ghallab2004automated}. \\
-Pelo fato de se ter muitos tipos de ações, também há varias formas de planejamento \cite{ghallab2004automated}. Algumas das formas de planejamento são:
+Pelo fato de se ter alguns tipos de ações, também há alguns formas de planejamento \cite{ghallab2004automated}. Algumas das formas de planejamento são:
 
 \begin{itemize}
 	\item Planejamento de trajetória e movimento - Este tipo de planejamento foca em problemas onde é preciso simplificar um caminho de um ponto inicial a um objetivo e ainda controlar a trajetória através do caminho. Por exemplo, gerar a rota de um caminhão e movimento de um braço mecânico. 
 	\item Planejamento de percepção - Este tipo de planejamento é focado em problemas onde os planos devem se preocupar com as informações obtidas pelo sistema. Por exemplo,  a construção de um ambiente virtual de uma área urbana através de imagens. 
 	\item Planejamento de navegação - Combina os dois tipos acima de planejamento, de percepção e movimento, para problemas que precisem da combinação de localizações e percepções. Por exemplo, andar por um rio desviando de obstáculos.  
 \end{itemize}
- 
-%**o que é em computação \\
+
 Planejamento na computação é a área da Inteligencia Artificial(IA) que busca a geração de planos automaticamente de forma computacional \cite{ghallab2004automated}. E para representar o processo de planejamento no computador é preciso de um modelo conceitual que é um recurso teórico usado para descrever o problema de forma geral e assim podendo aprofundar dependendo da abordagem. Como planejamento é  focado na escolha de ações para acontecer mudança de estados no sistema, o modelo para descrever esse processo deve ser dinâmico, ou seja, que permita a mudança do ambiente\cite{ghallab2004automated}. \\
 
 O modelo geral utilizado para representar um plano é o \textit{state-transition systems}. O modelo é representado por $\sum = (S, A, E, \gamma) $. Onde S representa os estados, A as ações, E os eventos que podem ocorrer no sistema, e $\gamma$ a função de transição composta por $ \gamma: S \times A \times E \rightarrow S'$. A figura \ref{fig:planmodelo} mostra uma representação desse modelo \cite{ghallab2004automated}.
@@ -34,111 +30,55 @@ O modelo geral utilizado para representar um plano é o \textit{state-transition
 
 Um plano é gerado, quando dado um estado inicial e um objetivo, um conjunto de ações é gerado e quando executadas levam ao objetivo. O processo usado para conseguir isso é chamado de planejamento, onde é necessário ter uma descrição do sistema($\sum$) onde os estados e as ações são definidos.\\ 
 Os estados são representados por um conjunto de átomos sem função \cite{intelligence2003modern}, que são usados para representar alguma situação, por exemplo uma pessoa estar em um lugar pode ser representado por \textit{at(Matheus, PUCRS)}, assim todos os estados devem seguir o padrão, podendo ter mais de uma situação, como por exemplo, representar que alguém está em um lugar e feliz ao mesmo tempo, \textit{at(Matheus,PUCRS) $\wedge$ happy(Matheus)}. \\
-As ações são descritas por um conjunto esquema de ações \cite{intelligence2003modern}. Para toda ação é necessário uma pré condição aplicada ao estado atual, que se for satisfeita, garante o efeito ou pós condição, levando o sistema para o estado resultante. A figura \ref{fig:explanning} mostra um exemplo de como seria um método de ação. \\
-
-%paragrafo que introduza os dois tipos de planejamento ou somente o HTN
-
-
-%\subsection{Planejamento Clássico}
-%\subsection{Planejamento Neoclassico}
-%**formas de planejaento\\ 
-%-metodos \\
-%*classico \\
-%**o que é \\
-%** objetivos \\
-%** complexidade \\
-%** limitações \\
-%*neoclassico
-%** o que é \\
-%** tipos \\
-
-%-definição \msr{acho que ficou desnecessario esse topico}\\
-
-%-conceitos \cite{ghallab2004automated}\\
-%**modelos(assumptions) \\
-
+As ações são descritas por um conjunto esquema de ações \cite{intelligence2003modern}. Para toda ação é necessário uma pré condição aplicada ao estado atual, que se for satisfeita, garante o efeito ou pós condição, levando o sistema para o estado resultante. Por exemplo, caminhar de um lugar a outro: \\
+\textit{Action(walk(from, to)): \\
+Precond: at(from)  $\wedge$ path(from,to) \\
+Effect: $\neg$ at(from)  $\wedge$ at(to)}
 
 \subsection{HTN} 
-%-como se encaixa em planejamento \\ 
-Dentro do planejamento existe um tipo especifico chamado \textit{Hierarchical Task Network Planning} (HTN). Os métodos de HTN são utilzados pelo fato do problemas serem descrito como receitas que corresponde como humanos podem pensar em resolver problemas de planejamento \cite{ghallab2004automated}.  
-%** linkar com planejamento classico\\
-Em HTN o objetivo não é alcançar o objetivo, e sim realizar um conjunto de tarefas \cite{ghallab2004automated}. Como entrada para o sistema é necessário um conjunto de operadores e um conjunto de métodos. Em HTN as ações são chamadas de tarefas, e podem ser dividas em dois tipos: Primitivas e não primitivas. As tarefas primitivas são executadas diretamente através do conjunto de métodos, já as tarefas não primitivas são decompostas recursivamente em sub tarefas e assim se transformando em tarefas menores até se tornarem em tarefas primitivas. \\
+Dentro do planejamento existe um tipo especifico chamado \textit{Hierarchical Task Network Planning} (HTN). Os métodos de HTN são utilzados pelo fato do problemas serem descrito como receitas, seguindo uma ordem de execução das tarefas, que pode corresponde como pessoas pensam em resolver problemas de planejamento \cite{ghallab2004automated}.  \\
+Em HTN o objetivo não é alcançar o objetivo, e sim realizar um conjunto de tarefas. Como entrada para o sistema é necessário um conjunto de operadores e um conjunto de métodos. Em HTN as ações são chamadas de tarefas, e podem ser dividas em dois tipos: Primitivas e não primitivas. As tarefas primitivas são executadas diretamente através do conjunto de métodos, já as tarefas não primitivas são decompostas recursivamente em sub tarefas e assim se transformando em tarefas menores até se tornarem em tarefas primitivas, e assim podem ser executadas. \\ 
 
-%** difereças do planejamento classico\\
-A diferença principal para outro tipo de planejamento é o fato que as tarefas são hierárquicas, ou seja, algumas tarefas devem ser executadas antes das outras.
-
-%-definição \\
-%** o que é\\ 
-%** decomposição de tarefas \\
-%** subtask \\
-%** goals \\
-** modelo formal \\
-**diferença entre SPN e total order SPN \\
-** problemas \\
-
--conceitos \msr{acho que ficou desnecessario esse topico}\\
+% task primitivas - precondições pos condições - são executadas
+% task não primitivas - precondiçoes conjunto de subtarefas - as subtarefas são analisadas até todas virarem primitivas.
+% HTN explora as possibilidades executando sempre os metodos em ordem.
+% quando chega ao deadend realiza backtrack
 
 \subsection{AHTN} 
--como se encaixa em planejamento e HTN \\
-**o que é (HTN + game search tree)\\
-** quem propos\cite{ontanon2015adversarial} \\
--definição \\
-** game search tree \\
-** como encaixou as duas coisas
-** algoritmo \\
-%-conceitos \msr{acho que este topico ficou desnecessario} \\
 
-%**Motivação \\
+%AHTN é HTN + game tree search \cite{adversal}
+\textit{Adversarial hierarchical-task network} (AHTN) é um algoritmo proposto por \cite{ontanon2015adversarial} onde combina técnicas de planejamento HTN e o algoritmo \textit{minimax game tree search}. Este algoritmo foi proposto para tentar solucionar o problema do grande fator de ramificação dos jogos em tempo real. \\
+%explicar Game search tree(minimax)
+%explicar técnica de HTN utilizada
+%explicar diferença do minimax puro
+
 \subsection{Motivação e aplicação}
 A motivação para o estudo de planejamento automatizado vem do fato que, como planejamento é um componente vital do comportamento racional, e a IA busca alcançar aspectos de inteligencia a nível computacional, então planejamento é um elemento chave para isso\cite{ghallab2004automated}.
-%-aplicação no mundo real\\
-%**como se aplica \\
-%**exemplo de problema \\
+%algumas aplicações de planejamento e exemplos
 
 \section{Aprendizado} 
--overview de aprendizado
-**O que é em geral \\
-**o que é em computação \\
-**formas de machine learning\\
-**Motivação \\
+%-overview de aprendizado
+%**O que é em geral \\
 
 \subsection{Aprendizado de Máquina} 
-- overview de aprendizado de maquina \\
-**
-- definição \\
-- conceitos
 
-\subsection{Aprendizado por Reforço} 
-\todo[color=red,author=Felipe,inline]{Pode ser desnecessário mesmo. Troca o tom do teu azul, é tri agressivo nos olhos, hehe.}
-- como se encaixa dentro de aprendizado de maquina \\
-** o que é \\
-** tipos de learning(passivo e ativo) \\
-* passivo \\
-** o que é \\
-** como funciona \\
-** algoritmos \\
-* ativo \\
-** o que é \\
-** como funciona \\
-** algoritmos \\
+% o que é aprendizado de maquina
+% Definição de ML: aprende atráves de um experiencia E em uma tarefa T com uma performace P  
+% reinforcement o que é - aprendizado atráves de um conjunto de simulações
+% explicar Q LEARNING
 
-%- definição \msr{acho que este topico ficou desnecessario}\\
-%- conceitos \msr{acho que este topico ficou desnecessario}
+\subsection{Motivação e aplicação}
+%motivação
+%aplicação no mundo real com exemplos
+
 
 \section{Jogos Real-time Strategy(RTS)} 
 
-%Explicação do que é jogos RTS \\
-%**jogos
-%** RTS
-%**jogos rts
 Jogos eletrônicos são muito populares, não só entre os jovens, principalmente pela grande quantidade de gêneros, existem jogos de ação, aventura, esportes, estrategia, entre outros. \\
 Dentro dos jogos de estratégia há uma subseção que se chama jogos de estratégia em tempo real, neles os jogadores estão se enfrentando no mesmo momento, como o nome já diz. Em alguns desses jogos há BOTs(jogadores que simulam um jogador real) e é preciso alguma inteligencia para esses BOTs conseguirem levar graça ao jogador real, para isso é utilizado algoritmos de IA. Esse tipo de jogo, devido a sua grande quantidade de ações, possui um fator de ramificação muito grande, e cresce exponencialmente, com isso aplicar os algoritmos se torna uma tarefa não trivial.  \\
-%ligação deles com atividades do mundo real \\
-%exemplos de jogos RTS 
 Como plataforma foi escolhido o jogo MicroRTS. 
 
 \subsection{MicroRTS} 
-%explicação de como funciona, para que foi feito. 
 O jogo MicroRTS foi feito por Santiago Ontañón \cite{ontanon2013combinatorial} para fins acadêmicos, com o intuito de aplicar e desenvolver técnicas de IA e para servir como prova de conceito para as técnicas criadas.  O jogo é uma simplificação do jogo Starcraft\footnote{http://us.battle.net/sc2/pt/}.
 A figura \ref{fig:microrts} mostra uma tela do jogo para que se possa observar que o fator de ramificação pode ser muito alto.
 
