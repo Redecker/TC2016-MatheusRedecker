@@ -1,21 +1,37 @@
 \chapter{\label{chap:ativ}Atividades}
 
-Para está etapa do projeto do Trabalho de Conclusão, foi proposto o plano das atividades apresentado na Figura \ref{fig:ativ}.
+Para está etapa do projeto do Trabalho de Conclusão, foi proposto o plano das atividades apresentado na diagrama de Gantt com a respectiva legenda.
 
 \begin{itemize}
-\item Estudar algoritmos de planejamento (1/2abril)
-\item estudar algoritmos de machine learning (2 1/2abril)
-\item avaliar a viabilidade de combinar os dois algoritmos (1/2 maio)
-\item estudar como o Micro RTS funciona ( 2 1/2 maio - 1/2 junho)
-\item estudar como implementar o algoritmo no jogo (1/2 junho - final)
-\item escrita do TC I (todos os meses)
-\item revisão bibliografica (todos os meses)
-\end{itemize} \msr{fazer a figura no project}
+\item Task 1 - Escrita do TC I e revisão bibliografica.
+\item Task 2 - Estudar algoritmos de planejamento.
+\item Task 3 - Estudar algoritmos de aprendizado de maquina.
+\item Task 4 - Avaliar a viabilidade de combinar os dois algoritmos.
+\item Task 5 - Estudar como o jogo MicroRTS funciona.
+\item Task 6 - Estudar como implementar o algoritmo no jogo.
+\end{itemize}
 
-\begin{figure}[ht]
-\centering
-%\includegraphics[width=1\textwidth]{fig/atividades.pdf}
-\caption{Plano das Atividades}
-\label{fig:ativ}
-\end{figure}
+\begin{ganttchart}{1}{14}
+	\gantttitle{Proposta 2016/1}{14} \\
+	\gantttitlelist{1,...,7}{2} \\
+	\ganttgroup{TC I}{6}{12} \\	
+	\ganttmilestone{Entrega Proposta}{7} \ganttnewline	
+	\ganttbar{Task 1}{6}{12} \\	
+	\ganttbar{Task 2}{8}{8} \\
+	\ganttbar{Task 3}{9}{9} \\
+	\ganttbar{Task 4}{10}{10} \\
+	\ganttbar{Task 5}{11}{11} \\
+	\ganttbar{Task 6}{12}{12} \\
+	\ganttmilestone{Entrega Volume Final TC I}{12} \ganttnewline
+	%\ganttlinkedgroup{Task 3}{2}{3}
+	%\ganttlinkedbar{Task 3}{3}{7} \ganttnewline
+	%\ganttmilestone{Milestone}{7} \ganttnewline
+	%\ganttbar{Final Task}{8}{12}
+	\ganttlink{elem3}{elem5}
+	\ganttlink{elem4}{elem5}
+	\ganttlink{elem6}{elem7}
+	\ganttlink{elem2}{elem8}
+\end{ganttchart}
+
+
 
