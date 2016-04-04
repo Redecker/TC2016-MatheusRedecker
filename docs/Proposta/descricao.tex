@@ -8,17 +8,17 @@ O algoritmo a ser implementado é o AHTN. Nele são combinados tecnicas de HTN c
 \section{Ambiente}
 
 O ambiente que será utilizado é o MicroRTS.  O jogo MicroRTS foi feito por Santiago Ontañón \cite{ontanon2013combinatorial} para fins acadêmicos, com o intuito de aplicar e desenvolver técnicas de IA e para servir como prova de conceito para as técnicas criadas.  O jogo é uma simplificação do jogo Starcraft\footnote{http://us.battle.net/sc2/pt/}.
-A figura \ref{fig:microrts} mostra uma tela do jogo para que se possa observar que o fator de ramificação pode ser muito alto.
+A figura \ref{fig:microrts}\footnote{https://github.com/santiontanon/microrts} mostra uma tela do jogo para que se possa entender um pouco o funcionamento do jogo e também observar que o fator de ramificação pode ser muito alto.
 
 \begin{figure}[ht]
 	\centering
-	%\includegraphics[width=1\textwidth]{fig/microrts.pdf}
+	\includegraphics[width=0.8\textwidth]{fig/microrts.pdf}
 	\caption{Uma foto da tela do MicroRTS}
 	\label{fig:microrts}
 \end{figure} 
 
-No ambiente há algumas estrategias implementados, cada estrategia possui variações dos algoritmos. Algumas estrategias são:
+No ambiente há algumas estrategias implementadas, cada estrategia possui variações dos algoritmos. Algumas das estrategias são:
 \begin{itemize}
-	\item Minimax Alpha-Beta Search Strategies
-	\item Monte Carlo Search Strategies
+	\item Minimax Alpha-Beta Search Strategies - O que muda entre as técnicas é o jeito com que é feito a expansão do grafo.
+	\item Monte Carlo Search Strategies - Executa jogadas aleatórias para planejar e após utiliza uma heurística para determinar em qual caminho seguir.
 \end{itemize}

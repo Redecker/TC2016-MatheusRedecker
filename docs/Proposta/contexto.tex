@@ -23,7 +23,7 @@ O modelo geral utilizado para representar um plano é o \textit{state-transition
 
 \begin{figure}[ht]
 	\centering
-	%\includegraphics[width=1\textwidth]{fig/modelo.pdf}
+	\includegraphics[width=0.4\textwidth]{fig/modelo.pdf}
 	\caption{Modelo de estado e transição}
 	\label{fig:planmodelo}
 \end{figure} 
@@ -47,7 +47,7 @@ Em HTN o objetivo não é alcançar o objetivo, e sim realizar um conjunto de ta
 \subsection{AHTN} 
 
 %AHTN é HTN + game tree search \cite{adversal}
-\textit{Adversarial hierarchical-task network} (AHTN) é um algoritmo proposto por \cite{ontanon2015adversarial} onde combina técnicas de planejamento HTN e o algoritmo \textit{minimax game tree search}. Este algoritmo foi proposto para tentar solucionar o problema do grande fator de ramificação dos jogos em tempo real. \\
+\textit{Adversarial hierarchical-task network} (AHTN) é um algoritmo proposto para tentar solucionar o problema do grande fator de ramificação dos jogos em tempo real \cite{ontanon2015adversarial}. O algoritmo combina técnicas de planejamento HTN e o algoritmo \textit{minimax game tree search}. \\
 %explicar Game search tree(minimax)
 %explicar técnica de HTN utilizada
 %explicar diferença do minimax puro
@@ -59,6 +59,15 @@ A motivação para o estudo de planejamento automatizado vem do fato que, como p
 \section{Aprendizado} 
 %-overview de aprendizado
 %**O que é em geral \\
+Para os humanos o aprendizado ocorre durante toda a vida. O aprendizado é o ato de adquirir novos conhecimentos, ou modificar conhecimentos já existentes ou ainda adquirir uma experiencia por repetição do ato de forma incorreta. Aprendizado pode variar de adquirir conhecimento de tarefas simples, como decorando um numero de telefone, até tarefas mais complicadas, como a formulação de novas teorias \cite{intelligence2003modern}. \\
+Na computação o aprendizado depende de alguns fatores \cite{intelligence2003modern}:
+\begin{itemize}
+	\item Qual o conhecimento que será melhorado ou descoberto.
+	\item Qual o conhecimento que o sistema já possui.
+	\item Qual é a representação usada por esse conhecimento.
+	\item Qual é o aprendizado disponível de fato.
+\end{itemize}
+
 
 \subsection{Aprendizado de Máquina} 
 
