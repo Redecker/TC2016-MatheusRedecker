@@ -5,7 +5,6 @@
 \todo[color=red,author=Felipe,inline]{Ok, aqui está bem genérico, agora começa a projetar parágrafo por parágrafo do material que tu já leste (bullets para cada parágrafo), e me manda depois que tu completares o texto. Deixa as bullets no topo para eu entender o teu raciocínio}
 
 \section{Planejamento} 
-
 Planejamento é o modo racional de agir. Planejamento é a geração de um plano para atingir um objetivo. O processo do planejamento consistem em escolher e gerenciar as ações, antecipando os resultados a fim de atingir um objetivo pré definido \cite{ghallab2004automated}. \\
 Para que alguns objetivos consigam ser alcançados, as ações que são tomadas não necessariamente necessitam de um planejamento, nas atividades do dia-a-dia a maioria das ações que são tomadas não são planejadas. Para fazer um planejamento é avaliado os ganhos de planejar as ações em vista do objetivo, geralmente, os planos nem sempre são os melhores possíveis, pois a busca de planos considerados perfeitos são mais demorados para construir, fazendo com que planos razoáveis ou bons sejam escolhidos ao invés dos perfeitos \cite{ghallab2004automated}. \\
 Pelo fato de se ter alguns tipos de ações, também há alguns formas de planejamento \cite{ghallab2004automated}. Algumas das formas de planejamento são:
@@ -58,15 +57,15 @@ O planejamento HTN executa todas as possibilidades de resolução do problema, s
 %explicar técnica de HTN utilizada
 %explicar diferença do minimax puro
 
-\subsection{Motivação e aplicação}
-A motivação para o estudo de planejamento automatizado vem do fato que, como planejamento é um componente vital do comportamento racional, e a IA busca alcançar aspectos de inteligencia a nível computacional, então planejamento é um elemento chave para isso\cite{ghallab2004automated}.
-%algumas aplicações de planejamento e exemplos
-
 \section{Aprendizado} 
-%-overview de aprendizado
-%**O que é em geral \\
 Para os humanos o aprendizado ocorre durante toda a vida. O aprendizado é o ato de adquirir novos conhecimentos, ou modificar conhecimentos já existentes ou ainda adquirir uma experiencia por repetição do ato de forma incorreta. Aprendizado pode variar de adquirir conhecimento de tarefas simples, como decorando um numero de telefone, até tarefas mais complicadas, como a formulação de novas teorias \cite{intelligence2003modern}. \\
-Na computação o aprendizado depende de alguns fatores \cite{intelligence2003modern}:
+
+
+\subsection{Aprendizado de Máquina} 
+
+A área na computação que estudo esse aprendizado de forma computacional é o aprendizado de maquina, melhor conhecida como \textit{machine learning}. \\
+
+Para que o aprendizado se realize é necessário alguns fatores \cite{intelligence2003modern}:
 \begin{itemize}
 	\item Qual o conhecimento que será melhorado ou descoberto.
 	\item Qual o conhecimento que o sistema já possui.
@@ -74,17 +73,23 @@ Na computação o aprendizado depende de alguns fatores \cite{intelligence2003mo
 	\item Qual é o aprendizado disponível de fato.
 \end{itemize}
 
+A definição de aprendizado de maquina proposta por Tom Mitchell \cite{Mitchell1997ML} é a seguinte:
 
-\subsection{Aprendizado de Máquina} 
+ \begin{quote}
+ 	Definição: Um programa de computador é dito para aprender de uma experiencia E com relação a alguma classe de tarefas T, e medida de performance P, se essa performance sobre as tarefas em T, medida por P, melhora com a experiencia E.
+ \end{quote}
 
-% o que é aprendizado de maquina
-% Definição de ML: aprende atráves de um experiencia E em uma tarefa T com uma performace P  
-% reinforcement o que é - aprendizado atráves de um conjunto de simulações
-% explicar Q LEARNING
+Essa definição mostra que o sistema aprimorar seu conjunto de tarefas T com uma performance P através de experiencias E. Ou seja, um sistema baseado em aprendizado de maquina deve, através de experiencias, ter um ganho nas informações para solucionar os seus problemas.  \\
 
-\subsection{Motivação e aplicação}
-%motivação
-%aplicação no mundo real com exemplos
+Para começar a resolver um problema utilizando aprendizado de maquina é preciso escolher qual tipo de experiencia será aprendida pelo sistema \cite{Mitchell1997ML}. Para isso existem alguns tipos de técnica para tratar aprendizado de maquina com objetivos diferentes \cite{intelligence2003modern}, alguma delas são:
+
+\begin{itemize}
+	\item Aprendizado supervisionado: Classificação correta para cada problema, através de alguma definição. 
+	\item Aprendizado não supervisionado: Agrupamento de problemas por um tópico em comum, através de algum padrão.
+	\item Aprendizado por reforço: Recompensas ocasionais, aprendendo por obervações bem sucedidas ou mal sucedidas. 
+\end{itemize}
+
+O aprendizado por reforço, também é conhecido como \textit{reinforcement learning}, tem as técnicas baseadas em  aprender através das execuções e a cada nova execução o conhecimento aprendido é utilizado para tentar maximalizar o seu desempenho na próxima execução \cite{intelligence2003modern}. Para conseguir medir o aprendizado em cada execução, existe a abordagem que é preciso medir a quantidade do ganho por estado do sistema e assim cada estado do sistema deve ter um valor de utilidade para dizer se o estado é um estado recomendado ou não para ser alcançado, ou ainda o estado não oferece nem ganho nem perda por ser atingido. \\ 
 
 
 %\section{Jogos Real-time Strategy(RTS)} 
