@@ -2,12 +2,20 @@
 %% Matheus renomeia "exemplo.tex" para um nome mais descritivo (e muda a linha acima)
 \chapter{\label{chap:conte}Contexto}
 
-\todo[color=red,author=Felipe,inline]{Ok, aqui está bem genérico, agora começa a projetar parágrafo por parágrafo do material que tu já leste (bullets para cada parágrafo), e me manda depois que tu completares o texto. Deixa as bullets no topo para eu entender o teu raciocínio}
+\frm[inline]{Ok, aqui está bem genérico, agora começa a projetar parágrafo por parágrafo do material que tu já leste (bullets para cada parágrafo), e me manda depois que tu completares o texto. Deixa as bullets no topo para eu entender o teu raciocínio}
+\frm[inline]{Coloca um parágrafo de signposting, diz o que tu vais tratar aqui, e dá uma palha rápida de por que.}
 
 \section{Planejamento} 
-Planejamento é o modo racional de agir. Planejamento é a geração de um plano para atingir um objetivo. O processo do planejamento consistem em escolher e gerenciar as ações, antecipando os resultados a fim de atingir um objetivo pré definido \cite{ghallab2004automated}. \\
-Para que alguns objetivos consigam ser alcançados, as ações que são tomadas não necessariamente necessitam de um planejamento, nas atividades do dia-a-dia a maioria das ações que são tomadas não são planejadas. Para fazer um planejamento é avaliado os ganhos de planejar as ações em vista do objetivo, geralmente, os planos nem sempre são os melhores possíveis, pois a busca de planos considerados perfeitos são mais demorados para construir, fazendo com que planos razoáveis ou bons sejam escolhidos ao invés dos perfeitos \cite{ghallab2004automated}. \\
-Pelo fato de se ter alguns tipos de ações, também há alguns formas de planejamento \cite{ghallab2004automated}. Algumas das formas de planejamento são:
+Planejamento é o modo racional de agir. 
+Planejamento é a geração de um plano para atingir um objetivo. \frm{Estas duas frases anteriores são meio gaguejantes, talvez tu queira situar planejamento automático em IA e diferenciá-lo de planejamento em outras áreas}
+O processo do planejamento consiste em escolher e gerenciar as ações, antecipando os resultados a fim de atingir um objetivo pré definido \cite{ghallab2004automated}.\frm{Talvez tu queira começar com busca (formalizar) e depois descer em planejamento. Aqui parece que tu cai de pára-quedas em planejamento.}
+
+\frm[inline]{O texto abaixo está meio confuso, tu começa falando que talvez não precise de planejamento, depois tu fala em ganhos e objetivos e mistura isto com tempo de execução do planejador. Clarifique onde tu queres chegar.}
+Para que alguns objetivos consigam ser alcançados, as ações que são tomadas não necessariamente necessitam de um planejamento, nas atividades do dia-a-dia a maioria das ações que são tomadas não são planejadas.\frm{Uh?!?! Onde tu queres chegar com isto?}
+Para fazer um planejamento é avaliado os ganhos de planejar as ações em vista do objetivo, geralmente, os planos nem sempre são os melhores possíveis, pois a busca de planos considerados perfeitos são mais demorados para construir, fazendo com que planos razoáveis ou bons sejam escolhidos ao invés dos perfeitos \cite{ghallab2004automated}. 
+
+Pelo fato de se ter alguns tipos de ações, também há alguns formas de planejamento \cite{ghallab2004automated}. \frm{Uh?!}
+Algumas das formas de planejamento são:\frm{Tá, mas estes planejadores não tem nada a ver com o que tu queres fazer no teu TC!!! Não desvie o foco para outros ``a propósitos''!}
 
 \begin{itemize}
 	\item Planejamento de trajetória e movimento - Este tipo de planejamento foca em problemas onde é preciso simplificar um caminho de um ponto inicial a um objetivo e ainda controlar a trajetória através do caminho. Por exemplo, gerar a rota de um caminhão e movimento de um braço mecânico. 
@@ -15,9 +23,14 @@ Pelo fato de se ter alguns tipos de ações, também há alguns formas de planej
 	\item Planejamento de navegação - Combina os dois tipos acima de planejamento, de percepção e movimento, para problemas que precisem da combinação de localizações e percepções. Por exemplo, andar por um rio desviando de obstáculos.  
 \end{itemize}
 
-Planejamento na computação é a área da Inteligencia Artificial(IA) que busca a geração de planos automaticamente de forma computacional \cite{ghallab2004automated}. E para representar o processo de planejamento no computador é preciso de um modelo conceitual que é um recurso teórico usado para descrever o problema de forma geral e assim podendo aprofundar dependendo da abordagem. Como planejamento é  focado na escolha de ações para acontecer mudança de estados no sistema, o modelo para descrever esse processo deve ser dinâmico, ou seja, que permita a mudança do ambiente\cite{ghallab2004automated}. \\
+Planejamento na computação é a área da Inteligencia Artificial(IA) que busca a geração de planos automaticamente de forma computacional \cite{ghallab2004automated}. 
+E para representar o processo de planejamento no computador é preciso de um modelo conceitual que é um recurso teórico usado para descrever o problema de forma geral e assim podendo aprofundar dependendo da abordagem. 
+Como planejamento é  focado na escolha de ações para acontecer mudança de estados no sistema, o modelo para descrever esse processo deve ser dinâmico, ou seja, que permita a mudança do ambiente\cite{ghallab2004automated}. 
+\frm[inline]{De novo, tudo isto acima caiu de para quedas aqui. Aqui tu situa Planejamento em IA (melhor começar com isto). Se tu começar com busca, falando de estados, ações, funções de transição, e depois falar de planejamento automático como uma formalização deste processo, o argumento vai fluir bem melhor. }
 
-O modelo geral utilizado para representar um plano é o \textit{state-transition systems}. O modelo é representado por $\sum = (S, A, E, \gamma) $. Onde S representa os estados, A as ações, E os eventos que podem ocorrer no sistema, e $\gamma$ a função de transição composta por $ \gamma: S \times A \times E \rightarrow S'$. A figura \ref{fig:planmodelo} mostra uma representação desse modelo \cite{ghallab2004automated}.
+O modelo geral utilizado para representar um plano é o \textit{state-transition systems}\frm{Um \textbf{plano}? Ou um \textbf{problema de planejamento}?}. 
+O modelo é representado por $\sum = (S, A, E, \gamma) $. Onde S representa os estados, A as ações, E os eventos que podem ocorrer no sistema, e $\gamma$ a função de transição composta por $ \gamma: S \times A \times E \rightarrow S'$. 
+A figura \ref{fig:planmodelo} ilustra uma representação desse modelo \cite{ghallab2004automated}.
 
 
 \begin{figure}[ht]
@@ -27,18 +40,36 @@ O modelo geral utilizado para representar um plano é o \textit{state-transition
 	\label{fig:planmodelo}
 \end{figure} 
 
-Um plano é gerado, quando dado um estado inicial e um objetivo, um conjunto de ações é gerado e quando executadas levam ao objetivo. O processo usado para conseguir isso é chamado de planejamento, onde é necessário ter uma descrição do sistema($\sum$) onde os estados e as ações são definidos.\\ 
-Os estados são representados por um conjunto de átomos sem função \cite{intelligence2003modern}, que são usados para representar alguma situação, por exemplo uma pessoa estar em um lugar pode ser representado por \textit{at(Matheus, PUCRS)}, assim todos os estados devem seguir o padrão, podendo ter mais de uma situação, como por exemplo, representar que alguém está em um lugar e feliz ao mesmo tempo, \textit{at(Matheus,PUCRS) $\wedge$ happy(Matheus)}. \\
-As ações são descritas por um conjunto esquema de ações \cite{intelligence2003modern}. Para toda ação é necessário uma pré condição aplicada ao estado atual, que se for satisfeita, garante o efeito ou pós condição, levando o sistema para o estado resultante. Por exemplo, caminhar de um lugar a outro: \\
+Um plano é gerado, quando dado um estado inicial e um objetivo, um conjunto de ações é gerado e quando executadas levam ao objetivo. \frm{Não entendi esta sentença... Evitar passivos}
+O processo usado para conseguir isso é chamado de planejamento, onde é necessário ter uma descrição do sistema($\sum$) onde os estados e as ações são definidos.\frm{$\Sigma$ é um sistema, um problema ou um plano? Te decide!! E seja preciso.}
+
+ 
+Os estados são representados por um conjunto de átomos sem função \cite{intelligence2003modern}\frm{Átomos inúteis? ou um conjunto de átomos em lógica sem símbolos de função?}, que são usados para representar alguma situação. 
+Por exemplo, o fato de uma pessoa estar em um lugar pode ser representado por \textit{at(Matheus, PUCRS)}, assim todos os estados devem seguir o padrão, podendo ter mais de uma situação, como por exemplo, representar que alguém está em um lugar e feliz ao mesmo tempo, \textit{at(Matheus,PUCRS) $\land$  happy(Matheus)}. % $\land$ fica mais legível no tex do que $\wedge$ e $\lor$ mais do que $\vee$
+
+As ações são descritas por um conjunto esquema de ações \cite{intelligence2003modern}\frm{Sempre que citar livro, dizer capítulo e páginas}. 
+Para toda ação é necessário uma pré condição aplicada ao estado atual, que se for satisfeita, garante o efeito ou pós condição, levando o sistema para o estado resultante. Por exemplo, caminhar de um lugar a outro: \\
 \textit{Action(walk(from, to)): \\
 Precond: at(from)  $\wedge$ path(from,to) \\
 Effect: $\neg$ at(from)  $\wedge$ at(to)}
 
-\subsection{HTN} 
-Dentro do planejamento existe um tipo especifico chamado \textit{Hierarchical Task Network Planning} (HTN). Os métodos de HTN são utilzados pelo fato do problemas serem descrito como receitas, seguindo uma ordem de execução das tarefas, que pode corresponder como pessoas pensam em resolver problemas de planejamento \cite{ghallab2004automated}.  \\
-A grande diferença de planejamento HTN dos demais tipos de planejamento é o fato de que as ações são tratadas em mais alto nível \cite{intelligence2003modern}. As ações vão sendo decompostas até serem diretamente executadas, um bom exemplo é viajar de avião, a tarefa principal é viajar de um lugar para o outro, mas antes disso deve-se comprar a passagem e ir até o aeroporto de táxi para então conseguir realizar a viagem. 
+\frm[inline]{Exemplo disto em estados, mas talvez não precisa entrar em tanto detalhe}
 
-Em HTN as ações são chamadas de tarefas e a finalidade não é alcançar o objetivo, e sim realizar um conjunto de tarefas que resolvam um determinado problema. Como entrada para o sistema é necessário um conjunto de operadores e um conjunto de métodos. Em HTN as ações são chamadas de tarefas, e podem ser dividas em dois tipos: Primitivas e não primitivas. As tarefas primitivas são executadas diretamente através do conjunto de métodos, já as tarefas não primitivas são decompostas recursivamente em sub tarefas e assim se transformando em tarefas menores até se tornarem em tarefas primitivas, e assim podem ser executadas. A figura \ref{fig:travelmethods} mostra um exemplo de descrição dos métodos para uma viagem de avião.
+\subsection{HTN} 
+
+\frm[inline]{Introduza o assunto mais devagar, por que HTN?}
+Dentro do planejamento existe um tipo especifico chamado \textit{Hierarchical Task Network Planning} (HTN). 
+Os métodos de planejamento HTN são utilizados pelo fato dos problemas serem descritos como receitas, seguindo uma ordem de execução das tarefas, que pode corresponder como pessoas pensam em resolver problemas de planejamento \cite{ghallab2004automated}.  \frm{Não tenho certeza de que a relação de causalidade de (receitas $\rightarrow$ HTN) funciona da maneira que tu descreve }
+
+
+A grande diferença entre planejamento HTN e os demais tipos de planejamento é o fato de que as ações são tratadas em mais alto nível \cite{intelligence2003modern}. \frm{Todos os outros tipos de planejamento ou só planejamento clássico?}
+As ações\frm{tarefas, são decompostas, ações não!!} vão sendo decompostas até serem diretamente executadas, um bom exemplo é viajar de avião, a tarefa principal é viajar de um lugar para o outro, mas antes disso deve-se comprar a passagem e ir até o aeroporto de táxi para então conseguir realizar a viagem. 
+
+Em HTN as ações são chamadas de tarefas\frm{Não!!! Tarefas nem sempre são ações} e a finalidade\frm{A finalidade é alcançar um objetivo, só que isto é implícito!!} não é alcançar o objetivo, e sim realizar um conjunto de tarefas que resolvam um determinado problema. Como entrada para o sistema é necessário um conjunto de operadores e um conjunto de métodos. 
+\frm{Repetição!}
+Em HTN as ações são chamadas de tarefas, e podem ser dividas em dois tipos: Primitivas e não primitivas. 
+As tarefas primitivas são executadas diretamente através do conjunto de métodos\frm{Não!!! Reveja isto! Os métodos é que decompõe tarefas não primitivas em primitivas!!}, já as tarefas não primitivas são decompostas recursivamente em sub tarefas e assim se transformando em tarefas menores até se tornarem em tarefas primitivas, e assim podem ser executadas. 
+A Figura~\ref{fig:travelmethods} mostra um exemplo de descrição dos métodos para uma viagem de avião.\frm{Explicar a figura, note que tu não explicou métodos e ações de forma diferente.}
 
 \begin{figure}[ht]
 	\centering
@@ -47,25 +78,29 @@ Em HTN as ações são chamadas de tarefas e a finalidade não é alcançar o ob
 	\label{fig:travelmethods}
 \end{figure}  
 
+\frm[inline]{O planejamento HTN não executa nada (do plano) ele só planeja!!}
 O planejamento HTN executa todas as possibilidades de resolução do problema, sempre respeitando a ordem dos métodos que conseguem ser realizados, quando um caminho de resolução leva a um fim de linha é realizado um retrocesso(\textit{backtracking}) até um caminho que tenha uma possibilidade de caminho diferente do que foi tomado anteriormente.
 
 \subsection{AHTN} 
 
 %AHTN é HTN + game tree search \cite{adversal}
-\textit{Adversarial hierarchical-task network} (AHTN) é um algoritmo proposto para tentar solucionar o problema do grande fator de ramificação dos jogos em tempo real \cite{ontanon2015adversarial}. O algoritmo combina técnicas de planejamento HTN e o algoritmo \textit{minimax game tree search}. \\
+\textit{Adversarial hierarchical-task network} (AHTN) é um algoritmo proposto para tentar solucionar o problema do grande fator de ramificação dos jogos em tempo real \cite{ontanon2015adversarial}. O algoritmo combina técnicas de planejamento HTN e o algoritmo \textit{minimax game tree search}. 
+\frm[inline]{Incompleto! Decide se tu queres incorpora isto ao parágrafo anterior. Em tempo, acho que tu tens que falar de minimax antes, para poder fazer a ligação de HTN e minimax $\rightarrow$ AHTN}
 %explicar Game search tree(minimax)
 %explicar técnica de HTN utilizada
 %explicar diferença do minimax puro
 
 \section{Aprendizado} 
-Para os humanos o aprendizado ocorre durante toda a vida. O aprendizado é o ato de adquirir novos conhecimentos, ou modificar conhecimentos já existentes ou ainda adquirir uma experiencia por repetição do ato de forma incorreta. Aprendizado pode variar de adquirir conhecimento de tarefas simples, como decorando um numero de telefone, até tarefas mais complicadas, como a formulação de novas teorias \cite{intelligence2003modern}. \\
-
+Para os humanos o aprendizado ocorre durante toda a vida. 
+O aprendizado é o ato de adquirir novos conhecimentos, ou modificar conhecimentos já existentes ou ainda adquirir uma experiencia por repetição do ato de forma incorreta. 
+Aprendizado pode variar de adquirir conhecimento de tarefas simples, como decorando um numero de telefone, até tarefas mais complicadas, como a formulação de novas teorias \cite{intelligence2003modern}. 
+% Não precisa colocar quebra de parágrafo em todo o lado!
 
 \subsection{Aprendizado de Máquina} 
 
-A área na computação que estudo esse aprendizado de forma computacional é o aprendizado de maquina, melhor conhecida como \textit{machine learning}. \\
+A área na computação que estudo esse aprendizado de forma computacional é o aprendizado de maquina, melhor conhecida como \textit{machine learning}. 
 
-Para que o aprendizado se realize é necessário alguns fatores \cite{intelligence2003modern}:
+Para que o aprendizado se realize é necessário alguns fatores\frm{\textbf{FATORES}!?!? O que é isto?} \cite{intelligence2003modern}:
 \begin{itemize}
 	\item Qual o conhecimento que será melhorado ou descoberto.
 	\item Qual o conhecimento que o sistema já possui.
@@ -79,17 +114,20 @@ A definição de aprendizado de maquina proposta por Tom Mitchell \cite{Mitchell
  	Definição: Um programa de computador é dito para aprender de uma experiencia E com relação a alguma classe de tarefas T, e medida de performance P, se essa performance sobre as tarefas em T, medida por P, melhora com a experiencia E.
  \end{quote}
 
-Essa definição mostra que o sistema aprimorar seu conjunto de tarefas T com uma performance P através de experiencias E. Ou seja, um sistema baseado em aprendizado de maquina deve, através de experiencias, ter um ganho nas informações para solucionar os seus problemas.  \\
+Essa definição mostra que o sistema aprimorar seu conjunto de tarefas T com uma performance P através de experiencias E. Ou seja, um sistema baseado em aprendizado de maquina deve, através de experiencias, ter um ganho nas informações para solucionar os seus problemas.  
 
-Para começar a resolver um problema utilizando aprendizado de maquina é preciso escolher qual tipo de experiencia será aprendida pelo sistema \cite{Mitchell1997ML}. Para isso existem alguns tipos de técnica para tratar aprendizado de maquina com objetivos diferentes \cite{intelligence2003modern}, alguma delas são:
+Para começar a resolver um problema utilizando aprendizado de maquina é preciso escolher qual tipo de experiencia será aprendida pelo sistema \cite{Mitchell1997ML}. 
+Para isso existem várias técnicas para tratar aprendizado de maquina com objetivos diferentes \cite{intelligence2003modern}, algumas delas são:\frm{Olha as concordâncias!!}
 
+\frm[inline]{Escrever sentenças completas!}
 \begin{itemize}
 	\item Aprendizado supervisionado: Classificação correta para cada problema, através de alguma definição. 
 	\item Aprendizado não supervisionado: Agrupamento de problemas por um tópico em comum, através de algum padrão.
-	\item Aprendizado por reforço: Recompensas ocasionais, aprendendo por obervações bem sucedidas ou mal sucedidas. 
+	\item Aprendizado por reforço: Recompensas ocasionais, aprendendo por observações bem sucedidas ou mal sucedidas. 
 \end{itemize}
 
-O aprendizado por reforço, também é conhecido como \textit{reinforcement learning}, tem as técnicas baseadas em  aprender através das execuções e a cada nova execução o conhecimento aprendido é utilizado para tentar maximalizar o seu desempenho na próxima execução \cite{intelligence2003modern}. Para conseguir medir o aprendizado em cada execução, existe a abordagem que é preciso medir a quantidade do ganho por estado do sistema e assim cada estado do sistema deve ter um valor de utilidade para dizer se o estado é um estado recomendado ou não para ser alcançado, ou ainda o estado não oferece nem ganho nem perda por ser atingido. \\ 
+\frm[inline]{Reescrever tudo isto, e organizar os pensamentos. Onde tu queres chegar com o parágrafo?}
+O aprendizado por reforço, também é conhecido como \textit{reinforcement learning}, \textbf{tem as técnicas }\frm{ARGH!!!} baseadas em  aprender através das execuções e a cada nova execução o conhecimento aprendido é utilizado para tentar maximizar o seu desempenho na próxima execução \cite{intelligence2003modern}. Para conseguir medir o aprendizado em cada execução, existe a abordagem que é preciso medir a quantidade do ganho por estado do sistema e assim cada estado do sistema deve ter um valor de utilidade para dizer se o estado é um estado recomendado ou não para ser alcançado, ou ainda o estado não oferece nem ganho nem perda por ser atingido. 
 
 
 %\section{Jogos Real-time Strategy(RTS)} 

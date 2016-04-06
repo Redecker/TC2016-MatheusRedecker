@@ -1,14 +1,18 @@
+%!TEX root = proposta.tex 
 \chapter{\label{chap:descr}Descrição do Projeto}
 
 \section{Algoritmo}
-O algoritmo a ser implementado é o AHTN. Nele são combinados tecnicas de HTN com o algoritmo \textit{minimax game tree search}. 
+O algoritmo a ser implementado é o AHTN. Nele são combinados tecnicas de HTN com o algoritmo \textit{minimax game tree search}\frm{Algoritmo o qual tu não falou nada ainda!! Aqui tu deixa muita coisa picando!}. 
 %algoritmo a ser utilizado \\
 %algoritmo de ML a ser agregado
 
 \section{Ambiente}
 
-O ambiente que será utilizado é o MicroRTS.  O jogo MicroRTS foi feito por Santiago Ontañón \cite{ontanon2013combinatorial} para fins acadêmicos, com o intuito de aplicar e desenvolver técnicas de IA e para servir como prova de conceito para as técnicas criadas.  O jogo é uma simplificação do jogo Starcraft\footnote{http://us.battle.net/sc2/pt/}.
-A figura \ref{fig:microrts}\footnote{https://github.com/santiontanon/microrts} mostra uma tela do jogo para que se possa entender um pouco o funcionamento do jogo e também observar que o fator de ramificação pode ser muito alto.
+\frm[inline]{Remover os passivos}
+O ambiente que será utilizado é o MicroRTS.  % Utilizaremos o jogo MicroRTS como plataforma de teste para o algoritmo AHTN (explicar pq)
+O jogo MicroRTS foi feito por Santiago Ontañón \cite{ontanon2013combinatorial} para fins acadêmicos, com o intuito de aplicar e desenvolver técnicas de IA e para servir como prova de conceito para as técnicas criadas.  
+O jogo é uma simplificação do jogo Starcraft\footnote{http://us.battle.net/sc2/pt/}.
+A Figura~\ref{fig:microrts}\footnote{https://github.com/santiontanon/microrts} mostra uma tela do jogo para que se possa entender um pouco o funcionamento do jogo e também observar que o fator de ramificação pode ser muito alto. \frm{Figura sem explicação... Só os comentários do lado, em inglês, não te resolvem}
 
 \begin{figure}[ht]
 	\centering
@@ -22,3 +26,5 @@ No ambiente há algumas estrategias implementadas, cada estrategia possui varia�
 	\item Minimax Alpha-Beta Search Strategies - O que muda entre as técnicas é o jeito com que é feito a expansão do grafo.
 	\item Monte Carlo Search Strategies - Executa jogadas aleatórias para planejar e após utiliza uma heurística para determinar em qual caminho seguir.
 \end{itemize}
+
+\frm[inline]{E.. depois da itemização talvez seja interessante concluir algo}

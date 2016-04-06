@@ -1,26 +1,33 @@
+%!TEX root = proposta.tex 
 \chapter{\label{chap:obje}Objetivos}
 
-Atualmente, há uma dificuldade na utilização de técnicas de IA para jogos em tempo real. O intuito desse trabalho é mostrar que uma abordagem hibrida com planejamento e aprendizado de maquina pode ser uma alternativa valida para tratar esse gênero de jogo. A leitura de livros será o ponto de estudo para ganhar embasamento para conseguir aplicar os algoritmos, já a leitura dos artigos ajudará com a analise dos resultados e ainda nas alternativas para resolver os possíveis problemas encontrados. Como o jogo escolhido como plataforma já tem alguns algoritmos de IA implementados, a comparação com outros algoritmos pode ser considerado algo mais simples.  \\ 
+Atualmente, há uma dificuldade na utilização de técnicas de IA para jogos em tempo real.\frm{Seja mais específico, o que é difícil? Faltam técnicas?}
+O intuito desse trabalho é mostrar que uma abordagem híbrida com planejamento e aprendizado de maquina pode ser uma alternativa valida para tratar esse gênero de jogo. 
+\frm{Não é bem a leitura de livros, tu vais te basear em um algoritmo específico que tu encontraste}
+A leitura de livros será o ponto de estudo para ganhar embasamento para conseguir aplicar os algoritmos, já a leitura dos artigos ajudará com a análise dos resultados e ainda nas alternativas para resolver os possíveis problemas encontrados. 
+Como o jogo escolhido como plataforma já tem alguns algoritmos de IA implementados\frm{Tu estás mencionando o jogo o qual tu ainda nem falou!!}, a comparação com outros algoritmos pode ser considerado algo mais simples. \frm{Talvez mover os objetivos para depois?} 
 
 \section{Objetivo Geral}
 
-O objetivo geral deste trabalho é implementar o algoritmo de planejamento AHTN \cite{ontanon2015adversarial} e ainda integrar aprendizado por reforço através da ferramenta WEKA\footnote{http://www.cs.waikato.ac.nz/ml/weka/} com o objetivo de melhorar o desempenho do algoritmo. Esse trabalho utilizará técnicas que serão estudadas ao longo do semestre. E assim, ao final do trabalho, conseguir comparar resultados obtidos com os resultados já publicados e consolidados \cite{ontanon2007case,ontanon2012experiments,hogg2010learning,buro2003real,ontanon2013survey}.  
+O objetivo geral deste trabalho é implementar o algoritmo de planejamento AHTN \cite{ontanon2015adversarial} e ainda integrar aprendizado por reforço através da ferramenta WEKA\footnote{http://www.cs.waikato.ac.nz/ml/weka/} com o objetivo de melhorar o desempenho do algoritmo. Esse trabalho utilizará técnicas que serão estudadas ao longo do semestre.\frm{Isto está vago, tu já identificaste as técnicas, te refira a elas} 
+E assim, ao final do trabalho, conseguir comparar resultados obtidos com os resultados já publicados e consolidados \cite{ontanon2007case,ontanon2012experiments,hogg2010learning,buro2003real,ontanon2013survey}.  
 
 \section{Objetivos Específicos}
 \label{obj:esp}
 \begin{itemize}
 \item Estudar algoritmos de planejamento para jogos em tempo real.
 \item Estudar algoritmos de aprendizado por reforço.
-\item Estudar como unir as técnicas de planejamento com as de aprendizado de máquina.
+\item Estudar como unir as técnicas de planejamento com as de aprendizado de máquina.\frm{E o AHTN? Te lembra que usamos aprendizado de máquina em minimax para compensar a falta de tempo para explorar tudo.}
 \item Avaliar a aplicabilidade desses algoritmos junto ao jogo escolhido.
 \item Definir a estratégia de implementação do algoritmo escolhido.
 \item Comparar resultados com outras abordagens.
 \end{itemize}
 
+\frm[inline]{De repente remover este objetivo}
 \section{Objetivo Adicional}
 
 Caso for possível atingir todos os objetivos propostos na seção \ref{obj:esp}, existe um item adicional para aplicar a este trabalho:
 
 \begin{itemize}
-\item Testar o algoritmo em outro jogo RTS, como por exemplo Battle for Wesnoth\footnote{https://www.wesnoth.org/}.
+\item Testar o algoritmo em outro jogo RTS, como por exemplo Battle for Wesnoth\footnote{https://www.wesnoth.org/}\frm{Wesnoth não é RTS é um jogo de estratégia por turnos}.
 \end{itemize}
