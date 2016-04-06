@@ -36,13 +36,19 @@ Precond: at(from)  $\wedge$ path(from,to) \\
 Effect: $\neg$ at(from)  $\wedge$ at(to)}
 
 \subsection{HTN} 
-Dentro do planejamento existe um tipo especifico chamado \textit{Hierarchical Task Network Planning} (HTN). Os métodos de HTN são utilzados pelo fato do problemas serem descrito como receitas, seguindo uma ordem de execução das tarefas, que pode corresponde como pessoas pensam em resolver problemas de planejamento \cite{ghallab2004automated}.  \\
-Em HTN o objetivo não é alcançar o objetivo, e sim realizar um conjunto de tarefas. Como entrada para o sistema é necessário um conjunto de operadores e um conjunto de métodos. Em HTN as ações são chamadas de tarefas, e podem ser dividas em dois tipos: Primitivas e não primitivas. As tarefas primitivas são executadas diretamente através do conjunto de métodos, já as tarefas não primitivas são decompostas recursivamente em sub tarefas e assim se transformando em tarefas menores até se tornarem em tarefas primitivas, e assim podem ser executadas. \\ 
+Dentro do planejamento existe um tipo especifico chamado \textit{Hierarchical Task Network Planning} (HTN). Os métodos de HTN são utilzados pelo fato do problemas serem descrito como receitas, seguindo uma ordem de execução das tarefas, que pode corresponder como pessoas pensam em resolver problemas de planejamento \cite{ghallab2004automated}.  \\
+A grande diferença de planejamento HTN dos demais tipos de planejamento é o fato de que as ações são tratadas em mais alto nível \cite{intelligence2003modern}. As ações vão sendo decompostas até serem diretamente executadas, um bom exemplo é viajar de avião, a tarefa principal é viajar de um lugar para o outro, mas antes disso deve-se comprar a passagem e ir até o aeroporto de táxi para então conseguir realizar a viagem. 
 
-% task primitivas - precondições pos condições - são executadas
-% task não primitivas - precondiçoes conjunto de subtarefas - as subtarefas são analisadas até todas virarem primitivas.
-% HTN explora as possibilidades executando sempre os metodos em ordem.
-% quando chega ao deadend realiza backtrack
+Em HTN as ações são chamadas de tarefas e a finalidade não é alcançar o objetivo, e sim realizar um conjunto de tarefas que resolvam um determinado problema. Como entrada para o sistema é necessário um conjunto de operadores e um conjunto de métodos. Em HTN as ações são chamadas de tarefas, e podem ser dividas em dois tipos: Primitivas e não primitivas. As tarefas primitivas são executadas diretamente através do conjunto de métodos, já as tarefas não primitivas são decompostas recursivamente em sub tarefas e assim se transformando em tarefas menores até se tornarem em tarefas primitivas, e assim podem ser executadas. A figura \ref{fig:travelmethods} mostra um exemplo de descrição dos métodos para uma viagem de avião.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\textwidth]{fig/travelmethod.pdf}
+	\caption{Exemplo de problema de HTN}
+	\label{fig:travelmethods}
+\end{figure}  
+
+O planejamento HTN executa todas as possibilidades de resolução do problema, sempre respeitando a ordem dos métodos que conseguem ser realizados, quando um caminho de resolução leva a um fim de linha é realizado um retrocesso(\textit{backtracking}) até um caminho que tenha uma possibilidade de caminho diferente do que foi tomado anteriormente.
 
 \subsection{AHTN} 
 
