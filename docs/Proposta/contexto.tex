@@ -149,18 +149,22 @@ A definição de aprendizado de maquina proposta por Tom Mitchell \cite{Mitchell
  	Definição: Um programa de computador é dito que aprende de uma experiencia E com relação a alguma classe de tarefas T, e medida de performance P, se essa performance sobre as tarefas em T, medida por P, melhora com a experiencia E.
  \end{quote}
 
-Essa definição mostra que o sistema aprimora seu conjunto de tarefas T com uma performance P através de experiencias E. Ou seja, um sistema baseado em aprendizado de maquina deve, através de experiencias, ter um ganho nas informações para solucionar os seus problemas. Para começar a resolver um problema utilizando aprendizado de maquina é preciso escolher qual tipo de experiencia será aprendida pelo sistema \cite{Mitchell1997ML}. 
-Para isso existem algumas técnicas para tratar aprendizado de maquina com objetivos diferentes \cite{intelligence2003modern}, algumas delas são:\frm{Olha as concordâncias!!}
+Essa definição mostra que o sistema aprimora seu conjunto de tarefas T com uma performance P através de experiencias E. Ou seja, um sistema baseado em aprendizado de maquina deve, através de experiencias, ter um ganho nas informações para solucionar os seus problemas. Para começar a resolver um problema utilizando aprendizado de maquina é preciso escolher qual experiencia será aprendida pelo sistema \cite{Mitchell1997ML}. Para isso existem algumas técnicas que tratam aprendizado de maquina com objetivos diferentes \cite{intelligence2003modern}. Alguma das técnicas são: %\frm{Olha as concordâncias!!}
 
-\frm[inline]{Escrever sentenças completas!}
+%\frm[inline]{Escrever sentenças completas!}
 \begin{itemize}
-	\item Aprendizado supervisionado: Classificação correta para cada problema, através de alguma definição. 
-	\item Aprendizado não supervisionado: Agrupamento de problemas por um tópico em comum, através de algum padrão.
-	\item Aprendizado por reforço: Recompensas ocasionais, aprendendo por observações bem sucedidas ou mal sucedidas. 
+	\item Aprendizado supervisionado: Aprender através de algum conjunto de exemplos a realizar a classificação de algum problema. Cada problema é mapeado para uma saída. 
+	\item Aprendizado não supervisionado: Aprender através das observações, algum pedrão ou regularidade, para classificar em grupos os problemas.
+	\item Aprendizado por reforço: Aprender através das execuções, bem ou mal sucedidas. Aprende quais ações são melhores de ser executadas.
 \end{itemize}
 
 \frm[inline]{Reescrever tudo isto, e organizar os pensamentos. Onde tu queres chegar com o parágrafo?}
-O aprendizado por reforço, também é conhecido como \textit{reinforcement learning}, \textbf{tem as técnicas }\frm{ARGH!!!} baseadas em  aprender através das execuções e a cada nova execução o conhecimento aprendido é utilizado para tentar maximizar o seu desempenho na próxima execução \cite{intelligence2003modern}. Para conseguir medir o aprendizado em cada execução, existe a abordagem que é preciso medir a quantidade do ganho por estado do sistema e assim cada estado do sistema deve ter um valor de utilidade para dizer se o estado é um estado recomendado ou não para ser alcançado, ou ainda o estado não oferece nem ganho nem perda por ser atingido. 
+
+
+O aprendizado por reforço também é conhecido como \textit{reinforcement learning}. O objetivo deste aprendizado é usar as recompensas obtidas nas observações para aprender uma politica do ambiente \cite{intelligence2003modern}. Para que isso aconteça, cada estado contém uma utilidade, que mostra o quão desejável é este estado, pode ser um desejo bom ou um ruim. Com essa informação é possível determinar, dado as ações disponíveis no estado, qual ação o sistema deve escolher para seguir a execução. 
+
+
+%O aprendizado por reforço, também é conhecido como \textit{reinforcement learning}, \textbf{tem as técnicas }\frm{ARGH!!!} baseadas em  aprender através das execuções e a cada nova execução o conhecimento aprendido é utilizado para tentar maximizar o seu desempenho na próxima execução \cite{intelligence2003modern}. Para conseguir medir o aprendizado em cada execução, existe a abordagem que é preciso medir a quantidade do ganho por estado do sistema e assim cada estado do sistema deve ter um valor de utilidade para dizer se o estado é um estado recomendado ou não para ser alcançado, ou ainda o estado não oferece nem ganho nem perda por ser atingido. 
 
 
 %\section{Jogos Real-time Strategy(RTS)} 
