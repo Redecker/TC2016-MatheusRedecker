@@ -5,7 +5,6 @@
 \frm[inline]{Ok, aqui está bem genérico, agora começa a projetar parágrafo por parágrafo do material que tu já leste (bullets para cada parágrafo), e me manda depois que tu completares o texto. Deixa as bullets no topo para eu entender o teu raciocínio}
 \frm[inline]{Coloca um parágrafo de signposting, diz o que tu vais tratar aqui, e dá uma palha rápida de por que.}
 
-
 \section{Planejamento} 
 
 Planejamento automatizado é uma área da inteligencia artificial que estuda o processo de geração de planos de forma computacional. Este tipo de planejamento está preocupado com a forma geral da composição dos planos \cite{ghallab2004automated}\frm{Sempre que citar livro, dizer capítulo e páginas}. O planejamento na computação se diferencia das outras áreas pelo fato de que todo o plano é gerado automaticamente. \\
@@ -14,6 +13,7 @@ Planejamento automatizado é uma área da inteligencia artificial que estuda o p
 %Planejamento é a geração de um plano para atingir um objetivo. \frm{Estas duas frases anteriores são meio gaguejantes, talvez tu queira situar planejamento automático em IA e diferenciá-lo de planejamento em outras áreas}
 
 Uma entrada necessária para qualquer algoritmo de planejamento é a representação do problema a ser resolvido. A representação de um problema é onde estão descritos os estados e as transições dos estados. Um estado do sistema é representados por um conjunto de átomos que resultam em verdadeiro ou falso dependendo da interpretação do ambiente. Para determinar as transições dos estados são utilizadas ações que são  representadas por operadores de planejamento que alteram os valores dos átomos presentes em determinado estado. Um operador de planejamento é definido como \textit{op} = (nome(\textit{op}), precondições(\textit{op}), efeitos(\textit{op})), onde cada elemento é definido como \cite{ghallab2004automated}: 
+
 \begin{itemize}
 	\item nome(\textit{op}) - É o nome do operador de planejamento e \textit{op} é o conjunto de todas as variáveis que irão aparecer qualquer parte do operador de planejamento.  
 	\item precondições(\textit{op}) - \textit{op} é o conjunto de átomos ou átomos negativos que representa a precondição do operador de planejamento. 
@@ -22,7 +22,7 @@ Uma entrada necessária para qualquer algoritmo de planejamento é a representa�
 
 O nome deve ser único pelo proposito de o nome poder se referir ao operador por completo, ou seja, após definido apenas com o nome pode-se inferir as pré e pós condições, assim escrevendo o nome(\textit{op}) para se referir a todo o operador de planejamento \textit{op}. \\
 
-Um problema de planejamento é descrito como \textit{P} = \textit{($\Sigma$, $s_{0}$, g)}. Onde $\Sigma$ é a representação do problema, $s_{0}$ é o estado inicial, estado onde o problema começa, e g é o objetivo, estado onde o problema deve acabar. Um planejador é responsável por pegar essas informações e gerar um plano que comece pelo estado inicial e chegue ao objetivo através de um conjunto de ações descritas na representação do problema. A figura \ref{fig:planmodelo} representa esse processo.\\
+Um problema de planejamento é descrito como \textit{P} = \textit{($\Sigma$, $s_{0}$, g)}. Onde $\Sigma$ é a representação do problema, $s_{0}$ é o estado inicial, estado onde o problema começa, e g é o objetivo, estado onde o problema deve acabar. Um planejador é responsável por pegar essas informações e gerar um plano que comece pelo estado inicial e chegue ao objetivo através de um conjunto de ações descritas na representação do problema. A figura \ref{fig:planmodelo} representa esse processo.
 
 \begin{figure}[ht]
 	\centering
@@ -30,7 +30,6 @@ Um problema de planejamento é descrito como \textit{P} = \textit{($\Sigma$, $s_
 	\caption{Problema de planejamento}
 	\label{fig:planmodelo}
 \end{figure} 
-
 
 
 %O processo do planejamento consiste em escolher e gerenciar as ações, antecipando os resultados a fim de atingir um objetivo \cite{ghallab2004automated}.\frm{Talvez tu queira começar com busca (formalizar) e depois descer em planejamento. Aqui parece que tu cai de pára-quedas em planejamento.}
@@ -76,32 +75,50 @@ Um problema de planejamento é descrito como \textit{P} = \textit{($\Sigma$, $s_
 \subsection{HTN} 
 
 \frm[inline]{Introduza o assunto mais devagar, por que HTN?}
-Dentro do planejamento existe um tipo especifico chamado \textit{Hierarchical Task Network Planning} (HTN). 
-Os métodos de planejamento HTN são utilizados pelo fato dos problemas serem descritos como receitas, seguindo uma ordem de execução das tarefas, que pode corresponder como pessoas pensam em resolver problemas de planejamento \cite{ghallab2004automated}.  \frm{Não tenho certeza de que a relação de causalidade de (receitas $\rightarrow$ HTN) funciona da maneira que tu descreve }
+
+Dentro da área de planejamento existe o planejamento \textit{Hierarchical Task Network Planning} (HTN). HTN é mais expressivo que o planejamento clássico, porque no planejamento clássico o conjunto de solução dos problemas é uma linguagem regular, ou seja, pode ser expressada por uma expressão regular, já em HTN dependendo da técnica utilizada o conjunto de solução dos problemas pode chegar a uma linguagem livre de contexto, que contém as linguagens regulares como um subconjunto, pois existem linguagens livres de contexto que não são linguagens regulares. No pior caso o resultado gerado do planejamento clássico será exponencialmente maior do que o gerado pelo planejamento HTN \cite{ghallab2004automated}.  \\ \msr{tentei introduzir melhor HTN}
+
+O planejamento \textit{Hierarchical Task Network} (HTN) é igual ao planejamento clássico, quando se refere a representação do problema, entretanto o diferencial vem do que é planejado e como é planejado \cite{ghallab2004automated}. \\
+
+Em planejamento HTN as ações são tratadas em mais alto nível \cite{intelligence2003modern}. e o objetivo é achar um conjunto de tarefas que resolve determinado problema. Para isso, além da representação do problema, um conjunto de métodos é adicionado como entrada, onde este conjunto serve para decompor as tarefas em tarefas menores. O planejamento é feito decompondo tarefas não primitivas recursivamente até chegar em tarefas primitivas, que podem ser realizadas com um operador de planejamento \cite{ghallab2004automated}. Um método HTN é definido como \textit{m} = (nome(\textit{m}), tarefa(\textit{m}), subtarefas(\textit{m}), limitação(\textit{m})), onde cada elemento é definido como \cite{ghallab2004automated}: 
+ 
+\begin{itemize}
+	\item nome(\textit{m}) - Nome do método, que deve ser único, e \textit{m} é o conjunto de variaveis que será utilizado em \textit{m}. 
+	\item tarefa(\textit{m}) - É uma tarefa não primitiva.
+	\item (subtarefa(\textit{m}),limitação(\textit{m})) - É uma ligação de tarefa de ligação.
+\end{itemize}
+
+Uma tarefa de ligação é definida como um par w = (U,C), onde U é um conjunto de tarefas de ligação e C um conjunto de limitações. Cada limitação deve ser satisfeita em todo o plano e cada tarefa de ligação é decomposta em subtarefas até todas as tarefas se tornarem primitivas. \\
+
+Um problema de planejamento HTN é descrito como P = ($s_{0}$, w, O, M), onde $s_{0}$ é o estado inicial, w a tarefa de ligação inicial, O é um conjunto de operadores de planejamento, e M é um conjunto de métodos. \\
+
+Na busca pelo plano, o planejamento HTN começa planejando por um caminho, quando um caminho de resolução leva a um fim de linha é realizado um retrocesso(\textit{backtracking}) até um caminho que tenha uma possibilidade diferente de caminho do que foi tomado anteriormente.
+
+%Os métodos de planejamento HTN são utilizados pelo fato dos problemas serem descritos como receitas, seguindo uma ordem de execução das tarefas, que pode corresponder como pessoas pensam em resolver problemas de planejamento \cite{ghallab2004automated}.  \frm{Não tenho certeza de que a relação de causalidade de (receitas $\rightarrow$ HTN) funciona da maneira que tu descreve }
 
 
-A grande diferença entre planejamento HTN e os demais tipos de planejamento é o fato de que as ações são tratadas em mais alto nível \cite{intelligence2003modern}. \frm{Todos os outros tipos de planejamento ou só planejamento clássico?}
-As ações\frm{tarefas, são decompostas, ações não!!} vão sendo decompostas até serem diretamente executadas, um bom exemplo é viajar de avião, a tarefa principal é viajar de um lugar para o outro, mas antes disso deve-se comprar a passagem e ir até o aeroporto de táxi para então conseguir realizar a viagem. 
+%A grande diferença entre planejamento HTN e os demais tipos de planejamento é o fato de que as ações são tratadas em mais alto nível \cite{intelligence2003modern}. \frm{Todos os outros tipos de planejamento ou só planejamento clássico?}
+%As ações\frm{tarefas, são decompostas, ações não!!} vão sendo decompostas até serem diretamente executadas, um bom exemplo é viajar de avião, a tarefa principal é viajar de um lugar para o outro, mas antes disso deve-se comprar a passagem e ir até o aeroporto de táxi para então conseguir realizar a viagem. 
 
-Em HTN as ações são chamadas de tarefas\frm{Não!!! Tarefas nem sempre são ações} e a finalidade\frm{A finalidade é alcançar um objetivo, só que isto é implícito!!} não é alcançar o objetivo, e sim realizar um conjunto de tarefas que resolvam um determinado problema. Como entrada para o sistema é necessário um conjunto de operadores e um conjunto de métodos. 
-\frm{Repetição!}
-Em HTN as ações são chamadas de tarefas, e podem ser dividas em dois tipos: Primitivas e não primitivas. 
-As tarefas primitivas são executadas diretamente através do conjunto de métodos\frm{Não!!! Reveja isto! Os métodos é que decompõe tarefas não primitivas em primitivas!!}, já as tarefas não primitivas são decompostas recursivamente em sub tarefas e assim se transformando em tarefas menores até se tornarem em tarefas primitivas, e assim podem ser executadas. 
-A Figura~\ref{fig:travelmethods} mostra um exemplo de descrição dos métodos para uma viagem de avião.\frm{Explicar a figura, note que tu não explicou métodos e ações de forma diferente.}
+%Em HTN as ações são chamadas de tarefas\frm{Não!!! Tarefas nem sempre são ações} e a finalidade\frm{A finalidade é alcançar um objetivo, só que isto é implícito!!} não é alcançar o objetivo, e sim realizar um conjunto de tarefas que resolvam um determinado problema. Como entrada para o sistema é necessário um conjunto de operadores e um conjunto de métodos. 
+%\frm{Repetição!}
+%Em HTN as ações são chamadas de tarefas, e podem ser dividas em dois tipos: Primitivas e não primitivas. 
+%As tarefas primitivas são executadas diretamente através do conjunto de métodos\frm{Não!!! Reveja isto! Os métodos é que decompõe tarefas não primitivas em primitivas!!}, já as tarefas não primitivas são decompostas recursivamente em sub tarefas e assim se transformando em tarefas menores até se tornarem em tarefas primitivas, e assim podem ser executadas. 
+%A Figura~\ref{fig:travelmethods} mostra um exemplo de descrição dos métodos para uma viagem de avião.\frm{Explicar a figura, note que tu não explicou métodos e ações de forma diferente.}
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.8\textwidth]{fig/travelmethod.pdf}
-	\caption{Exemplo de problema de HTN}
-	\label{fig:travelmethods}
-\end{figure}  
+%\begin{figure}[ht]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{fig/travelmethod.pdf}
+%	\caption{Exemplo de problema de HTN}
+%	\label{fig:travelmethods}
+%\end{figure}  
 
-\frm[inline]{O planejamento HTN não executa nada (do plano) ele só planeja!!}
-O planejamento HTN executa todas as possibilidades de resolução do problema, sempre respeitando a ordem dos métodos que conseguem ser realizados, quando um caminho de resolução leva a um fim de linha é realizado um retrocesso(\textit{backtracking}) até um caminho que tenha uma possibilidade de caminho diferente do que foi tomado anteriormente.
+%\frm[inline]{O planejamento HTN não executa nada (do plano) ele só planeja!!}
+%O planejamento HTN executa todas as possibilidades de resolução do problema, sempre %respeitando a ordem dos métodos que conseguem ser realizados, quando um caminho de %resolução leva a um fim de linha é realizado um retrocesso(\textit{backtracking}) até um %caminho que tenha uma possibilidade de caminho diferente do que foi tomado anteriormente.
 
 \subsection{AHTN} 
 
-%AHTN é HTN + game tree search \cite{adversal}
+%AHTN é HTN + game tree search \cite{adversa}
 \textit{Adversarial hierarchical-task network} (AHTN) é um algoritmo proposto para tentar solucionar o problema do grande fator de ramificação dos jogos em tempo real \cite{ontanon2015adversarial}. O algoritmo combina técnicas de planejamento HTN e o algoritmo \textit{minimax game tree search}. 
 \frm[inline]{Incompleto! Decide se tu queres incorpora isto ao parágrafo anterior. Em tempo, acho que tu tens que falar de minimax antes, para poder fazer a ligação de HTN e minimax $\rightarrow$ AHTN}
 %explicar Game search tree(minimax)
@@ -118,24 +135,22 @@ Aprendizado pode variar de adquirir conhecimento de tarefas simples, como decora
 
 A área na computação que estudo esse aprendizado de forma computacional é o aprendizado de maquina, melhor conhecida como \textit{machine learning}. 
 
-Para que o aprendizado se realize é necessário alguns fatores\frm{\textbf{FATORES}!?!? O que é isto?} \cite{intelligence2003modern}:
-\begin{itemize}
-	\item Qual o conhecimento que será melhorado ou descoberto.
-	\item Qual o conhecimento que o sistema já possui.
-	\item Qual é a representação usada por esse conhecimento.
-	\item Qual é o aprendizado disponível de fato.
-\end{itemize}
+%Para que o aprendizado se realize é necessário alguns fatores\frm{\textbf{FATORES}!?!? O que é isto?} \cite{intelligence2003modern}:
+%\begin{itemize}
+%	\item Qual o conhecimento que será melhorado ou descoberto.
+%	\item Qual o conhecimento que o sistema já possui.
+%	\item Qual é a representação usada por esse conhecimento.
+%	\item Qual é o aprendizado disponível de fato.
+%\end{itemize}
 
 A definição de aprendizado de maquina proposta por Tom Mitchell \cite{Mitchell1997ML} é a seguinte:
 
  \begin{quote}
- 	Definição: Um programa de computador é dito para aprender de uma experiencia E com relação a alguma classe de tarefas T, e medida de performance P, se essa performance sobre as tarefas em T, medida por P, melhora com a experiencia E.
+ 	Definição: Um programa de computador é dito que aprende de uma experiencia E com relação a alguma classe de tarefas T, e medida de performance P, se essa performance sobre as tarefas em T, medida por P, melhora com a experiencia E.
  \end{quote}
 
-Essa definição mostra que o sistema aprimorar seu conjunto de tarefas T com uma performance P através de experiencias E. Ou seja, um sistema baseado em aprendizado de maquina deve, através de experiencias, ter um ganho nas informações para solucionar os seus problemas.  
-
-Para começar a resolver um problema utilizando aprendizado de maquina é preciso escolher qual tipo de experiencia será aprendida pelo sistema \cite{Mitchell1997ML}. 
-Para isso existem várias técnicas para tratar aprendizado de maquina com objetivos diferentes \cite{intelligence2003modern}, algumas delas são:\frm{Olha as concordâncias!!}
+Essa definição mostra que o sistema aprimora seu conjunto de tarefas T com uma performance P através de experiencias E. Ou seja, um sistema baseado em aprendizado de maquina deve, através de experiencias, ter um ganho nas informações para solucionar os seus problemas. Para começar a resolver um problema utilizando aprendizado de maquina é preciso escolher qual tipo de experiencia será aprendida pelo sistema \cite{Mitchell1997ML}. 
+Para isso existem algumas técnicas para tratar aprendizado de maquina com objetivos diferentes \cite{intelligence2003modern}, algumas delas são:\frm{Olha as concordâncias!!}
 
 \frm[inline]{Escrever sentenças completas!}
 \begin{itemize}
