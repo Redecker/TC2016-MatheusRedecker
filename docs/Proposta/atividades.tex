@@ -3,16 +3,17 @@
 
 Para está etapa do projeto do Trabalho de Conclusão, foi proposto o plano das atividades apresentado na diagrama de Gantt com a respectiva legenda.
 
-\frm[inline]{Não é um mapeamento um para um com os objetivos específicos}
+%\frm[inline]{Não é um mapeamento um para um com os objetivos específicos}
 \begin{itemize}
-\item Task 1 - Escrita do TC I e revisão bibliografica.
-\item Task 2 - Estudar algoritmos de planejamento.
-\item Task 3 - Estudar algoritmos de aprendizado de maquina.
-\item Task 4 - Avaliar a viabilidade de combinar os dois algoritmos.
-\item Task 5 - Estudar a arquitetura e código fonte do jogo MicroRTS.
-\item Task 6 - Estudar como implementar o algoritmo no jogo. \frm{Que algoritmo?}
+\item Task 1 - Escrita do TC I e revisão bibliográfica.
+\item Task 2 - Estudar algoritmos de HTN e aprendizado por reforço viáveis para jogos RTS.
+%\item Task 3 - Estudar algoritmos de aprendizado de maquina.
+\item Task 3 - Avaliar a viabilidade de combinar o algoritmo de AHTN com um algoritmo de aprendizado por reforço através da ferramenta WEKA.
+\item Task 4 - Estudar a arquitetura e código fonte do jogo MicroRTS.
+\item Task 5 - Projetar a implementação do algoritmo AHTN na plataforma. 
+\item Task 6 - Projetar a união do algoritmo AHTN com o de aprendizado por reforço. %\frm{Que algoritmo?}
 \end{itemize}
-\frm[inline]{E projetar a implementação? Tu não vais fazer?}
+%\frm[inline]{E projetar a implementação? Tu não vais fazer?}
 
 \begin{ganttchart}{1}{14}
 	\gantttitle{Proposta 2016/1}{14} \\
@@ -24,16 +25,17 @@ Para está etapa do projeto do Trabalho de Conclusão, foi proposto o plano das 
 	\ganttbar{Task 3}{9}{9} \\
 	\ganttbar{Task 4}{10}{10} \\
 	\ganttbar{Task 5}{11}{11} \\
-	\ganttbar{Task 6}{12}{12} \\
+	\ganttbar{Task 6}{12}{12} \\	
 	\ganttmilestone{Entrega Volume Final TC I}{12} \ganttnewline
 	%\ganttlinkedgroup{Task 3}{2}{3}
 	%\ganttlinkedbar{Task 3}{3}{7} \ganttnewline
 	%\ganttmilestone{Milestone}{7} \ganttnewline
-	%\ganttbar{Final Task}{8}{12}
-	\ganttlink{elem3}{elem5}
-	\ganttlink{elem4}{elem5}
-	\ganttlink{elem6}{elem7}
+	%\ganttbar{Final Task}{8}{12}	
 	\ganttlink{elem2}{elem8}
+	\ganttlink{elem4}{elem6}
+	\ganttlink{elem3}{elem4}
+	\ganttlink{elem5}{elem6}	
+	\ganttlink{elem6}{elem7}
 \end{ganttchart}
 
 
