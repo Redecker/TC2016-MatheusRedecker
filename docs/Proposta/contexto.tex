@@ -5,55 +5,73 @@
 \frm[inline]{Ok, aqui está bem genérico, agora começa a projetar parágrafo por parágrafo do material que tu já leste (bullets para cada parágrafo), e me manda depois que tu completares o texto. Deixa as bullets no topo para eu entender o teu raciocínio}
 \frm[inline]{Coloca um parágrafo de signposting, diz o que tu vais tratar aqui, e dá uma palha rápida de por que.}
 
+
 \section{Planejamento} 
-Planejamento é o modo racional de agir. 
-Planejamento é a geração de um plano para atingir um objetivo. \frm{Estas duas frases anteriores são meio gaguejantes, talvez tu queira situar planejamento automático em IA e diferenciá-lo de planejamento em outras áreas}
-O processo do planejamento consiste em escolher e gerenciar as ações, antecipando os resultados a fim de atingir um objetivo pré definido \cite{ghallab2004automated}.\frm{Talvez tu queira começar com busca (formalizar) e depois descer em planejamento. Aqui parece que tu cai de pára-quedas em planejamento.}
 
-\frm[inline]{O texto abaixo está meio confuso, tu começa falando que talvez não precise de planejamento, depois tu fala em ganhos e objetivos e mistura isto com tempo de execução do planejador. Clarifique onde tu queres chegar.}
-Para que alguns objetivos consigam ser alcançados, as ações que são tomadas não necessariamente necessitam de um planejamento, nas atividades do dia-a-dia a maioria das ações que são tomadas não são planejadas.\frm{Uh?!?! Onde tu queres chegar com isto?}
-Para fazer um planejamento é avaliado os ganhos de planejar as ações em vista do objetivo, geralmente, os planos nem sempre são os melhores possíveis, pois a busca de planos considerados perfeitos são mais demorados para construir, fazendo com que planos razoáveis ou bons sejam escolhidos ao invés dos perfeitos \cite{ghallab2004automated}. 
+Planejamento automatizado é uma área da inteligencia artificial que estuda o processo de geração de planos de forma computacional. Este tipo de planejamento está preocupado com a forma geral da composição dos planos \cite{ghallab2004automated}\frm{Sempre que citar livro, dizer capítulo e páginas}. O planejamento na computação se diferencia das outras áreas pelo fato de que todo o plano é gerado automaticamente. \\
 
-Pelo fato de se ter alguns tipos de ações, também há alguns formas de planejamento \cite{ghallab2004automated}. \frm{Uh?!}
-Algumas das formas de planejamento são:\frm{Tá, mas estes planejadores não tem nada a ver com o que tu queres fazer no teu TC!!! Não desvie o foco para outros ``a propósitos''!}
+%Planejamento é o modo racional de agir. 
+%Planejamento é a geração de um plano para atingir um objetivo. \frm{Estas duas frases anteriores são meio gaguejantes, talvez tu queira situar planejamento automático em IA e diferenciá-lo de planejamento em outras áreas}
 
+Uma entrada necessária para qualquer algoritmo de planejamento é a representação do problema a ser resolvido. A representação de um problema é onde estão descritos os estados e as transições dos estados. Um estado do sistema é representados por um conjunto de átomos que resultam em verdadeiro ou falso dependendo da interpretação do ambiente. Para determinar as transições dos estados são utilizadas ações que são  representadas por operadores de planejamento que alteram os valores dos átomos presentes em determinado estado. Um operador de planejamento é definido como \textit{op} = (nome(\textit{op}), precondições(\textit{op}), efeitos(\textit{op})), onde cada elemento é definido como \cite{ghallab2004automated}: 
 \begin{itemize}
-	\item Planejamento de trajetória e movimento - Este tipo de planejamento foca em problemas onde é preciso simplificar um caminho de um ponto inicial a um objetivo e ainda controlar a trajetória através do caminho. Por exemplo, gerar a rota de um caminhão e movimento de um braço mecânico. 
-	\item Planejamento de percepção - Este tipo de planejamento é focado em problemas onde os planos devem se preocupar com as informações obtidas pelo sistema. Por exemplo,  a construção de um ambiente virtual de uma área urbana através de imagens. 
-	\item Planejamento de navegação - Combina os dois tipos acima de planejamento, de percepção e movimento, para problemas que precisem da combinação de localizações e percepções. Por exemplo, andar por um rio desviando de obstáculos.  
+	\item nome(\textit{op}) - É o nome do operador de planejamento e \textit{op} é o conjunto de todas as variáveis que irão aparecer qualquer parte do operador de planejamento.  
+	\item precondições(\textit{op}) - \textit{op} é o conjunto de átomos ou átomos negativos que representa a precondição do operador de planejamento. 
+	\item efeitos(\textit{op}) - \textit{op} é o conjunto de átomos ou átomos negativos que representa o efeito do operador de planejamento
 \end{itemize}
 
-Planejamento na computação é a área da Inteligencia Artificial(IA) que busca a geração de planos automaticamente de forma computacional \cite{ghallab2004automated}. 
-E para representar o processo de planejamento no computador é preciso de um modelo conceitual que é um recurso teórico usado para descrever o problema de forma geral e assim podendo aprofundar dependendo da abordagem. 
-Como planejamento é  focado na escolha de ações para acontecer mudança de estados no sistema, o modelo para descrever esse processo deve ser dinâmico, ou seja, que permita a mudança do ambiente\cite{ghallab2004automated}. 
-\frm[inline]{De novo, tudo isto acima caiu de para quedas aqui. Aqui tu situa Planejamento em IA (melhor começar com isto). Se tu começar com busca, falando de estados, ações, funções de transição, e depois falar de planejamento automático como uma formalização deste processo, o argumento vai fluir bem melhor. }
+O nome deve ser único pelo proposito de o nome poder se referir ao operador por completo, ou seja, após definido apenas com o nome pode-se inferir as pré e pós condições, assim escrevendo o nome(\textit{op}) para se referir a todo o operador de planejamento \textit{op}. \\
 
-O modelo geral utilizado para representar um plano é o \textit{state-transition systems}\frm{Um \textbf{plano}? Ou um \textbf{problema de planejamento}?}. 
-O modelo é representado por $\sum = (S, A, E, \gamma) $. Onde S representa os estados, A as ações, E os eventos que podem ocorrer no sistema, e $\gamma$ a função de transição composta por $ \gamma: S \times A \times E \rightarrow S'$. 
-A figura \ref{fig:planmodelo} ilustra uma representação desse modelo \cite{ghallab2004automated}.
-
+Um problema de planejamento é descrito como \textit{P} = \textit{($\Sigma$, $s_{0}$, g)}. Onde $\Sigma$ é a representação do problema, $s_{0}$ é o estado inicial, estado onde o problema começa, e g é o objetivo, estado onde o problema deve acabar. Um planejador é responsável por pegar essas informações e gerar um plano que comece pelo estado inicial e chegue ao objetivo através de um conjunto de ações descritas na representação do problema. A figura \ref{fig:planmodelo} representa esse processo.\\
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.4\textwidth]{fig/modelo.pdf}
-	\caption{Modelo de estado e transição}
+	\caption{Problema de planejamento}
 	\label{fig:planmodelo}
 \end{figure} 
 
-Um plano é gerado, quando dado um estado inicial e um objetivo, um conjunto de ações é gerado e quando executadas levam ao objetivo. \frm{Não entendi esta sentença... Evitar passivos}
-O processo usado para conseguir isso é chamado de planejamento, onde é necessário ter uma descrição do sistema($\sum$) onde os estados e as ações são definidos.\frm{$\Sigma$ é um sistema, um problema ou um plano? Te decide!! E seja preciso.}
+
+
+%O processo do planejamento consiste em escolher e gerenciar as ações, antecipando os resultados a fim de atingir um objetivo \cite{ghallab2004automated}.\frm{Talvez tu queira começar com busca (formalizar) e depois descer em planejamento. Aqui parece que tu cai de pára-quedas em planejamento.}
+
+%\frm[inline]{O texto abaixo está meio confuso, tu começa falando que talvez não precise de planejamento, depois tu fala em ganhos e objetivos e mistura isto com tempo de execução do planejador. Clarifique onde tu queres chegar.}
+%Para que alguns objetivos consigam ser alcançados, as ações que são tomadas não necessariamente necessitam de um planejamento, nas atividades do dia-a-dia a maioria das ações que são tomadas não são planejadas.\frm{Uh?!?! Onde tu queres chegar com isto?}
+%Para fazer um planejamento é avaliado os ganhos de planejar as ações em vista do objetivo, geralmente, os planos nem sempre são os melhores possíveis, pois a busca de planos considerados perfeitos são mais demorados para construir, fazendo com que planos razoáveis ou bons sejam escolhidos ao invés dos perfeitos \cite{ghallab2004automated}. 
+
+
+
+%Planejamento na computação é a área da Inteligencia Artificial(IA) que busca a geração de planos automaticamente de forma computacional \cite{ghallab2004automated}. 
+%E para representar o processo de planejamento no computador é preciso de um modelo conceitual que é um recurso teórico usado para descrever o problema de forma geral e assim podendo aprofundar dependendo da abordagem. 
+%Como planejamento é  focado na escolha de ações para acontecer mudança de estados no sistema, o modelo para descrever esse processo deve ser dinâmico, ou seja, que permita a mudança do ambiente\cite{ghallab2004automated}. 
+%\frm[inline]{De novo, tudo isto acima caiu de para quedas aqui. Aqui tu situa Planejamento em IA (melhor começar com isto). Se tu começar com busca, falando de estados, ações, funções de transição, e depois falar de planejamento automático como uma formalização deste processo, o argumento vai fluir bem melhor. }
+
+%O modelo geral utilizado para representar um plano é o \textit{state-transition systems}\frm{Um \textbf{plano}? Ou um \textbf{problema de planejamento}?}. 
+%O modelo é representado por $\sum = (S, A, E, \gamma) $. Onde S representa os estados, A as ações, E os eventos que podem ocorrer no sistema, e $\gamma$ a função de transição composta por $ \gamma: S \times A \times E \rightarrow S'$. 
+%A figura \ref{fig:planmodelo} ilustra uma representação desse modelo \cite{ghallab2004automated}.
+
+
+%\begin{figure}[ht]
+%	\centering
+%	\includegraphics[width=0.4\textwidth]{fig/modelo.pdf}
+%	\caption{Modelo de estado e transição}
+%	\label{fig:planmodelo}
+%\end{figure} 
+
+%Um plano é gerado, quando dado um estado inicial e um objetivo, um conjunto de ações é gerado e quando executadas levam ao objetivo. \frm{Não entendi esta sentença... Evitar passivos}
+%O processo usado para conseguir isso é chamado de planejamento, onde é necessário ter uma descrição do sistema($\sum$) onde os estados e as ações são definidos.\frm{$\Sigma$ é um sistema, um problema ou um plano? Te decide!! E seja preciso.}
 
  
-Os estados são representados por um conjunto de átomos sem função \cite{intelligence2003modern}\frm{Átomos inúteis? ou um conjunto de átomos em lógica sem símbolos de função?}, que são usados para representar alguma situação. 
-Por exemplo, o fato de uma pessoa estar em um lugar pode ser representado por \textit{at(Matheus, PUCRS)}, assim todos os estados devem seguir o padrão, podendo ter mais de uma situação, como por exemplo, representar que alguém está em um lugar e feliz ao mesmo tempo, \textit{at(Matheus,PUCRS) $\land$  happy(Matheus)}. % $\land$ fica mais legível no tex do que $\wedge$ e $\lor$ mais do que $\vee$
+%Os estados são representados por um conjunto de átomos sem função \cite{intelligence2003modern}\frm{Átomos inúteis? ou um conjunto de átomos em lógica sem símbolos de função?}, que são usados para representar alguma situação. 
+%Por exemplo, o fato de uma pessoa estar em um lugar pode ser representado por \textit{at(Matheus, PUCRS)}, assim todos os estados devem seguir o padrão, podendo ter mais de uma situação, como por exemplo, representar que alguém está em um lugar e feliz ao mesmo tempo, \textit{at(Matheus,PUCRS) $\land$  happy(Matheus)}. % $\land$ fica mais legível no tex do que $\wedge$ e $\lor$ mais do que $\vee$
 
-As ações são descritas por um conjunto esquema de ações \cite{intelligence2003modern}\frm{Sempre que citar livro, dizer capítulo e páginas}. 
-Para toda ação é necessário uma pré condição aplicada ao estado atual, que se for satisfeita, garante o efeito ou pós condição, levando o sistema para o estado resultante. Por exemplo, caminhar de um lugar a outro: \\
-\textit{Action(walk(from, to)): \\
-Precond: at(from)  $\wedge$ path(from,to) \\
-Effect: $\neg$ at(from)  $\wedge$ at(to)}
+%As ações são descritas por um conjunto esquema de ações \cite{intelligence2003modern}\frm{Sempre que citar livro, dizer capítulo e páginas}. 
+%Para toda ação é necessário uma pré condição aplicada ao estado atual, que se for satisfeita, garante o efeito ou pós condição, levando o sistema para o estado resultante. Por exemplo, caminhar de um lugar a outro: \\
+%\textit{Action(walk(from, to)): \\
+%Precond: at(from)  $\wedge$ path(from,to) \\
+%Effect: $\neg$ at(from)  $\wedge$ at(to)}
 
-\frm[inline]{Exemplo disto em estados, mas talvez não precisa entrar em tanto detalhe}
+%\frm[inline]{Exemplo disto em estados, mas talvez não precisa entrar em tanto detalhe}
 
 \subsection{HTN} 
 
