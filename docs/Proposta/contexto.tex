@@ -76,9 +76,7 @@ Um problema de planejamento é descrito como \textit{P} = \textit{($\Sigma$, $s_
 
 %\frm[inline]{Introduza o assunto mais devagar, por que HTN?}
 
-Dentro da área de planejamento existe o planejamento \textit{Hierarchical Task Network Planning} (HTN). HTN é mais expressivo que o planejamento clássico, porque no planejamento clássico o conjunto de solução dos problemas é uma linguagem regular, ou seja, pode ser expressada por uma expressão regular, já em HTN dependendo da técnica utilizada o conjunto de solução dos problemas pode chegar a uma linguagem livre de contexto, que contém as linguagens regulares como um subconjunto, pois existem linguagens livres de contexto que não são linguagens regulares. No pior caso o resultado gerado do planejamento clássico será exponencialmente maior do que o gerado pelo planejamento HTN \cite{ghallab2004automated}.  \\
-
-O planejamento \textit{Hierarchical Task Network} (HTN) é igual ao planejamento clássico, quando se refere a representação do problema, entretanto o diferencial vem do que é planejado e como é planejado \cite{ghallab2004automated}. \\
+Dentro da área de planejamento existe o planejamento hierárquico, chamado de \textit{Hierarchical Task Network} (HTN). HTN é igual ao planejamento clássico, quando se refere a representação do problema, entretanto o diferencial vem do que é planejado e como é planejado \cite{ghallab2004automated}, mas acaba sendo mais expressivo que o planejamento clássico, porque no planejamento clássico o conjunto de solução dos problemas é uma linguagem regular, ou seja, pode ser expressada por uma expressão regular, já em HTN dependendo da técnica utilizada o conjunto de solução dos problemas pode chegar a uma linguagem livre de contexto, que contém as linguagens regulares como um subconjunto, pois existem linguagens livres de contexto que não são linguagens regulares. No pior caso o resultado gerado do planejamento clássico será exponencialmente maior do que o gerado pelo planejamento HTN \cite{ghallab2004automated}.  \\
 
 Em planejamento HTN as ações são tratadas em mais alto nível \cite{intelligence2003modern}. e o objetivo é achar um conjunto de tarefas que resolve determinado problema. Para isso, além da representação do problema, um conjunto de métodos é adicionado como entrada, onde este conjunto serve para decompor as tarefas em tarefas menores. O planejamento é feito decompondo tarefas não primitivas recursivamente até chegar em tarefas primitivas, que podem ser realizadas com um operador de planejamento \cite{ghallab2004automated}. Um método HTN é definido como \textit{m} = (nome(\textit{m}), tarefa(\textit{m}), subtarefas(\textit{m}), limitação(\textit{m})), onde cada elemento é definido como \cite{ghallab2004automated}: 
  
@@ -116,9 +114,33 @@ Na busca pelo plano, o planejamento HTN começa planejando por um caminho, quand
 %\frm[inline]{O planejamento HTN não executa nada (do plano) ele só planeja!!}
 %O planejamento HTN executa todas as possibilidades de resolução do problema, sempre %respeitando a ordem dos métodos que conseguem ser realizados, quando um caminho de %resolução leva a um fim de linha é realizado um retrocesso(\textit{backtracking}) até um %caminho que tenha uma possibilidade de caminho diferente do que foi tomado anteriormente.
 
-%\subsection{AHTN} 
+\subsection{AHTN} 
 
-%\textit{Adversarial hierarchical-task network} (AHTN) é um algoritmo proposto para tentar solucionar o problema do grande fator de ramificação dos jogos em tempo real \cite{ontanon2015adversarial}. O algoritmo combina técnicas de planejamento HTN e o algoritmo \textit{minimax game tree search}. 
+\textit{Adversarial hierarchical-task network} (AHTN) é um algoritmo proposto para tentar solucionar o problema do grande fator de ramificação dos jogos em tempo real \cite{ontanon2015adversarial}. Nele são combinados técnicas de HTN com o algoritmo \textit{minimax search}. O algoritmo \ref{alg:ahtn} é a representação da técnica de AHTN. Cada nodo da arvore das jogadas é definido por uma tupla $(s, N_{+}, N_{-}, t_{+}, t_{-})$, onde s é o estado corrente do ambiente, $N_{+}$ e $N_{-}$ são a representação de planos HTN para os jogadores max e min, respectivamente, $t_{+}$ e $t_{-}$ representam ponteiros para qual parte do plano HTN está sendo executado, sendo  $t_{+}$ uma tarefa de $N_{+}$ e $t_{-}$ uma tarefa de $N_{-}$. \textit{nextAction(N,t)} é uma função que, dado um HTN N e um ponteiro t, encontra a tarefa primitiva que deve ser executada em N. Se N ainda não estiver completamente decomposto, ou seja, ainda existem tarefas não primitivas, então \textit{nextAction(N,t)} = $\perp$.  $decompositions_{+}(s, N_{+}, N_{-}, t_{+}, t_{-})$ denota o conjunto das decomposições validas que adicionem apenas um novo método em $N_{+}$. A partir de uma função de avaliação, que pode ser aplicada sobre um estado, é retornado a recompensa de max em um estado terminal ou uma aproximação se o estado for não terminal. A partir destas definições, o algoritmo para AHTNMin é análogo. O algoritmo retorna o melhor plano encontrado para os dois jogadores, e também o resultado da função de avaliação no nodo terminal alcançado após a execução dos planos. A grande diferença entre o algoritmo de AHTN e o algoritmo do \textit{minimax search}, é que as chamadas recursivas nem sempre se alternam entre max e min. O algoritmo troca de nodos max para min apenas quando os planos estão totalmente decompostos a ponto de gerar uma ação. 
+
+\begin{algorithm}
+	\caption{AHTNMax(s, $N_{+}$, $N_{-}$, $t_{+}$, $t_{-}$, d)}
+	\label{alg:ahtn}
+	\begin{algorithmic}[1]
+		\If {terminal(s) $\vee$ d $\leq$ 0}
+		\State	\Return ($N_{+}$, $N_{-}$, e(s))
+		\EndIf
+		\If {nextAction($N_{+}$, $t_{+}$) $\neq$ $\perp$}
+		\State t = nextAction($N_{+}$, $t_{+}$) 
+		\State \Return AHTNMin($\gamma$(s,t), $N_{+}$, $N_{-}$, t, $t_{-}$, d-1)
+		\EndIf
+		\State $N_{+}^{*}$ = $\perp$, $N_{-}^{*}$ = $\perp$, $v^{*}$ = $-\infty$
+		\State $\aleph$ = $decompositions_{+}(s, N_{+}, N_{-}, t_{+}, t_{-})$
+		\ForAll{$N \in \aleph$}
+		\State $(N^{'}_{+}, N^{'}_{-}, v^{'}) = AHTNMax(s, N, N_{-}, t_{+}, t_{-}, d)$
+		\If{$v^{'} > v^{*}$}
+		\State $N_{+}^{*} = N^{'}_{+}, N_{-}^{*} = N^{'}_{-}, v^{*} = v^{'} $
+		\EndIf
+		\EndFor		
+		\State \Return $(N_{+}^{*}, N_{-}^{*}, v^{*} )$
+	\end{algorithmic}
+\end{algorithm}
+
 %\frm[inline]{Incompleto! Decide se tu queres incorpora isto ao parágrafo anterior. Em tempo, acho que tu tens que falar de minimax antes, para poder fazer a ligação de HTN e minimax $\rightarrow$ AHTN}
 
 \section{Busca adversaria}
@@ -175,7 +197,32 @@ O aprendizado por reforço também é conhecido como \textit{reinforcement learn
 %O aprendizado por reforço, também é conhecido como \textit{reinforcement learning}, \textbf{tem as técnicas }\frm{ARGH!!!} baseadas em  aprender através das execuções e a cada nova execução o conhecimento aprendido é utilizado para tentar maximizar o seu desempenho na próxima execução \cite{intelligence2003modern}. Para conseguir medir o aprendizado em cada execução, existe a abordagem que é preciso medir a quantidade do ganho por estado do sistema e assim cada estado do sistema deve ter um valor de utilidade para dizer se o estado é um estado recomendado ou não para ser alcançado, ou ainda o estado não oferece nem ganho nem perda por ser atingido. 
 
 
-%\section{Jogos Real-time Strategy(RTS)} 
+\section{Jogos Real-time Strategy(RTS)} 
 
-%Jogos eletrônicos são muito populares, não só entre os jovens, principalmente pela grande quantidade de gêneros, existem jogos de ação, aventura, esportes, estrategia, entre outros. \\
-%Dentro dos jogos de estratégia há uma subseção que se chama jogos de estratégia em tempo real, neles os jogadores estão se enfrentando no mesmo momento, como o nome já diz. Em alguns desses jogos há BOTs(jogadores que simulam um jogador real) e é preciso alguma inteligencia para esses BOTs conseguirem levar graça ao jogador real, para isso é utilizado algoritmos de IA. Esse tipo de jogo, devido a sua grande quantidade de ações, possui um fator de ramificação muito grande, e cresce exponencialmente, com isso aplicar os algoritmos se torna uma tarefa não trivial.  \\
+Jogos eletrônicos são muito populares, principalmente pela grande quantidade de gêneros, existem jogos de ação, aventura, esportes, estrategia, entre outros. Dentro dos jogos de estratégia há uma subseção que se chama jogos de estratégia em tempo real, neles os jogadores estão se enfrentando no mesmo momento, como o nome já diz. \\
+
+Um exemplo deste gênero é o Starcraft\footnote{http://us.battle.net/sc2/pt/}.  Uma simplificação do Starcraft foi feita por Santiago Ontañón \cite{ontanon2013combinatorial}, chamada de MicroRTS. O MicroRTS foi desenvolvido para fins acadêmicos, com o intuito de aplicar e desenvolver técnicas de IA e para servir como prova de conceito para as técnicas criadas.  O objetivo do jogo é destruir a base adversaria. Existem trabalhadores que podem coletar recursos e construir outros prédios. Os recursos são coletados dos minerais. Com os recursos é possível construir bases de ataque, onde são realizado o treinamento de unidades de ataque. Para conseguir realizar o objetivo de destruir a base adversaria é preciso ter unidades de ataque. O jogo oferece três destas unidades, são elas:
+
+\begin{itemize}
+	\item Heavy - Possui um alto poder de ataque, mas sua velocidade é lenta.
+	\item Light - Possui um baixo poder de ataque, mas sua velocidade é rapida.
+	\item Ranged - Possui um ataque de longa distancia. 
+\end{itemize} 
+
+A Figura~\ref{fig:microrts}\footnote{https://github.com/santiontanon/microrts} mostra uma tela do jogo que representa o que foi explicado e ainda é possível observar que o fator de ramificação pode ser muito alto dependendo do cenário do jogo. %\frm{Figura sem explicação... Só os comentários do lado, em inglês, não te resolvem}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\textwidth]{fig/microrts.pdf}
+	\caption{Um exemplo da tela do MicroRTS}
+	\label{fig:microrts}
+\end{figure} 
+
+No ambiente há algumas estrategias implementadas, cada estrategia possui variações dos algoritmos. Algumas das estrategias são:
+\begin{itemize}
+	\item Minimax Alpha-Beta Search Strategies - O que muda entre as técnicas é o jeito com que é feito a expansão do grafo.
+	\item Monte Carlo Search Strategies - Executa jogadas aleatórias para planejar e após utiliza uma heurística para determinar em qual caminho seguir.
+\end{itemize}
+
+%\frm[inline]{E.. depois da itemização talvez seja interessante concluir algo}
+A plataforma já foi utilizada para aplicar técnica de IA. Por esse motivo a utilização desta plataforma se torna viável. A comparação entre as estrategias já existentes com a que estou propondo pode mostrar que a abordagem resulta em um melhor desempenho. 
