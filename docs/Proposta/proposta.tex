@@ -53,14 +53,17 @@
 % Para formatar algoritmos.
 % A opção [algo2e] é necessária para evitar conflitos
 % com as definições da classe.
-%\usepackage[algo2e]{algorithm2e}
-\usepackage{algorithmic}
+%\usepackage[ruled, algo2e, linesnumbered]{algorithm2e}
+%\usepackage{algorithmic}
 % Um float do tipo algoritmo. No momento
 % este pacote é incompatível com a classe.
 %\usepackage{algorithm}
 \usepackage{todonotes}
 \usepackage{pgfgantt}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
 \newcommand\frm[2][noinline]{\todo[size=\tiny,author=Felipe,color=red!75,#1]{#2}}
+\newcommand{\msr}[1]{\todo[color=blue!50,author=Matheus]{#1}}
 %----------------------------------------------------------------
 % Autor (OBRIGATÓRIO)
 %----------------------------------------------------------------
@@ -159,7 +162,6 @@
 % um para cada capítulo. Para isso, utilize o comando \include,
 % como mostrado abaixo.0
 %----------------------------------------------------------------
-\newcommand{\msr}[1]{\todo[color=blue!50,author=Matheus]{#1}}
 
 \sigla{IA}{Inteligência Artiﬁcial}
 \sigla{HTN}{Hierarchical Task Network}

@@ -2,9 +2,33 @@
 \chapter{\label{chap:descr}Descrição do Projeto}
 
 \section{Algoritmo}
-O algoritmo a ser implementado é o AHTN. Nele são combinados tecnicas de HTN com o algoritmo \textit{minimax game tree search}\frm{Algoritmo o qual tu não falou nada ainda!! Aqui tu deixa muita coisa picando!}. 
-%algoritmo a ser utilizado \\
-%algoritmo de ML a ser agregado
+O algoritmo a ser implementado é o \textit{Adversarial hierarchical-task network} (AHTN). Nele são combinados técnicas de HTN com o algoritmo \textit{minimax search}. Após a implementação um algoritmo de aprendizado por reforço será incorporado para tentar melhorar o desempenho do algoritmo. %\frm{Algoritmo o qual tu não falou nada ainda!! Aqui tu deixa muita coisa picando!}. 
+
+\begin{algorithm}
+	\caption{AHTNMAX(s, $N_{+}$, $N_{-}$, $t_{+}$, $t_{-}$, d)}
+	\begin{algorithmic}[1]
+		\If {terminal(s) ou d <= 0}
+		\State	\Return ($N_{+}$, $N_{-}$, e(s))
+		\EndIf
+		\If {}
+		\State t = 
+		\State \Return AHTNMIN
+		\EndIf
+		\State $N_{+}^{*}$ = 
+		\State nbonito = 
+		\ForAll{}
+		\State x
+		\If{}
+		\State $N_{+}^{*}$ = 
+		\EndIf
+		\EndFor		
+		\State \Return $-x$
+	\end{algorithmic}
+\end{algorithm}
+
+\msr{adicionar o algoritmo}
+
+A grande diferença entre o algoritmo de AHTN e o algoritmo do \textit{minimax search}, é que as chamadas recursivas nem sempre se alternam entre max e min. O algoritmo troca de nodos max para min apenas quando os planos estão totalmente decompostos a ponto de gerar uma ação. 
 
 \section{Ambiente}
 
@@ -19,7 +43,7 @@ O jogo é uma simplificação do jogo Starcraft\footnote{http://us.battle.net/sc
 	\item Ranged - Possui um ataque de longa distancia. 
 \end{itemize} 
 
-A Figura~\ref{fig:microrts}\footnote{https://github.com/santiontanon/microrts} mostra uma tela do jogo que representa o que foi explicado. É possível observar que o fator de ramificação pode ser muito alto dependendo do cenário do jogo. %\frm{Figura sem explicação... Só os comentários do lado, em inglês, não te resolvem}
+A Figura~\ref{fig:microrts}\footnote{https://github.com/santiontanon/microrts} mostra uma tela do jogo que representa o que foi explicado e ainda é possível observar que o fator de ramificação pode ser muito alto dependendo do cenário do jogo. %\frm{Figura sem explicação... Só os comentários do lado, em inglês, não te resolvem}
 
 \begin{figure}[ht]
 	\centering
@@ -35,5 +59,4 @@ No ambiente há algumas estrategias implementadas, cada estrategia possui varia�
 \end{itemize}
 
 %\frm[inline]{E.. depois da itemização talvez seja interessante concluir algo}
-A plataforma já foi utilizada para aplicar técnica de IA. Por esse motivo a utilização desta plataforma se torna viável. A comparação entre as estrategias já existentes com a que estou propondo pode mostrar que a
- abordagem resulta em um melhor desempenho. 
+A plataforma já foi utilizada para aplicar técnica de IA. Por esse motivo a utilização desta plataforma se torna viável. A comparação entre as estrategias já existentes com a que estou propondo pode mostrar que a abordagem resulta em um melhor desempenho. 
