@@ -2,31 +2,30 @@
 \chapter{\label{chap:descr}Descrição do Projeto}
 
 \section{Algoritmo}
-O algoritmo a ser implementado é o \textit{Adversarial hierarchical-task network} (AHTN). Nele são combinados técnicas de HTN com o algoritmo \textit{minimax search}. Após a implementação um algoritmo de aprendizado por reforço será incorporado para tentar melhorar o desempenho do algoritmo. %\frm{Algoritmo o qual tu não falou nada ainda!! Aqui tu deixa muita coisa picando!}. 
+O algoritmo a ser implementado é o \textit{Adversarial hierarchical-task network} (AHTN). Nele são combinados técnicas de HTN com o algoritmo \textit{minimax search}. Após a implementação um algoritmo de aprendizado por reforço será incorporado para tentar melhorar o desempenho do algoritmo. O algoritmo \ref{alg:ahtn} é a representação da técnica de AHTN. Cada nodo da arvore das jogadas é definido por uma tupla $(s, N_{+}, N_{-}, t_{+}, t_{-})$, onde s é o estado corrente do ambiente, $N_{+}$ e $N_{-}$ são a representação de planos HTN para os jogadores max e min, respectivamente, $t_{+}$ e $t_{-}$ representam ponteiros para qual parte do plano HTN está sendo executado, sendo  $t_{+}$ uma tarefa de $N_{+}$ e $t_{-}$ uma tarefa de $N_{-}$. \textit{nextAction(N,t)} é uma função que, dado um HTN N e um ponteiro t, encontra a tarefa primitiva que deve ser executada em N. Se N ainda não estiver completamente decomposto, ou seja, ainda existem tarefas não primitivas, então \textit{nextAction(N,t)} = $\perp$    %\frm{Algoritmo o qual tu não falou nada ainda!! Aqui tu deixa muita coisa picando!}. 
 
 \begin{algorithm}
-	\caption{AHTNMAX(s, $N_{+}$, $N_{-}$, $t_{+}$, $t_{-}$, d)}
+	\caption{AHTNMax(s, $N_{+}$, $N_{-}$, $t_{+}$, $t_{-}$, d)}
+	\label{alg:ahtn}
 	\begin{algorithmic}[1]
-		\If {terminal(s) ou d <= 0}
+		\If {terminal(s) $\vee$ d $\leq$ 0}
 		\State	\Return ($N_{+}$, $N_{-}$, e(s))
 		\EndIf
-		\If {}
-		\State t = 
-		\State \Return AHTNMIN
+		\If {nextAction($N_{+}$, $t_{+}$) $\neq$ $\perp$}
+		\State t = nextAction($N_{+}$, $t_{+}$) 
+		\State \Return AHTNMin($\gamma$(s,t), $N_{+}$, $N_{-}$, t, $t_{-}$, d-1)
 		\EndIf
-		\State $N_{+}^{*}$ = 
-		\State nbonito = 
-		\ForAll{}
-		\State x
-		\If{}
-		\State $N_{+}^{*}$ = 
+		\State $N_{+}^{*}$ = $\perp$, $N_{-}^{*}$ = $\perp$, $v^{*}$ = $-\infty$
+		\State $\aleph$ = $decompositions_{+}(s, N_{+}, N_{-}, t_{+}, t_{-})$
+		\ForAll{$N \in \aleph$}
+		\State $(N^{'}_{+}, N^{'}_{-}, v^{'}) = AHTNMax(s, N, N_{-}, t_{+}, t_{-}, d)$
+		\If{$v^{'} > v^{*}$}
+		\State $N_{+}^{*} = N^{'}_{+}, N_{-}^{*} = N^{'}_{-}, v^{*} = v^{'} $
 		\EndIf
 		\EndFor		
-		\State \Return $-x$
+		\State \Return $(N_{+}^{*}, N_{-}^{*}, v^{*} )$
 	\end{algorithmic}
 \end{algorithm}
-
-\msr{adicionar o algoritmo}
 
 A grande diferença entre o algoritmo de AHTN e o algoritmo do \textit{minimax search}, é que as chamadas recursivas nem sempre se alternam entre max e min. O algoritmo troca de nodos max para min apenas quando os planos estão totalmente decompostos a ponto de gerar uma ação. 
 
