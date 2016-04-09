@@ -11,18 +11,15 @@ Perguntas que teu texto tem que responder:
 }
 
 Inteligencia artificial(IA) é uma área em ciência da computação que tem como objetivo fazer com que o computador seja capaz de realizar tarefas que precisam ser pensadas, como é feito pelas pessoas.  
-A IA possui algumas áreas de aplicação, tais como: %\frm{Isto é uma lista exaustiva?} 
-\begin{itemize}
-	\item Aprendizado;
-	\item Planejamento;
-	\item Jogos;
-	\item Mineração de dados;
-	\item Escalonamento de tarefas.
-\end{itemize}
+A IA possui algumas áreas de aplicação, tais como: aprendizado, planejamento, jogos, e mineração de dados entre outras. 
 
 %\frm[inline]{Tu estás tentando explicar em profundidade os tipos de jogos, mas talvez seja melhor tu simplesmente colocar o problema mais genérico de programar As para jogos, depois te preocupa em detalhar os tipos de jogos e tipos de técnicas (isto é a parte final  da introdução)}
 
-A utilização de IA para jogos começou simples, com a aplicação de técnicas para jogos como xadrez e jogo da velha, mas atualmente é difícil encontrar um jogo que não utilize alguma técnica de IA. As técnicas de IA são utilizadas para conseguir uma melhor interação com o jogador, tornando o jogo mais real e assim prendendo a atenção do jogador. As técnicas utilizadas nos jogos, geralmente, são mais simples das que utilizadas no meio acadêmico, pelo fato de que o tempo de resposta dos algoritmos é superior ao tempo que se tem para tomar uma ação dentro do jogo. Nos jogos as reações devem ser quase que imediatas, para isso técnicas que tentam explorar todo o espaço de estados do jogo se tornam inviáveis para jogos mais complexos. No xadrez a quantidade aproximada de estados possíveis é de $10^{40}$, isso mostra que o poder de processamento para gerar, de maneira rápida, uma ação precisa ser alto \cite{millington2009artificial}. \\
+A utilização de IA para jogos começou simples, com a aplicação de técnicas para jogos como xadrez e jogo da velha, mas atualmente é difícil encontrar um jogo que não utilize alguma técnica de IA.\frm{Quem disse isto? Citação ou não existiu.} 
+As técnicas de IA são utilizadas para conseguir uma melhor interação com o jogador, tornando o jogo mais real e assim prendendo a atenção do jogador.\frm{Quem disse isto? De novo, citação.} 
+As técnicas utilizadas nos jogos, geralmente, são mais simples do que as que utilizadas no meio acadêmico, pelo fato de que o tempo de resposta dos algoritmos é superior ao tempo que se tem para tomar uma ação ótima dentro do jogo. 
+Nos jogos as reações devem ser quase que imediatas, para isso técnicas que tentam explorar todo o espaço de estados do jogo se tornam inviáveis para jogos mais complexos.
+Por exemplo, no xadrez a quantidade aproximada de estados possíveis é de $10^{40}$, isso mostra que o poder de processamento para gerar, de maneira rápida, uma ação precisa ser alto \cite{millington2009artificial}. \frm{Tá, agora tu tens que concluir alguma coisa... Então é complicado gerar uma ação ótima, e daí?}
 
 
 %A área de jogos eletrônicos é muito popular %, não só entre os jovens\frm{Se tu tens que falar ``nos jovens'', tu parece um velho, hehe},
@@ -31,17 +28,25 @@ A utilização de IA para jogos começou simples, com a aplicação de técnicas
 
 
 %\frm[inline]{Estás entrando direto em jargão (planejamento), esta introdução tem que ser legível sem falar do jargão.}
-Planejamento é uma área da IA que busca a geração de planos de forma automática. As técnicas buscam a geração de um plano que satisfaça um objetivo. A utilização de técnicas de planejamento em jogos é uma tarefa difícil devido a sua grande quantidade de ações possíveis. Esse gênero de jogo possui um fator de ramificação muito grande, e cresce exponencialmente, com isso aplicar algoritmos de planejamento se torna uma tarefa não trivial. \\
+Planejamento é uma área da IA que busca a geração de planos de forma automática. As técnicas buscam a geração de um plano que satisfaça um objetivo. 
+A utilização de técnicas de planejamento em jogos é uma tarefa difícil devido a sua grande quantidade de ações possíveis. 
+Esse gênero de jogo possui um fator de ramificação muito grande, e cresce exponencialmente, com isso aplicar algoritmos de planejamento se torna uma tarefa não trivial. \frm{Isto é o mesmo assunto do parágrafo seguinte, então por que quebrar? Ou não? Qual a relação entre estes parágrafos? Parece que tu fica mudando de assunto assim do nada. Estes parágrafos tem que fluir melhor.}
+\frm[inline]{De repente falar de busca adversária antes, ou algo assim. Eu sei que tu tens que conectar estas idéias.}
 
+%
 %Em algoritmos de aprendizado de maquina esse tipo de problema não acontece, pois os algoritmos podem ser construídos para aprender com o ambiente através das execuções,  mas a dificuldade vem do fato que é difícil modelar todas as variáveis que devem ser utilizadas nesses algoritmos a fim de cobrir completamente o comportamento do sistema. \frm{Não são só estas as dificuldades, de novo, não entra no aprendizado de máquina ainda.}
 %\frm[inline]{Aqui tu só queres oferecer pro leitor o fato de que tu vais usar técnicas de planejamento (mas antes de falar de planejamento, dizes em duas sentenças o que é isto), e busca adversária para resolver um problema muito difícil.}
+%
+A busca é utilizada para achar a possível sequencia de ações que resolve um problema. Já busca adversária é utilizada para a resolução de problemas de busca em modo competitivo. 
+A busca adversária pressupõe que sempre o oponente irá realizar sempre a jogada que mais lhe beneficia, mas isso nem sempre acontece, seja porque o jogador é iniciante ou comete um erro. \frm{Mas mais precisamente por que um ser humano não é perfeitamente racional (no sentido de não ser um otimizador perfeito, ele é muito bom, mas não é perfeito sempre)}
 
-A busca é utilizada para achar a possível sequencia de ações que resolve um problema. Já busca adversária é utilizada para a resolução de problemas de busca em modo competitivo. A busca adversária acredita que sempre o oponente irá realizar sempre a jogada que mais lhe beneficia, mas isso nem sempre acontece, seja porque o jogador é iniciante ou comete um erro. \\
 
+\frm{Tu conectaste as idéias melhor no abstract, aqui tu terias que introduzir algo no sentido de que: para mitigar as limitações de eficiência computacional de abordagens tradicionais de raciocínio em jogos, X e Y propuseram o AHTN}
+Um algoritmo que foi proposto como alternativa para resolver o problema do alto espaço de estado dos jogos é o \textit{Adversarial Hierarchical Task Network (AHTN)} \cite{ontanon2015adversarial}. 
+Neste algoritmo são combinadas técnicas de HTN com o algoritmo de busca adversaria \textit{minimax search}. 
 
-Um algoritmo que foi proposto como alternativa para resolver o problema do alto espaço de estado dos jogos é o \textit{Adversarial Hierarchical Task Network (AHTN)} \cite{ontanon2015adversarial}. Neste algoritmo são combinadas técnicas de HTN com o algoritmo de busca adversaria \textit{minimax search}. \\
-
-Eu proponho a utilização do algoritmo AHTN combinado com uma técnica de aprendizado por reforço em um jogo de estrategia em tempo real. Com este trabalho pretendo apresentar outra alternativa de implementação para jogos de estrategia em tempo real, e ainda apresentar melhores resultados combinando uma técnica de aprendizado por reforço.
+Propomos a utilização do algoritmo AHTN combinado com uma técnica de aprendizado por reforço em um jogo de estrategia em tempo real. 
+Com este trabalho pretendemos apresentar uma alternativa de implementação para jogos de estrategia em tempo real, e ainda apresentar melhores resultados\frm{Melhores do que quem?} combinando uma técnica de aprendizado por reforço.
 
 
 
