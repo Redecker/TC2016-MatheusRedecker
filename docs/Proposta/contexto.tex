@@ -1,3 +1,4 @@
+
 %!TEX root = proposta.tex 
 %% Matheus renomeia "exemplo.tex" para um nome mais descritivo (e muda a linha acima)
 \chapter{\label{chap:conte}Contexto}
@@ -54,14 +55,14 @@ Um problema de planejamento é descrito como \textit{P} = \textit{($\Sigma$, $s_
 Dentro da área de planejamento existe o planejamento hierárquico, chamado de \textit{Hierarchical Task Network} (HTN). HTN é igual ao planejamento clássico, quando se refere a representação do problema, entretanto o diferencial vem do que é planejado e como é planejado \cite{ghallab2004automated}, mas acaba sendo mais expressivo que o planejamento clássico, porque no planejamento clássico o conjunto de solução dos problemas é uma linguagem regular, ou seja, pode ser expressada por uma expressão regular, já em HTN dependendo da técnica utilizada o conjunto de solução dos problemas pode chegar a uma linguagem livre de contexto, que contém as linguagens regulares como um subconjunto, pois existem linguagens livres de contexto que não são linguagens regulares. No pior caso o resultado gerado do planejamento clássico será exponencialmente maior do que o gerado pelo planejamento HTN \cite{ghallab2004automated}.  
 
 Em planejamento HTN as ações são tratadas em mais alto nível \cite{intelligence2003modern}. e o objetivo é achar um conjunto de tarefas que resolve determinado problema. Para isso, além da representação do problema, um conjunto de métodos é adicionado como entrada, onde este conjunto serve para decompor as tarefas em tarefas menores. O planejamento é feito decompondo tarefas não primitivas recursivamente até chegar em tarefas primitivas, que podem ser realizadas com um operador de planejamento \cite{ghallab2004automated}. Um método HTN é definido como \textit{m} = (nome(\textit{m}), tarefa(\textit{m}), subtarefas(\textit{m}), limitação(\textit{m})), onde cada elemento é definido como \cite{ghallab2004automated}: 
- 
+
 \begin{itemize}
 	\item nome(\textit{m}) - Nome do método, que deve ser único, e \textit{m} é o conjunto de variaveis que será utilizado em \textit{m}. 
 	\item tarefa(\textit{m}) - É uma tarefa não primitiva.
 	\item (subtarefa(\textit{m}),limitação(\textit{m})) - É uma ligação de tarefa de ligação.
 \end{itemize}
 
-Uma tarefa de ligação é definida como um par w = (U,C), onde U é um conjunto de tarefas de ligação e C um conjunto de limitações. Cada limitação deve ser satisfeita em todo o plano e cada tarefa de ligação é decomposta em subtarefas até todas as tarefas se tornarem primitivas. 
+Uma tarefa de ligação é definida como um par w = (U,C), onde U é um conjunto de tarefas de ligação e C um conjunto de limitações. Cada limitação deve ser satisfeita em todo o plano e cada tarefa de ligação é decomposta em sub tarefas até todas as tarefas se tornarem primitivas. 
 
 Um problema de planejamento HTN é descrito como P = ($s_{0}$, w, O, M), onde $s_{0}$ é o estado inicial, w a tarefa de ligação inicial, O é um conjunto de operadores de planejamento, e M é um conjunto de métodos. 
 
@@ -107,9 +108,9 @@ Aprendizado pode variar de adquirir conhecimento de tarefas simples, como decora
 
 A área na computação que estudo esse aprendizado de forma computacional é o aprendizado de maquina, melhor conhecida como \textit{machine learning}. A definição de aprendizado de maquina proposta por Tom Mitchell \cite{Mitchell1997ML} é a seguinte:
 
- \begin{quote}
- 	Definição: Um programa de computador é dito que aprende de uma experiencia E com relação a alguma classe de tarefas T, e medida de performance P, se essa performance sobre as tarefas em T, medida por P, melhora com a experiencia E.
- \end{quote}
+\begin{quote}
+	Definição: Um programa de computador é dito que aprende de uma experiencia E com relação a alguma classe de tarefas T, e medida de performance P, se essa performance sobre as tarefas em T, medida por P, melhora com a experiencia E.
+\end{quote}
 
 Essa definição mostra que o sistema aprimora seu conjunto de tarefas T com uma performance P através de experiencias E. Ou seja, um sistema baseado em aprendizado de maquina deve, através de experiencias, ter um ganho nas informações para solucionar os seus problemas. Para começar a resolver um problema utilizando aprendizado de maquina é preciso escolher qual experiencia será aprendida pelo sistema \cite{Mitchell1997ML}. Para isso existem algumas técnicas que tratam aprendizado de maquina com objetivos diferentes \cite{intelligence2003modern}. Alguma das técnicas são: %\frm{Olha as concordâncias!!}
 
@@ -137,7 +138,7 @@ Um exemplo deste gênero é o Starcraft\footnote{http://us.battle.net/sc2/pt/}. 
 
 \begin{itemize}
 	\item Heavy - Possui um alto poder de ataque, mas sua velocidade é lenta.
-	\item Light - Possui um baixo poder de ataque, mas sua velocidade é rapida.
+	\item Light - Possui um baixo poder de ataque, mas sua velocidade é rápida.
 	\item Ranged - Possui um ataque de longa distancia. 
 \end{itemize} 
 
@@ -145,7 +146,7 @@ A Figura~\ref{fig:microrts}\footnote{https://github.com/santiontanon/microrts} m
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.8\textwidth]{fig/microrts.pdf}
+	\includegraphics[width=0.5\textwidth]{fig/microrts.pdf}
 	\caption{Um exemplo da tela do MicroRTS}
 	\label{fig:microrts}
 \end{figure} 
@@ -158,3 +159,6 @@ No ambiente há algumas estrategias implementadas, cada estrategia possui varia�
 
 %\frm[inline]{E.. depois da itemização talvez seja interessante concluir algo}
 A plataforma já foi utilizada para aplicar técnica de IA. Por esse motivo a utilização desta plataforma se torna viável. A comparação entre as estrategias já existentes com a que estou propondo pode mostrar que a abordagem resulta em um melhor desempenho. 
+
+
+
