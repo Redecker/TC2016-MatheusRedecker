@@ -1,0 +1,26 @@
+%!TEX root = volumeFinal.tex 
+\chapter{\label{chap:aprendizado}Aprendizado}
+ 
+Para os humanos o aprendizado ocorre durante toda a vida. 
+O aprendizado é o ato de adquirir novos conhecimentos, ou modificar conhecimentos já existentes ou ainda adquirir uma experiencia por repetição do ato de forma incorreta. 
+Aprendizado pode variar de adquirir conhecimento de tarefas simples, como decorando um numero de telefone, até tarefas mais complicadas, como a formulação de novas teorias \cite{intelligence2003modern}. 
+% Não precisa colocar quebra de parágrafo em todo o lado!
+
+\section{Aprendizado de Máquina} 
+
+A área na computação que estudo esse aprendizado de forma computacional é o aprendizado de maquina, melhor conhecida como \textit{machine learning}. A definição de aprendizado de maquina proposta por Tom Mitchell \cite{Mitchell1997ML} é a seguinte:
+
+\begin{quote}
+	Definição: Um programa de computador é dito que aprende de uma experiencia E com relação a alguma classe de tarefas T, e medida de performance P, se essa performance sobre as tarefas em T, medida por P, melhora com a experiencia E.
+\end{quote}
+
+Essa definição mostra que o sistema aprimora seu conjunto de tarefas T com uma performance P através de experiencias E. Ou seja, um sistema baseado em aprendizado de maquina deve, através de experiencias, ter um ganho nas informações para solucionar os seus problemas. Para começar a resolver um problema utilizando aprendizado de maquina é preciso escolher qual experiencia será aprendida pelo sistema \cite{Mitchell1997ML}. Para isso existem algumas técnicas que tratam aprendizado de maquina com objetivos diferentes \cite{intelligence2003modern}. Alguma das técnicas são: 
+\begin{itemize}
+	\item Aprendizado supervisionado: Aprender através de algum conjunto de exemplos a realizar a classificação de algum problema. Cada problema é mapeado para uma saída. 
+	\item Aprendizado não supervisionado: Aprender através das observações, algum pedrão ou regularidade, para classificar em grupos os problemas.
+	\item Aprendizado por reforço: Aprender através das execuções, bem ou mal sucedidas. Aprende quais ações são melhores de ser executadas.
+\end{itemize}
+
+O aprendizado por reforço também é conhecido como \textit{reinforcement learning}. O objetivo deste aprendizado é usar as recompensas obtidas nas observações para aprender uma politica do ambiente \cite{intelligence2003modern}. Para que isso aconteça, cada estado contém uma utilidade, que mostra o quão desejável é este estado, pode ser um desejo bom ou um ruim. Com essa informação é possível determinar, dado as ações disponíveis no estado, qual ação o sistema deve escolher para seguir a execução. 
+
+\section{Aprendizado por Reforço}
