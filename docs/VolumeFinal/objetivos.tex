@@ -3,16 +3,33 @@
 
 Atualmente, há uma dificuldade na utilização de técnicas de IA para jogos em tempo real. Isso ocorre pelo fato que a IA precisa ser capaz de resolver tarefas, do mundo real, de maneira rápida e satisfatória. Geralmente, o espaço de estados dos jogos é enorme, isso faz com que não se tenha tempo de explorar todas as possibilidades de solução \cite{millington2009artificial}.   
 
+\section{Objetivo Geral}
 O objetivo geral deste trabalho é implementar o algoritmo de planejamento AHTN \cite{ontanon2015adversarial} que combina técnicas de HTN com o algoritmo de \textit{minimax serach}. Após implementado, integrar aprendizado por reforço através da ferramenta WEKA\footnote{http://www.cs.waikato.ac.nz/ml/weka/} com o objetivo de melhorar o desempenho do algoritmo. Ao final do trabalho, o objetivo é conseguir comparar resultados obtidos com os resultados \cite{ontanon2012experiments,hogg2010learning,ontanon2013survey}. 
 
-\section{Objetivos Específicos}
-\label{obj:esp}
+\section{Objetivos Específicos}\label{obj:esp}
+Os Objetivos são classificados em dois grupos, fundamentais e desejáveis. Os objetivos fundamentais representam a base do projeto, . Já os objetivos desejáveis, representam objetivos que devem ser realizados para uma melhor demonstração das técnicas apresentadas, e ainda para tentar melhorar os resultados obtidos nos objetivos fundamentais. 
+ 
+\subsection{Objetivos fundamentais} 
 \begin{itemize}
-\item Entender as técnicas de HTN.
-\item Entender o algoritmo de AHTN.
-\item Entender algoritmos de aprendizado por reforço.
-\item Estudar como integrar o algoritmo de AHTN com uma técnica de aprendizado por reforço. 
-\item Avaliar a aplicabilidade dos algoritmos junto ao jogo escolhido.
-\item Definir a estratégia de implementação.
-\item Comparar resultados com outras abordagens.
+	\item Implementar o algoritmo de AHTN no ambiente do jogo MicroRTS.
+	\item Comparar os resultados obtidos com as implementados já embutidas no MicroRTS.
+	\item Enviar a implementação para o autor do MicroRTS como uma sugestão de IA para o jogo.
 \end{itemize}
+ 
+\subsection{Objetivos desejaveis}
+\begin{itemize}
+	\item Integrar um algoritmo de aprendizado por reforço a técnica de AHTN através da ferramenta WEKA.
+	\item Comprar os resultados obtidos com a implementação do AHTN puro.
+	\item Escrever um artigo para um workshop mostrando a unificação das técnicas de planejamento com aprendizado por reforço.
+\end{itemize}
+
+ 
+%\begin{itemize}
+%\item Entender as técnicas de HTN.
+%\item Entender o algoritmo de AHTN.
+%\item Entender algoritmos de aprendizado por reforço.
+%\item Estudar como integrar o algoritmo de AHTN com uma técnica de aprendizado por reforço. 
+%\item Avaliar a aplicabilidade dos algoritmos junto ao jogo escolhido.
+%\item Definir a estratégia de implementação.
+%\item Comparar resultados com outras abordagens.
+%\end{itemize}
