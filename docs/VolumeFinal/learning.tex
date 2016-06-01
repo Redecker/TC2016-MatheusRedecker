@@ -4,7 +4,6 @@
 Para os humanos o aprendizado ocorre durante toda a vida. 
 O aprendizado é o ato de adquirir novos conhecimentos, ou modificar conhecimentos já existentes ou ainda adquirir uma experiencia por repetição do ato de forma incorreta. 
 Aprendizado pode variar de adquirir conhecimento de tarefas simples, como decorando um numero de telefone, até tarefas mais complicadas, como a formulação de novas teorias \cite{intelligence2003modern}. 
-% Não precisa colocar quebra de parágrafo em todo o lado!
 
 \section{Aprendizado de Máquina} 
 
@@ -21,8 +20,25 @@ Essa definição mostra que o sistema aprimora seu conjunto de tarefas T com uma
 	\item Aprendizado por reforço: Aprender através das execuções, bem ou mal sucedidas. Aprende quais ações são melhores de ser executadas.
 \end{itemize}
 
-Como podemos ver cada tipo de aprendizado é utilizado para uma aplicação especifica...
+Cada tipo de aprendizado é utilizado pode ser usado para uma aplicação especifica, mas existem casos em que a combinação das técnicas se mostra mais eficaz. Um exemplo apresentado por \cite{intelligence2003modern} é o reconhecimento de idade por fotos, para essa tarefa são necessários amostras de fotos com as idades, então a técnica que se encaixa é aprendizado supervisionado, mas existem ruídos aleatórios nas imagens que fazem com que a precisão da abordagem caia, para superar esse problema pode ser combinado aprendizado supervisionado com o não supervisionado.
 
 \section{Aprendizado por Reforço}
 
-O aprendizado por reforço também é conhecido como \textit{reinforcement learning}. O objetivo deste aprendizado é usar as recompensas obtidas nas observações para aprender uma politica do ambiente \cite{intelligence2003modern}. Para que isso aconteça, cada estado contém uma utilidade, que mostra o quão desejável é este estado, pode ser um desejo bom ou um ruim. Com essa informação é possível determinar, dado as ações disponíveis no estado, qual ação o sistema deve escolher para seguir a execução. 
+O aprendizado por reforço também é conhecido como \textit{reinforcement learning}. O objetivo deste aprendizado é usar as recompensas obtidas nas observações para aprender uma politica do ambiente ou determinar o quão boa a politica é. Para isso, existem dois tipos principais de aprendizado por reforço \cite{intelligence2003modern}:
+
+\begin{itemize}
+	\item Passivo - Onde a politica é fixa.
+	\item Ativo - Onde a politica deve ser aprendida.
+\end{itemize}
+
+\subsection{Aprendizado Passivo}
+
+O aprendizado passivo usa 
+
+
+\subsection{Aprendizado Ativo}
+
+
+
+
+%Para que isso aconteça, cada estado contém uma utilidade, que mostra o quão desejável é este estado, pode ser um desejo bom ou um ruim. Com essa informação é possível determinar, dado as ações disponíveis no estado, qual ação o sistema deve escolher para seguir a execução. 
