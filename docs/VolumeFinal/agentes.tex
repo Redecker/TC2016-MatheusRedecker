@@ -6,7 +6,8 @@
 %	\item figura de agentes para exemplificar ambiente -> agentes( percepções -> ações) 	
 %\end{itemize}
 
-Agentes são entidades capazes de realizar alguma atividade de forma autônoma em um ambiente \cite{agent1993oriented}. Os agentes utilizam sensores que permitem que o ele consiga ter percepções vindas do ambiente. Com as percepções é possível que o agente reaja de um determinado jeito dependendo da percepção \cite{intelligence2003modern}. O agente realiza ações no ambiente em busca do seu objetivo, que foi previamente definido. Uma arquitetura abstrata de agente pode ser descrita como um conjunto de estados do ambiente, onde em qualquer instante de tempo, o ambiente estará em algum dos estados, um conjunto de ações, que quando executadas alteram o estado do ambiente. A Figura \ref{fig:agente} representa a arquitetura definida acima \cite{agent1999}. 
+
+Formalmente, agentes são entidades que agem de forma continua e autônoma em um ambiente \cite{agent1993oriented}. Os agentes são capazes de receber estímulos do ambiente através de sensores e assim responder aos estímulos por intermédio de atuadores \cite{intelligence2003modern}. Para os agentes os estímulos do ambiente são recebidos como percepções \cite{intelligence2003modern}. Os atuadores, por sua vez, geram, considerando as percepções, uma ação \cite{intelligence2003modern}. Essa definição de agentes pode ser representada pela figura \ref{fig:agente}.
 
 \begin{figure}[ht]
 	\centering
@@ -15,7 +16,7 @@ Agentes são entidades capazes de realizar alguma atividade de forma autônoma e
 	\label{fig:agente}
 \end{figure} 
 
-Ao contrario dos objetos, os agentes são autônomos, podem aprender a lidar com as situações, e são ativos. Para que o agente consiga cumprir estes aspectos é preciso que ele seja capaz de realizar uma ação de forma autônoma e flexível, para que isso acontece, um agente precisa de três atributos\cite{agent1999}: 
+Definindo os agentes como autônomos, eles devem ser capazes de aprender a lidar com as situações proporcionadas pelo ambiente, e serem ativos. Para que o agente consiga cumprir estes aspectos é preciso que ele seja capaz de realizar uma ação de forma autônoma e flexível, para que isso aconteça, um agente precisa de três atributos\cite{agent1999}: 
 
 \begin{itemize}
 	\item Reatividade - Para que os agentes sejam capazes de perceber o ambiente e suas mudanças a fim de levar o ambiente em consideração para a tomada de decisão das ações;
@@ -23,7 +24,62 @@ Ao contrario dos objetos, os agentes são autônomos, podem aprender a lidar com
 	\item Habilidade social - Para que os agentes sejam capazes de interagir com outros agentes(humanos ou não).
 \end{itemize}
 
-Os dois primeiros atributos são mais intuitivos pelo que já foi explicado antes, o ultimo vem do fato de que um agente nem sempre vai estar sozinho no ambiente. Quando isso acontece temos o que é chamado de Sistemas multi agentes, que é um sistema onde temos mais de um agente e eles interagem um com os outros. Os agentes podem ter objetivos em comum ou não, mas o mais importante é que eles terão que, dependendo da situação, cooperar ou negociar entre si \cite{intelligence2003modern}.    
+Os dois primeiros atributos são necessários para que o agente consiga interagir com o ambiente. Já o terceiro atributo é necessário para que o agente consiga interagir com outros agentes, pois ele nem sempre vai estar sozinho no ambiente, quando há mais de um agente no sistema, podemos considerar o sistema como multi agentes, onde os agentes interagem entre si. Os agentes podem ter objetivos em comum ou não, mas o mais importante é que eles terão que, dependendo da situação, cooperar ou negociar entre si \cite{intelligence2003modern}.    
+
+\section{Arquiteturas de Agentes}
+A definição descrita acima é uma forma geral de descrever um agente: um agente recebe um estimulo do ambiente com seus sensores e retorna uma ação por meio de seus atuadores. Mas existem diferentes tipos de arquiteturas de agentes. Cada tipo de arquitetura combina componentes diferentes para gerar as ações \cite{intelligence2003modern}. Os quatro tipos básicos de arquiteturas de agentes, que englobam as principais características de agentes são \cite{intelligence2003modern}: 
+
+\begin{itemize}
+	\item Agentes de simples reflexo (Simple reflex agents);
+	\item Agentes de reflexos baseados em modelo (Model-based reflex agents);
+	\item Agentes baseados em objetivo (Goal-based agents);
+	\item Agentes baseados em utilidade (Utility-based agents).
+\end{itemize}  
+
+\subsection{Simple reflex agents}
+
+A arquitetura considerada a mais simples é a de agentes de simples reflexo. Esses agentes escolhem suas ações baseados na percepção atual vinda do ambiente, ignorando qualquer outra percepção que já tenha sido observada \cite{intelligence2003modern}. A figura \ref{fig:agenteSimple} representa esse tipo de arquitetura. 
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.6\textwidth]{fig/agentSimple.pdf}
+	\caption{Simple reflex agents}
+	\label{fig:agenteSimple}
+\end{figure} 
+
+Essa arquitetura pode ser usado em ambientes de alta complexidade, como por exemplo, em carros que são dirigidos por agentes, quando o carro da frente freia, o agente deve frear também para não ocasionar em uma batida. Esse agente utiliza uma regra de ação condicional, se acontecer uma freada no carro da frente então eu devo frear também. Este tipo de agente tem a propriedade de ser simples, mas com isso sua inteligencia fica limitada \cite{intelligence2003modern}. Essa abordagem é eficaz somente se o ambiente for completamente observável, ou seja, os sensores do agente tem acesso a todas as informações do ambiente a qualquer instante de tempo para detectar aspectos que são relevantes para a escolha das ações, por exemplo, um agente precisa se locomover de uma cidade para a outra, se o ambiente é completamente observável o agente consegue ver todas as estradas que chegam a cidade destino, já se o ambiente for parcialmente observável, pode ter alguma estrada que o agente não consiga ver, e se o agente não consegue ver nenhuma estrada o ambiente é não observável \cite{intelligence2003modern}. 
+
+\subsection{Model-based reflex agents}
+
+Os agentes de reflexos baseados em modelo utilizam um estado interno para marcar qual o estado do ambiente ele está. Este estado é utilizado como parte do processo de escolha da ação. A informação do estado pode ser de alguma informação que não pode ser obtida por alguma percepção do ambiente ou de estados que já foram visitados pelo agente. Este tipo de abordagem é eficaz para ambientes parcialmente observáveis, pelo fato de que o estado pode guardar informações relevantes para o agente \cite{intelligence2003modern}. Um modelo deste tipo de agente pode ser visto na figura \ref{fig:agenteModelbased}. 
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.6\textwidth]{fig/agentModel.pdf}
+	\caption{Model-based reflex agents}
+	\label{fig:agenteModelbased}
+\end{figure} 
+
+\subsection{Goal-based agents}
+
+Conhecendo o estado atual do ambiente, as vezes, não é suficiente para saber o que fazer \cite{intelligence2003modern}. Além do estado atual, o agente pode precisar de uma informação para saber a onde ele quer chegar, ou seja, um objetivo para descrever o que o agente está buscando alcançar. O objetivo pode ser alcançado com uma ação, outras vezes é mais complicado e leva várias ações. Esta arquitetura é diferente das outras duas apresentadas, pelo fato de se preocupar com o futuro. Para achar a sequencia de ações que alcança o objetivo pode ser usado Busca ou Planejamento, que são sub áreas da IA que tem como objetivo achar a sequencia de ações que levem o agente para o objetivo \cite{intelligence2003modern}. A figura \ref{fig:agenteGoal} mostra a arquitetura e como o objetivo influencia na escolha da ação. 
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.6\textwidth]{fig/agenteGoal.pdf}
+	\caption{Goal-based agents}
+	\label{fig:agenteGoal}
+\end{figure} 
+
+\subsection{Utility-based agents}
+
+Apenas alcançar um objetivo pode não ser suficiente para alguns cenários, como por exemplo, um agente que deseja chegar a determinada cidade, existem mais de um caminho que levam para a mesma cidade, indo pelo caminho mais longo o agente ainda estará chegando no objetivo. Para o agente conseguir alcançar o objetivo com uma melhor performance é utilizado uma função de utilidade, nela é medido o "desejo" do agente em tomar determinada ação. Cada ação exercida pelo agente terá influencia no valor de utilidade obtido \cite{intelligence2003modern}. Esta arquitetura é melhor utilizada em ambientes parcialmente observáveis e estocásticos, um ambiente estocástico é onde não há conhecimento preciso do próximo estado dado determinada ação \cite{intelligence2003modern}. A figura \ref{fig:agenteUtility} representa essa arquitetura.  
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.6\textwidth]{fig/agentUtility.pdf}
+	\caption{Utility-based agents}
+	\label{fig:agenteUtility}
+\end{figure} 
 
 
-\todo[inline]{explicar ambientes}
