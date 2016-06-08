@@ -24,21 +24,15 @@ Cada tipo de aprendizado é utilizado pode ser usado para uma aplicação especi
 
 \section{Aprendizado por Reforço}
 
-O aprendizado por reforço também é conhecido como \textit{reinforcement learning}. O objetivo deste aprendizado é usar as recompensas obtidas nas observações para aprender uma politica do ambiente ou determinar o quão boa a politica é. Para isso, existem dois tipos principais de aprendizado por reforço \cite{intelligence2003modern}:
+O aprendizado por reforço também é conhecido como \textit{reinforcement learning}. Este tipo de aprendizado utiliza \textit{feedbacks}, vindas do ambiente após a sua execução, esse tipo de \textit{feedback}, é chamado de recompensa. O objetivo deste aprendizado é usar as recompensas obtidas nas observações para aprender uma politica do ambiente ou determinar o quão boa a politica é \cite{intelligence2003modern}. 
+
+Em jogos \textit{reinforcement learning} é um tópico que é bastante utilizado \cite{millington2009artificial}. Em um jogo essa técnica utiliza três etapas, uma para exploração da estrategia para achar as diferentes ações possíveis no jogo, uma função que disponibiliza o \textit{feedback} e diz o quão bom é cada ação, e uma regra de aprendizado que junta as outras duas etapas \cite{millington2009artificial}.
+
+Existem dois tipos principais de aprendizado por reforço \cite{intelligence2003modern}:
 
 \begin{itemize}
-	\item Passivo - Onde a politica é fixa.
-	\item Ativo - Onde a politica deve ser aprendida.
+	\item Passivo- O aprendizado passivo utiliza ambientes completamente observáveis. Com uma politica do ambiente fixa, em um estado, sempre é executado a mesma ação. O objetivo desse tipo de aprendizado é aprender o quão bom é a politica. Para isso, um agente que utiliza essa técnica precisa de varias observações, e em cada uma delas ele começa no mesmo estado e experimenta uma combinação de sequencia diferente para chegar no objetivo.
+	\item Ativo- O aprendizado ativo diferente do passivo não tem uma politica fixa e a mesma deve ser aprendida. Para isso, um agente que utiliza este tipo de aprendizado precisa decidir quais ações tomar, isso faz com que o agente precise aprender o modelo de transição para cada um dos estados e ações.
 \end{itemize}
-
-\subsection{Aprendizado Passivo}
-
-O aprendizado passivo usa 
-
-
-\subsection{Aprendizado Ativo}
-
-
-
 
 %Para que isso aconteça, cada estado contém uma utilidade, que mostra o quão desejável é este estado, pode ser um desejo bom ou um ruim. Com essa informação é possível determinar, dado as ações disponíveis no estado, qual ação o sistema deve escolher para seguir a execução. 
