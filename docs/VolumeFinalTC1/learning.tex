@@ -31,8 +31,43 @@ Em jogos \textit{reinforcement learning} é um tópico que é bastante utilizado
 Existem dois tipos principais de aprendizado por reforço \cite{intelligence2003modern}:
 
 \begin{itemize}
-	\item Passivo- O aprendizado passivo utiliza ambientes completamente observáveis. Com uma politica do ambiente fixa, em um estado, sempre é executado a mesma ação. O objetivo desse tipo de aprendizado é aprender o quão bom é a politica. Para isso, um agente que utiliza essa técnica precisa de varias observações, e em cada uma delas ele começa no mesmo estado e experimenta uma combinação de sequencia diferente para chegar no objetivo.
-	\item Ativo- O aprendizado ativo diferente do passivo não tem uma politica fixa e a mesma deve ser aprendida. Para isso, um agente que utiliza este tipo de aprendizado precisa decidir quais ações tomar, isso faz com que o agente precise aprender o modelo de transição para cada um dos estados e ações.
+	\item Aprendizado Passivo
+	\item Aprendizado Ativo
 \end{itemize}
+
+\subsection{Aprendizado passivo} 
+
+O aprendizado passivo utiliza ambientes completamente observáveis. Com uma politica do ambiente fixa, em um estado, sempre é executado a mesma ação. O objetivo desse tipo de aprendizado é aprender o quão bom é a politica, e para isso se deseja aprender a função de utilidade para cada estado, dada por \textit{utility(state)} \cite{intelligence2003modern}.
+
+Um agente que utiliza essa técnica realiza várias execuções do ambiente com a politica, para descobrir a recompensa de cada estado alcançado. Em cada uma das execuções o agente começa no mesmo estado e experimenta uma sequencia diferente de caminhos para chegar no objetivo \cite{intelligence2003modern}. 
+
+
+
+\subsection{Aprendizado ativo}
+
+O aprendizado ativo diferente do passivo não tem uma politica fixa e a mesma deve ser aprendida. Para isso, um agente que utiliza este tipo de aprendizado precisa decidir quais ações tomar, isso faz com que o agente precise aprender o modelo de transição para cada um dos estados e ações \cite{intelligence2003modern}. 
+
+Um método para conseguir definir a politica do ambiente é chamado de \textit{Q-learning}. O objetivo desse método é aprender uma utilidade ligada a um estado e uma ação, denotada por uma tabela $Q[s,a]$, através da informação de recompensa para cada estado. A cada entrada no mesmo par de estado e ação, a informação contida nele diminui, então uma tabela de frequência é necessária para contabilizar a frequência dos pares, detonada por $N[s, a]$. $\alpha$ é o fator de aprendizado para cada repetição de estado, quanto menor ele for, menos ele aprende de estados que já tenham sido visitado. O algoritmo \ref{alg:qlearning} apresenta o método de \textit{Q-learning} para um agente.
+
+\begin{algorithm}
+	\caption{Q-Learning}
+	\label{alg:qlearning}
+	\begin{algorithmic}[]	
+		\Function{Q-Learning}{$state, reward$}
+		\If {$terminal(state)$}
+		\State	\Return $Q[s, None] = reward$
+		\EndIf
+		\If {$state$ is not null}
+		\State {increment $N[s, a]$}
+		\State $Q[s, a] = Q[s, a] + \alpha(N[s, a]) (r + \gamma max_{a'} Q[s', a'] - Q[s, a])$
+		\State s = $s'$
+		\State a = $argmax_{a'} f(Q[s', a'], N[s', a'])$
+		\State r = $r'$
+		\EndIf	
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+Com a informação de cada par de estado e ação, é possível determinar qual sequencia de ações é a melhor possível para o agente.
 
 %Para que isso aconteça, cada estado contém uma utilidade, que mostra o quão desejável é este estado, pode ser um desejo bom ou um ruim. Com essa informação é possível determinar, dado as ações disponíveis no estado, qual ação o sistema deve escolher para seguir a execução. 

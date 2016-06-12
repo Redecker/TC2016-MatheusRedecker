@@ -34,16 +34,16 @@ A busca adversaria é utilizada para ambientes competitivos, como nos jogos. Com
 
 \begin{itemize}
 	\item $S_{0}$ - O estado inicial, que especifica como o jogo se configura no inicio.
-	\item Jogadores(s) -  Define qual jogador tem o movimento no estado.
-	\item Ações(s) - Conjunto das ações possíveis em um estado.
-	\item Resultado(s, a) - Um modelo de transição, que define o resultado da ação a aplicada ao estado s.
-	\item Terminal(s) - Verifica se o estado é um estado onde o jogo terminou.
-	\item Utilidade(s,p) - Define qual é o valor numérico para o jogo quando atingir um estado s terminal por um jogador p. 
+	\item players(s) -  Define qual jogador tem o movimento no estado.
+	\item actions(s) - Conjunto das ações possíveis em um estado.
+	\item result(s, a) - Um modelo de transição, que define o resultado da ação a aplicada ao estado s.
+	\item terminal(s) - Verifica se o estado é um estado onde o jogo terminou.
+	\item utility(s,p) - Define qual é o valor numérico para o jogo quando atingir um estado s terminal por um jogador p. 
 \end{itemize}
 
 Com esses componentes descritos é possível entender alguma das técnicas de busca adversarias. 
 
-\subsection{Minimax search}
+\section{Minimax search}
 
 Para explicar como é resolvido um problema pelo algoritmo de \textit{Minimax search}, primeiro é preciso considerar um jogo com dois jogadores, um é chamado de MAX e o outro de MIN. O jogador MAX representa o jogador que está tentando ganhar o jogo, e o jogador MIN é o jogador que está jogando contra. O jogo é alterna entre jogada de MIN e de MAX até o final do jogo, como em jogos por turnos. Quando são feitas jogadas que beneficiam o jogador MAX é obtido uma recompensa positiva e quando acontece ao contrario, o jogador MIN se beneficia da jogada, é obtido uma recompensa negativa \cite{intelligence2003modern}.
  
@@ -57,7 +57,36 @@ O estado inicial, as ações e os resultados definem a arvore das jogadas para o
 	\label{fig:gametree}
 \end{figure} 
 
-Este tipo de busca leva em consideração que o jogador adversário sempre realizará a jogada que mais lhe beneficiará. O algoritmo de \textit{minimax search} retorna a jogada que tem a melhor chance de resultar em uma vitoria no estado atual. O algoritmo sempre acha uma solução e ela é sempre a solução que, dentro das jogadas possíveis, é a melhor para o jogador \cite{intelligence2003modern}.  
+Este tipo de busca leva em consideração que o jogador adversário sempre realizará a jogada que mais lhe beneficiará. O algoritmo de \textit{minimax search} pode ser visto no algoritmo \ref{alg:minimax}, ele retorna a jogada que tem a melhor chance de resultar em uma vitoria no estado atual, do ponto de vista do jogador MAX \cite{intelligence2003modern}. 
 
+\begin{algorithm}
+	\caption{Minimax Search}
+	\label{alg:minimax}
+	\begin{algorithmic}[]	
+		\Function{Minimax}{$state$}
+		\State \Return $arg max_{action \in actions(s)} min\_value(result(state, action)) $
+		\EndFunction \\
+		\Function {Max\_Value}{$state$}
+		\If {$terminal(state)$}
+		\State	\Return $utility(state)$
+		\EndIf
+		\State $v = -\infty$
+		\ForAll{$action \in actions(state)$}
+		\State $v = max(v, min\_value(result(state,action)))$
+		\EndFor	
+		\EndFunction \\
+		\Function {Min\_Value}{$state$}
+		\If {$terminal(state)$}
+		\State	\Return $utility(state)$
+		\EndIf
+		\State $v = \infty$
+		\ForAll{$action \in actions(state)$}
+		\State $v = min(v, max\_value(result(state,action)))$
+		\EndFor	
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+O algoritmo sempre acha uma solução e ela é sempre a solução que, dentro das jogadas possíveis, é a melhor para o jogador \cite{intelligence2003modern}.  
 
 %\subsection{Monte Carlo tree search}
