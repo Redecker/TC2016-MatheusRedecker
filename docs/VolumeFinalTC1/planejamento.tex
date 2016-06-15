@@ -1,10 +1,16 @@
 %!TEX root = volumeFinal.tex 
 \chapter{\label{chap:planejamento}Planejamento automatizado}
 
-Planejamento automatizado é uma sub-área da inteligencia artificial que estuda o processo de geração automática de planos. O processo para gerar um plano, é feito a partir da escolha e organização das ações, antecipando os resultados esperados das ações, em busca do seu objetivo. Um plano pode ser descrito como uma sequencia de ações que se forem executadas chegam a um objetivo \cite{ghallab2004automated}. O planejamento na computação se diferencia das outras áreas pelo fato de que todo o plano é gerado automaticamente \cite{intelligence2003modern}. 
+Planejamento automatizado é uma sub-área da inteligencia artificial que estuda o processo de geração automática de planos.\frm{Esta frase não poderia ser um pouco mais circular?} 
+O processo para gerar um plano, é feito a partir da escolha e organização das ações, antecipando os resultados esperados das ações, em busca do seu objetivo. Um plano pode ser descrito como uma sequencia de ações que se forem executadas chegam a um objetivo \cite{ghallab2004automated}. O planejamento na computação se diferencia das outras áreas pelo fato de que todo o plano é gerado automaticamente \cite{intelligence2003modern}.\frm{Repetição de pontos semelhantes, e introdução de jargão sem explicação. Cada a conexão com busca?} 
 
 \section{Representação do problema}
-Uma entrada para qualquer técnica de planejamento é uma descrição do problema a ser resolvido. Isso é necessário para não precisar representar todos os estados e transição do problema. Com a descrição do problema os estados e transição não precisam ser explícitos, mas faz com que os estados não descritos possam ser computados \cite{ghallab2004automated}. Como foi visto no capitulo \ref{chap:agentes}, os estados são os estados para o agente se situar no ambiente e transições são para a interação com o ambiente. Um problema de planejamento pode ser descrito como \textit{P} = \textit{($\Sigma$, $s_{0}$, g)}. Onde \cite{ghallab2004automated}:
+Uma entrada para qualquer técnica de planejamento é uma descrição do problema a ser resolvido. 
+Isso é necessário para não precisar representar todos os estados e \underline{transição} do problema. 
+Com a descrição do problema os estados e transição não precisam ser explícitos, mas faz com que os estados não descritos possam ser computados \cite{ghallab2004automated}.\frm{Duas últimas frases são uma mistura de erros com contradições. Primeiro tu não precisa representar os estados e transições, depois isto é implícito, mas não pode ser computado??!?! O que é isto companheiro?} 
+Como foi visto no Capitulo~\ref{chap:agentes}, os estados são os estados para o agente se situar no ambiente e transições são para a interação com o ambiente. \frm{Mas tu não viste NADA DISTO no capítulo de agentes!!!}
+Um problema de planejamento pode ser descrito como \textit{P} = \textit{($\Sigma$, $s_{0}$, g)}. 
+Onde \cite{ghallab2004automated}:\frm{Onde é uma frase inteira?!?!}
 
 \begin{itemize}
 	\item $\Sigma$- é a representação do problema;
@@ -12,26 +18,29 @@ Uma entrada para qualquer técnica de planejamento é uma descrição do problem
 	\item g- é o objetivo, estado onde o problema deve acabar.
 \end{itemize}
 
-Para representar o problema é necessário representar os estados do ambiente. Uma forma de fazer isso é utilizando lógica matemática. Sendo assim um estado do ambiente é representados por um conjunto de átomos que resultam em verdadeiro ou falso dependendo da interpretação do ambiente \cite{ghallab2004automated}. Vamos lembrar do problema do Capitulo \ref{chap:busca}, chegar a uma determinada cidade, estados para esse problema podem ser estar em determinada cidade e ter ligação entre as cidades, representado respectivamente como \textit{estar(cidade)} \textit{terLigação(cidadeOrigem, cidadeDestino)}.   
+Para representar o problema é necessário representar os estados do ambiente. Uma forma de fazer isso é utilizando lógica matemática. Sendo assim um estado do ambiente é representados por um conjunto de átomos que resultam em verdadeiro ou falso dependendo da interpretação do ambiente \cite{ghallab2004automated}. 
+Vamos lembrar do problema do Capitulo \ref{chap:busca}, chegar a uma determinada cidade, estados para esse problema podem ser estar em determinada cidade e ter ligação entre as cidades, representado respectivamente como \textit{estar(cidade)} \textit{terLigação(cidadeOrigem, cidadeDestino)}. \frm{Parse error}
 
-Além dos estados do ambiente precisamos determinar as transições, que alteram os estados. As transições utilizam ações e são representadas por operadores de planejamento que alteram os valores dos átomos presentes em determinado estado. Um operador de planejamento é definido como \textit{op} = (nome(\textit{op}), precondições(\textit{op}), efeitos(\textit{op})), onde cada elemento é definido como \cite{ghallab2004automated}: 
+Além dos estados do ambiente precisamos determinar as transições, que alteram os estados. \frm{Repetição, que tu não definiste, se não me falha a memória.}
+As transições utilizam ações e são representadas por operadores de planejamento que alteram os valores dos átomos presentes em determinado estado. 
+Um operador de planejamento é definido como \textit{op} = (nome(\textit{op}), precondições(\textit{op}), efeitos(\textit{op})), onde cada elemento é definido como \cite{ghallab2004automated}: 
 
 \begin{itemize}
-	\item nome(\textit{op}) - É o nome do operador de planejamento e \textit{op} é o conjunto de todas as variáveis que irão aparecer qualquer parte do operador de planejamento.  
-	\item precondições(\textit{op}) - \textit{op} é o conjunto de átomos ou átomos negativos que representa a precondição do operador de planejamento. 
+	\item nome(\textit{op}) - é o nome do operador de planejamento e \textit{op} é o conjunto de todas as variáveis que irão aparecer qualquer parte do operador de planejamento;  
+	\item precondições(\textit{op}) - \textit{op} é o conjunto de átomos ou átomos negativos que representa a precondição do operador de planejamento; e
 	\item efeitos(\textit{op}) - \textit{op} é o conjunto de átomos ou átomos negativos que representa o efeito do operador de planejamento
 \end{itemize}
 
-No nosso exemplo, um operador de planejamento seria a mudança de uma cidade A para outra cidade B, que poderia ser representado como:
+No nosso exemplo, um operador de planejamento seria\frm{Seria ou é?} a mudança de uma cidade $A$ para outra cidade $B$, que poderia ser representado como:
 \begin{itemize}
 	\item nome- mudarDeCidade(cidadeA, cidadeB);
 	\item precondições- estar(cidadeA) $\wedge$ terLigação(cidadeA, cidadeB);
 	\item efeitos- $\neg$ estar(cidadeA) \and estar(cidadeB).
 \end{itemize}  
 
-O nome deve ser único pelo proposito de o nome poder se referir ao operador por completo, ou seja, após definido apenas com o nome pode-se inferir as pré e pós condições, assim escrevendo o nome(\textit{op}) para se referir a todo o operador de planejamento \textit{op} \cite{ghallab2004automated}. 
+O nome deve ser único pelo proposito de o nome poder se referir ao operador por completo\frm{?!?!}, ou seja, após definido apenas com o nome pode-se inferir as pré e pós condições, assim escrevendo o nome(\textit{op}) para se referir a todo o operador de planejamento \textit{op} \cite{ghallab2004automated}. 
 
-O processo de geração do plano é feito pelo planejador, para isso ele utiliza a representação do problema, o estado inicial e os objetivos como entrada \cite{ghallab2004automated}. A figura \ref{fig:planmodelo} representa esse processo. 
+O processo de geração do plano é feito pelo planejador, para isso ele utiliza a representação do problema, o estado inicial e os objetivos como entrada \cite{ghallab2004automated}.\frm{?!?!} A figura \ref{fig:planmodelo} \underline{representa} esse processo. 
 
 \begin{figure}[ht]
 	\centering
@@ -40,26 +49,32 @@ O processo de geração do plano é feito pelo planejador, para isso ele utiliza
 	\label{fig:planmodelo}
 \end{figure} 
 
-O domínio do problema é a parte do mundo que é expressada pelo conjunto de informações que é usado pelo planejador para gerar o plano \cite{intelligence2003modern}. No nosso exemplo, se representássemos as cidades presentes no mapa, apenas aquelas cidades seriam nosso domínio, e a única ação disponível no domínio seria mudar de cidade.
+O domínio do problema é a parte do mundo que é expressada pelo conjunto de informações que é usado pelo planejador para gerar o plano \cite{intelligence2003modern}.\frm{E agora é o momento de dizer em uma sentença, o que é o domínio?} 
+No nosso exemplo, se representássemos as cidades presentes no mapa, apenas aquelas cidades seriam nosso domínio, e a única ação disponível no domínio seria mudar de cidade.
 
 %\msr[inline]{Falar mais de domínio? exemplos de domínios?}
 
 \section{HTN} 
 
-Dentro da área de planejamento existe o planejamento hierárquico, chamado de \textit{Hierarchical Task Network} (HTN). Em planejamento HTN as ações são tratadas em mais alto nível \cite{intelligence2003modern}. Essa abordagem de planejamento cria planos decompondo tarefas em tarefas ainda menores \cite{ontanon2015adversarial}.
+Dentro da área de planejamento existe o planejamento hierárquico\frm{Não seja tão abruto para entrar em HTN. Qual a limitação de panejamento clássico? O que poderia ajudar nisto? O que é conhecimento de domínio? Por que usá-lo?}, chamado de \textit{Hierarchical Task Network} (HTN). 
+Em planejamento HTN as ações são tratadas em mais alto nível \cite{intelligence2003modern}. 
+Essa abordagem de planejamento cria planos decompondo tarefas em tarefas ainda menores \cite{ontanon2015adversarial}.\frm{Tu tentaste resumir HTN em três frases! Mas tu tens que ir adicionando os tópicos.}
 
-Uma tarefa $t$ é uma representação de uma atividade no ambiente. Existem dois tipos de tarefa \cite{intelligence2003modern}: 
+Uma tarefa $t$ é uma representação de uma atividade no ambiente. Existem dois tipos de tarefa \cite{intelligence2003modern}\frm{Compressão máxima, compreensão mínima pelo leitor}: 
 
 \begin{itemize}
 	\item Tarefas primitivas- Uma atividade que um agente possa executar diretamente no ambiente.
 	\item Tarefas não-primitivas- Representa objetivos que o agente deve alcançar antes que ele possa executar-las, ou seja, tarefas que devem ser decompostas em tarefas menores até todas serem tarefas primitivas. 
 \end{itemize}
 
-Para decompor as tarefas não-primitivas em primitivas é necessário um conjunto de métodos \cite{ghallab2004automated}. Um método é composto por $m = (t, C, w)$. Um método m representa uma maneira na qual pode-se decompor as tarefas $t$ em um conjunto de sub-tarefas $w$ se todas as pre-condições C forem satisfeitas \cite{ontanon2015adversarial}.
+Para decompor as tarefas não-primitivas em primitivas é necessário um conjunto de métodos \cite{ghallab2004automated}. 
+Um método é composto por $m = (t, C, w)$. \frm{????}
+Um método m representa uma maneira na qual pode-se decompor as tarefas $t$ em um conjunto de sub-tarefas $w$ se todas as pre-condições C forem satisfeitas \cite{ontanon2015adversarial}.
 
 O planejamento HTN $N$ é feito decompondo tarefas não primitivas recursivamente até chegar em tarefas primitivas \cite{ghallab2004automated}. $N$ é uma arvore, na qual os nodos são tarefas ou métodos. Cada tarefa não-primitiva pode ter apenas um filho, que deve ser um método. Um método tem um filho para cada uma das tarefas em $w$. Tarefas primitivas não podem ter filhos. Uma arvore totalmente decomposta, é onde todas as folhas de $N$ são tarefas primitivas \cite{ontanon2015adversarial}.
 
-Um problema de planejamento HTN pode ser descrito como, $ P = (S, A, \gamma, T, M, s_{0}, N_{0}) $. S é o conjunto dos possíveis estados do ambiente. A é o cojunto finitio das ações que podem ser executadas pelo agente. $\gamma$ é a função de transição que define os efeitos de cada ação no ambiente. T é o cojunto de tarefas. M é o conjunto de métodos. $s_{0} \in S$ é o estado inicial do agente. $n_{0}$ é estado inicial do ambiente, que servem para definir os objetivos do agente. O proposito do planejamento HTN é achar uma arvore N totalmente decomposta que tenha como estado inicial da arvore $n_{0}$ e estado inicial do agente $s_{0}$ \cite{ontanon2015adversarial}.
+\frm[inline]{Daqui para adiante é óbvio que tu escreveste na corrida. Revisa sob a luz dos comentários anteriores e me avisa quando terminaste.}
+Um problema de planejamento HTN pode ser descrito como, $ P = (S, A, \gamma, T, M, s_{0}, N_{0}) $. S é o conjunto dos possíveis estados do ambiente. A é o \underline{cojunto finitio} das ações que podem ser executadas pelo agente. $\gamma$ é a função de transição que define os efeitos de cada ação no ambiente. T é o \underline{cojunto} de tarefas. M é o conjunto de métodos. $s_{0} \in S$ é o estado inicial do agente. $n_{0}$ é estado inicial do ambiente, que servem para definir os objetivos do agente. O proposito do planejamento HTN é achar uma arvore N totalmente decomposta que tenha como estado inicial da arvore $n_{0}$ e estado inicial do agente $s_{0}$ \cite{ontanon2015adversarial}.
 
 A ideia do planejamento HTN é através desta descrição do problema de planejamento HTN, decompor o estado inicial e continuar decompondo as tarefas que restarem pelo conjunto de métodos, até só restarem tarefas primitivas. O plano é composto apenas por tarefas primitivas. Na busca pelo plano, o planejamento HTN começa planejando por um caminho, quando um caminho de resolução leva a um fim de linha é realizado um retrocesso(\textit{backtracking}) até um caminho que tenha uma possibilidade diferente de caminho do que foi tomado anteriormente \cite{intelligence2003modern}. 
 
