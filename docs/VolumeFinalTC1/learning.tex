@@ -37,21 +37,9 @@ Existem dois tipos principais de aprendizado por reforço \cite{intelligence2003
 
 \subsection{Aprendizado passivo} 
 
-O aprendizado passivo utiliza ambientes completamente observáveis. A politica do agente $\pi$ é fixa, em um estado $s$, sempre é executado a mesma ação $\pi(s)$. O objetivo desse tipo de aprendizado é aprender o quão bom é a politica, o que significa aprender a função de utilidade $U^{\pi}(s)$. Um agente que utiliza aprendizado passivo não conhece o modelo de transição $P(s' | s, a)$, que especifica a probabilidade de alcança o estado $s'$ a partir do estado $s$ executando a ação $a$, e também não conhece a função de recompensa $R(s)$, que especifica a recompensa de cada estado \cite{intelligence2003modern}. 
+O aprendizado passivo utiliza ambientes completamente observáveis. A politica do agente $\pi$ é fixa, em um estado $s$, sempre é executado a mesma ação $\pi(s)$. O objetivo desse tipo de aprendizado é aprender o quão bom é a politica, o que significa aprender a função de utilidade $U^{\pi}(s)$. Um agente que utiliza aprendizado passivo não conhece o modelo de transição $P(s' | s, a)$, que especifica a probabilidade de alcançar o estado $s'$ a partir do estado $s$ executando a ação $a$, e também não conhece a função de recompensa $R(s)$, que especifica a recompensa de cada estado \cite{intelligence2003modern}. 
 
 Um agente que utiliza essa técnica realiza várias execuções do ambiente utilizando a politica $\pi$. Em cada tentativa o agente inicia no mesmo estado inicial e realiza uma sequencia de transições de estados ate chegar a um estado terminal. As percepções obtidas com essas execuções, em cada estado, servem para descobrir a recompensa obtida nos estados. O objetivo é utilizar a informação das recompensas para aprender a utilidade esperada $U^{\pi}(s)$ associada a cada estado $s$ não terminal \cite{intelligence2003modern}. 
-
-A utilidade é definida para ser a soma esperada das recompensas obtidas seguindo a politica $\pi$. Podendo ser representado pela equação \ref{eq:utility}, onde $R(s)$ é a recompensa do estado $s$, $S_{t}$ é o estado alcançado no tempo $t$ quando executado a politica $\pi$ e $S_{0} = s$. É preciso de um fator de desconto $\gamma$ para descrever a performasse do agente para as recompensas atuais sobre as futuras, este fator é um numero entre 0 e 1, quando 1 as recompensas são exatamente equivalentes as recompensas futuras. \cite{intelligence2003modern}.
-
-\begin{equation}
-\label{eq:utility}
-	U^{\pi}(s) = E 
-	\begin{bmatrix}	
-	\displaystyle\sum_{t=0}^{\infty} \gamma^{t} R(S_{t})
-	\end{bmatrix}
-\end{equation}
-
-
 
 \subsection{Aprendizado ativo}
 
@@ -64,12 +52,15 @@ Um método para conseguir definir a politica do ambiente é chamado de \textit{Q
 	U(s) =  max_{a} Q(s, a)
 \end{equation}
 
-Como o \textit{Q-learning} não precisa do modelo de transição $P(s' | s, a)$ ele é chamado de um método livre de modelo. A equação \ref{eq:qler2} representa o calculo do valor de $Q(s, a)$. O algoritmo \ref{alg:qlearning} apresenta o método de \textit{Q-learning} para um agente \cite{intelligence2003modern}.
+O algoritmo de \textit{Q-learning} não precisa aprender o modelo de transição $P(s' | s, a)$, por esse motivo ele é chamado de um método livre de modelo. A equação \ref{eq:qler2} representa o calculo do valor de $Q(s, a)$.
 
 \begin{equation}
 \label{eq:qler2}	
 Q(s, a) = Q(s, a) + \alpha (R(s) + \gamma max_{a'} Q(s', a') - Q(s, a))
 \end{equation}
+
+O valor de $\alpha$ é a taxa de aprendizado do agente, variando de 0 a 1, nele é contido a informação se o agente deve considerar as informações obtidas em um novo aprendizado ou não, sendo 1 se considera inteiramente o que foi aprendido, e 0 se for descartar as novas informações. $R(s)$ é a recompensa do estado, $\gamma$ é o fator de desconto. O algoritmo~\ref{alg:qlearning} ilustra o método de \textit{Q-learning} para um agente \cite{intelligence2003modern}.
+
 
 \begin{algorithm}
 	\caption{Q-Learning}

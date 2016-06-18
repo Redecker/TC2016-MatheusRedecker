@@ -82,17 +82,8 @@ Um problema de planejamento $P$ é definido como $P = (d, I, D)$, onde $D$ é um
 	\label{fig:htnmethodtree}
 \end{figure}
 
-Para realizar o processo de geração de um plano é utilizado o algoritmo de \textit{Total-order Forward Decomposition} (TFD). O Algoritmo~\ref{alg:tfd} representa esse algoritmo.
-
-\todo[inline]{EXPLICAR O ALGORITMO}
-\begin{verbatim}
-P----(SO,w, O,M),
-s_{0} tarefa ligação A predicados M métodos 
-
-O = predicados
-M = métodos
-\end{verbatim}
-
+Para realizar o processo de geração de um plano é utilizado o algoritmo de \textit{Total-order Forward Decomposition} (TFD). O Algoritmo~\ref{alg:tfd} representa esse algoritmo. O algoritmo gera as ações na mesma ordem que serão executadas, então com isso cada vez que é alcançada uma tarefa tudo que antecede a mesma já foi planejado \cite{ghallab2004automated}.
+ 
 \begin{algorithm}
 	\caption{TFD}
 	\label{alg:tfd}
@@ -115,7 +106,7 @@ M = métodos
 			\EndIf
 			
 			\ElsIf {$t_{1}$ é não primitiva}
-				\State $ativo = {m | m }$
+				\State $ativo = \{m |~ m$ é aplicavel a $s$ e $m \in M\}$
 				\If {$ativo = \emptyset$}
 					\State \Return falha
 				\EndIf
@@ -126,6 +117,7 @@ M = métodos
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
+
 \section{AHTN} 
 
 \textit{Adversarial hierarchical-task network} (AHTN) é um algoritmo proposto para tentar solucionar o problema do grande fator de ramificação dos jogos em tempo real \cite{ontanon2015adversarial}. Nele são combinados técnicas de HTN com o algoritmo \textit{minimax search}. O algoritmo assume jogos totalmente observáveis, baseados em turno e determinísticos.
