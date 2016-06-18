@@ -4,7 +4,7 @@
 \section{Jogos}
  Jogos eletrônicos são muito populares, principalmente pela grande quantidade de gêneros, existem jogos de ação, aventura, esportes, estrategia, entre outros. Hoje em dia, os jogos buscam que quem jogue consiga ficar imerso no dentro do jogo, sem conseguir identificar um padrão nos jogadores fictícios, pois se não o jogo deixa de ser tão interessante. Para que isso aconteça, a IA é associada a diversos jogos, e é comum pensar que quanto mais complexa a IA aplicada dentro do jogo mais difícil jogo irá ficar, mas isso nem sempre é verdade, nem sempre IA complicadas terão melhor desempenho do que as mais simples, uma boa IA dentro do jogo é feita a partir de determinar o comportamento certo para os algoritmo certos \cite{millington2009artificial}.
  
- \section{Jogos de estratégia em tempo real}
+ \subsection{Jogos de estratégia em tempo real}
  
  Jogos de estratégia em tempo real, também conhecido por \textit{real-time strategy games} (RTS), é um sub-gênero de jogos de estrategia, onde os jogadores precisam construir uma base com uma economia, ganhando recursos, construindo edificações, treinando unidades de ataques e tecnologias para elas, tudo isso com o objetivo de destruir uma ou mais bases inimigas \cite{ontanon2013survey, buro2012real}. 
  
@@ -21,7 +21,7 @@
  
  Pelo fato de existirem essas diferenças, não é possível traduzir automaticamente as técnicas padrões dos jogos de tabuleiro para jogos RTS sem algum tipo de abstração ou simplificação \cite{ontanon2013survey}.
  
-\section{MicroRTS}  
+\subsection{MicroRTS}  
  
  Um exemplo deste gênero é o MicroRTS\footnote{https://github.com/santiontanon/microrts}, uma simplificação do jogo Starcraft\footnote{http://us.battle.net/sc2/pt/}, feita por Santiago Ontañón \cite{ontanon2013combinatorial} em Java. O MicroRTS foi desenvolvido para fins acadêmicos, com o intuito de aplicar e desenvolver técnicas de IA e para servir como prova de conceito para as técnicas criadas.
  
@@ -60,7 +60,7 @@ No ambiente há algumas estrategias implementadas, cada estrategia possui varia�
  A plataforma já foi utilizada para aplicar técnica de IA. Por esse motivo a utilização dela se torna viável para a realização deste trabalho. 
 Nela é possível observar que o fator de ramificação pode ser muito alto dependendo do cenário do jogo.
 
-\section{Arquitetura do MicroRTS}
+\subsection{Arquitetura do MicroRTS}
 
 A arquitetura do MicroRTS é composta por 4 componentes principais: O Jogo em si, onde são feitas todas as ações dos jogos. As unidades, onde todas as ações de cada unidade podem ser controladas e acessadas, por exemplo, saber onde está cada unidade inimiga. A Interface gráfica, responsável pela representação gráfica do jogo. E a Inteligencia Artificial, onde pode ser acoplado a IA que desejar, a plataforma já possui algumas como foi dito anteriormente. A imagem \ref{fig:pacotes} representa os componentes.
 
@@ -71,6 +71,7 @@ A arquitetura do MicroRTS é composta por 4 componentes principais: O Jogo em si
  	\label{fig:pacotes}
  \end{figure} 
  
+\section{Descrição do Projeto}
  
 Para realizar a implementação de uma IA para acoplar no MicroRTS, é preciso conhecer as classes responsáveis por cada componente. A imagem \ref{fig:classes} apresenta, as classes principais. A Classe \textit{GameVisualSimulation} é uma \textit{facade} que provê uma interface para a simulação dos outros componentes do jogo. A classe \textit{GameState} e \textit{PhysicalGameState}, são responsaveis pelo controle das ações das unidades, e pelo controle do mapa e das unidades dentro dele, respectivamente. A classe \textit{UnitTypeTable} é onde cada unidade é associada as ações possíveis no jogo. A Classse \textit{PhysicalGameStatePanel} é responsável pela interface gráfica. E por fim a classe \textit{AHTN} é onde minha proposta de solução será acoplada ao jogo.
  
@@ -82,9 +83,8 @@ Para realizar a implementação de uma IA para acoplar no MicroRTS, é preciso c
   \end{figure} 
 
 
-\section{Cromograma}
+\section{Cronograma}
 
-\frm[inline]{\textbf{Cromograma?!?!} Sério????}
 Para está etapa do projeto do Trabalho de Conclusão, foi proposto o plano das atividades apresentado na diagrama de Gantt com a respectiva legenda.
 
 \begin{itemize}
