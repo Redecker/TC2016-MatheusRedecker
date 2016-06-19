@@ -7,20 +7,26 @@ Aprendizado pode variar de adquirir conhecimento de tarefas simples, como decora
 
 \section{Aprendizado de Máquina} 
 
-A área na computação que estudo esse aprendizado de forma computacional é o aprendizado de maquina, melhor conhecida como \textit{machine learning}. A definição de aprendizado de maquina proposta por Tom Mitchell \cite{Mitchell1997ML} é a seguinte:
+A área na computação que estudo esse aprendizado de forma computacional é o aprendizado de maquina, melhor conhecida como \textit{machine learning}. 
+A definição de aprendizado de maquina proposta por Tom Mitchell \cite{Mitchell1997ML} é a seguinte:
 
 \begin{quote}
 	Definição: Um programa de computador é dito que aprende de uma experiencia E com relação a alguma classe de tarefas T, e medida de performance P, se essa performance sobre as tarefas em T, medida por P, melhora com a experiencia E.
 \end{quote}
 
-Essa definição mostra que o sistema aprimora seu conjunto de tarefas T com uma performance P através de experiencias E. Ou seja, um sistema baseado em aprendizado de maquina deve, através de experiencias, ter um ganho nas informações para solucionar os seus problemas. Para começar a resolver um problema utilizando aprendizado de maquina é preciso escolher qual experiencia será aprendida pelo sistema \cite{Mitchell1997ML}. Para isso existem algumas técnicas que tratam aprendizado de maquina com objetivos diferentes \cite{intelligence2003modern}. Alguma das técnicas são: 
+Essa definição mostra que o sistema aprimora seu conjunto de tarefas T com uma performance P através de experiencias E. 
+Ou seja, um sistema baseado em aprendizado de maquina deve, através de experiencias, ter um ganho nas informações para solucionar os seus problemas. 
+Para começar a resolver um problema utilizando aprendizado de maquina é preciso escolher qual experiencia será aprendida pelo sistema \cite{Mitchell1997ML}. 
+Para isso existem algumas técnicas que tratam aprendizado de maquina com objetivos diferentes \cite{intelligence2003modern}. 
+Alguma das técnicas são: 
 \begin{itemize}
-	\item Aprendizado supervisionado: Aprender através de algum conjunto de exemplos a realizar a classificação de algum problema. Cada problema é mapeado para uma saída. 
-	\item Aprendizado não supervisionado: Aprender através das observações, algum pedrão ou regularidade, para classificar em grupos os problemas.
-	\item Aprendizado por reforço: Aprender através das execuções, bem ou mal sucedidas. Aprende quais ações são melhores de ser executadas.
+	\item aprendizado supervisionado: que consiste em aprender através de algum conjunto de exemplos a realizar a classificação de algum problema. Cada problema é mapeado para uma saída;  
+	\item aprendizado não supervisionado: que consisten em aprender através das observações, algum padrão ou regularidade, para classificar em grupos os problemas; e 
+	\item aprendizado por reforço: que consiste em aprender, através das execuções de um agente, quais ações possuem maior recompensa média esperada.
 \end{itemize}
 
-Cada tipo de aprendizado é utilizado pode ser usado para uma aplicação especifica, mas existem casos em que a combinação das técnicas se mostra mais eficaz. Um exemplo apresentado por \cite{intelligence2003modern} é o reconhecimento de idade por fotos, para essa tarefa são necessários amostras de fotos com as idades, então a técnica que se encaixa é aprendizado supervisionado, mas existem ruídos aleatórios nas imagens que fazem com que a precisão da abordagem caia, para superar esse problema pode ser combinado aprendizado supervisionado com o não supervisionado.
+Cada tipo de aprendizado é utilizado pode ser usado para uma aplicação especifica, mas existem casos em que a combinação das técnicas se mostra mais eficaz. 
+Um exemplo apresentado por \cite{intelligence2003modern} é o reconhecimento de idade por fotos, para essa tarefa são necessários amostras de fotos com as idades, então a técnica que se encaixa é aprendizado supervisionado, mas existem ruídos aleatórios nas imagens que fazem com que a precisão da abordagem caia, para superar esse problema pode ser combinado aprendizado supervisionado com o não supervisionado.
 
 \section{Aprendizado por Reforço}
 
@@ -28,12 +34,7 @@ O aprendizado por reforço também é conhecido como \textit{reinforcement learn
 
 Em jogos \textit{reinforcement learning} é um tópico que é bastante utilizado \cite{millington2009artificial}. Em um jogo essa técnica utiliza três etapas, uma para exploração da estrategia para achar as diferentes ações possíveis no jogo, uma função que disponibiliza o \textit{feedback} e diz o quão bom é cada ação, e uma regra de aprendizado que junta as outras duas etapas \cite{millington2009artificial}.
 
-Existem dois tipos principais de aprendizado por reforço \cite{intelligence2003modern}:
-
-\begin{itemize}
-	\item Aprendizado Passivo
-	\item Aprendizado Ativo
-\end{itemize}
+Existem dois tipos principais de aprendizado por reforço \cite{intelligence2003modern}: aprendizado passivo, e aprendizado ativo; detalhados nas seções a seguir. 
 
 \subsection{Aprendizado passivo} 
 
@@ -59,7 +60,9 @@ O algoritmo de \textit{Q-learning} não precisa aprender o modelo de transição
 Q(s, a) = Q(s, a) + \alpha (R(s) + \gamma max_{a'} Q(s', a') - Q(s, a))
 \end{equation}
 
-O valor de $\alpha$ é a taxa de aprendizado do agente, variando de 0 a 1, nele é contido a informação se o agente deve considerar as informações obtidas em um novo aprendizado ou não, sendo 1 se considera inteiramente o que foi aprendido, e 0 se for descartar as novas informações. $R(s)$ é a recompensa do estado, $\gamma$ é o fator de desconto. O algoritmo~\ref{alg:qlearning} ilustra o método de \textit{Q-learning} para um agente \cite{intelligence2003modern}.
+O valor $\alpha$ representa a taxa de aprendizado do agente, variando de 0 a 1, nele é contido a informação se o agente deve considerar as informações obtidas em um novo aprendizado ou não, sendo 1 se considera inteiramente o que foi aprendido, e 0 se for descartar as novas informações. 
+$R(s)$ é a recompensa do estado, $\gamma$ é o fator de desconto.\frm{Certo, e o que diabos é isto?} 
+O algoritmo~\ref{alg:qlearning} ilustra o método de \textit{Q-learning} para um agente \cite{intelligence2003modern}.
 
 
 \begin{algorithm}
@@ -80,3 +83,7 @@ O valor de $\alpha$ é a taxa de aprendizado do agente, variando de 0 a 1, nele 
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
+
+\frm[inline]{Acho que vale a pena colocar um pouquinho mais aqui, tipo SARSA e a generalização.}
+
+\frm[inline]{Tu tens que fechar o capítulo de alguma forma, e dizer por que isto está aqui. No projeto tu também tens que referenciar este capítulo.}
