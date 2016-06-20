@@ -66,22 +66,30 @@ A arquitetura do MicroRTS é composta por 4 componentes principais: O Jogo em si
 
  \begin{figure}[ht]
  	\centering
- 	\includegraphics[width=0.7\textwidth]{fig/pacotes.pdf}
+ 	\includegraphics[width=0.4\textwidth]{fig/pacotes.pdf}
  	\caption{Arquitetura MicroRTS}
  	\label{fig:pacotes}
  \end{figure} 
  
 \section{Descrição do Projeto}
  
-Para realizar a implementação de uma IA para acoplar no MicroRTS, é preciso conhecer as classes responsáveis por cada componente. A imagem \ref{fig:classes} apresenta, as classes principais. A Classe \textit{GameVisualSimulation} é a interface entre os componentes do jogo e o usuário. A classe \textit{GameState} e \textit{PhysicalGameState}, são responsáveis pelo controle das ações das unidades, e pelo controle do mapa e das unidades dentro dele, respectivamente. A classe \textit{UnitTypeTable} é onde cada unidade é associada as ações possíveis no jogo. A Classe \textit{PhysicalGameStatePanel} é responsável pela interface gráfica. E por fim a classe \textit{AHTN} é onde minha proposta de solução será acoplada ao jogo.
+Para realizar a implementação de uma IA para acoplar no MicroRTS, é preciso conhecer as classes responsáveis por cada componente. A Figura \ref{fig:classes} ilustra as principais classes presentes no jogo. A Classe \textit{GameVisualSimulation} é a interface entre os componentes do jogo e o usuário. A classe \textit{GameState} e \textit{PhysicalGameState}, são responsáveis pelo controle das ações das unidades, e pelo controle do mapa e das unidades dentro dele, respectivamente. A classe \textit{UnitTypeTable} é onde cada unidade é associada as ações possíveis no jogo. A Classe \textit{PhysicalGameStatePanel} é responsável pela interface gráfica. E por fim a classe \textit{AHTN} é onde minha proposta de solução será acoplada ao jogo.
  
   \begin{figure}[ht]
   	\centering
-  	\includegraphics[width=0.7\textwidth]{fig/classes.pdf}
+  	\includegraphics[width=1\textwidth]{fig/classes.pdf}
   	\caption{Classes do MicroRTS}
   	\label{fig:classes}
   \end{figure} 
 
+A Figura~\ref{fig:sequencia} apresenta o diagrama de sequência, para entender o funcionamento das classes citadas acima. Os passos de 1 a 6 são apenas para criação dos objetos que serão utilizados pelo jogo. No passo 7 é gerado a ação que deve ser executado no momento atual do jogo, já no passo 8 é confirmado se foi encontrado alguma ação que possa ser executada. No passo 9 a tela é desenha novamente com a atualização das jogadas. Existe um laço do passo 7 até o 9, pois são onde são geradas as ações, esse laço acaba quando termina o tempo limite de jogo, ou algum jogador vence. O diagrama mostra a geração da jogada para apenas um jogador, mas a forma como as jogadas são geradas é da mesma forma como a apresentada.
+
+  \begin{figure}[ht]
+  	\centering
+  	\includegraphics[width=1\textwidth]{fig/diagramaSequencia.pdf}
+  	\caption{Diagrama de sequência}
+  	\label{fig:sequencia}
+  \end{figure}
 
 \section{Cronograma}
 
