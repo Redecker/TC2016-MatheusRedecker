@@ -92,7 +92,7 @@ Q(s, a) = Q(s, a) + \alpha (R(s) + \gamma~Q(s', a') - Q(s, a))
 \end{equation}
 
 
-As duas técnicas consistem em percorrer os estados diversas vezes, com o intuito de aprender o valor de utilidade de cada par estado e ação. Entretanto, as técnicas não tem estimativa para pares que não tenha sido visitado. Em caso de ambientes parcialmente observáveis ou não observáveis podem existir estados que não consigam ser alcançados nas observações, e com isso não consigam ser avaliados \cite{Mitchell1997ML}.   
+As duas técnicas consistem em percorrer os estados diversas vezes, com o intuito de aprender o valor de utilidade de cada par estado e ação. Entretanto, as técnicas não têm estimativa para pares que não tenha sido visitado. Em caso de ambientes parcialmente observáveis ou não observáveis podem existir estados que não consigam ser alcançados nas observações, e com isso não consigam ser avaliados \cite{Mitchell1997ML}.   
 
 
 \subsection{Generalização} 
@@ -101,7 +101,7 @@ No aprendizado ativo, o conhecimento sobre as utilidades é feito a partir de um
 
 Uma maneira de utilizar generalização é através de uma função de aproximação, que é uma alternativa para a tabela de pesquisa. Essa técnica é vista como uma aproximação, pois não há garantia que ela irá representar a verdadeira função de utilidade. Um algoritmo de aprendizado por reforço pode aprender valores dos parâmetros $\theta$, e gerar uma função $U_{\theta}$ que aproxima a verdadeira função de utilidade. Essa técnica consegue reduzir, para o xadrez, de $10^{40}$ valores na tabela, para 20 parâmetros aproximados. A compressão alcançada através da função de aproximação permite que o agente consiga generalizar o aprendizado de estados que foram visitados para os que não foram visitados. O problema desse tipo método é o tempo que leva para convergir a uma função de aproximação que represente o modelo de forma satisfatória \cite{intelligence2003modern}.
 
-Em aprendizado por reforço a atualização da função é feita a cada nova observação, pelo fato de que a função pode obter valores que precisam ser ajustados. O ajuste é feito por uma função de erro que altera o parâmetro $\theta$, através do calculo do gradiente. Isso faz com que a função de avaliação permita o aprendizado por reforço a generalizar por meio de suas observações. A Equação~\ref{eq:gene} mostra como fica o calculo de $\theta$ para o \textit{Q-learning} \cite{intelligence2003modern}.
+Em aprendizado por reforço a atualização da função é feita a cada nova observação, pelo fato de que a função pode obter valores que precisam ser ajustados. O ajuste é feito por uma função de erro que altera o parâmetro $\theta$, através do cálculo do gradiente. Isso faz com que a função de avaliação permita o aprendizado por reforço a generalizar por meio de suas observações. A Equação~\ref{eq:gene} mostra como fica o cálculo de $\theta$ para o \textit{Q-learning} \cite{intelligence2003modern}.
 
 \begin{equation}
 \label{eq:gene}	
