@@ -82,14 +82,15 @@ Para realizar a implementação de uma IA para acoplar no MicroRTS, é preciso c
   	\label{fig:classes}
   \end{figure} 
 
-A Figura~\ref{fig:sequencia} apresenta o diagrama de sequência, para entender o funcionamento das classes citadas acima. Os passos de 1 a 6 são apenas para criação dos objetos que serão utilizados pelo jogo. No passo 7 é gerado a ação que deve ser executado no momento atual do jogo, já no passo 8 é confirmado se foi encontrado alguma ação que possa ser executada. No passo 9 a tela é desenha novamente com a atualização das jogadas. Existe um laço do passo 7 até o 9, pois são onde são geradas as ações, esse laço acaba quando termina o tempo limite de jogo, ou algum jogador vence. O diagrama mostra a geração da jogada para apenas um jogador, mas a forma como as jogadas são geradas é da mesma forma como a apresentada.
+A Figura~\ref{fig:sequencia} apresenta o diagrama de sequência, para entender o funcionamento das classes citadas acima. Os passos de 1 a 6 são apenas para criação dos objetos que serão utilizados pelo jogo. No passo 7 é gerado a ação que deve ser executado no momento atual do jogo, já no passo 8 é confirmado se foi encontrado alguma ação que possa ser executada. No passo 9 a tela é desenha novamente com a atualização das jogadas. Existe um laço do passo 7 até o 9, pois são onde são geradas as ações, esse laço acaba quando termina o tempo limite de jogo, ou algum jogador vence. O diagrama mostra a geração da jogada para apenas um jogador, mas a forma como as jogadas são geradas é da mesma forma como a apresentada. O algoritmo de AHTN irá ser implementado dentro do método $getAction$, e portanto estará presente no passo 7 do diagrama.
 
-  \begin{figure}[ht]
+\begin{figure}[ht]
   	\centering
   	\includegraphics[width=1\textwidth]{fig/diagramaSequencia.pdf}
   	\caption{Diagrama de sequência}
   	\label{fig:sequencia}
-  \end{figure}
+\end{figure}
+
 
 \section{Cronograma}
 

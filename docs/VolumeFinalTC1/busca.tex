@@ -77,6 +77,8 @@ O algoritmo utiliza a \textit{game tree} para analisar todos os estados possíve
 O método de \textit{minimax search} assume que os todos os jogadores como sendo racionais, com isso o algoritmo considera que as ações tomadas pelos agentes sempre realizarão uma jogada para tentar ganhar o jogo. O algoritmo de \textit{minimax search} é apresentado no Algoritmo~\ref{alg:minimax}. O algoritmo tem como retorno a melhor ação a ser realizada no estado atual. As funções presentes nas linhas~\ref{alg:minimax:max} e ~\ref{alg:minimax:min} são utilizadas para calcular a jogada na visão de \textsc{Max} e \textsc{Min} respectivamente.
 A função presente na linha~\ref{alg:minimax:minimax} é utilizada para iniciar a recursão e ao final retornar o melhor valor de utilidade.
 
+O algoritmo de \textit{minimax} deve explorar todo o espaço de estados para conseguir encontrar a ação que deve ser executada. A quantidade de estados possíveis, dependendo da situação, pode ser muito alta, no xadrez esse número chega a $10^{50}$, em um jogo de \textit{poker} no estilo \textit{texas holdem} esse número pode chegar a $10^{80}$. Geralmente, as ações devem ser tomadas em uma quantidade de tempo muito pequena. Por esse motivo, utilizar técnicas de busca para jogos pode ser um problema. Existem algumas abordagens que utilizam busca adversaria com um nível de abstração mais alto para tentar minimax esse problema \cite{ontanon2013survey}. \frm[color=yellow]{Finaleira meio rasa de capítulo. Eu esperava algum insight maior disto. Especialmente no tocante a jogos com grandes espaços de estados.} 
+
 \begin{algorithm}
 	\caption{Minimax Search}
 	\label{alg:minimax}
@@ -105,5 +107,5 @@ A função presente na linha~\ref{alg:minimax:minimax} é utilizada para iniciar
 	\end{algorithmic}
 \end{algorithm}
 
-O algoritmo de \textit{minimax} deve explorar todo o espaço de estados para conseguir encontrar a ação que deve ser executada. A quantidade de estados possíveis, dependendo da situação, pode ser muito alta, no xadrez esse número chega a $10^{50}$, em um jogo de \textit{poker} no estilo \textit{texas holdem} esse número pode chegar a $10^{80}$. Geralmente, as ações devem ser tomadas em uma quantidade de tempo muito pequena. Por esse motivo, utilizar técnicas de busca para jogos pode ser um problema. Existem algumas abordagens que utilizam busca adversaria com um nível de abstração mais alto para tentar minimax esse problema \cite{ontanon2013survey}. \frm[color=yellow]{Finaleira meio rasa de capítulo. Eu esperava algum insight maior disto. Especialmente no tocante a jogos com grandes espaços de estados.} 
+
 
