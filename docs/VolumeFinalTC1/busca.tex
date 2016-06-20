@@ -2,7 +2,7 @@
 \chapter{\label{chap:busca}Busca}
 
 Com o intuito de encontrar uma sequência de ações que um agente consiga alcançar o seu objetivo, é possível utilizar técnicas de busca.
-O principio da busca é encontrar uma solução de um problema através de um conjunto de ações que alcancem o objetivo desejado. 
+O princípio da busca é encontrar uma solução de um problema através de um conjunto de ações que alcancem o objetivo desejado. 
 Para utilizar as técnicas de busca é preciso formalizar o problema a ser resolvido e o objetivo a ser alcançado, pois na busca, como entrada é recebido um problema e é retornado uma solução na forma do conjunto de ações \cite{intelligence2003modern}. 
 
 Um problema pode ser definido por cinco componentes \cite{intelligence2003modern}: \frm[color=yellow]{Refaça as enumerações no estilo que eu fiz no cap anterior.}
@@ -32,18 +32,18 @@ Com a finalidade de exemplificar um problema de busca, considere o mapa apresent
 	\label{fig:mapabusca}
 \end{figure} 
 
-Para atingir o objetivo é preciso tentar os possíveis caminhos até o objetivo. Digamos que o agente comece sua viagem indo para a cidade de Triunfo, para nós, humanos, é intuitivo que a escolha não foi a melhor de inicio, mas a técnica só terá como saber após realizar todas as possíveis opções de caminhos, ou se utilizar uma técnica que utilize uma função de heurística, levando em consideração os custos dos caminhos, que acrescentam um conhecimento adicional para a resolução do problema \cite{intelligence2003modern}.
+Para atingir o objetivo é preciso tentar os possíveis caminhos até o objetivo. Digamos que o agente comece sua viagem indo para a cidade de Triunfo, para nós, humanos, é intuitivo que a escolha não foi a melhor de início, mas a técnica só terá como saber após realizar todas as possíveis opções de caminhos, ou se utilizar uma técnica que utilize uma função de heurística, levando em consideração os custos dos caminhos, que acrescentam um conhecimento adicional para a resolução do problema \cite{intelligence2003modern}.
 
 \section{Busca adversaria}
 
 Jogos são difíceis de resolver com técnicas de IA, pois eles requerem uma habilidade de tomar algum tipo de decisão, e as técnicas comuns as vezes não são satisfatórias, seja pelo fato dos estados que são possíveis de atingir ser muito grande, ou pelo curto espaço de tempo para tomar a decisão.
-A busca adversaria é utilizada nos jogos que estão situados em ambientes competitivos e de multi agentes. Em um jogo o jogador, preferencialmente, não informa suas jogadas previamente, assim tornando o ambiente imprevisível. Os objetivos dos jogadores entram em conflito, pois ambos estão em busca da vitoria. 
-Com o intuito de resolver esse problema é possível gerar uma solução de contingência para tentar antecipar as jogadas do adversário  \cite{intelligence2003modern}. 
+A busca adversaria é utilizada nos jogos que estão situados em ambientes competitivos e de multi agentes. Em um jogo o jogador, preferencialmente, não informa suas jogadas previamente, assim tornando o ambiente imprevisível. Os objetivos dos jogadores entram em conflito, pois ambos estão em busca da vitória. 
+Com o intuito de resolver esse problema é possível gerar uma solução de contingência para tentar antecipar as jogadas do adversário \cite{intelligence2003modern}. 
 
 As técnicas de busca adversária utilizam uma variação da definição de um problema de busca comum. Os componentes devem se adequar ao ambiente competitivo. Por esse motivo os componentes são redefinidos como:
 
 \begin{itemize}
-	\item $s_{0}$, sendo o estado inicial, que especifica como o jogo se configura no inicio;
+	\item $s_{0}$, sendo o estado inicial, que especifica como o jogo se configura no início;
 	\item $players(s)$, definindo qual jogador tem o movimento no estado $s$;
 	\item $actions(s)$, conjunto das ações possíveis em um estado $s$;
 	\item $result(s, a)$, um modelo de transição, que define o resultado da ação $a$ a aplicada ao estado $s$;
@@ -105,5 +105,5 @@ A função presente na linha~\ref{alg:minimax:minimax} é utilizada para iniciar
 	\end{algorithmic}
 \end{algorithm}
 
-O algoritmo de minimax deve explorar todo o espaço de estados para conseguir encontrar a ação que deve ser executada. A quantidade de estados possíveis, dependendo da situação, pode ser muito alta, no xadrez esse número chega a $10^{50}$, em um jogo de \textit{poker} no estilo \textit{texas holdem} esse número pode chegar a $10^{80}$. Geralmente, as ações devem ser tomadas em uma quantidade de tempo muito pequena. Por esse motivo, utilizar técnicas de busca para jogos pode ser um problema. Existem algumas abordagens que utilizam busca adversaria com um nível de abstração mais alto para tentar minimax esse problema \cite{ontanon2013survey}. \frm[color=yellow]{Finaleira meio rasa de capítulo. Eu esperava algum insight maior disto. Especialmente no tocante a jogos com grandes espaços de estados.} 
+O algoritmo de \textit{minimax} deve explorar todo o espaço de estados para conseguir encontrar a ação que deve ser executada. A quantidade de estados possíveis, dependendo da situação, pode ser muito alta, no xadrez esse número chega a $10^{50}$, em um jogo de \textit{poker} no estilo \textit{texas holdem} esse número pode chegar a $10^{80}$. Geralmente, as ações devem ser tomadas em uma quantidade de tempo muito pequena. Por esse motivo, utilizar técnicas de busca para jogos pode ser um problema. Existem algumas abordagens que utilizam busca adversaria com um nível de abstração mais alto para tentar minimax esse problema \cite{ontanon2013survey}. \frm[color=yellow]{Finaleira meio rasa de capítulo. Eu esperava algum insight maior disto. Especialmente no tocante a jogos com grandes espaços de estados.} 
 

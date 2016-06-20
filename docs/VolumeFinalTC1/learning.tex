@@ -2,26 +2,26 @@
 \chapter{\label{chap:aprendizado}Aprendizado}
  
 Para os humanos o aprendizado ocorre durante toda a vida. 
-O aprendizado é o ato de adquirir novos conhecimentos, ou modificar conhecimentos já existentes ou ainda adquirir uma experiencia por repetição do ato de forma incorreta. 
-Aprendizado pode variar de adquirir conhecimento de tarefas simples, como decorando um numero de telefone, até tarefas mais complicadas, como a formulação de novas teorias \cite{intelligence2003modern}. 
+O aprendizado é o ato de adquirir novos conhecimentos, ou modificar conhecimentos já existentes ou ainda adquirir uma experiência por repetição do ato de forma incorreta. 
+Aprendizado pode variar de adquirir conhecimento de tarefas simples, como decorando um número de telefone, até tarefas mais complicadas, como a formulação de novas teorias \cite{intelligence2003modern}. 
 
 \section{Aprendizado de Máquina} 
 
-A área na computação que estudo esse aprendizado de forma computacional é o aprendizado de maquina, melhor conhecida como \textit{machine learning}. 
-A definição de aprendizado de maquina proposta por Tom Mitchell \cite{Mitchell1997ML} é a seguinte:
+A área na computação que estudo esse aprendizado de forma computacional é o aprendizado de máquina, melhor conhecida como \textit{machine learning}. 
+A definição de aprendizado de máquina proposta por Tom Mitchell \cite{Mitchell1997ML} é a seguinte:
 
 \begin{quote}
-	Definição: Um programa de computador é dito que aprende de uma experiencia E com relação a alguma classe de tarefas T, e medida de performance P, se essa performance sobre as tarefas em T, medida por P, melhora com a experiencia E.
+	Definição: Um programa de computador é dito que aprende de uma experiência E com relação a alguma classe de tarefas T, e medida de performance P, se essa performance sobre as tarefas em T, medida por P, melhora com a experiência E.
 \end{quote}
 
-Essa definição mostra que o sistema aprimora seu conjunto de tarefas T com uma performance P através de experiencias E. 
-Ou seja, um sistema baseado em aprendizado de maquina deve, através de experiencias, ter um ganho nas informações para solucionar os seus problemas. 
-Para começar a resolver um problema utilizando aprendizado de maquina é preciso escolher qual experiencia será aprendida pelo sistema \cite{Mitchell1997ML}. 
-Para isso existem algumas técnicas que tratam aprendizado de maquina com objetivos diferentes \cite{intelligence2003modern}. 
+Essa definição mostra que o sistema aprimora seu conjunto de tarefas T com uma performance P através de experiências E. 
+Ou seja, um sistema baseado em aprendizado de máquina deve, através de experiências, ter um ganho nas informações para solucionar os seus problemas. 
+Para começar a resolver um problema utilizando aprendizado de máquina é preciso escolher qual experiência será aprendida pelo sistema \cite{Mitchell1997ML}. 
+Para isso existem algumas técnicas que tratam aprendizado de máquina com objetivos diferentes \cite{intelligence2003modern}. 
 Alguma das técnicas são: 
 \begin{itemize}
 	\item aprendizado supervisionado: que consiste em aprender através de algum conjunto de exemplos a realizar a classificação de algum problema. Cada problema é mapeado para uma saída;  
-	\item aprendizado não supervisionado: que consisten em aprender através das observações, algum padrão ou regularidade, para classificar em grupos os problemas; e 
+	\item aprendizado não supervisionado: que consistem em aprender através das observações, algum padrão ou regularidade, para classificar em grupos os problemas; e 
 	\item aprendizado por reforço: que consiste em aprender, através das execuções de um agente, quais ações possuem maior recompensa média esperada.
 \end{itemize}
 
@@ -30,37 +30,37 @@ Um exemplo apresentado por \cite{intelligence2003modern} é o reconhecimento de 
 
 \section{Aprendizado por Reforço}
 
-O aprendizado por reforço também é conhecido como \textit{reinforcement learning}. Este tipo de aprendizado utiliza \textit{feedbacks}, vindas do ambiente após a sua execução, esse tipo de \textit{feedback}, é chamado de recompensa. O objetivo deste aprendizado é usar as recompensas obtidas nas observações para aprender uma politica do ambiente ou determinar o quão boa a politica é \cite{intelligence2003modern}. 
+O aprendizado por reforço também é conhecido como \textit{reinforcement learning}. Este tipo de aprendizado utiliza \textit{feedbacks}, vindas do ambiente após a sua execução, esse tipo de \textit{feedback}, é chamado de recompensa. O objetivo deste aprendizado é usar as recompensas obtidas nas observações para aprender uma política do ambiente ou determinar o quão boa a política é \cite{intelligence2003modern}. 
 
-Em jogos \textit{reinforcement learning} é um tópico que é bastante utilizado \cite{millington2009artificial}. Em um jogo essa técnica utiliza três etapas, uma para exploração da estrategia para achar as diferentes ações possíveis no jogo, uma função que disponibiliza o \textit{feedback} e diz o quão bom é cada ação, e uma regra de aprendizado que junta as outras duas etapas \cite{millington2009artificial}.
+Em jogos \textit{reinforcement learning} é um tópico que é bastante utilizado \cite{millington2009artificial}. Em um jogo essa técnica utiliza três etapas, uma para exploração da estratégia para achar as diferentes ações possíveis no jogo, uma função que disponibiliza o \textit{feedback} e diz o quão bom é cada ação, e uma regra de aprendizado que junta as outras duas etapas \cite{millington2009artificial}.
 
 Existem dois tipos principais de aprendizado por reforço \cite{intelligence2003modern}: aprendizado passivo, e aprendizado ativo; detalhados nas seções a seguir. 
 
 \subsection{Aprendizado passivo} 
 
-O aprendizado passivo utiliza ambientes completamente observáveis. A politica do agente $\pi$ é fixa, em um estado $s$, sempre é executado a mesma ação $\pi(s)$. O objetivo desse tipo de aprendizado é aprender o quão bom é a politica, o que significa aprender a função de utilidade $U^{\pi}(s)$. Um agente que utiliza aprendizado passivo não conhece o modelo de transição $P(s' | s, a)$, que especifica a probabilidade de alcançar o estado $s'$ a partir do estado $s$ executando a ação $a$, e também não conhece a função de recompensa $R(s)$, que especifica a recompensa de cada estado \cite{intelligence2003modern}. 
+O aprendizado passivo utiliza ambientes completamente observáveis. A política do agente $\pi$ é fixa, em um estado $s$, sempre é executado a mesma ação $\pi(s)$. O objetivo desse tipo de aprendizado é aprender o quão bom é a política, o que significa aprender a função de utilidade $U^{\pi}(s)$. Um agente que utiliza aprendizado passivo não conhece o modelo de transição $P(s' | s, a)$, que especifica a probabilidade de alcançar o estado $s'$ a partir do estado $s$ executando a ação $a$, e também não conhece a função de recompensa $R(s)$, que especifica a recompensa de cada estado \cite{intelligence2003modern}. 
 
-Um agente que utiliza essa técnica realiza várias execuções do ambiente utilizando a politica $\pi$. Em cada tentativa o agente inicia no mesmo estado inicial e realiza uma sequencia de transições de estados ate chegar a um estado terminal. As percepções obtidas com essas execuções, em cada estado, servem para descobrir a recompensa obtida nos estados. O objetivo é utilizar a informação das recompensas para aprender a utilidade esperada $U^{\pi}(s)$ associada a cada estado $s$ não terminal \cite{intelligence2003modern}. 
+Um agente que utiliza essa técnica realiza várias execuções do ambiente utilizando a politica $\pi$. Em cada tentativa o agente inicia no mesmo estado inicial e realiza uma sequência de transições de estados até chegar a um estado terminal. As percepções obtidas com essas execuções, em cada estado, servem para descobrir a recompensa obtida nos estados. O objetivo é utilizar a informação das recompensas para aprender a utilidade esperada $U^{\pi}(s)$ associada a cada estado $s$ não terminal \cite{intelligence2003modern}. 
 
 \subsection{Aprendizado ativo}
 
-O aprendizado ativo diferente do passivo não tem uma politica fixa e a mesma deve ser aprendida. Para isso, um agente que utiliza este tipo de aprendizado precisa decidir quais ações tomar, isso faz com que o agente precise aprender o modelo de transição $P(s' | s, a)$ para cada um dos estados e ações \cite{intelligence2003modern}. 
+O aprendizado ativo diferente do passivo não tem uma política fixa e a mesma deve ser aprendida. Para isso, um agente que utiliza este tipo de aprendizado precisa decidir quais ações tomar, isso faz com que o agente precise aprender o modelo de transição $P(s' | s, a)$ para cada um dos estados e ações \cite{intelligence2003modern}. 
 
-Um método para conseguir definir a politica do ambiente é chamado de \textit{Q-learning}. O objetivo desse método é aprender uma utilidade ligada a um par de estado e ação, a notação $Q(s, a)$, representa o valor de executar a ação $a$ no estado $s$. Este método está relacionado com o valor de utilidade presente na equação \ref{eq:qler} \cite{intelligence2003modern}.
+Um método para conseguir definir a política do ambiente é chamado de \textit{Q-learning}. O objetivo desse método é aprender uma utilidade ligada a um par de estado e ação, a notação $Q(s, a)$, representa o valor de executar a ação $a$ no estado $s$. Este método está relacionado com o valor de utilidade presente na equação \ref{eq:qler} \cite{intelligence2003modern}.
 
 \begin{equation}
 \label{eq:qler}	
 	U(s) =  max_{a} Q(s, a)
 \end{equation}
 
-O algoritmo de \textit{Q-learning} não precisa aprender o modelo de transição $P(s' | s, a)$, por esse motivo ele é chamado de um método livre de modelo. A equação \ref{eq:qler2} representa o calculo do valor de $Q(s, a)$.
+O algoritmo de \textit{Q-learning} não precisa aprender o modelo de transição $P(s' | s, a)$, por esse motivo ele é chamado de um método livre de modelo. A equação \ref{eq:qler2} representa o cálculo do valor de $Q(s, a)$.
 
 \begin{equation}
 \label{eq:qler2}	
 Q(s, a) = Q(s, a) + \alpha (R(s) + \gamma max_{a'} Q(s', a') - Q(s, a))
 \end{equation}
 
-O valor $\alpha$ representa a taxa de aprendizado do agente, variando de 0 a 1, nele é contido a informação se o agente deve considerar as informações obtidas em um novo aprendizado ou não, sendo 1 se considera inteiramente o que foi aprendido, e 0 se for descartar as novas informações. $R(s)$ é a recompensa obtida ao alcançar o estado $s$. O valor de $\gamma$ representa o fator de desconto, que descreve a preferencia do agente em receber recompensas futuras ou recompensas locais, o seu valor varia entre 0 e 1, quando 0 apenas as recompensas locais são utilizadas, e quando 1 as recompensas futuras são totalmente utilizadas. O Algoritmo~\ref{alg:qlearning} ilustra o método de \textit{Q-learning} para um agente \cite{intelligence2003modern}. A Linha~\ref{alg:qlearning:form} é onde é atualizado o valor de $Q(s, a)$ utilizando a Formula~\ref{eq:qler2}. O algoritmo leva em conta quantas vezes quantas vezes o valor $Q(s, a)$ foi calculado, incrementando a cada nova passada do algoritmo pela Linha~\ref{alg:qlearning:increment}. O algoritmo indica a melhor ação para o estado atual.  
+O valor $\alpha$ representa a taxa de aprendizado do agente, variando de 0 a 1, nele é contido a informação se o agente deve considerar as informações obtidas em um novo aprendizado ou não, sendo 1 se considera inteiramente o que foi aprendido, e 0 se for descartar as novas informações. $R(s)$ é a recompensa obtida ao alcançar o estado $s$. O valor de $\gamma$ representa o fator de desconto, que descreve a preferência do agente em receber recompensas futuras ou recompensas locais, o seu valor varia entre 0 e 1, quando 0 apenas as recompensas locais são utilizadas, e quando 1 as recompensas futuras são totalmente utilizadas. O Algoritmo~\ref{alg:qlearning} ilustra o método de \textit{Q-learning} para um agente \cite{intelligence2003modern}. A Linha~\ref{alg:qlearning:form} é onde é atualizado o valor de $Q(s, a)$ utilizando a Formula~\ref{eq:qler2}. O algoritmo leva em conta quantas vezes quantas vezes o valor $Q(s, a)$ foi calculado, incrementando a cada nova passada do algoritmo pela Linha~\ref{alg:qlearning:increment}. O algoritmo indica a melhor ação para o estado atual.  
 
 \begin{algorithm}
 	\caption{Q-Learning}
@@ -84,4 +84,4 @@ O valor $\alpha$ representa a taxa de aprendizado do agente, variando de 0 a 1, 
 
 \frm[inline]{Acho que vale a pena colocar um pouquinho mais aqui, tipo SARSA e a generalização.}
 
-As técnicas de aprendizado de máquina tem grande potencial na área de jogos. O aprendizado de máquina consegue que os agentes reproduzam jogadores mais interessante, pelo fato de que os agentes aprendem sobre o ambiente e usam essa informação a seu favor em jogadas futuras. Os agentes aprendem táticas de jogos com suas derrotas e as aperfeiçoam com suas vitorias. Utilizar técnicas de aprendizado de máquina exige um cuidado e um entendimento das necessidades do jogo \cite{millington2009artificial}. O intuito de adicionar um algoritmo de aprendizado de máquina ao trabalho, vem do fato de que com as informações, provenientes das observações, é possível acrescentar um conhecimento extra nas próximas execuções, a fim de não cometer os mesmo erros de observações anteriores. \frm[color=yellow]{Tu tens que fechar o capítulo de alguma forma, e dizer por que isto está aqui. No projeto tu também tens que referenciar este capítulo.}
+As técnicas de aprendizado de máquina têm grande potencial na área de jogos. O aprendizado de máquina consegue que os agentes reproduzam jogadores mais interessante, pelo fato de que os agentes aprendem sobre o ambiente e usam essa informação a seu favor em jogadas futuras. Os agentes aprendem táticas de jogos com suas derrotas e as aperfeiçoam com suas vitorias. Utilizar técnicas de aprendizado de máquina exige um cuidado e um entendimento das necessidades do jogo \cite{millington2009artificial}. O intuito de adicionar um algoritmo de aprendizado de máquina ao trabalho, vem do fato de que com as informações, provenientes das observações, é possível acrescentar um conhecimento extra nas próximas execuções, a fim de não cometer os mesmos erros de observações anteriores. \frm[color=yellow]{Tu tens que fechar o capítulo de alguma forma, e dizer por que isto está aqui. No projeto tu também tens que referenciar este capítulo.}

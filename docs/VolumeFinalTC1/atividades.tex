@@ -2,20 +2,20 @@
 \chapter{\label{chap:ativ}Análise e Projeto}
 
 \section{Jogos}
- Jogos eletrônicos são muito populares, principalmente pela grande quantidade de gêneros, existem jogos de ação, aventura, esportes, estrategia, entre outros. Hoje em dia, os jogos buscam que quem jogue consiga ficar imerso no dentro do jogo, sem conseguir identificar um padrão nos jogadores fictícios, pois se não o jogo deixa de ser tão interessante. Para que isso aconteça, a IA é associada a diversos jogos, e é comum pensar que quanto mais complexa a IA aplicada dentro do jogo mais difícil jogo irá ficar, mas isso nem sempre é verdade, nem sempre IA complicadas terão melhor desempenho do que as mais simples, uma boa IA dentro do jogo é feita a partir de determinar o comportamento certo para os algoritmo certos \cite{millington2009artificial}.
+ Jogos eletrônicos são muito populares, principalmente pela grande quantidade de gêneros, existem jogos de ação, aventura, esportes, estratégia, entre outros. Hoje em dia, os jogos buscam que quem jogue consiga ficar imerso no dentro do jogo, sem conseguir identificar um padrão nos jogadores fictícios, pois se não o jogo deixa de ser tão interessante. Para que isso aconteça, a IA é associada a diversos jogos, e é comum pensar que quanto mais complexa a IA aplicada dentro do jogo mais difícil jogo irá ficar, mas isso nem sempre é verdade, nem sempre IA complicadas terão melhor desempenho do que as mais simples, uma boa IA dentro do jogo é feita a partir de determinar o comportamento certo para os algoritmo certos \cite{millington2009artificial}.
  
  \subsection{Jogos de estratégia em tempo real}
  
- Jogos de estratégia em tempo real, também conhecido por \textit{real-time strategy games} (RTS), é um sub-gênero de jogos de estrategia, onde os jogadores precisam construir uma base com uma economia, ganhando recursos, construindo edificações, treinando unidades de ataques e tecnologias para elas, tudo isso com o objetivo de destruir uma ou mais bases inimigas \cite{ontanon2013survey, buro2012real}. 
+ Jogos de estratégia em tempo real, também conhecido por \textit{real-time strategy games} (RTS), é um subgênero de jogos de estratégia, onde os jogadores precisam construir uma base com uma economia, ganhando recursos, construindo edificações, treinando unidades de ataques e tecnologias para elas, tudo isso com o objetivo de destruir uma ou mais bases inimigas \cite{ontanon2013survey, buro2012real}. 
  
  Existem algumas diferenças entre jogos RTS e jogos de tabuleiro, como xadrez. Estas diferenças são \cite{ontanon2013survey}:
  
  \begin{itemize}
- 	\item Movimentos simultâneos- jogadores realizam jogadas ao mesmo tempo;
- 	\item Tempo real- cada jogador deve realizar suas ações em um curto espaço de tempo;
- 	\item Parcialmente observável- na maioria dos jogos RTS, o jogador só consegue enxergar parte do ambiente;
- 	\item Não-determinístico- nem sempre uma ação realizada resulta  na saída esperada;
- 	\item Complexidade- O espaço de estados e o número de ações possíveis é muito grande.
+ 	\item movimentos simultâneos, jogadores realizam jogadas ao mesmo tempo;
+ 	\item tempo real, cada jogador deve realizar suas ações em um curto espaço de tempo;
+ 	\item parcialmente observável, na maioria dos jogos RTS, o jogador só consegue enxergar parte do ambiente;
+ 	\item não-determinístico, nem sempre uma ação realizada resulta na saída esperada; e
+ 	\item complexidade, O espaço de estados e o número de ações possíveis é muito grande.
  \end{itemize} 
  
  
@@ -32,29 +32,29 @@
  	\label{fig:microrts}
  \end{figure} 
  
-O MicroRTS consistem em dois jogadores tentando destruir a base adversaria. Para destruir com o inimigo é preciso eliminar cada unidade e edificações adversarias. A Figura~\ref{fig:microrts} mostra uma tela do jogo. Existem quatro tipos de unidades no jogo, são elas:
+O MicroRTS consiste em dois jogadores tentando destruir a base adversaria. Para destruir com o inimigo é preciso eliminar cada unidade e edificações adversarias. A Figura~\ref{fig:microrts} mostra uma tela do jogo. Existem quatro tipos de unidades no jogo, são elas:
   
 \begin{itemize}
- 	\item Worker- É responsável por coletar recursos e construir as edificações. Esta unidade também consegue lutar, mas possui um dano muito baixo.
- 	\item Heavy- Unidade que pode apenas atacar. Ela possui um alto poder de ataque, mas sua velocidade é lenta.
- 	\item Light- Unidade que pode apenas atacar. Ela possui um baixo poder de ataque, mas sua velocidade é rápida.
- 	\item Ranged- Unidade que pode apenas atacar. Ela possui um ataque de longa distancia. 
+ 	\item \textit{worker}, é responsável por coletar recursos e construir as edificações. Esta unidade também consegue lutar, mas possui um dano muito baixo;
+ 	\item \textit{heavy}, unidade que pode apenas atacar. Ela possui um alto poder de ataque, mas sua velocidade é lenta;
+ 	\item \textit{light}, unidade que pode apenas atacar. Ela possui um baixo poder de ataque, mas sua velocidade é rápida; e
+ 	\item \textit{ranged}, unidade que pode apenas atacar. Ela possui um ataque de longa distância. 
 \end{itemize} 
  
 Para adquirir as unidades é preciso das edificações e recursos. Existem três tipos de edificações, são elas:
 
 \begin{itemize}
-	\item Base- A base é a edificação principal, ela é responsável pela criação dos \textit{workers}, e nela também é guardado os recursos coletados pelos \textit{workers}. 
-	\item Quartel- O quartel é responsável pela criação das unidades de ataque \textit{heavy}, \textit{light} e \textit{ranged}. Ela pode ser construída pelos \textit{workers} usando recursos.
-	\item Base de recurso- Na base de recurso são coletados os recursos pelos \textit{workers}, os a base de recursos é finitos para ser coletada.
+	\item base, a base é a edificação principal, ela é responsável pela criação dos \textit{workers}, e nela também é guardado os recursos coletados pelos \textit{workers};
+	\item quartel, o quartel é responsável pela criação das unidades de ataque \textit{heavy}, \textit{light} e \textit{ranged}. Ela pode ser construída pelos \textit{workers} usando recursos; e
+	\item base de recurso, na base de recurso são coletados os recursos pelos \textit{workers}, os a base de recursos é finitos para ser coletada.
 \end{itemize}  
 
-No inicio do jogo, cada jogador inicia com uma base, um \textit{worker} e uma base de recurso para coletar. Todas as unidades podem ser atacas menos a base de recursos. 
+No início do jogo, cada jogador inicia com uma base, um \textit{worker} e uma base de recurso para coletar. Todas as unidades podem ser atacas menos a base de recursos. 
  
-No ambiente há algumas estrategias implementadas, cada estrategia possui variações dos algoritmos. Algumas das estrategias são:
+No ambiente há algumas estratégias implementadas, cada estratégia possui variações dos algoritmos. Algumas das estratégias são:
  \begin{itemize}
- 	\item Minimax Alpha-Beta Search Strategies - O que muda entre as técnicas é o jeito com que é feito a expansão do grafo.
- 	\item Monte Carlo Search Strategies - Executa jogadas aleatórias para planejar e após utiliza uma heurística para determinar em qual caminho seguir.
+ 	\item \textit{Minimax Alpha-Beta Search Strategies} - O que muda entre as técnicas é o jeito com que é feito a expansão do grafo.
+ 	\item \textit{Monte Carlo Search Strategies} - Executa jogadas aleatórias para planejar e após utiliza uma heurística para determinar em qual caminho seguir.
  \end{itemize}
  
  A plataforma já foi utilizada para aplicar técnica de IA. Por esse motivo a utilização dela se torna viável para a realização deste trabalho. 
@@ -62,7 +62,7 @@ Nela é possível observar que o fator de ramificação pode ser muito alto depe
 
 \subsection{Arquitetura do MicroRTS}
 
-A arquitetura do MicroRTS é composta por 4 componentes principais: O Jogo em si, onde são feitas todas as ações dos jogos. As unidades, onde todas as ações de cada unidade podem ser controladas e acessadas, por exemplo, saber onde está cada unidade inimiga. A Interface gráfica, responsável pela representação gráfica do jogo. E a Inteligencia Artificial, onde pode ser acoplado a IA que desejar, a plataforma já possui algumas como foi dito anteriormente. A imagem \ref{fig:pacotes} representa os componentes.
+A arquitetura do MicroRTS é composta por 4 componentes principais: O Jogo em si, onde são feitas todas as ações dos jogos. As unidades, onde todas as ações de cada unidade podem ser controladas e acessadas, por exemplo, saber onde está cada unidade inimiga. A Interface gráfica, responsável pela representação gráfica do jogo. E a Inteligência Artificial, onde pode ser acoplado a IA que desejar, a plataforma já possui algumas como foi dito anteriormente. A imagem \ref{fig:pacotes} representa os componentes.
 
  \begin{figure}[ht]
  	\centering
@@ -73,7 +73,7 @@ A arquitetura do MicroRTS é composta por 4 componentes principais: O Jogo em si
  
 \section{Descrição do Projeto}
  
-Para realizar a implementação de uma IA para acoplar no MicroRTS, é preciso conhecer as classes responsáveis por cada componente. A imagem \ref{fig:classes} apresenta, as classes principais. A Classe \textit{GameVisualSimulation} é a interface entre os componentes do jogo e o usuário. A classe \textit{GameState} e \textit{PhysicalGameState}, são responsaveis pelo controle das ações das unidades, e pelo controle do mapa e das unidades dentro dele, respectivamente. A classe \textit{UnitTypeTable} é onde cada unidade é associada as ações possíveis no jogo. A Classse \textit{PhysicalGameStatePanel} é responsável pela interface gráfica. E por fim a classe \textit{AHTN} é onde minha proposta de solução será acoplada ao jogo.
+Para realizar a implementação de uma IA para acoplar no MicroRTS, é preciso conhecer as classes responsáveis por cada componente. A imagem \ref{fig:classes} apresenta, as classes principais. A Classe \textit{GameVisualSimulation} é a interface entre os componentes do jogo e o usuário. A classe \textit{GameState} e \textit{PhysicalGameState}, são responsáveis pelo controle das ações das unidades, e pelo controle do mapa e das unidades dentro dele, respectivamente. A classe \textit{UnitTypeTable} é onde cada unidade é associada as ações possíveis no jogo. A Classe \textit{PhysicalGameStatePanel} é responsável pela interface gráfica. E por fim a classe \textit{AHTN} é onde minha proposta de solução será acoplada ao jogo.
  
   \begin{figure}[ht]
   	\centering
@@ -85,7 +85,7 @@ Para realizar a implementação de uma IA para acoplar no MicroRTS, é preciso c
 
 \section{Cronograma}
 
-Para está etapa do projeto do Trabalho de Conclusão, foi proposto o plano das atividades apresentado na diagrama de Gantt com a respectiva legenda.
+Para a próxima etapa do projeto do Trabalho de Conclusão, foi proposto o plano das atividades apresentado no diagrama de Gantt com a respectiva legenda.
 
 \begin{itemize}
 \item Tarefa 1 - Escrita do TC II.
