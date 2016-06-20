@@ -46,14 +46,14 @@ Um agente que utiliza essa técnica realiza várias execuções do ambiente util
 
 O aprendizado ativo diferente do passivo não tem uma política fixa e a mesma deve ser aprendida. Para isso, um agente que utiliza este tipo de aprendizado precisa decidir quais ações tomar, isso faz com que o agente precise aprender o modelo de transição $P(s' | s, a)$ para cada um dos estados e ações \cite{intelligence2003modern}. 
 
-Um método para conseguir definir a política do ambiente é chamado de \textit{Q-learning}. O objetivo desse método é aprender uma utilidade ligada a um par de estado e ação, a notação $Q(s, a)$, representa o valor de executar a ação $a$ no estado $s$. Este método está relacionado com o valor de utilidade presente na equação \ref{eq:qler} \cite{intelligence2003modern}.
+Um método para conseguir definir a política do ambiente é chamado de \textit{Q-learning}. O objetivo desse método é aprender uma utilidade ligada a um par de estado e ação, a notação $Q(s, a)$, representa o valor de executar a ação $a$ no estado $s$. Este método está relacionado com o valor de utilidade presente na Equação \ref{eq:qler} \cite{intelligence2003modern}.
 
 \begin{equation}
 \label{eq:qler}	
 	U(s) =  max_{a} Q(s, a)
 \end{equation}
 
-O algoritmo de \textit{Q-learning} não precisa aprender o modelo de transição $P(s' | s, a)$, por esse motivo ele é chamado de um método livre de modelo. A equação \ref{eq:qler2} representa o cálculo do valor de $Q(s, a)$.
+O algoritmo de \textit{Q-learning} não precisa aprender o modelo de transição $P(s' | s, a)$, por esse motivo ele é chamado de um método livre de modelo. A Equação \ref{eq:qler2} apresenta como é feito o cálculo do valor de $Q(s, a)$.
 
 \begin{equation}
 \label{eq:qler2}	
@@ -65,7 +65,7 @@ O valor $\alpha$ representa a taxa de aprendizado do agente, variando de 0 a 1, 
 \begin{algorithm}
 	\caption{Q-Learning}
 	\label{alg:qlearning}
-	\begin{algorithmic}[]	
+	\begin{algorithmic}[1]	
 		\Function{Q-Learning}{$state, reward$}
 		\If {$terminal(state)$}
 		\State	\Return $Q[s, None] = reward$
@@ -82,6 +82,23 @@ O valor $\alpha$ representa a taxa de aprendizado do agente, variando de 0 a 1, 
 	\end{algorithmic}
 \end{algorithm}
 
-\frm[inline]{Acho que vale a pena colocar um pouquinho mais aqui, tipo SARSA e a generalização.}
+
+Um algoritmo que tem grande relação com o \textit{Q-learning} é o algoritmo chamado \textit{State-Action-Reward-State-Action} (SARSA), onde as equações de atualização são bem parecidas. A Equação~\ref{eq:sarsa} apresenta como é calculado o valor de utilidade no SARSA. A grande diferença entre os dois métodos é que, enquanto o \textit{Q-learning} busca o melhor valor de utilidade do estado na transição observada, o SARSA espera até uma ação ser realmente tomada para calcular o valor para aquela ação. 
+A grande diferença entre os dois métodos é que, enquanto o \textit{Q-learning} não leva em consideração a politica atual, o SARSA utiliza essa informação para saber o que realmente irá acontecer \cite{intelligence2003modern}. \frm[color=yellow]{Acho que vale a pena colocar um pouquinho mais aqui, tipo SARSA e a generalização.}
+
+\begin{equation}
+\label{eq:sarsa}	
+Q(s, a) = Q(s, a) + \alpha (R(s) + \gamma~Q(s', a') - Q(s, a))
+\end{equation}
+
+
+As duas técnicas consistem em percorrer os estados diversas vezes, com o intuito de aprender o valor de utilidade de cada par estado e ação. Entretanto, as técnicas não tem estimativa para pares que não tenha sido visitado. Em caso de ambientes parcialmente observáveis ou não observáveis podem existir estados que não consigam ser alcançados nas observações, e com isso não consigam ser avaliados \cite{Mitchell1997ML}.   
+
+
+\section{Generalização} 
+ 
+No aprendizado ativo, o conhecimento sobre as utilidades é feito a partir de um par de estado e ação, e a maneira como é armazenado essa informação é feita através de uma tabela. A maioria dos problemas terá uma grande quantidade de estados, isso faz com que toda a informação tenha que ser calculada e guardada em uma tabela que pode ser muito grande. Com o objetivo de tratar o problema do grande espaço de estados é possível utilizar generalização. A generalização permite compactar o jeito que as informações são armazenadas, e ainda transferir conhecimento entre estados e ações similares \cite{Mitchell1997ML, kaelbling1996reinforcement}.
+
+\todo[inline]{falta algo aqui}	
 
 As técnicas de aprendizado de máquina têm grande potencial na área de jogos. O aprendizado de máquina consegue que os agentes reproduzam jogadores mais interessante, pelo fato de que os agentes aprendem sobre o ambiente e usam essa informação a seu favor em jogadas futuras. Os agentes aprendem táticas de jogos com suas derrotas e as aperfeiçoam com suas vitorias. Utilizar técnicas de aprendizado de máquina exige um cuidado e um entendimento das necessidades do jogo \cite{millington2009artificial}. O intuito de adicionar um algoritmo de aprendizado de máquina ao trabalho, vem do fato de que com as informações, provenientes das observações, é possível acrescentar um conhecimento extra nas próximas execuções, a fim de não cometer os mesmos erros de observações anteriores. \frm[color=yellow]{Tu tens que fechar o capítulo de alguma forma, e dizer por que isto está aqui. No projeto tu também tens que referenciar este capítulo.}
