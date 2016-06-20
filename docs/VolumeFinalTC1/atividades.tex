@@ -73,7 +73,7 @@ A arquitetura do MicroRTS é composta por 4 componentes principais: O Jogo em si
  
 \section{Descrição do Projeto}
  
-Para realizar a implementação de uma IA para acoplar no MicroRTS, é preciso conhecer as classes responsáveis por cada componente. A imagem \ref{fig:classes} apresenta, as classes principais. A Classe \textit{GameVisualSimulation} é uma \textit{facade} que provê uma interface para a simulação dos outros componentes do jogo. A classe \textit{GameState} e \textit{PhysicalGameState}, são responsaveis pelo controle das ações das unidades, e pelo controle do mapa e das unidades dentro dele, respectivamente. A classe \textit{UnitTypeTable} é onde cada unidade é associada as ações possíveis no jogo. A Classse \textit{PhysicalGameStatePanel} é responsável pela interface gráfica. E por fim a classe \textit{AHTN} é onde minha proposta de solução será acoplada ao jogo.
+Para realizar a implementação de uma IA para acoplar no MicroRTS, é preciso conhecer as classes responsáveis por cada componente. A imagem \ref{fig:classes} apresenta, as classes principais. A Classe \textit{GameVisualSimulation} é a interface entre os componentes do jogo e o usuário. A classe \textit{GameState} e \textit{PhysicalGameState}, são responsaveis pelo controle das ações das unidades, e pelo controle do mapa e das unidades dentro dele, respectivamente. A classe \textit{UnitTypeTable} é onde cada unidade é associada as ações possíveis no jogo. A Classse \textit{PhysicalGameStatePanel} é responsável pela interface gráfica. E por fim a classe \textit{AHTN} é onde minha proposta de solução será acoplada ao jogo.
  
   \begin{figure}[ht]
   	\centering
@@ -90,7 +90,8 @@ Para está etapa do projeto do Trabalho de Conclusão, foi proposto o plano das 
 \begin{itemize}
 \item Tarefa 1 - Escrita do TC II.
 \item Tarefa 2 - Desenvolvimento do dominio.
-\item Tarefa 3 - Implementação do algoritmo AHTN.
+\item Tarefa 3.1 - Implementação do algoritmo AHTN.
+\item Tarefa 3.2 - Testar e corrigir possíveis erros da implementação.
 \item Tarefa 4 - Criação dos \textit{benchmark}.
 \item Tarefa 5 - Integrar o algoritmo de \textit{q-learning} a implementação. 
 \item Tarefa 6 - Realizar a comparação com as outras abordagens. 
@@ -104,7 +105,8 @@ Para está etapa do projeto do Trabalho de Conclusão, foi proposto o plano das 
 	\ganttmilestone{Entrega do volume Final TCI}{3} \ganttnewline	
 	\ganttbar{Tarefa 1}{7}{20} \\	
 	\ganttbar{Tarefa 2}{7}{8} \\
-	\ganttbar{Tarefa 3}{9}{12} \\
+	\ganttbar{Tarefa 3.1}{9}{10} \\	
+	\ganttbar{Tarefa 3.2}{11}{12} \\	
 	\ganttbar{Tarefa 4}{13}{14} \\
 	\ganttbar{Tarefa 5}{15}{16} \\
 	\ganttbar{Tarefa 6}{17}{18} \\	

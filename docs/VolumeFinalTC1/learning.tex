@@ -60,10 +60,7 @@ O algoritmo de \textit{Q-learning} não precisa aprender o modelo de transição
 Q(s, a) = Q(s, a) + \alpha (R(s) + \gamma max_{a'} Q(s', a') - Q(s, a))
 \end{equation}
 
-O valor $\alpha$ representa a taxa de aprendizado do agente, variando de 0 a 1, nele é contido a informação se o agente deve considerar as informações obtidas em um novo aprendizado ou não, sendo 1 se considera inteiramente o que foi aprendido, e 0 se for descartar as novas informações. 
-$R(s)$ é a recompensa do estado, $\gamma$ é o fator de desconto.\frm{Certo, e o que diabos é isto?} 
-O algoritmo~\ref{alg:qlearning} ilustra o método de \textit{Q-learning} para um agente \cite{intelligence2003modern}.
-
+O valor $\alpha$ representa a taxa de aprendizado do agente, variando de 0 a 1, nele é contido a informação se o agente deve considerar as informações obtidas em um novo aprendizado ou não, sendo 1 se considera inteiramente o que foi aprendido, e 0 se for descartar as novas informações. $R(s)$ é a recompensa obtida ao alcançar o estado $s$. O valor de $\gamma$ representa o fator de desconto, que descreve a preferencia do agente em receber recompensas futuras ou recompensas locais, o seu valor varia entre 0 e 1, quando 0 apenas as recompensas locais são utilizadas, e quando 1 as recompensas futuras são totalmente utilizadas. O Algoritmo~\ref{alg:qlearning} ilustra o método de \textit{Q-learning} para um agente \cite{intelligence2003modern}. A Linha~\ref{alg:qlearning:form} é onde é atualizado o valor de $Q(s, a)$ utilizando a Formula~\ref{eq:qler2}. O algoritmo leva em conta quantas vezes quantas vezes o valor $Q(s, a)$ foi calculado, incrementando a cada nova passada do algoritmo pela Linha~\ref{alg:qlearning:increment}. O algoritmo indica a melhor ação para o estado atual.  
 
 \begin{algorithm}
 	\caption{Q-Learning}
@@ -74,17 +71,17 @@ O algoritmo~\ref{alg:qlearning} ilustra o método de \textit{Q-learning} para um
 		\State	\Return $Q[s, None] = reward$
 		\EndIf
 		\If {$state$ is not null}
-		\State {increment $N[s, a]$}
-		\State $Q[s, a] = Q[s, a] + \alpha(N[s, a]) (r + \gamma max_{a'} Q[s', a'] - Q[s, a])$
-		\State s = $s'$
-		\State a = $argmax_{a'} f(Q[s', a'], N[s', a'])$
-		\State r = $r'$
+		\State {increment $N[s, a]$} \label{alg:qlearning:increment}
+		\State $Q[s, a] = Q[s, a] + \alpha(N[s, a]) (r + \gamma max_{a'} Q[s', a'] - Q[s, a])$ \label{alg:qlearning:form}
+		\State $s = s'$
+		\State $a = argmax_{a'} f(Q[s', a'], N[s', a'])$ \label{alg:qlearning:f}
+		\State $r = r'$
 		\EndIf	
+		\State \Return $a$
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
 
 \frm[inline]{Acho que vale a pena colocar um pouquinho mais aqui, tipo SARSA e a generalização.}
-
 
 As técnicas de aprendizado de máquina tem grande potencial na área de jogos. O aprendizado de máquina consegue que os agentes reproduzam jogadores mais interessante, pelo fato de que os agentes aprendem sobre o ambiente e usam essa informação a seu favor em jogadas futuras. Os agentes aprendem táticas de jogos com suas derrotas e as aperfeiçoam com suas vitorias. Utilizar técnicas de aprendizado de máquina exige um cuidado e um entendimento das necessidades do jogo \cite{millington2009artificial}. O intuito de adicionar um algoritmo de aprendizado de máquina ao trabalho, vem do fato de que com as informações, provenientes das observações, é possível acrescentar um conhecimento extra nas próximas execuções, a fim de não cometer os mesmo erros de observações anteriores. \frm[color=yellow]{Tu tens que fechar o capítulo de alguma forma, e dizer por que isto está aqui. No projeto tu também tens que referenciar este capítulo.}

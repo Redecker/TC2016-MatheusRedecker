@@ -55,16 +55,15 @@ O processo de geração do plano é feito pelo planejador. Um plano é uma sequ�
 	\label{fig:planmodelo}
 \end{figure} 
 
-\todo[inline]{falar aqui dos planos que não dependem de domínio }
-\frm{E...? Terminar a seção numa figura, sem conectar com o resto do trabalho?}
+Um plano é considerado ótimo quando utiliza o menor número de ações para resolver o problema, ou seja, o número de ações que levam o estado inicial até o objetivo é o menor possivel. Para gerar planos ótimos o planejador utiliza técnicas de busca combinado com alguma heurística que seja independente de domínio. Uma heurística deve ser computacionalmente eficiente e ter precisão para que a geração do plano seja eficiente \cite{helmert2007flexible}. %\frm[color=yellow]{E...? Terminar a seção numa figura, sem conectar com o resto do trabalho?}
 
-\section{HTN} 
+\section{Planejamento hierárquico} 
 
-Embora o planejamento clássico consiga gerar planos que satisfaçam sua representação\frm{O que é um plano ``que satisfaça sua representação''? O que isto quer dizer? A principal vantagem do HTN é que, ao invés de planejamento clássico que depende de heurísticas independentes de domínio, permite que tu expresse \textbf{conhecimento de domínio} junto com os operadores!!}, a quantidade de ações que são geradas para a construção do plano para problemas maiores se torna muito grande. 
-\underline{Um outro fator} \frm{Isto, como já conversamos antes, é um sinal de má organização.} que torna o planejamento clássico menos utilizável é sua expressividade. 
+
+Embora que o planejamento clássico consiga gerar planos ótimos, a quantidade de ações resultante é grande para problemas maiores. O planejamento clássico possui a expressividade é limitada, pois não é possível representar quando uma ação irá ocorrer, por exemplo \cite{intelligence2003modern}.
 Como alternativa para esses problemas foi proposto o planejamento hierárquico, chamado de \textit{Hierarchical Task Network} (HTN). 
 O planejamento HTN se diferencia do planejamento clássico na forma como os planos são gerados \cite{ghallab2004automated}. 
-As ações em HTN são tratadas em mais alto nível \cite{intelligence2003modern}.  \frm[color=yellow]{Não seja tão abruto para entrar em HTN. Qual a limitação de panejamento clássico? O que poderia ajudar nisto? O que é conhecimento de domínio? Por que usá-lo?}
+Enquanto no planejamento clássico é necessário ter heurísticas para a geração de planos, em planejamento HTN é possível expressar conhecimento de domínio junto com os operadores, isso faz com que as ações sejam tratadas em mais alto nível \cite{intelligence2003modern}.  \frm[color=yellow]{Não seja tão abruto para entrar em HTN. Qual a limitação de panejamento clássico? O que poderia ajudar nisto? O que é conhecimento de domínio? Por que usá-lo?} \frm[color=yellow]{O que é um plano ``que satisfaça sua representação''? O que isto quer dizer? A principal vantagem do HTN é que, ao invés de planejamento clássico que depende de heurísticas independentes de domínio, permite que tu expresse \textbf{conhecimento de domínio} junto com os operadores!!}, 
 
 O objetivo do planejamento HTN é produzir uma sequência de ações que executam determinada tarefa $t$. 
 As tarefas são completadas decompondo tarefas não primitivas em tarefas menores até só restarem tarefas primitivas. 
@@ -95,12 +94,12 @@ Um problema de planejamento HTN $P$ é definido como $P = (d, I, D)$, onde $D$ �
 O processo de geração de um plano utilizando planejamento HTN consistem em encontrar um método que consegue ser aplicado na primeira tarefa de $d$, isso faz com que seja gerado uma tarefa de ligação diferente $d'$, onde a primeira tarefa foi decomposta. 
 Esse processo continua, agora aplicado a $d'$, até que todas as tarefas sejam primitivas \cite{meneguzzi2015planning}. 
 Se em algum ponto, nenhum método consiga ser aplicado, o planejador tem que realizar um retrocesso(\textit{backtracking}), que consiste em voltar a um $d$ anterior a ponto de tentar outra decomposição \cite{intelligence2003modern}. 
-É possível representar a busca do plano por uma arvore $N$, na qual os nodos são tarefas ou métodos. 
+É possível representar a busca do plano por uma árvore $N$, na qual os nodos são tarefas ou métodos. 
 Cada tarefa não-primitiva pode ter apenas um filho, que deve ser um método. 
 Cada método deve ter um filho para cada uma das suas sub tarefas. 
 Tarefas primitivas não podem ter filhos, o que significa que elas não podem ser decompostas. 
-Uma arvore totalmente decomposta, é onde todas as folhas de $N$ são tarefas primitivas \cite{ontanon2015adversarial}. 
-A Figura~\ref{fig:htnmethodtree} ilustra a arvore de resolução do exemplo anterior.
+Uma árvore totalmente decomposta, é onde todas as folhas de $N$ são tarefas primitivas \cite{ontanon2015adversarial}. 
+A Figura~\ref{fig:htnmethodtree} ilustra a árvore de resolução do exemplo anterior.
 
 \begin{figure}[ht]
 	\centering
@@ -113,7 +112,7 @@ O algoritmo de \textit{Total-order Forward Decomposition} (TFD) gera um plano a 
 O algoritmo gera as ações na mesma ordem que serão executadas, então com isso cada vez que é alcançada uma tarefa tudo que antecede a mesma já foi planejado \cite{ghallab2004automated}.
  
 \begin{algorithm}
-	\caption{TFD}
+	\caption{Total-order Forward Decomposition}
 	\label{alg:tfd}
 	\begin{algorithmic}[1]		
 		\Function {TFD}{$s, <t_{1}, ...,t_{k}>, O, M$}
@@ -153,11 +152,11 @@ Nele são combinados técnicas de HTN com o algoritmo \textit{minimax search}.
 O algoritmo assume jogos totalmente observáveis, baseados em turno e determinísticos. 
 
 O Algoritmo~\ref{alg:ahtn}~\cite{ontanon2015adversarial} é a representação da técnica de AHTN, e assume que existem dois jogadores, MAX e MIN, como no algoritmo de \textit{minimax search} apresentado no Capitulo~\ref{chap:busca}.
-O algoritmo também assume uma busca em uma arvore com uma máxima profundidade $d$. 
+O algoritmo também assume uma busca em uma árvore com uma máxima profundidade $d$. 
 O intuito do algoritmo de AHTN é gerar os melhores plano para \textsc{Max} e outro para \text{Min}, junto com o resultado de uma função de avaliação quando os planos chegam a um estado terminal.  \frm[color=yellow]{Utilize as linhas do algoritmo (E.g. a primeira linha que eu referencio é a Linha~\ref{alg:lin:firstLine}), para tu dar uma idéia do que tu estás falando no algoritmo. Antes de começar a ir nos símbolos, tu tens que descrever em um parágrafo a intuição do algoritmo.}
 
 \begin{algorithm}
-	\caption{AHTN}
+	\caption{Adversarial hierarchical-task network}
 	\label{alg:ahtn}
 	\begin{algorithmic}[1]		
 		\Function {AHTNMax}{$s, N_{+}, N_{-}, t_{+}, t_{-}, d$}
@@ -181,11 +180,11 @@ O intuito do algoritmo de AHTN é gerar os melhores plano para \textsc{Max} e ou
 	\end{algorithmic}
 \end{algorithm}
 
-Cada nodo da arvore das jogadas é definido por uma tupla $(s, N_{+}, N_{-}, t_{+}, t_{-})$, onde $s$ é o estado corrente do ambiente, $N_{+}$ e $N_{-}$ são a representação de planos HTN para os jogadores \textsc{Max} e \textsc{Min}, respectivamente, $t_{+}$ e $t_{-}$ representam ponteiros para qual parte do plano HTN está sendo executada, sendo $t_{+}$ para uma tarefa de $N_{+}$ e $t_{-}$ para uma tarefa de $N_{-}$ ~\cite{ontanon2015adversarial}.
+Cada nodo da árvore das jogadas é definido por uma tupla $(s, N_{+}, N_{-}, t_{+}, t_{-})$, onde $s$ é o estado corrente do ambiente, $N_{+}$ e $N_{-}$ são a representação de planos HTN para os jogadores \textsc{Max} e \textsc{Min}, respectivamente, $t_{+}$ e $t_{-}$ representam ponteiros para qual parte do plano HTN está sendo executada, sendo $t_{+}$ para uma tarefa de $N_{+}$ e $t_{-}$ para uma tarefa de $N_{-}$ ~\cite{ontanon2015adversarial}.
 
 A função $nextAction(N,t)$ faz com que, dado um HTN $N$ e um ponteiro $t$, seja encontrada a próxima tarefa primitiva que deve ser executada em $N$ após a tarefa $t$. Se $t = \perp$ então é retornado a primeira tarefa primitiva a ser executada em $N$. 
 Se existir em $N$ alguma tarefas não primitivas e não existir nenhuma tarefa primitiva em $N$ então $nextAction(N,t) = \perp$ \cite{ontanon2015adversarial}.
-Na linha~\ref{alg:ahtn:nexaction} é testado se existe alguma tarefa primitiva no plano atual, se existir ela é aplicada e passa para o próximo nível da arvore alternando para \textsc{Min}, através da função $AHTNMin$. \frm[color=yellow]{Eu estou bem perdido aqui. Seria legal tu usar as linhas do algoritmo para indicar do que tu estás falando...}
+Na linha~\ref{alg:ahtn:nexaction} é testado se existe alguma tarefa primitiva no plano atual, se existir ela é aplicada e passa para o próximo nível da árvore alternando para \textsc{Min}, através da função $AHTNMin$. \frm[color=yellow]{Eu estou bem perdido aqui. Seria legal tu usar as linhas do algoritmo para indicar do que tu estás falando...}
 
 Um nodo \textsc{Max} $n = (s, N_{+}, N_{-}, t_{+}, t_{-})$ é consistente se as ações primitivas que já estão em $N_{+}$ e $N_{-}$ conseguem ser executadas dado um estado $s$ e uma transição $\gamma$. A definição de consistência de \textsc{Min} é análoga \cite{ontanon2015adversarial}.
 
@@ -200,8 +199,8 @@ Quando um estado terminal ou a profundidade for atingida os planos e a função 
 A grande diferença entre o algoritmo de $AHTN$ e o algoritmo do \textit{minimax search}, é que as chamadas recursivas nem sempre se alternam entre \textsc{Max} e \textsc{Min}. 
 O algoritmo troca de nodos \textsc{Max} para \textsc{Min} apenas quando os planos estão totalmente decompostos a ponto de gerar uma ação (Linha \ref{alg:ahtn:troca}) \cite{ontanon2015adversarial}.
 
-Para exemplificar o funcionamento do Algoritmo \ref{alg:ahtn}, é apresentado a Figura \ref{fig:ahtn}, que mostra a arvore gerada com profundidade $d = 2$. 
-Na raiz da arvore pode ser visto que, para os dois jogadores, apenas uma tarefa não primitiva \textit{win} que precisa ser decomposta. 
+Para exemplificar o funcionamento do Algoritmo \ref{alg:ahtn}, é apresentado a Figura \ref{fig:ahtn}, que mostra a árvore gerada com profundidade $d = 2$. 
+Na raiz da árvore pode ser visto que, para os dois jogadores, apenas uma tarefa não primitiva \textit{win} que precisa ser decomposta. 
 Há duas decomposições que o jogador \textsc{Max} pode aplicar para sua HTN, resultando nos nodos $n_{1}$ e $n_{5}$. 
 A decomposição de n1 não resulta em nenhuma ação primitiva, e por isso $n_{1}$ continua um nodo \textsc{Max}. 
 Uma vez que o jogador \textsc{Max} decompõe sua HTN para o ponto onde a primeira ação pode ser gerada(nodo $n_{2}$ e $n_{5}$), é o turno de \textsc{Min} de decompor. Quando \textsc{Min} pode gerar suas ações, a profundidade máxima foi atingida (nodos $n_{3}$ e $n_{4}$). 
