@@ -1,0 +1,112 @@
+%!TEX root = volumeFinal.tex 
+\chapter{\label{chap:aprendizado}Aprendizado}
+ 
+Para os humanos o aprendizado ocorre durante toda a vida. 
+O aprendizado é o ato de adquirir novos conhecimentos, ou modificar conhecimentos já existentes ou ainda adquirir uma experiência por repetição do ato de forma incorreta. 
+Aprendizado pode variar de adquirir conhecimento de tarefas simples, como decorando um número de telefone, até tarefas mais complicadas, como a formulação de novas teorias \cite{intelligence2003modern}. 
+
+\section{Aprendizado de Máquina} 
+
+A área na computação que estudo esse aprendizado de forma computacional é o aprendizado de máquina, melhor conhecida como \textit{machine learning}. 
+A definição de aprendizado de máquina proposta por Tom Mitchell \cite{Mitchell1997ML} é a seguinte:
+
+\begin{quote}
+	Definição: Um programa de computador é dito que aprende de uma experiência E com relação a alguma classe de tarefas T, e medida de performance P, se essa performance sobre as tarefas em T, medida por P, melhora com a experiência E.
+\end{quote}
+
+Essa definição mostra que o sistema aprimora seu conjunto de tarefas T com uma performance P através de experiências E. 
+Ou seja, um sistema baseado em aprendizado de máquina deve, através de experiências, ter um ganho nas informações para solucionar os seus problemas. 
+Para começar a resolver um problema utilizando aprendizado de máquina é preciso escolher qual experiência será aprendida pelo sistema \cite{Mitchell1997ML}. 
+Para isso existem algumas técnicas que tratam aprendizado de máquina com objetivos diferentes \cite{intelligence2003modern}. 
+Alguma das técnicas são: 
+\begin{itemize}
+	\item aprendizado supervisionado: que consiste em aprender através de algum conjunto de exemplos a realizar a classificação de algum problema. Cada problema é mapeado para uma saída;  
+	\item aprendizado não supervisionado: que consistem em aprender através das observações, algum padrão ou regularidade, para classificar em grupos os problemas; e 
+	\item aprendizado por reforço: que consiste em aprender, através das execuções de um agente, quais ações possuem maior recompensa média esperada.
+\end{itemize}
+
+Cada tipo de aprendizado é utilizado pode ser usado para uma aplicação especifica, mas existem casos em que a combinação das técnicas se mostra mais eficaz. 
+Um exemplo apresentado por \cite{intelligence2003modern} é o reconhecimento de idade por fotos, para essa tarefa são necessários amostras de fotos com as idades, então a técnica que se encaixa é aprendizado supervisionado, mas existem ruídos aleatórios nas imagens que fazem com que a precisão da abordagem caia, para superar esse problema pode ser combinado aprendizado supervisionado com o não supervisionado.
+
+\section{Aprendizado por Reforço}
+
+O aprendizado por reforço também é conhecido como \textit{reinforcement learning}. Este tipo de aprendizado utiliza \textit{feedbacks}, vindas do ambiente após a sua execução, esse tipo de \textit{feedback}, é chamado de recompensa. O objetivo deste aprendizado é usar as recompensas obtidas nas observações para aprender uma política do ambiente ou determinar o quão boa a política é \cite{intelligence2003modern}. 
+
+Em jogos \textit{reinforcement learning} é um tópico que é bastante utilizado \cite{millington2009artificial}. Em um jogo essa técnica utiliza três etapas, uma para exploração da estratégia para achar as diferentes ações possíveis no jogo, uma função que disponibiliza o \textit{feedback} e diz o quão bom é cada ação, e uma regra de aprendizado que junta as outras duas etapas \cite{millington2009artificial}.
+
+Existem dois tipos principais de aprendizado por reforço \cite{intelligence2003modern}: aprendizado passivo, e aprendizado ativo; detalhados nas seções a seguir. 
+
+\subsection{Aprendizado passivo} 
+
+O aprendizado passivo utiliza ambientes completamente observáveis. A política do agente $\pi$ é fixa, em um estado $s$, sempre é executado a mesma ação $\pi(s)$. O objetivo desse tipo de aprendizado é aprender o quão bom é a política, o que significa aprender a função de utilidade $U^{\pi}(s)$. Um agente que utiliza aprendizado passivo não conhece o modelo de transição $P(s' | s, a)$, que especifica a probabilidade de alcançar o estado $s'$ a partir do estado $s$ executando a ação $a$, e também não conhece a função de recompensa $R(s)$, que especifica a recompensa de cada estado \cite{intelligence2003modern}. 
+
+Um agente que utiliza essa técnica realiza várias execuções do ambiente utilizando a politica $\pi$. Em cada tentativa o agente inicia no mesmo estado inicial e realiza uma sequência de transições de estados até chegar a um estado terminal. As percepções obtidas com essas execuções, em cada estado, servem para descobrir a recompensa obtida nos estados. O objetivo é utilizar a informação das recompensas para aprender a utilidade esperada $U^{\pi}(s)$ associada a cada estado $s$ não terminal \cite{intelligence2003modern}. 
+
+\subsection{Aprendizado ativo}
+
+O aprendizado ativo diferente do passivo não tem uma política fixa e a mesma deve ser aprendida. Para isso, um agente que utiliza este tipo de aprendizado precisa decidir quais ações tomar, isso faz com que o agente precise aprender o modelo de transição $P(s' | s, a)$ para cada um dos estados e ações \cite{intelligence2003modern}. 
+
+Um método para conseguir definir a política do ambiente é chamado de \textit{Q-learning}. O objetivo desse método é aprender uma utilidade ligada a um par de estado e ação, a notação $Q(s, a)$, representa o valor de executar a ação $a$ no estado $s$. Este método está relacionado com o valor de utilidade presente na Equação \ref{eq:qler} \cite{intelligence2003modern}.
+
+\begin{equation}
+\label{eq:qler}	
+	U(s) =  max_{a} Q(s, a)
+\end{equation}
+
+O algoritmo de \textit{Q-learning} não precisa aprender o modelo de transição $P(s' | s, a)$, por esse motivo ele é chamado de um método livre de modelo. A Equação \ref{eq:qler2} apresenta como é feito o cálculo do valor de $Q(s, a)$.
+
+\begin{equation}
+\label{eq:qler2}	
+Q(s, a) = Q(s, a) + \alpha (R(s) + \gamma max_{a'} Q(s', a') - Q(s, a))
+\end{equation}
+
+O valor $\alpha$ representa a taxa de aprendizado do agente, variando de 0 a 1, nele é contido a informação se o agente deve considerar as informações obtidas em um novo aprendizado ou não, sendo 1 se considera inteiramente o que foi aprendido, e 0 se for descartar as novas informações. $R(s)$ é a recompensa obtida ao alcançar o estado $s$. O valor de $\gamma$ representa o fator de desconto, que descreve a preferência do agente em receber recompensas futuras ou recompensas locais, o seu valor varia entre 0 e 1, quando 0 apenas as recompensas locais são utilizadas, e quando 1 as recompensas futuras são totalmente utilizadas. O Algoritmo~\ref{alg:qlearning} ilustra o método de \textit{Q-learning} para um agente \cite{intelligence2003modern}. A Linha~\ref{alg:qlearning:form} é onde é atualizado o valor de $Q(s, a)$ utilizando a Formula~\ref{eq:qler2}. O algoritmo leva em conta quantas vezes quantas vezes o valor $Q(s, a)$ foi calculado, incrementando a cada nova passada do algoritmo pela Linha~\ref{alg:qlearning:increment}. O algoritmo indica a melhor ação para o estado atual.  
+
+\begin{algorithm}
+	\caption{Q-Learning}
+	\label{alg:qlearning}
+	\begin{algorithmic}[1]	
+		\Function{Q-Learning}{$state, reward$}
+		\If {$terminal(state)$}
+		\State	\Return $Q[s, None] = reward$
+		\EndIf
+		\If {$state$ is not null}
+		\State {increment $N[s, a]$} \label{alg:qlearning:increment}
+		\State $Q[s, a] = Q[s, a] + \alpha(N[s, a]) (r + \gamma max_{a'} Q[s', a'] - Q[s, a])$ \label{alg:qlearning:form}
+		\State $s = s'$
+		\State $a = argmax_{a'} f(Q[s', a'], N[s', a'])$ \label{alg:qlearning:f}
+		\State $r = r'$
+		\EndIf	
+		\State \Return $a$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+
+Um algoritmo que tem grande relação com o \textit{Q-learning} é o algoritmo chamado \textit{State-Action-Reward-State-Action} (SARSA), onde as equações de atualização são bem parecidas. A Equação~\ref{eq:sarsa} apresenta como é calculado o valor de utilidade no SARSA. A grande diferença entre os dois métodos é que, enquanto o \textit{Q-learning} busca o melhor valor de utilidade do estado na transição observada, o SARSA espera até uma ação ser realmente tomada para calcular o valor para aquela ação. 
+A grande diferença entre os dois métodos é que, enquanto o \textit{Q-learning} não leva em consideração a politica atual, o SARSA utiliza essa informação para saber o que realmente irá acontecer \cite{intelligence2003modern}. \frm[color=yellow]{Acho que vale a pena colocar um pouquinho mais aqui, tipo SARSA e a generalização.}
+
+\begin{equation}
+\label{eq:sarsa}	
+Q(s, a) = Q(s, a) + \alpha (R(s) + \gamma~Q(s', a') - Q(s, a))
+\end{equation}
+
+
+As duas técnicas consistem em percorrer os estados diversas vezes, com o intuito de aprender o valor de utilidade de cada par estado e ação. Entretanto, as técnicas não têm estimativa para pares que não tenha sido visitado. Em caso de ambientes parcialmente observáveis ou não observáveis podem existir estados que não consigam ser alcançados nas observações, e com isso não consigam ser avaliados \cite{Mitchell1997ML}.   
+
+
+\subsection{Generalização} 
+ 
+No aprendizado ativo, o conhecimento sobre as utilidades é feito a partir de um par de estado e ação, e a maneira como é armazenado essa informação é feita através de uma tabela. A maioria dos problemas terá uma grande quantidade de estados, isso faz com que toda a informação tenha que ser calculada e guardada em uma tabela que pode ser muito grande. Com o objetivo de tratar o problema do grande espaço de estados é possível utilizar generalização. A generalização permite compactar o jeito como as informações são armazenadas, e ainda transferir conhecimento entre estados e ações similares \cite{Mitchell1997ML, kaelbling1996reinforcement}.
+
+Uma maneira de utilizar generalização é através de uma função de aproximação, que é uma alternativa para a tabela de pesquisa. Essa técnica é vista como uma aproximação, pois não há garantia que ela irá representar a verdadeira função de utilidade. Um algoritmo de aprendizado por reforço pode aprender valores dos parâmetros $\theta$, e gerar uma função $U_{\theta}$ que aproxima a verdadeira função de utilidade. Essa técnica consegue reduzir, para o xadrez, de $10^{40}$ valores na tabela, para 20 parâmetros aproximados. A compressão alcançada através da função de aproximação permite que o agente consiga generalizar o aprendizado de estados que foram visitados para os que não foram visitados. O problema desse tipo método é o tempo que leva para convergir a uma função de aproximação que represente o modelo de forma satisfatória \cite{intelligence2003modern}.
+
+Em aprendizado por reforço a atualização da função é feita a cada nova observação, pelo fato de que a função pode obter valores que precisam ser ajustados. O ajuste é feito por uma função de erro que altera o parâmetro $\theta$, através do cálculo do gradiente. Isso faz com que a função de avaliação permita o aprendizado por reforço a generalizar por meio de suas observações. A Equação~\ref{eq:gene} mostra como fica o cálculo de $\theta$ para o \textit{Q-learning} \cite{intelligence2003modern}.
+
+\begin{equation}
+\label{eq:gene}	
+\theta_{i} = \theta_{i} + \alpha [R(s) + \gamma~Q_{\theta}(s', a') - Q_{\theta}(s, a)] \frac{\partial Q_{\theta}(s, a)}{\partial \theta_{i}}
+\end{equation}
+
+
+As técnicas de aprendizado de máquina têm grande potencial na área de jogos. O aprendizado de máquina consegue que os agentes reproduzam jogadores mais interessante, pelo fato de que os agentes aprendem sobre o ambiente e usam essa informação a seu favor em jogadas futuras. Os agentes aprendem táticas de jogos com suas derrotas e as aperfeiçoam com suas vitorias. Utilizar técnicas de aprendizado de máquina exige um cuidado e um entendimento das necessidades do jogo \cite{millington2009artificial}. O intuito de adicionar um algoritmo de aprendizado de máquina ao trabalho, vem do fato de que com as informações, provenientes das observações, é possível acrescentar um conhecimento extra nas próximas execuções, a fim de não cometer os mesmos erros de observações anteriores. \frm[color=yellow]{Tu tens que fechar o capítulo de alguma forma, e dizer por que isto está aqui. No projeto tu também tens que referenciar este capítulo.}
