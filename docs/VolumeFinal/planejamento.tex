@@ -1,26 +1,27 @@
 %!TEX root = volumeFinal.tex 
 \chapter{\label{chap:planejamento}Planejamento}
 
-A atividade de planejar alguma coisa é feita muitas vezes por dia. Algumas vezes esse planejamento é muito simples, como organizar as tarefas que serão feitas no próximo dia, outras vezes pode ser mais complexa como organizar uma viagem de final de ano. Planejar implica em elaborar uma sequência de ações com o intuito de obter um objetivo. Ou seja, o processo de planejar consiste em organizar as ações, antecipando os resultados esperados de cada ação, com o intuito de conquistar um objetivo. 
+A atividade de planejar alguma coisa é feita muitas vezes por dia. Algumas vezes esse planejamento é muito simples, como organizar as tarefas que serão feitas no próximo dia, outras vezes pode ser mais complexa como organizar uma viagem de final de ano. Planejar implica em elaborar uma sequência de ações com o intuito de alcançar um objetivo, ou seja, o processo de planejar consiste em organizar as ações, antecipando os resultados esperados de cada ação, com o intuito de conquistar um objetivo. 
 
-O planejamento, na área da IA, é uma sub área de estudo, ele é usado para encontrar um plano que resolva um problema especifico. Como os ambientes nem sempre possuem as mesmas características, existem diferentes técnicas que são usadas para construir um plano.
+O planejamento, na área da IA, é uma sub área de estudo, onde ele é usado para encontrar um plano que resolva um problema especifico. Como os ambientes nem sempre possuem as mesmas características, existem diferentes técnicas que são usadas para construir um plano.
 
 \section{Planejamento automatizado}
 
-Planejamento automatizado é a área da inteligência artificial que estuda o processo de geração de planos computacionalmente. O objetivo do planejamento é encontrar uma sequência de ações que solucione um problema, a sequência de ações encontrada é chamada de plano. Para construir um plano é utilizado um planejador. O planejador recebe uma descrição formal de um problema de planejamento, e tenta solucionar esse problema utilizando algoritmos de buscas e heurísticas \cite{ghallab2004automated, intelligence2003modern}. \frm[color=yellow]{Esta frase não poderia ser um pouco mais circular?} \frm[color=yellow]{Repetição de pontos semelhantes, e introdução de jargão sem explicação. Cada a conexão com busca?} 
+Planejamento automatizado estuda o processo de geração de planos computacionalmente. O objetivo do planejamento é encontrar uma sequência de ações que solucione um problema, a sequência de ações encontrada é chamada de plano. Para construir um plano é utilizado um planejador. O planejador recebe uma descrição formal de um problema de planejamento, e tenta solucionar esse problema utilizando algoritmos de buscas e heurísticas \cite{ghallab2004automated, intelligence2003modern}.
 
 \subsection{Representação de um problema de planejamento}
 
 Uma das maneiras de representar um problema de planejamento é utilizando lógica matemática. A lógica proposicional é expressada através de sentenças atômicas, que são compostas de proposições. Cada proposição pode assumir um valor de verdadeiro ou falso. Por exemplo, queremos representar que a lâmpada está apagada, para isso pode ser utilizado a proposição $apagada$, se a lâmpada estiver apagada, a proposição assume o valor de verdadeiro. Junto com as proposições podem ser usados conectivos lógicos, como negação (\textit{not}) $\neg$, conjunção (\textit{and}) $\wedge$ e disjunção (\textit{or}) $\vee$. No exemplo da luz, se queremos saber se a luz está apagada e a TV está ligada, podemos representar por $apagada~ \wedge~ ligada$. A lógica proposicional pode ser considerada simples, mas ela serve de base para as logicas mais expressivas \cite{intelligence2003modern}. 
 
-Como a lógica proposicional tem expressividade limitada, é preciso utilizar uma lógica que consiga resolver esse problema. A lógica de primeira ordem (LPO) estende a lógica proposicional. Na LPO uma sentença atômica é composta por um predicado seguido de uma lista de termos, denotada por $p(t_{0}, t_{1}, ..., t_{n})$. Um predicado se refere a uma relação que existe entre os termos. Os termos são objetos que se referem a objetos definidos, indefinidos ou a funções \cite{intelligence2003modern}. No exemplo da lâmpada, podemos dizer que a lâmpada da cozinha está apagada, representado por $apagada(cozinha)$. Ou ainda podemos dizer que a lâmpada do quarto está apagada e a TV da sala está ligada, $apagada(quarto)~ \wedge~ ligada(sala)$.  
+Como a lógica proposicional tem expressividade limitada, é preciso utilizar uma lógica que consiga resolver esse problema. A lógica de primeira ordem (LPO) estende a lógica proposicional. Na LPO uma sentença atômica é composta por um predicado seguido de uma lista de termos, denotada por $p(t_{0}, t_{1}, ..., t_{n})$. Um predicado se refere a uma relação existente entre os termos. Os termos são objetos que se referem a objetos definidos, indefinidos ou a funções \cite{intelligence2003modern}. No exemplo da lâmpada, podemos dizer que a lâmpada da cozinha está apagada, representado por $apagada(cozinha)$. Ou ainda podemos dizer que a lâmpada do quarto está apagada e a TV da sala está ligada, $apagada(quarto)~ \wedge~ ligada(sala)$.  
 
 \subsection{Formalização de um problema de planejamento}
 
+Como nas técnicas de busca, em planejamento também é necessário ter uma descrição do problema.
 Para realizar a descrição de um problema de planejamento é preciso definir alguns conceitos, são eles \cite{intelligence2003modern, ghallab2004automated, meneguzzi2015planning}:
 
 \begin{itemize}
-	\item estados, cada estado é um predicado. Conforme a situação do ambiente os estados assumem o valor de verdadeiro ou falso;	\frm[color=yellow]{Isto é um conjunto de fragmentos de sentença, mas certamente não é uma frase coerente. Note, as definições (citando), to \textbf{pode} levantar de outro trabalho!!} 	
+	\item estados, onde cada estado é um predicado. Conforme a situação do ambiente os estados assumem os valores de verdadeiro ou falso;
 	\item operadores, cada operador é definido como $op = (nome(t), pre(p), efeitos(p)$. O $nome(t)$ é o nome do operador e t é o conjunto de termos que irão aparecer nas precondições e efeitos. $pre(p)$ é o conjunto de predicados que representam as precondições do operador. $efeitos(p)$ é o conjunto de predicados que serão o resultado após a execução do operador; e
 	\item domínio, o conjunto de operadores que podem ser usados para a resolução do problema.
 \end{itemize}
@@ -60,15 +61,15 @@ Um plano é considerado ótimo quando utiliza o menor número de ações para re
 \section{Planejamento hierárquico} 
 
 
-Embora que o planejamento clássico consiga gerar planos ótimos, a quantidade de ações resultante é grande para problemas maiores. O planejamento clássico possui a expressividade é limitada, pois não é possível representar quando uma ação irá ocorrer, por exemplo \cite{intelligence2003modern}.
+Embora que o planejamento clássico consiga gerar planos ótimos, a quantidade de ações resultante é grande para problemas maiores. O planejamento clássico possui uma expressividade limitada, pois não é possível representar quando uma ação irá ocorrer, por exemplo \cite{intelligence2003modern}.
 Como alternativa para esses problemas foi proposto o planejamento hierárquico, chamado de \textit{Hierarchical Task Network} (HTN). 
 O planejamento HTN se diferencia do planejamento clássico na forma como os planos são gerados \cite{ghallab2004automated}. 
-Enquanto no planejamento clássico é necessário ter heurísticas para a geração de planos, em planejamento HTN é possível expressar conhecimento de domínio junto com os operadores, isso faz com que as ações sejam tratadas em mais alto nível \cite{intelligence2003modern}.  \frm[color=yellow]{Não seja tão abruto para entrar em HTN. Qual a limitação de panejamento clássico? O que poderia ajudar nisto? O que é conhecimento de domínio? Por que usá-lo?} \frm[color=yellow]{O que é um plano ``que satisfaça sua representação''? O que isto quer dizer? A principal vantagem do HTN é que, ao invés de planejamento clássico que depende de heurísticas independentes de domínio, permite que tu expresse \textbf{conhecimento de domínio} junto com os operadores!!}, 
+Enquanto no planejamento clássico é necessário ter heurísticas para a geração de planos, em planejamento HTN é possível expressar conhecimento de domínio junto com os operadores, isso faz com que as ações sejam tratadas em mais alto nível \cite{intelligence2003modern}.  
 
 O objetivo do planejamento HTN é produzir uma sequência de ações que executam determinada tarefa $t$. 
-As tarefas são completadas decompondo tarefas não primitivas em tarefas menores até só restarem tarefas primitivas. 
-Uma tarefa não primitiva representa objetivos que o agente deve alcançar antes que ele possa executá-la. 
+As tarefas são completadas decompondo tarefas não primitivas em tarefas menores até só restarem tarefas primitivas.  
 As tarefas primitivas são análogas as ações executáveis em planejamento clássico, e expressam uma atividade que o agente possa executar diretamente no ambiente \cite{intelligence2003modern}. 
+Já as tarefa não primitiva representam objetivos que o agente deve alcançar com o intuito de decompor as tarefas não primitivas em primitivas.
 O exemplo da seção anterior de mover um objeto de lugar é um exemplo de tarefa primitiva, pois altera o estado do ambiente, denotado por $(move~ ?from~ ?to)$. 
 Um exemplo de tarefa não primitiva é realizar uma viagem de carro, para conseguir completar essa tarefa é necessário fazer a revisão do carro, arrumar as malas e colocar tudo dentro do carro, que é representado por $(travelByCar ~?car~ ?stuffs))$. 
 
@@ -76,11 +77,10 @@ Para iniciar a geração de um plano HTN, é usado como início uma tarefa de li
 Onde uma tarefa de ligação HTN é definida como $w = (T, C)$, onde $T$ é um conjunto de tarefas a ser completadas e $C$ é um conjunto ordenado de restrições sobre as tarefas $T$. 
 As restrições estabelecem a ordem com que as tarefas $T$ devem ser executadas. 
 
-% Em planejamento HTN é preciso um domínio para que o planejador consiga decompor as tarefas não primitivas. 
 Um domínio de planejamento HTN é um par $D = (A, M)$, onde $A$ é um conjunto de predicados, que representam estados no ambiente, e $M$ um conjunto finto de métodos \cite{meneguzzi2015planning}. 
 Um método é utilizado para decompor tarefas não-primitivas em primitivas. 
 Um método é representado por $m = (p, t, w)$, onde $p$ é uma precondição que estabelece o que deve estar presente no estado atual para que a tarefa $t$ consiga ser decomposta por uma tarefa de ligação $w$ \cite{ghallab2004automated}. 
-Considerando o exemplo anterior de viajar de carro, a Figura~\ref{fig:htnmethod} ilustra esse método, sendo a tarefa de em cinza uma tarefa não primitiva, que posteriormente também será decomposta. 
+Considerando o exemplo anterior de viajar de carro, a Figura~\ref{fig:htnmethod} ilustra esse método, sendo a tarefa em cinza uma tarefa não primitiva, que posteriormente também será decomposta. 
 O conjunto de tarefas que faz parte da tarefa de ligação está representada pelas sub tarefas, e a ordem caracteriza as restrições. 
 
 \begin{figure}[ht]
@@ -91,9 +91,9 @@ O conjunto de tarefas que faz parte da tarefa de ligação está representada pe
 \end{figure} 
 
 Um problema de planejamento HTN $P$ é definido como $P = (d, I, D)$, onde $D$ é um domínio, $d$ é a tarefa de ligação inicial e $I$ é um estado inicial como no planejamento clássico. 
-O processo de geração de um plano utilizando planejamento HTN consistem em encontrar um método que consegue ser aplicado na primeira tarefa de $d$, isso faz com que seja gerado uma tarefa de ligação diferente $d'$, onde a primeira tarefa foi decomposta. 
+O processo de geração de um plano utilizando planejamento HTN consistem em encontrar um método que consiga ser aplicado na primeira tarefa de $d$, isso faz com que seja gerado uma tarefa de ligação diferente $d'$, onde a primeira tarefa foi decomposta. 
 Esse processo continua, agora aplicado a $d'$, até que todas as tarefas sejam primitivas \cite{meneguzzi2015planning}. 
-Se em algum ponto, nenhum método consiga ser aplicado, o planejador tem que realizar um retrocesso(\textit{backtracking}), que consiste em voltar a um $d$ anterior a ponto de tentar outra decomposição \cite{intelligence2003modern}. 
+Se em algum ponto, nenhum método consiga ser aplicado, o planejador tem que realizar um retrocesso(\textit{backtracking}), que consiste em voltar a um $d$ anterior a ponto de conseguir tentar outra decomposição \cite{intelligence2003modern}. 
 É possível representar a busca do plano por uma árvore $N$, na qual os nodos são tarefas ou métodos. 
 Cada tarefa não-primitiva pode ter apenas um filho, que deve ser um método. 
 Cada método deve ter um filho para cada uma das suas sub tarefas. 
@@ -108,8 +108,8 @@ A Figura~\ref{fig:htnmethodtree} ilustra a árvore de resolução do exemplo ant
 	\label{fig:htnmethodtree}
 \end{figure}
 
-O algoritmo de \textit{Total-order Forward Decomposition} (TFD) gera um plano a partir de uma rede de tarefas inicial com ordenação total, como detalhado no Algoritmo~\ref{alg:tfd}.
-O algoritmo gera as ações na mesma ordem que serão executadas, então com isso cada vez que é alcançada uma tarefa tudo que antecede a mesma já foi planejado \cite{ghallab2004automated}.
+O algoritmo de \textit{Total-order Forward Decomposition} (TFD) é utilizado para gerar um plano a partir de uma rede de tarefas inicial com ordenação total, como detalhado no Algoritmo~\ref{alg:tfd}.
+O algoritmo gera as ações na mesma ordem que serão executadas, então a cada vez que uma tarefa é alcançada, tudo que antecede a mesma já foi planejado \cite{ghallab2004automated}.
  
 \begin{algorithm}
 	\caption{Total-order Forward Decomposition}
@@ -151,9 +151,9 @@ O algoritmo gera as ações na mesma ordem que serão executadas, então com iss
 Nele são combinados técnicas de HTN com o algoritmo \textit{minimax search}. 
 O algoritmo assume jogos totalmente observáveis, baseados em turno e determinísticos. 
 
-O Algoritmo~\ref{alg:ahtn}~\cite{ontanon2015adversarial} é a representação da técnica de AHTN, e assume que existem dois jogadores, MAX e MIN, como no algoritmo de \textit{minimax search} apresentado no Capitulo~\ref{chap:busca}.
+O Algoritmo~\ref{alg:ahtn}~\cite{ontanon2015adversarial} é a representação da técnica de AHTN, e assume que existem dois jogadores, \textsc{Max} e \textsc{Min}, como no algoritmo de \textit{minimax search} apresentado no Capitulo~\ref{chap:busca}.
 O algoritmo também assume uma busca em uma árvore com uma máxima profundidade $d$. 
-O intuito do algoritmo de AHTN é gerar os melhores plano para \textsc{Max} e outro para \text{Min}, junto com o resultado de uma função de avaliação quando os planos chegam a um estado terminal.  \frm[color=yellow]{Utilize as linhas do algoritmo (E.g. a primeira linha que eu referencio é a Linha~\ref{alg:lin:firstLine}), para tu dar uma ideia do que tu estás falando no algoritmo. Antes de começar a ir nos símbolos, tu tens que descrever em um parágrafo a intuição do algoritmo.}
+O intuito do algoritmo de AHTN é gerar os melhores plano para \textsc{Max} e para \text{Min}, junto com o resultado de uma função de avaliação para quando os planos chegam a um estado terminal. 
 
 \begin{algorithm}
 	\caption{Adversarial hierarchical-task network}
@@ -165,7 +165,7 @@ O intuito do algoritmo de AHTN é gerar os melhores plano para \textsc{Max} e ou
 		\EndIf
 		\If {$nextAction(N_{+}, t_{+}) \neq \perp$} \label{alg:ahtn:nexaction}
 		\State $t = nextAction(N_{+}, t_{+})$ 
-		\State \Return $\Call{AHTNMin}{(\gamma(s,t), N_{+}, N_{-}, t, t_{-}, d-1)}$ \label{alg:ahtn:troca}% FRM - Note como tu faz uma chamada de subfunção
+		\State \Return $\Call{AHTNMin}{(\gamma(s,t), N_{+}, N_{-}, t, t_{-}, d-1)}$ \label{alg:ahtn:troca}
 		\EndIf
 		\State $N_{+}^{*} = \perp, N_{-}^{*} = \perp, v^{*} = -\infty$
 		\State $\aleph = decompositions_{+}(s, N_{+}, N_{-}, t_{+}, t_{-})$ \label{alg:decompositions}
@@ -182,9 +182,9 @@ O intuito do algoritmo de AHTN é gerar os melhores plano para \textsc{Max} e ou
 
 Cada nodo da árvore das jogadas é definido por uma tupla $(s, N_{+}, N_{-}, t_{+}, t_{-})$, onde $s$ é o estado corrente do ambiente, $N_{+}$ e $N_{-}$ são a representação de planos HTN para os jogadores \textsc{Max} e \textsc{Min}, respectivamente, $t_{+}$ e $t_{-}$ representam ponteiros para qual parte do plano HTN está sendo executada, sendo $t_{+}$ para uma tarefa de $N_{+}$ e $t_{-}$ para uma tarefa de $N_{-}$ ~\cite{ontanon2015adversarial}.
 
-A função $nextAction(N,t)$ faz com que, dado um HTN $N$ e um ponteiro $t$, seja encontrada a próxima tarefa primitiva que deve ser executada em $N$ após a tarefa $t$. Se $t = \perp$ então é retornado a primeira tarefa primitiva a ser executada em $N$. 
+A função $nextAction(N,t)$ faz com que, dado uma representação de plano em HTN $N$ e um ponteiro $t$, seja encontrada a próxima tarefa primitiva que deve ser executada em $N$ após a tarefa $t$. Se $t = \perp$ então é retornado a primeira tarefa primitiva a ser executada em $N$. 
 Se existir em $N$ alguma tarefas não primitivas e não existir nenhuma tarefa primitiva em $N$ então $nextAction(N,t) = \perp$ \cite{ontanon2015adversarial}.
-Na linha~\ref{alg:ahtn:nexaction} é testado se existe alguma tarefa primitiva no plano atual, se existir ela é aplicada e passa para o próximo nível da árvore alternando para \textsc{Min}, através da função $AHTNMin$. \frm[color=yellow]{Eu estou bem perdido aqui. Seria legal tu usar as linhas do algoritmo para indicar do que tu estás falando...}
+Na linha~\ref{alg:ahtn:nexaction} é testado se existe alguma tarefa primitiva no plano atual, se existir ela é aplicada e passa para o próximo nível da árvore alternando para \textsc{Min}, através da função $AHTNMin$. 
 
 Um nodo \textsc{Max} $n = (s, N_{+}, N_{-}, t_{+}, t_{-})$ é consistente se as ações primitivas que já estão em $N_{+}$ e $N_{-}$ conseguem ser executadas dado um estado $s$ e uma transição $\gamma$. A definição de consistência de \textsc{Min} é análoga \cite{ontanon2015adversarial}.
 
@@ -199,12 +199,12 @@ Quando um estado terminal ou a profundidade for atingida os planos e a função 
 A grande diferença entre o algoritmo de $AHTN$ e o algoritmo do \textit{minimax search}, é que as chamadas recursivas nem sempre se alternam entre \textsc{Max} e \textsc{Min}. 
 O algoritmo troca de nodos \textsc{Max} para \textsc{Min} apenas quando os planos estão totalmente decompostos a ponto de gerar uma ação (Linha \ref{alg:ahtn:troca}) \cite{ontanon2015adversarial}.
 
-Para exemplificar o funcionamento do Algoritmo \ref{alg:ahtn}, é apresentado a Figura \ref{fig:ahtn}, que mostra a árvore gerada com profundidade $d = 2$. 
-Na raiz da árvore pode ser visto que, para os dois jogadores, apenas uma tarefa não primitiva \textit{win} que precisa ser decomposta. 
-Há duas decomposições que o jogador \textsc{Max} pode aplicar para sua HTN, resultando nos nodos $n_{1}$ e $n_{5}$. 
+Para exemplificar o funcionamento do Algoritmo \ref{alg:ahtn}, é apresentado a Figura \ref{fig:ahtn}, que ilustra uma árvore gerada com profundidade $d = 2$. 
+Na raiz da árvore pode ser visto que, para os dois jogadores, apenas uma tarefa não primitiva \textit{win} precisa ser decomposta. 
+Há duas decomposições que o jogador \textsc{Max} pode aplicar para seu plano HTN, resultando nos nodos $n_{1}$ e $n_{5}$. 
 A decomposição de n1 não resulta em nenhuma ação primitiva, e por isso $n_{1}$ continua um nodo \textsc{Max}. 
-Uma vez que o jogador \textsc{Max} decompõe sua HTN para o ponto onde a primeira ação pode ser gerada(nodo $n_{2}$ e $n_{5}$), é o turno de \textsc{Min} de decompor. Quando \textsc{Min} pode gerar suas ações, a profundidade máxima foi atingida (nodos $n_{3}$ e $n_{4}$). 
-A função de avaliação $e$ é aplicada para os estados do jogo para determina o valor das folhas.
+Uma vez que o jogador \textsc{Max} decompõe sua HTN para o ponto onde a primeira ação pode ser gerada(nodo $n_{2}$ e $n_{5}$), é o turno de \textsc{Min} decompor suas tarefas não primitivas. Quando \textsc{Min} pode gerar suas ações, a profundidade máxima foi atingida (nodos $n_{3}$ e $n_{4}$). 
+A função de avaliação $e$ é aplicada para cada um dos estados do jogo para determina o valor das folhas.
 
 \begin{figure}[ht]
 	\centering
@@ -212,3 +212,6 @@ A função de avaliação $e$ é aplicada para os estados do jogo para determina
 	\caption{Árvore gerada pelo algoritmo de AHTN}
 	\label{fig:ahtn}
 \end{figure}
+
+
+\msr[inline]{FINALIZAR PLANEJAMENTO E INTRODUZIR ML}
