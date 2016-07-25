@@ -70,11 +70,11 @@ O objetivo do planejamento HTN é produzir uma sequência de ações que executa
 As tarefas são completadas decompondo tarefas não primitivas em tarefas menores até só restarem tarefas primitivas.  
 As tarefas primitivas são análogas as ações executáveis em planejamento clássico, e expressam uma atividade que o agente possa executar diretamente no ambiente \cite{intelligence2003modern}. 
 Já as tarefa não primitiva representam objetivos que o agente deve alcançar com o intuito de decompor as tarefas não primitivas em primitivas.
-O exemplo da seção anterior de mover um objeto de lugar é um exemplo de tarefa primitiva, pois altera o estado do ambiente, denotado por $(move~ ?from~ ?to)$. 
-Um exemplo de tarefa não primitiva é realizar uma viagem de carro, para conseguir completar essa tarefa é necessário fazer a revisão do carro, arrumar as malas e colocar tudo dentro do carro, que é representado por $(travelByCar ~?car~ ?stuffs))$. 
+O exemplo da seção anterior de mover um objeto de lugar é um exemplo de tarefa primitiva, pois altera o estado do ambiente, podendo ser representado em HTN como: $(move~ ?from~ ?to)$. 
+Um exemplo de tarefa não primitiva é realizar uma viagem de carro, para conseguir completar essa tarefa é necessário fazer a revisão do carro, arrumar as malas e colocar tudo dentro do carro, que pode ser representado por $(travelByCar ~?car~ ?stuffs))$. 
 
-Para iniciar a geração de um plano HTN, é usado como início uma tarefa de ligação. 
-Onde uma tarefa de ligação HTN é definida como $w = (T, C)$, onde $T$ é um conjunto de tarefas a ser completadas e $C$ é um conjunto ordenado de restrições sobre as tarefas $T$. 
+Para iniciar a geração de um plano HTN, deve ser usado como início uma tarefa de ligação. 
+Uma tarefa de ligação HTN é definida como $w = (T, C)$, onde $T$ é um conjunto de tarefas a ser completadas e $C$ é um conjunto ordenado de restrições sobre as tarefas $T$. 
 As restrições estabelecem a ordem com que as tarefas $T$ devem ser executadas. 
 
 Um domínio de planejamento HTN é um par $D = (A, M)$, onde $A$ é um conjunto de predicados, que representam estados no ambiente, e $M$ um conjunto finto de métodos \cite{meneguzzi2015planning}. 
@@ -93,7 +93,7 @@ O conjunto de tarefas que faz parte da tarefa de ligação está representada pe
 Um problema de planejamento HTN $P$ é definido como $P = (d, I, D)$, onde $D$ é um domínio, $d$ é a tarefa de ligação inicial e $I$ é um estado inicial como no planejamento clássico. 
 O processo de geração de um plano utilizando planejamento HTN consistem em encontrar um método que consiga ser aplicado na primeira tarefa de $d$, isso faz com que seja gerado uma tarefa de ligação diferente $d'$, onde a primeira tarefa foi decomposta. 
 Esse processo continua, agora aplicado a $d'$, até que todas as tarefas sejam primitivas \cite{meneguzzi2015planning}. 
-Se em algum ponto, nenhum método consiga ser aplicado, o planejador tem que realizar um retrocesso(\textit{backtracking}), que consiste em voltar a um $d$ anterior a ponto de conseguir tentar outra decomposição \cite{intelligence2003modern}. 
+Se em algum ponto, nenhum método consiga ser aplicado, o planejador deve realizar um retrocesso(\textit{backtracking}), que consiste em voltar a um $d$ anterior a ponto de conseguir aplicar outra decomposição \cite{intelligence2003modern}. 
 É possível representar a busca do plano por uma árvore $N$, na qual os nodos são tarefas ou métodos. 
 Cada tarefa não-primitiva pode ter apenas um filho, que deve ser um método. 
 Cada método deve ter um filho para cada uma das suas sub tarefas. 
