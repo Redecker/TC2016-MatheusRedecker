@@ -213,5 +213,6 @@ A função de avaliação $e$ é aplicada para cada um dos estados do jogo para 
 	\label{fig:ahtn}
 \end{figure}
 
+Em jogos, um agente pode ter que seguir um objetivo, para isso é possível utilizar técnicas de planejamento. O grande problema, continua sendo o grande fator de ramificação e o pouco tempo para determinar a próxima ação do agente \cite{}. O algoritmo de AHTN tenta lidar com esses problemas. 
 
-\msr[inline]{FINALIZAR PLANEJAMENTO E INTRODUZIR ML}
+Com o intuito de aumentar o desempenho do algoritmo, é possível utilizar técnicas de aprendizado de máquina na geração dos planos. No processo de geração do plano é possível ter mais de um método que decomponha a mesma tarefa não primitiva, nesses casos o planejador precisa escolher um dos métodos para tentar chegar ao fim da decomposição. Como dito anteriormente, se em algum ponto, não for possível decompor uma tarefa não primitiva, um retrocesso é feito até chegar a um ponto que outro método possa ser executado. Uma maneira de melhorar a decisão de escolha dos métodos é obtendo uma recompensa a cada decomposição de uma tarefa não primitiva, para que com as informações obtidas nas execuções, as recompensas possam auxiliem nas escolhas dos métodos, com o intuito de minimizar os retrocessos \cite{hogg2010learning}. 
