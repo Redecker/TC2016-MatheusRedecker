@@ -32,9 +32,17 @@ public class GameVisualSimulationTest {
         int PERIOD = 20;
         boolean gameover = false;
         
-        AI ai1 = new myAHTN(utt, new BFSPathFinding());//new WorkerRush(utt, new BFSPathFinding());        
+        myAHTN /*AI*/ ai1 = new myAHTN(utt, new BFSPathFinding());//new WorkerRush(utt, new BFSPathFinding());        
         AI ai2 = new RandomAI();//RangedRush(utt, new BFSPathFinding());//new RandomBiasedAI();
 
+		String problema = "(defproblem problem basic ((have kiwi)) ((swap banjo kiwi)))";
+				
+		for(String s : ai1.getPlano(problema)){
+			System.out.println(s);
+		}
+		
+//		ai1.getPlano(problema);
+        
         XMLWriter xml = new XMLWriter(new OutputStreamWriter(System.out));
         pgs.toxml(xml);
         xml.flush();

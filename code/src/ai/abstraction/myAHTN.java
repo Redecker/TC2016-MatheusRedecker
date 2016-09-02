@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -70,7 +71,19 @@ public class myAHTN extends AbstractionLayerAI {
 		
 		//executa o script para rodar o JSHOP2		
 		try {
-			Runtime.getRuntime().exec("./criaPlano.sh");
+			//Runtime.getRuntime().exec();
+			Runtime rt = Runtime.getRuntime();
+            Process proc = rt.exec("./criaPlano.sh");
+			InputStream stderr = proc.getErrorStream();
+            InputStreamReader isr = new InputStreamReader(stderr);
+            BufferedReader br = new BufferedReader(isr);
+            String line = null;
+            System.out.println("<ERROR>");
+            while ( (line = br.readLine()) != null)
+                System.out.println(line);
+            System.out.println("</ERROR>");
+            int exitVal = proc.waitFor();
+            System.out.println("Process exitValue: " + exitVal);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -95,20 +108,12 @@ public class myAHTN extends AbstractionLayerAI {
 		return plano;
 	}
 	
-	
+	//NÃO UTILIZAR O GETPLANOS AQUI DENTRO QUE TAH TRAVANDO O PC!!!!!!
 	public PlayerAction getAction(int player, GameState gs) throws IOException {
 		
 		PhysicalGameState pgs = gs.getPhysicalGameState();
 		Player p = gs.getPlayer(player);
 	    
-		String problema = "(defproblem problem basic ((have kiwi)) ((swap banjo kiwi)))";
-		
-		
-		for(String s : getPlano(problema)){
-			System.out.println(s);
-		}
-	
-				
 		Unit worker = null;
         Unit barrack = null;
         ArrayList<Unit> unidadesAtaque = new ArrayList<>();
