@@ -1,4 +1,3 @@
-package ai.abstraction;
 import java.util.LinkedList;
 import JSHOP2.*;
 

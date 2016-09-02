@@ -32,11 +32,6 @@ public class GameVisualSimulationTest {
         int PERIOD = 20;
         boolean gameover = false;
         
-        Runtime.getRuntime().exec("./test.sh");
-        
-        
-        
-        
         AI ai1 = new myAHTN(utt, new BFSPathFinding());//new WorkerRush(utt, new BFSPathFinding());        
         AI ai2 = new RandomAI();//RangedRush(utt, new BFSPathFinding());//new RandomBiasedAI();
 

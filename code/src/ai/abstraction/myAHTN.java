@@ -4,11 +4,18 @@ import ai.core.AI;
 import ai.abstraction.AbstractionLayerAI;
 import ai.abstraction.pathfinding.PathFinding;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+
 import rts.GameState;
 import rts.PhysicalGameState;
 import rts.Player;
@@ -51,22 +58,57 @@ public class myAHTN extends AbstractionLayerAI {
 	        return new myAHTN(utt, null);
 	}
 	
+	public ArrayList<String> getPlano(String problema){
+
+		//salva o problema no arquivo
+		try (BufferedWriter buffWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("problem"), "UTF-8"))) {
+	        buffWriter.write(problema);    
+	        buffWriter.close();
+		} catch (Exception e) {
+		   	e.printStackTrace();
+		}
+		
+		//executa o script para rodar o JSHOP2		
+		try {
+			Runtime.getRuntime().exec("./criaPlano.sh");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		//lê o arquivo com o plano e retorna
+		//ajeita o plano e retorna
+		ArrayList<String> plano = new ArrayList<String>();
+		try (BufferedReader buffRead = new BufferedReader(new InputStreamReader(new FileInputStream("plano.txt"), "UTF-8"))) {
+			String linha = "";			
+			while(buffRead.ready()) { 
+				linha = buffRead.readLine();
+				if(!linha.trim().isEmpty()) {
+					plano.add(linha);
+				}
+			} 
+			
+			buffRead.close();				
+		} catch (Exception e) {
+		   	e.printStackTrace();
+		}
+		
+		return plano;
+	}
+	
+	
 	public PlayerAction getAction(int player, GameState gs) throws IOException {
 		
 		PhysicalGameState pgs = gs.getPhysicalGameState();
 		Player p = gs.getPlayer(player);
 	    
-		//test jshop
-		//problem.getPlans();
-		//Runtime rt = Runtime.getRuntime();Process pr1 = rt.exec("java JSHOP2.InternalDomain basic");Process pr2 = rt.exec("java JSHOP2.InternalDomain -r problem");
-		//Runtime.getRuntime().exec("java JSHOP2.InternalDomain JSHOP/basic");
+		String problema = "(defproblem problem basic ((have kiwi)) ((swap banjo kiwi)))";
 		
-		//Runtime.getRuntime().exec("./test.sh");
 		
-		System.out.println(problem.getPlans());
-		//new JSHOP2GUI();
-
-		
+		for(String s : getPlano(problema)){
+			System.out.println(s);
+		}
+	
+				
 		Unit worker = null;
         Unit barrack = null;
         ArrayList<Unit> unidadesAtaque = new ArrayList<>();
