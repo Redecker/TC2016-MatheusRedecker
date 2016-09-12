@@ -9,6 +9,11 @@ import ai.*;
 import ai.abstraction.myAHTN;
 import ai.abstraction.pathfinding.BFSPathFinding;
 import gui.PhysicalGameStatePanel;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import javax.swing.JFrame;
 import rts.GameState;
@@ -16,6 +21,7 @@ import rts.PhysicalGameState;
 import rts.PlayerAction;
 import rts.units.UnitTypeTable;
 import util.XMLWriter;
+import JSHOP2.*;
 
 /**
  *
@@ -34,18 +40,30 @@ public class GameVisualSimulationTest {
         
         myAHTN /*AI*/ ai1 = new myAHTN(utt, new BFSPathFinding());//new WorkerRush(utt, new BFSPathFinding());        
         AI ai2 = new RandomAI();//RangedRush(utt, new BFSPathFinding());//new RandomBiasedAI();
-
-		String problema = "(defproblem problem basic ((have kiwi)) ((swap banjo kiwi)))";
-				
-		for(String s : ai1.getPlano(problema)){
-			System.out.println(s);
-		}
-		
-//		ai1.getPlano(problema);
         
-        XMLWriter xml = new XMLWriter(new OutputStreamWriter(System.out));
-        pgs.toxml(xml);
-        xml.flush();
+        //compila o dominio
+        try {
+			//Runtime.getRuntime().exec();
+			Runtime rt = Runtime.getRuntime();
+            Process proc = rt.exec("./compileDomain.sh");
+			InputStream stderr = proc.getErrorStream();
+            InputStreamReader isr = new InputStreamReader(stderr);
+            BufferedReader br = new BufferedReader(isr);
+            String line = null;
+            System.out.println("<Domain ERROR>");
+            while ( (line = br.readLine()) != null)
+                System.out.println(line);
+            System.out.println("</Domain ERROR>");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
+        //compila o problem
+//        String[] test = new String[2];
+//        test[0] = "-r";
+//        test[1] = "problem";
+//        InternalDomain.main(test);
+       
 
         JFrame w = PhysicalGameStatePanel.newVisualizer(gs,640,640,false,PhysicalGameStatePanel.COLORSCHEME_BLACK);
 //        JFrame w = PhysicalGameStatePanel.newVisualizer(gs,640,640,false,PhysicalGameStatePanel.COLORSCHEME_WHITE);

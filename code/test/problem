@@ -1,0 +1,8 @@
+(defproblem problem ahtn (	
+							(have worker)
+							(have quartel)		
+						 )
+						 (
+						 	(treinar-unidade ranged quartel recurso)
+						 )
+)

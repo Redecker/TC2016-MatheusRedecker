@@ -1,6 +1,6 @@
 [Plan cost: 2.0
 
-(!obter-recurso recurso base)
+(!obter-recurso recurso worker)
 (!treinar quartel ranged recurso)
 --------------------
 ]

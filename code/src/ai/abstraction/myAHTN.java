@@ -40,7 +40,58 @@ public class myAHTN extends AbstractionLayerAI {
 	UnitType rangedType;
 	UnitType heavyType;
     UnitType lightType;
-
+    
+    private static String headProblem = "(defproblem problem ahtn ( ";
+    private static int rounds = 0;
+    private static int roundsToAction = 100;
+    
+    boolean print = true;
+    
+    public class node{
+    	
+    	private ArrayList<String> planoMax;
+    	private ArrayList<String> planoMin;
+    	private int pointerMax;
+    	private int pointerMin;
+    	
+    }
+    
+    //Faz com que dado um plano e um ponteiro, seja encontrado a proxima tarefa primitiva desse plano
+    //retorna o ponteiro para a tarefa primitiva, se não houver retorna -1
+    public int nextAction(ArrayList<String> plan, int pointer){
+    	
+    	return -1;
+    }    
+    
+    //adiciona um método novo método no plano de Max
+    public ArrayList<ArrayList<String>> decompositionsMax(/*estado s */ArrayList<String> planMax, ArrayList<String> planMin, int pointerMax, int pointerMin){
+    	return null;
+    }
+	
+	public void AHTNMax(/*estado s */ArrayList<String> planMax, ArrayList<String> planMin, int pointerMax, int pointerMin, int deph){
+		//se o estado é terminal retorna os planos de max e min, e a utilidade do estado s
+		
+		//se houver uma ação primitiva para ser executada
+		//altera o ponteiro e muda para perspectiva de Min
+		if(nextAction(planMax, pointerMax) != -1){
+			int t = nextAction(planMax, pointerMax);
+			//return AHTNMin(d -1); 
+		}
+		
+		ArrayList<String> planMaxAux = new ArrayList<String>();
+		ArrayList<String> planMinAux = new ArrayList<String>();
+		int v = -999999999;
+		
+		//adiciona apenas um método no plano
+		//N = decompositions();
+		
+		//para cada plano possivel chama o AHTNMax novamente
+		//se o v < v achado acima
+		//atualiza os planos achados acima e o v
+		//retorna os itens acima
+		
+	}
+    
 	public myAHTN(UnitTypeTable a_utt, PathFinding a_pf) {
 		super(a_pf);
 	    utt = a_utt;
@@ -78,12 +129,10 @@ public class myAHTN extends AbstractionLayerAI {
             InputStreamReader isr = new InputStreamReader(stderr);
             BufferedReader br = new BufferedReader(isr);
             String line = null;
-            System.out.println("<ERROR>");
+            if (print) System.out.println("<Problem ERROR>");
             while ( (line = br.readLine()) != null)
-                System.out.println(line);
-            System.out.println("</ERROR>");
-            int exitVal = proc.waitFor();
-            System.out.println("Process exitValue: " + exitVal);
+            	if (print) System.out.println(line);
+            if (print) System.out.println("</Problem ERROR>");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -108,18 +157,67 @@ public class myAHTN extends AbstractionLayerAI {
 		return plano;
 	}
 	
-	//NÃO UTILIZAR O GETPLANOS AQUI DENTRO QUE TAH TRAVANDO O PC!!!!!!
-	public PlayerAction getAction(int player, GameState gs) throws IOException {
+	private static int x = 0;
+	public String getProblem(Player player, PhysicalGameState pgs){
+		String problem = "";
 		
-		PhysicalGameState pgs = gs.getPhysicalGameState();
-		Player p = gs.getPlayer(player);
-	    
+		//Verifica quais as unidades e construções que o jogador tem
+		for (Unit u : pgs.getUnits()) {
+			 if (u.getType() == workerType && u.getPlayer() == player.getID()) {            	
+	            	problem += "(have worker)";
+	         }
+			 if (u.getType() == barracksType && u.getPlayer() == player.getID()) {            	
+	            	problem += "(have quartel)";
+	         }
+			 if (u.getType() == baseType && u.getPlayer() == player.getID()) {            	
+	            	problem += "(have base)";
+	         }
+			 if (u.getType() == heavyType && u.getPlayer() == player.getID()) {            	
+	            	problem += "(have heavy)";
+	         }
+			 if (u.getType() == lightType && u.getPlayer() == player.getID()) {            	
+	            	problem += "(have light)";
+	         }
+			 if (u.getType() == rangedType && u.getPlayer() == player.getID()) {            	
+	            	problem += "(have ranged)";
+	         }
+		}		
+		if(player.getResources() >= 10){
+			problem += "(have recursoWorker)" + "(have recursoQuartel)" + "(have recursoBase)" + "(have recursoRanged)"; 
+		}else if(player.getResources() >= 5){
+			problem += "(have recursoWorker)" + "(have recursoQuartel)" + "(have recursoRanged)"; 
+		}else if(player.getResources() >= 2){
+			problem += "(have recursoWorker)" + "(have recursoRanged)"; 
+		}else if(player.getResources() >= 1){
+			problem += "(have recursoWorker)"; 
+		}		
+		problem += ")";
+		
+		//aqui tem que adicionar o que o plano quer alcançar
+		problem += "(";
+		problem += getPlanObjective(x);
+		x++;
+		problem += "))";
+		
+		return problem;
+	}
+	
+	public String getPlanObjective(int x){
+		if(x == 0){
+			return "(construir-quartel worker quartel recursoQuartel)";
+		}else if(x > 0){
+			return "(treinar-unidade ranged quartel recurso)";
+		}
+		return "";
+	}
+	
+	//pegar cada plano e transformar em ações	
+	public void perfromActions(ArrayList<String> plan, GameState gs, PhysicalGameState pgs, Player p){
+		//usado para buscar as referencias das unidades
 		Unit worker = null;
         Unit barrack = null;
         ArrayList<Unit> unidadesAtaque = new ArrayList<>();
-		for (Unit u : pgs.getUnits()) {
-			//if(u.getPlayer() == p.getID()) idle(u);
-			
+		for (Unit u : pgs.getUnits()) {			
             if (u.getType() == workerType && u.getPlayer() == p.getID()) {            	
             	worker = u ;
             }
@@ -129,37 +227,46 @@ public class myAHTN extends AbstractionLayerAI {
             if (u.getType().canAttack && !(u.getType() == workerType)){
             	unidadesAtaque.add(u);
             }
-        }    
+        }
 		
-		if(barrack == null){
-			construirBarrack(worker, p, pgs);
-		}else{
-			workersRecolhemRecursos(worker, p, pgs);
-		}
-		
-		if (barrack != null){
-			r.nextInt(3);
-			switch(r.nextInt(3)){
-				case 0:
-					treinarUnidade(barrack, p, pgs, heavyType);
-					break;
-				case 1:
-					treinarUnidade(barrack, p, pgs, lightType);
-					break;
-				case 2:
-					treinarUnidade(barrack, p, pgs, rangedType);
-					break;
+		for(String stepPlan : plan){
+			if(stepPlan.contains("!base")){
+				if (print) System.out.println("base");
+				construirBase(worker, p, pgs);
+			}else if(stepPlan.contains("!quartel")){
+				if (print) System.out.println("quartel");
+				construirBarrack(worker, p, pgs);
+			}else if(stepPlan.contains("!worker")){
+				if (print) System.out.println("worker");
+				construirWorkers(p, pgs, gs, 1);
+			}else if(stepPlan.contains("!obter-recurso")){
+				if (print) System.out.println("recurso");
+				workersRecolhemRecursos(worker, p, pgs);
+			}else if(stepPlan.contains("!atacar")){
+				if (print) System.out.println("atacar");
+				for(Unit u : unidadesAtaque) unidadeAtaca(u, p, pgs);
+			}else if(stepPlan.contains("!treinar")){
+				if (print) System.out.println("treinar");
+				treinarUnidade(barrack, p, pgs, rangedType);
 			}
+		}		
+	}
+	
+	//NÃO UTILIZAR O GETPLANOS AQUI DENTRO QUE TAH TRAVANDO O PC, POIS CHAMA MUITAS VEZES, FAZER ALGUM CONTROLE PARA NÃO CHAMAR TANTO!!!!!!
+	public PlayerAction getAction(int player, GameState gs) throws IOException {
+		rounds ++;
+		if(rounds % roundsToAction == 0){
+			PhysicalGameState pgs = gs.getPhysicalGameState();
+			Player p = gs.getPlayer(player);
+			
+			String problem = headProblem + getProblem(p, pgs);
+			if (print) print(problem);
+			ArrayList<String> plan = getPlano(problem);
+			
+			perfromActions(plan, gs, pgs, p);
+			
 		}
-		
-		for(Unit u : unidadesAtaque){
-			unidadeAtaca(u, p, pgs);
-		}
-		
-        //workersRecolhemRecursos(worker, p, pgs);
-        //construirBarrack(worker, p, pgs);
-        
-        return translateActions(player, gs);
+		return translateActions(player, gs);
 	}     
 	
 	    public void unidadeAtaca(Unit u, Player p, PhysicalGameState pgs) {
@@ -179,6 +286,57 @@ public class myAHTN extends AbstractionLayerAI {
 		    }
 	    }
 
+		
+		
+//		PhysicalGameState pgs = gs.getPhysicalGameState();
+//		Player p = gs.getPlayer(player);
+//	    
+//		Unit worker = null;
+//        Unit barrack = null;
+//        ArrayList<Unit> unidadesAtaque = new ArrayList<>();
+//		for (Unit u : pgs.getUnits()) {
+//			//if(u.getPlayer() == p.getID()) idle(u);
+//			
+//            if (u.getType() == workerType && u.getPlayer() == p.getID()) {            	
+//            	worker = u ;
+//            }
+//            if (u.getType() == barracksType && u.getPlayer() == p.getID()) {            	
+//            	barrack = u;
+//            }
+//            if (u.getType().canAttack && !(u.getType() == workerType)){
+//            	unidadesAtaque.add(u);
+//            }
+//        }    
+//		
+//		if(barrack == null){
+//			construirBarrack(worker, p, pgs);
+//		}else{
+//			workersRecolhemRecursos(worker, p, pgs);
+//		}
+//		
+//		if (barrack != null){
+//			r.nextInt(3);
+//			switch(r.nextInt(3)){
+//				case 0:
+//					treinarUnidade(barrack, p, pgs, heavyType);
+//					break;
+//				case 1:
+//					treinarUnidade(barrack, p, pgs, lightType);
+//					break;
+//				case 2:
+//					treinarUnidade(barrack, p, pgs, rangedType);
+//					break;
+//			}
+//		}
+//		
+//		for(Unit u : unidadesAtaque){
+//			unidadeAtaca(u, p, pgs);
+//		}
+//		
+//        //workersRecolhemRecursos(worker, p, pgs);
+//        //construirBarrack(worker, p, pgs);
+//        
+//        return translateActions(player, gs);
 	    public void treinarUnidade(Unit u, Player p, PhysicalGameState pgs, UnitType ut) {
 		    if (p.getResources() >= ut.cost) {
 		        train(u, ut);
@@ -312,7 +470,7 @@ public class myAHTN extends AbstractionLayerAI {
     }
 	    
 	    private void print(String message){
-	    	System.out.println(message);
+	    	if (print) System.out.println(message);
 	    }
 	    
 }
