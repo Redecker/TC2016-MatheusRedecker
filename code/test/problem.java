@@ -5,12 +5,10 @@ public class problem
 {
 	private static String[] defineConstants()
 	{
-		String[] problemConstants = new String[4];
+		String[] problemConstants = new String[2];
 
 		problemConstants[0] = "worker";
 		problemConstants[1] = "quartel";
-		problemConstants[2] = "ranged";
-		problemConstants[3] = "recurso";
 
 		return problemConstants;
 	}
@@ -23,7 +21,7 @@ public class problem
 	public static LinkedList<Plan> getPlans()
 	{
 		LinkedList<Plan> returnedPlans = new LinkedList<Plan>();
-		TermConstant.initialize(5);
+		TermConstant.initialize(3);
 
 		Domain d = new ahtn();
 
@@ -39,7 +37,7 @@ public class problem
 		createState0(s);
 
 		tl = new TaskList(1, true);
-		tl.subtasks[0] = new TaskList(new TaskAtom(new Predicate(3, 0, new TermList(TermConstant.getConstant(3), new TermList(TermConstant.getConstant(2), new TermList(TermConstant.getConstant(4), TermList.NIL)))), false, false));
+		tl.subtasks[0] = new TaskList(new TaskAtom(new Predicate(4, 0, new TermList(TermConstant.getConstant(1), TermList.NIL)), false, false));
 
 		thread = new SolverThread(tl, 1);
 		thread.start();

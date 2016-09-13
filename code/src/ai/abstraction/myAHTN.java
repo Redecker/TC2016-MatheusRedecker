@@ -45,7 +45,7 @@ public class myAHTN extends AbstractionLayerAI {
     private static int rounds = 0;
     private static int roundsToAction = 100;
     
-    boolean print = true;
+    boolean print = false;
     
     public class node{
     	
@@ -53,7 +53,6 @@ public class myAHTN extends AbstractionLayerAI {
     	private ArrayList<String> planoMin;
     	private int pointerMax;
     	private int pointerMin;
-    	
     }
     
     //Faz com que dado um plano e um ponteiro, seja encontrado a proxima tarefa primitiva desse plano
@@ -122,7 +121,6 @@ public class myAHTN extends AbstractionLayerAI {
 		
 		//executa o script para rodar o JSHOP2		
 		try {
-			//Runtime.getRuntime().exec();
 			Runtime rt = Runtime.getRuntime();
             Process proc = rt.exec("./criaPlano.sh");
 			InputStream stderr = proc.getErrorStream();
@@ -205,8 +203,10 @@ public class myAHTN extends AbstractionLayerAI {
 	public String getPlanObjective(int x){
 		if(x == 0){
 			return "(construir-quartel worker quartel recursoQuartel)";
-		}else if(x > 0){
+		}else if(x <= 10){
 			return "(treinar-unidade ranged quartel recurso)";
+		}else if(x > 3){
+			return "(atacar ranged)";
 		}
 		return "";
 	}
@@ -229,30 +229,32 @@ public class myAHTN extends AbstractionLayerAI {
             }
         }
 		
+		//executa o que o plano manda
 		for(String stepPlan : plan){
+			print(stepPlan);
 			if(stepPlan.contains("!base")){
-				if (print) System.out.println("base");
+				print("base");
 				construirBase(worker, p, pgs);
 			}else if(stepPlan.contains("!quartel")){
-				if (print) System.out.println("quartel");
+				print("quartel");
 				construirBarrack(worker, p, pgs);
 			}else if(stepPlan.contains("!worker")){
-				if (print) System.out.println("worker");
+				print("worker");
 				construirWorkers(p, pgs, gs, 1);
 			}else if(stepPlan.contains("!obter-recurso")){
-				if (print) System.out.println("recurso");
+				print("obter-recurso");
 				workersRecolhemRecursos(worker, p, pgs);
-			}else if(stepPlan.contains("!atacar")){
-				if (print) System.out.println("atacar");
+			}else if(stepPlan.contains("!ataque")){
+				print("atacar");
 				for(Unit u : unidadesAtaque) unidadeAtaca(u, p, pgs);
 			}else if(stepPlan.contains("!treinar")){
-				if (print) System.out.println("treinar");
+				print("treinar");
 				treinarUnidade(barrack, p, pgs, rangedType);
 			}
 		}		
 	}
 	
-	//NÃO UTILIZAR O GETPLANOS AQUI DENTRO QUE TAH TRAVANDO O PC, POIS CHAMA MUITAS VEZES, FAZER ALGUM CONTROLE PARA NÃO CHAMAR TANTO!!!!!!
+	//metodo que é chamado para gerar as ações das unidades
 	public PlayerAction getAction(int player, GameState gs) throws IOException {
 		rounds ++;
 		if(rounds % roundsToAction == 0){
@@ -260,7 +262,7 @@ public class myAHTN extends AbstractionLayerAI {
 			Player p = gs.getPlayer(player);
 			
 			String problem = headProblem + getProblem(p, pgs);
-			if (print) print(problem);
+			print(problem);
 			ArrayList<String> plan = getPlano(problem);
 			
 			perfromActions(plan, gs, pgs, p);
@@ -268,8 +270,11 @@ public class myAHTN extends AbstractionLayerAI {
 		}
 		return translateActions(player, gs);
 	}     
-	
-	    public void unidadeAtaca(Unit u, Player p, PhysicalGameState pgs) {
+		
+	/*
+	 * 
+	 */
+	public void unidadeAtaca(Unit u, Player p, PhysicalGameState pgs) {
 		    Unit closestEnemy = null;
 		    int closestDistance = 0;
 		    for (Unit u2 : pgs.getUnits()) {
@@ -286,64 +291,13 @@ public class myAHTN extends AbstractionLayerAI {
 		    }
 	    }
 
-		
-		
-//		PhysicalGameState pgs = gs.getPhysicalGameState();
-//		Player p = gs.getPlayer(player);
-//	    
-//		Unit worker = null;
-//        Unit barrack = null;
-//        ArrayList<Unit> unidadesAtaque = new ArrayList<>();
-//		for (Unit u : pgs.getUnits()) {
-//			//if(u.getPlayer() == p.getID()) idle(u);
-//			
-//            if (u.getType() == workerType && u.getPlayer() == p.getID()) {            	
-//            	worker = u ;
-//            }
-//            if (u.getType() == barracksType && u.getPlayer() == p.getID()) {            	
-//            	barrack = u;
-//            }
-//            if (u.getType().canAttack && !(u.getType() == workerType)){
-//            	unidadesAtaque.add(u);
-//            }
-//        }    
-//		
-//		if(barrack == null){
-//			construirBarrack(worker, p, pgs);
-//		}else{
-//			workersRecolhemRecursos(worker, p, pgs);
-//		}
-//		
-//		if (barrack != null){
-//			r.nextInt(3);
-//			switch(r.nextInt(3)){
-//				case 0:
-//					treinarUnidade(barrack, p, pgs, heavyType);
-//					break;
-//				case 1:
-//					treinarUnidade(barrack, p, pgs, lightType);
-//					break;
-//				case 2:
-//					treinarUnidade(barrack, p, pgs, rangedType);
-//					break;
-//			}
-//		}
-//		
-//		for(Unit u : unidadesAtaque){
-//			unidadeAtaca(u, p, pgs);
-//		}
-//		
-//        //workersRecolhemRecursos(worker, p, pgs);
-//        //construirBarrack(worker, p, pgs);
-//        
-//        return translateActions(player, gs);
-	    public void treinarUnidade(Unit u, Player p, PhysicalGameState pgs, UnitType ut) {
+	public void treinarUnidade(Unit u, Player p, PhysicalGameState pgs, UnitType ut) {
 		    if (p.getResources() >= ut.cost) {
 		        train(u, ut);
 		    }
 		}	
 	
-		public void construirBase(Unit worker, Player p, PhysicalGameState pgs){
+	public void construirBase(Unit worker, Player p, PhysicalGameState pgs){
             int nroBases = 0;
             for (Unit u : pgs.getUnits()) {
             	if (u.getType() == baseType && u.getPlayer() == p.getID()) {
@@ -364,7 +318,7 @@ public class myAHTN extends AbstractionLayerAI {
             }
 		}
 		
-		public void construirBarrack(Unit worker, Player p, PhysicalGameState pgs){            
+	public void construirBarrack(Unit worker, Player p, PhysicalGameState pgs){            
 			int nroBarracks = 0;
             for (Unit u : pgs.getUnits()) {
             	if (u.getType() == barracksType && u.getPlayer() == p.getID()) {
@@ -386,7 +340,7 @@ public class myAHTN extends AbstractionLayerAI {
 		}	
 		
         // Worker W colhe recurso.
-	    public void workersRecolhemRecursos(Unit worker, Player p, PhysicalGameState pgs){
+	public void workersRecolhemRecursos(Unit worker, Player p, PhysicalGameState pgs){
 	    	//for (Unit u : workers) {
 	        Unit closestBase = null;
 	        Unit closestResource = null;
@@ -426,7 +380,7 @@ public class myAHTN extends AbstractionLayerAI {
 	   }
 	    
 	    //A base faz at� x workers
-	    public void construirWorkers(Player p, PhysicalGameState pgs, GameState gs, int nw) {	    	
+	public void construirWorkers(Player p, PhysicalGameState pgs, GameState gs, int nw) {	    	
 	    	Unit base = null;		    
 	        int nworkers = 0;
 	    	
@@ -446,7 +400,7 @@ public class myAHTN extends AbstractionLayerAI {
 	        }
 	    }
 
-	    public int findBuildingPosition(List<Integer> reserved, Unit u, Player p, PhysicalGameState pgs) {
+	public int findBuildingPosition(List<Integer> reserved, Unit u, Player p, PhysicalGameState pgs) {
         int bestPos = -1;
         int bestScore = 0;
 
@@ -468,8 +422,9 @@ public class myAHTN extends AbstractionLayerAI {
 
         return bestPos;
     }
-	    
-	    private void print(String message){
+	
+	//metodo de print
+	private void print(String message){
 	    	if (print) System.out.println(message);
 	    }
 	    

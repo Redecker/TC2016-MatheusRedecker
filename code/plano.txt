@@ -1,6 +1,5 @@
-[Plan cost: 2.0
+[Plan cost: 1.0
 
-(!obter-recurso recurso base)
-(!treinar quartel ranged recurso)
+(!ataque ranged)
 --------------------
 ]
