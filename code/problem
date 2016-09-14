@@ -1,1 +1,1 @@
-(defproblem problem ahtn ( (have base)(have quartel)(have ranged)(have ranged)(have recursoWorker)(have recursoQuartel)(have recursoRanged))((treinar-unidade ranged quartel recurso)))
+(defproblem problem ahtn ( (have base)(have worker)(have quartel)(have ranged)(have ranged)(have ranged)(have recursoWorker)(have recursoQuartel)(have recursoBase)(have recursoRanged))((atacar ranged)))
