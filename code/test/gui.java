@@ -19,6 +19,7 @@ public class gui{
 		   	e.printStackTrace();
 		}
 
+		new JSHOP2GUI();
 		//LinkedList<Plan> llp = problem.getPlans();
 		//LinkedList<Predicate> llpre = llp.peek().getOps();
 		//System.out.println(llpre.peek());
