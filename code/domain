@@ -38,31 +38,31 @@
 
 
         (:method (construir-base ?base)
-                ((not (base ?base)) (recurso ?base ?recursoBase) (worker ?worker))
+                ((not (base ?base)) (recurso ?base ?recursoBase) (have ?recursoBase) (worker ?worker))
                 ((!base ?worker ?recursoBase))
         )
 
         (:method (treinar-worker ?worker)
-                ((not (worker ?worker)) (recurso ?worker ?recursoWorker) (base ?base))
+                ((not (worker ?worker)) (recurso ?worker ?recursoWorker) (have ?recursoWorker) (base ?base))
                 ((!worker ?base ?recursoWorker))
         )
 
         (:method (construir-quartel ?quartel)
-                ;nao tem worker mas tenho base e recurso para construir -> consegue um worker e tenta denovo 
-                ((not (quartel ?quartel)) (recurso ?quartel ?recursoQuartel) (not (have ?recursoQuartel)) (not (worker ?worker)) (base ?base))
-                ((treinar-worker ?worker) (construir-quartel ?quartel))
-                
-                ;nao tenho base mas tenho worker e recurso pra base
-                ((not (quartel ?quartel)) (recurso ?quartel ?recursoQuartel) (not (have ?recursoQuartel)) (not (base ?base)) (worker ?worker))
-                ((construir-base ?base) (construir-quartel ?quartel))
+                ;caso simples não tenho quartel e tenho recurso e worker -> somente constroi
+                ((not (quartel ?quartel)) (recurso ?quartel ?recursoQuartel) (have ?recursoQuartel) (worker ?worker)) 
+                ((!quartel ?worker ?recursoQuartel))
 
                 ;nao tem recurso para o quartel -> consegue recurso e constroi
                 ((not (quartel ?quartel)) (recurso ?quartel ?recursoQuartel) (not (have ?recursoQuartel)) (worker ?worker) (base ?base))
                 ((!obter-recurso ?worker ?base ?recursoQuartel) (construir-quartel ?quartel))
                 
-                ;caso simples não tenho quartel e tenho recurso e worker -> somente constroi
-                ((not (quartel ?quartel)) (recurso ?quartel ?recursoQuartel) (worker ?worker)) 
-                ((!quartel ?worker ?recursoQuartel))
+                ;nao tem worker mas tenho base e recurso para construir -> consegue um worker e tenta denovo 
+                ((not (quartel ?quartel)) (not (worker ?worker)) (base ?base))
+                ((treinar-worker ?worker) (construir-quartel ?quartel))
+                
+                ;nao tenho base mas tenho worker e recurso pra base
+                ((not (quartel ?quartel)) (not (base ?base)) (worker ?worker))
+                ((construir-base ?base) (construir-quartel ?quartel))
         )
 
         (:method (treinar-ranged ?ranged)

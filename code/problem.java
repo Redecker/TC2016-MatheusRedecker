@@ -24,7 +24,11 @@ public class problem
 		s.add(new Predicate(5, 0, new TermList(TermConstant.getConstant(8), new TermList(TermConstant.getConstant(9), TermList.NIL))));
 		s.add(new Predicate(5, 0, new TermList(TermConstant.getConstant(10), new TermList(TermConstant.getConstant(11), TermList.NIL))));
 		s.add(new Predicate(5, 0, new TermList(TermConstant.getConstant(12), new TermList(TermConstant.getConstant(13), TermList.NIL))));
-		s.add(new Predicate(3, 0, new TermList(TermConstant.getConstant(8), TermList.NIL)));
+		s.add(new Predicate(2, 0, new TermList(TermConstant.getConstant(6), TermList.NIL)));
+		s.add(new Predicate(0, 0, new TermList(TermConstant.getConstant(10), TermList.NIL)));
+		s.add(new Predicate(1, 0, new TermList(TermConstant.getConstant(11), TermList.NIL)));
+		s.add(new Predicate(1, 0, new TermList(TermConstant.getConstant(9), TermList.NIL)));
+		s.add(new Predicate(1, 0, new TermList(TermConstant.getConstant(13), TermList.NIL)));
 	}
 
 	public static LinkedList<Plan> getPlans()

@@ -7,20 +7,21 @@ O planejamento, na área da IA, é uma sub área de estudo, onde ele é usado pa
 
 \section{Planejamento automatizado}
 
-Planejamento automatizado estuda o processo de geração de planos computacionalmente. O objetivo do planejamento é encontrar uma sequência de ações que solucione um problema, a sequência de ações encontrada é chamada de plano. Para construir um plano é utilizado um planejador. O planejador recebe uma descrição formal de um problema de planejamento, e tenta solucionar esse problema utilizando algoritmos de buscas e heurísticas \cite{ghallab2004automated, intelligence2003modern}.
+Planejamento automatizado estuda o processo de geração de planos computacionalmente. O objetivo do planejamento é encontrar uma sequência de ações que solucione um problema, a sequência de ações encontrada é chamada de plano. Para construir um plano é utilizado um planejador. O planejador recebe uma descrição formal de um problema de planejamento, e tenta solucionar esse problema, para isso pode ser utilizado algoritmos de buscas e heurísticas \cite{ghallab2004automated, intelligence2003modern}.
 
 \subsection{Representação de um problema de planejamento}
 
-Uma das maneiras de representar um problema de planejamento é utilizando lógica matemática. \frm{Salto de lógica matemática para lógica proposicional.}
+Uma das maneiras de representar um problema de planejamento é utilizando lógica proposicional.
 A lógica proposicional é expressada através de sentenças atômicas, que são compostas de proposições. 
 Cada proposição pode assumir um valor de verdadeiro ou falso. 
 Por exemplo, queremos representar que a lâmpada está apagada, para isso pode ser utilizado a proposição $apagada$, se a lâmpada estiver apagada, a proposição assume o valor de verdadeiro. Junto com as proposições podem ser usados conectivos lógicos, como negação (\textit{not}) $\neg$, conjunção (\textit{and}) $\wedge$ e disjunção (\textit{or}) $\vee$. 
 No exemplo da luz, se queremos saber se a luz está apagada e a TV está ligada, podemos representar por $apagada~ \wedge~ ligada$. 
 A lógica proposicional pode ser considerada simples, mas ela serve de base para as lógicas mais expressivas \cite{intelligence2003modern}. 
 
-Como a lógica proposicional tem expressividade limitada, é preciso utilizar uma lógica que consiga resolver esse problema.\frm{Qual problema?} 
-A lógica de primeira ordem (LPO) estende a lógica proposicional.\frm{E...?} 
-Na LPO uma sentença atômica é composta por um predicado seguido de uma lista de termos, denotada por $p(t_{0}, t_{1}, ..., t_{n})$. 
+Como a lógica proposicional tem expressividade limitada, é preciso utilizar uma lógica que consiga expressar mais sobre os estados do ambiente que desejamos representar. 
+A lógica de primeira ordem (LPO) estende a lógica proposicional, e diferente da lógica proposicional a LPO consegue representar relação entre preposições, ou seja, as preposições podem ter aridade mais que um, um exemplo pode ser um objeto estar sobre o outro ($sobre(A,B)$). Uma outra diferenças da LPO é a possibilidade de utilizar quantificadores para demonstrar fatos comuns sobre as preposições, como objetos que tenham a mesma cor ($\forall x~ azul(x)$).
+
+A descrição formal de sentenças em LPO é composta por um predicado seguido de uma lista de termos, denotada por $p(t_{0}, t_{1}, ..., t_{n})$. 
 Um predicado se refere a uma relação existente entre os termos. 
 Os termos são objetos que se referem a objetos definidos, indefinidos ou a funções \cite{intelligence2003modern}. 
 No exemplo da lâmpada, podemos dizer que a lâmpada da cozinha está apagada, representado por $apagada(cozinha)$. 
@@ -30,42 +31,46 @@ Ou ainda podemos dizer que a lâmpada do quarto está apagada e a TV da sala est
 
 Como nas técnicas de busca, em planejamento também é necessário ter uma descrição do problema.
 Para realizar a descrição de um problema de planejamento é preciso definir alguns conceitos, são eles \cite{intelligence2003modern, ghallab2004automated, meneguzzi2015planning}:\frm{Evita este tipo de itemização com parágrafos no lugar de itens. Articula o texto melhor e transforma isto em um ou mais parágrafos.}
-
+\msr[inline]{FALAR AQUI DE PRECONDIÇÕES EFEITOS, DOMINIO, problema}
 \begin{itemize}
-	\item estados, onde cada estado é um predicado.\frm{Cada estado não é um predicado. Cada estado é representado por uma valoração para todos os predicados associados a todos os objetos! Lembre-se que em planning o estado é como se fosse um vetor de bits} Conforme a situação do ambiente os estados assumem os valores de verdadeiro ou falso;
+	\item estados, onde cada estado é um predicado.\frm{Cada estado não é um predicado. Cada estado é representado por uma valoração para todos os predicados associados a todos os objetos! Lembre-se que em planning o estado é como se fosse um vetor de bits} Conforme a situação do ambiente os estados assumem valores de verdadeiro ou falso;
 	\item operadores, cada operador é definido como $op = (nome(t), pre(p), efeitos(p)$. 
 	O $nome(t)$ é o nome do operador e t é o conjunto de termos que irão\frm{Tu ainda nem falou de precodições e efeitos. Igualmente, não use futuro para se referir a texto neste trabalho ou elementos que já existem. Como regra geral não use outro tempo que não o presente a não ser que tu consiga pensar muito bem nisto.} aparecer nas precondições e efeitos. $pre(p)$ é o conjunto de predicados que representam as precondições do operador. $efeitos(p)$ é o conjunto de predicados que serão o resultado após a execução do operador; e
-	\item domínio, o conjunto de operadores que podem ser usados para a resolução do problema.
+	\item descrição das ações, o conjunto de operadores que podem ser usados para a resolução do problema.
 \end{itemize}
 
 Os operadores também são chamados de ações.\frm{Ações e operadores, para mim, não são a mesma coisa. Uma coisa é uma instância ground, a outra é o esquema do operador (com variáveis)} 
-As ações causam uma alteração no ambiente. Um exemplo é mover um objeto de um lugar para o outro, precisamos de um estado que defina que um objeto está em determinado lugar.\frm{Evitar confusão entre estado e predicado.} 
-Esse exemplo é representado abaixo:
+As ações causam uma alteração no ambiente. Um exemplo é mover um objeto de um lugar para o outro, precisamos de um predicado que defina que um objeto está em determinado lugar. Esse exemplo é representado abaixo:
+
+\frm[inline]{Evitar confusão entre estado e predicado.} 
+
 
 \begin{itemize}
-	\item Ação(move(from, to))
-	\item Precondição: at(from)
-	\item Efeito: $\neg$ at(from) $\wedge$ at(to)
+	\item Ação: $move(from, to)$
+	\item Precondição: $at(from)$
+	\item Efeito: $\neg at(from) \wedge at(to)$
 \end{itemize}
 
 Uma ação $a$ é aplicável em um estado $s$, se todas as precondições forem satisfeitas no estado $s$. 
 O resultado gerado pela execução de $a$ no estado $s$ é um novo estado $s'$, nesse estado é aplicado todos os efeitos, removendo os predicados negativos e adicionando os positivos.
 
-Formalmente, um problema de planejamento pode ser descrito como $P = (\Sigma, s_{0}, g)$, onde $\Sigma$ é o domínio do problema\frm{Domínio do problema?}, $s_{0}$ é o estado inicial onde o problema começa e $g$ é o objetivo \cite{ghallab2004automated}. 
-Voltando ao exemplo do Capítulo~\ref{chap:busca}, onde um agente tenta chegar a cidade de Porto Alegre partindo da cidade de São Jerônimo, podemos formaliza-lo como:
+Formalmente, um problema de planejamento pode ser descrito como $P = (\Sigma, s_{0}, g)$, onde $\Sigma$ é a descrição do problema com as ações disponíveis, $s_{0}$ é o estado inicial onde o problema começa e $g$ é o objetivo \cite{ghallab2004automated}. 
+Voltando ao exemplo do Capítulo~\ref{chap:busca}, onde um agente tenta chegar a cidade de Porto Alegre partindo da cidade de São Jerônimo, podemos formalizá-lo como:
 
 \begin{itemize}
 	\item \textbf{estado inicial} ($s_{0}$) = $At(S$\~a$o~Jer$\^o$nimo)$;
 	\item \textbf{objetivo} ($g$) = $At(Porto~Alegre)$; e
-	\item \textbf{domínio} ($\Sigma$) = \\
-	-	nome: $move(cityA, cityB)$\\
-	-	precondições: $at(cityA) \wedge link(cityA, cityB)$\\
-	-	efeitos: $\neg at(cityA)~ \wedge at(cityB)$.
+	\item \textbf{domínio} ($\Sigma$) = 
+	\begin{itemize}
+		\item nome: $move(cityA, cityB)$
+		\item precondições: $at(cityA) \wedge link(cityA, cityB)$
+		\item efeitos: $\neg at(cityA)~ \wedge at(cityB)$.
+	\end{itemize}
 \end{itemize}
 
 
 O processo de geração do plano é feito pelo planejador. 
-Um plano é uma sequência de operadores gerada a partir de um problema que, quando executada a partir do estado inicial,  modifica o estado de forma que o objetivo seja válido no estado resultante. 
+Um plano é uma sequência de operadores gerada a partir de um problema que, quando executada partindo do estado inicial, modifica o estado de forma que o objetivo seja válido no estado resultante. 
 A Figura \ref{fig:planmodelo} ilustra o comportamento do planejador.
 
 \begin{figure}[ht]
@@ -77,16 +82,16 @@ A Figura \ref{fig:planmodelo} ilustra o comportamento do planejador.
 
 Um plano é considerado ótimo quando utiliza o menor número de ações para resolver o problema, ou seja, o número de ações que levam o estado inicial até o objetivo é o menor possível.\frm{Isto foi raciocínio circular. Talvez tu queira dizer que não há nenhum outro plano que atinga o objetivo utilizando um número menor de ações} 
 Para gerar planos ótimos o planejador utiliza técnicas de busca combinado com alguma heurística que seja independente de domínio.\frm{Nem sempre existem heurísticas envolvidas (e.g. SAT), dá uma revisada nos meus slides de planejamento, ou pede os meus slides de planejamento automático.} 
-Uma heurística deve ser computacionalmente eficiente e ter precisão para que a geração do plano seja eficiente \cite{helmert2007flexible}. %\frm[color=yellow]{E...? Terminar a seção numa figura, sem conectar com o resto do trabalho?}
+Uma heurística deve ser computacionalmente eficiente e ter precisão para que a geração do plano seja eficiente~\cite{helmert2007flexible}.
 
 \section{Planejamento hierárquico} 
 
 
-Embora que o planejamento clássico consiga gerar planos ótimos, a quantidade de ações resultante\frm{A quantidade de ações resultantes?!?! Como assim? Tu queres dizer que problemas de grande complexidade ou com espaços de estado/busca grandes podem ser intratáveis.} é grande para problemas maiores. 
-O planejamento clássico possui uma expressividade limitada, pois não é possível representar quando uma ação irá ocorrer, por exemplo~\cite{intelligence2003modern}.\frm{Coloca o til entre o texto e a citação para ser um non-breakable space.} 
+Embora que o planejamento clássico consiga gerar planos ótimos, o tratamento de problemas de grande complexidade ou com o espaço de estados grande pode se tornar intratável por conta do poder computacional necessário para que o plano consiga ser gerado.
+O planejamento clássico possui uma expressividade limitada, pois não é possível representar quando uma ação irá ocorrer, por exemplo~\cite{intelligence2003modern}.
 Como alternativa para esses problemas foi proposto o planejamento hierárquico, chamado de \textit{Hierarchical Task Network} (HTN). 
 O planejamento HTN se diferencia do planejamento clássico na forma como os planos são gerados~\cite{ghallab2004automated}. 
-Enquanto no planejamento clássico é necessário ter heurísticas para a geração de planos, em planejamento HTN é possível expressar conhecimento de domínio junto com os operadores, isso faz com que as ações sejam tratadas em mais alto nível \cite{intelligence2003modern}.  
+Enquanto no planejamento clássico é necessário ter heurísticas para a geração de planos, em planejamento HTN é possível expressar conhecimento de domínio junto com os operadores, isso faz com que as ações sejam tratadas em mais alto nível~\cite{intelligence2003modern}.  
 
 \frm[inline]{Se possível, fale um pouco mais sobre conhecimento de domínio}
 
