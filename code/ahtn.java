@@ -732,8 +732,8 @@ class Precondition7 extends Precondition
 		p[1] = new PreconditionNegation(new PreconditionAtomic(new Predicate(3, 4, new TermList(TermVariable.getVariable(0), TermList.NIL)), unifier), 4);
 		p[2] = new PreconditionAtomic(new Predicate(5, 4, new TermList(TermVariable.getVariable(0), new TermList(TermVariable.getVariable(1), TermList.NIL))), unifier);
 		p[3] = new PreconditionNegation(new PreconditionAtomic(new Predicate(1, 4, new TermList(TermVariable.getVariable(1), TermList.NIL)), unifier), 4);
-		p[4] = new PreconditionNegation(new PreconditionAtomic(new Predicate(2, 4, new TermList(TermVariable.getVariable(2), TermList.NIL)), unifier), 4);
-		p[5] = new PreconditionAtomic(new Predicate(0, 4, new TermList(TermVariable.getVariable(3), TermList.NIL)), unifier);
+		p[4] = new PreconditionNegation(new PreconditionAtomic(new Predicate(0, 4, new TermList(TermVariable.getVariable(2), TermList.NIL)), unifier), 4);
+		p[5] = new PreconditionAtomic(new Predicate(2, 4, new TermList(TermVariable.getVariable(3), TermList.NIL)), unifier);
 		b = new Term[6][];
 		b[0] = unifier;
 		b[0] = Term.merge( b, 1 );
@@ -837,8 +837,8 @@ class Precondition8 extends Precondition
 		p[1] = new PreconditionNegation(new PreconditionAtomic(new Predicate(3, 4, new TermList(TermVariable.getVariable(0), TermList.NIL)), unifier), 4);
 		p[2] = new PreconditionAtomic(new Predicate(5, 4, new TermList(TermVariable.getVariable(0), new TermList(TermVariable.getVariable(1), TermList.NIL))), unifier);
 		p[3] = new PreconditionNegation(new PreconditionAtomic(new Predicate(1, 4, new TermList(TermVariable.getVariable(1), TermList.NIL)), unifier), 4);
-		p[4] = new PreconditionNegation(new PreconditionAtomic(new Predicate(0, 4, new TermList(TermVariable.getVariable(3), TermList.NIL)), unifier), 4);
-		p[5] = new PreconditionAtomic(new Predicate(2, 4, new TermList(TermVariable.getVariable(2), TermList.NIL)), unifier);
+		p[4] = new PreconditionNegation(new PreconditionAtomic(new Predicate(2, 4, new TermList(TermVariable.getVariable(3), TermList.NIL)), unifier), 4);
+		p[5] = new PreconditionAtomic(new Predicate(0, 4, new TermList(TermVariable.getVariable(2), TermList.NIL)), unifier);
 		b = new Term[6][];
 		b[0] = unifier;
 		b[0] = Term.merge( b, 1 );
@@ -942,8 +942,8 @@ class Precondition9 extends Precondition
 		p[1] = new PreconditionNegation(new PreconditionAtomic(new Predicate(3, 4, new TermList(TermVariable.getVariable(0), TermList.NIL)), unifier), 4);
 		p[2] = new PreconditionAtomic(new Predicate(5, 4, new TermList(TermVariable.getVariable(0), new TermList(TermVariable.getVariable(1), TermList.NIL))), unifier);
 		p[3] = new PreconditionNegation(new PreconditionAtomic(new Predicate(1, 4, new TermList(TermVariable.getVariable(1), TermList.NIL)), unifier), 4);
-		p[4] = new PreconditionAtomic(new Predicate(0, 4, new TermList(TermVariable.getVariable(3), TermList.NIL)), unifier);
-		p[5] = new PreconditionAtomic(new Predicate(2, 4, new TermList(TermVariable.getVariable(2), TermList.NIL)), unifier);
+		p[4] = new PreconditionAtomic(new Predicate(0, 4, new TermList(TermVariable.getVariable(2), TermList.NIL)), unifier);
+		p[5] = new PreconditionAtomic(new Predicate(2, 4, new TermList(TermVariable.getVariable(3), TermList.NIL)), unifier);
 		b = new Term[6][];
 		b[0] = unifier;
 		b[0] = Term.merge( b, 1 );
@@ -1046,7 +1046,7 @@ class Precondition10 extends Precondition
 		p = new Precondition[4];
 		p[1] = new PreconditionNegation(new PreconditionAtomic(new Predicate(3, 4, new TermList(TermVariable.getVariable(0), TermList.NIL)), unifier), 4);
 		p[2] = new PreconditionAtomic(new Predicate(5, 4, new TermList(TermVariable.getVariable(0), new TermList(TermVariable.getVariable(1), TermList.NIL))), unifier);
-		p[3] = new PreconditionAtomic(new Predicate(0, 4, new TermList(TermVariable.getVariable(3), TermList.NIL)), unifier);
+		p[3] = new PreconditionAtomic(new Predicate(0, 4, new TermList(TermVariable.getVariable(2), TermList.NIL)), unifier);
 		b = new Term[4][];
 		b[0] = unifier;
 		b[0] = Term.merge( b, 1 );
@@ -1131,7 +1131,7 @@ class Method2 extends Method
 		TaskList retVal;
 
 		retVal = new TaskList(2, true);
-		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(0, 4, new TermList(TermVariable.getVariable(2), TermList.NIL)), false, false));
+		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(1, 4, new TermList(TermVariable.getVariable(2), TermList.NIL)), false, false));
 		retVal.subtasks[1] = new TaskList(new TaskAtom(new Predicate(2, 4, new TermList(TermVariable.getVariable(0), TermList.NIL)), false, false));
 
 		return retVal;
@@ -1142,7 +1142,7 @@ class Method2 extends Method
 		TaskList retVal;
 
 		retVal = new TaskList(2, true);
-		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(1, 4, new TermList(TermVariable.getVariable(3), TermList.NIL)), false, false));
+		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(0, 4, new TermList(TermVariable.getVariable(3), TermList.NIL)), false, false));
 		retVal.subtasks[1] = new TaskList(new TaskAtom(new Predicate(2, 4, new TermList(TermVariable.getVariable(0), TermList.NIL)), false, false));
 
 		return retVal;
@@ -1153,7 +1153,7 @@ class Method2 extends Method
 		TaskList retVal;
 
 		retVal = new TaskList(2, true);
-		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(4, 4, new TermList(TermVariable.getVariable(3), new TermList(TermVariable.getVariable(2), new TermList(TermVariable.getVariable(1), TermList.NIL)))), false, true));
+		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(4, 4, new TermList(TermVariable.getVariable(2), new TermList(TermVariable.getVariable(3), new TermList(TermVariable.getVariable(1), TermList.NIL)))), false, true));
 		retVal.subtasks[1] = new TaskList(new TaskAtom(new Predicate(2, 4, new TermList(TermVariable.getVariable(0), TermList.NIL)), false, false));
 
 		return retVal;
@@ -1164,7 +1164,7 @@ class Method2 extends Method
 		TaskList retVal;
 
 		retVal = new TaskList(1, true);
-		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(2, 4, new TermList(TermVariable.getVariable(3), new TermList(TermVariable.getVariable(1), TermList.NIL))), false, true));
+		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(2, 4, new TermList(TermVariable.getVariable(2), new TermList(TermVariable.getVariable(1), TermList.NIL))), false, true));
 
 		return retVal;
 	}
