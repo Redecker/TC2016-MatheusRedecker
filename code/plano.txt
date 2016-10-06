@@ -1,7 +1,0 @@
-[Plan cost: 3.0
-
-(!quartel w rq)
-(!ranged VAR0 rr)
-(!atacar-ranged r)
---------------------
-]
