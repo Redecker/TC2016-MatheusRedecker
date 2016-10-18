@@ -1,4 +1,4 @@
-package ai.abstraction.JSHOP;
+package AHTN;
 import JSHOP2.*;
 
 class Precondition0 extends Precondition
@@ -1508,9 +1508,9 @@ class Method4 extends Method
 	}
 }
 
-public class ahtn extends Domain
+public class HighLevelDomain extends Domain
 {
-	public ahtn()
+	public HighLevelDomain()
 	{
 		TermVariable.initialize(5);
 
