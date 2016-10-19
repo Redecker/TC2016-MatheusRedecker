@@ -1,10 +1,12 @@
-package AHTN;
+package AHTN.HighLevel2;
 import java.util.LinkedList;
-import JSHOP2.*;
-import ai.abstraction.*;
-import rts.*;
 
-public class HighLevelProblem
+import AHTN.HighLevel1.HighLevel1Domain;
+import JSHOP2.*;
+import ai.abstraction.myAHTN;
+import rts.Player;
+
+public class HighLevel2Problem
 {
 	private static String[] defineConstants()
 	{
@@ -27,7 +29,7 @@ public class HighLevelProblem
 		LinkedList<Plan> returnedPlans = new LinkedList<Plan>();
 		TermConstant.initialize(14);
 
-		Domain d = new HighLevelDomain();
+		Domain d = new HighLevel2Domain();
 
 		d.setProblemConstants(defineConstants());
 

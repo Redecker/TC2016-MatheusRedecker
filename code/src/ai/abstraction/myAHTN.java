@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Random;
 
 import AHTN.*;
+import AHTN.HighLevel1.HighLevel1Problem;
+import AHTN.HighLevel2.HighLevel2Problem;
 import JSHOP2.Predicate;
 import JSHOP2.State;
 import JSHOP2.TaskAtom;
@@ -47,7 +49,9 @@ public class myAHTN extends AbstractionLayerAI {
     private int rounds = 0;
     private static int roundsToAction = 50;
     
-    private boolean print = false;
+    private boolean print = true;
+    
+    private static String strategy = "HighLevel2";
     
     /*
      * Inicialização da classe
@@ -95,15 +99,12 @@ public class myAHTN extends AbstractionLayerAI {
     			evaluation = aux;
     		}
     	}
-    	print("evaluation: " + evaluation.getAvaliacao());
     	return evaluation;
     }
 	
 	public Node AHTNMax(Plano planMax, int ponteiroMax, Plano planMin,  int ponteiroMin, int deph){
-		print("AHTNMax");
 		//se o estado é terminal retorna os planos de max e min, e a utilidade do estado s
 		if(planMax.getEstadoJogo().evaluation() < 0 || planMin.getEstadoJogo().evaluation() < 0 || deph == 0){
-			print("ATHNMax Estado final");
 			return new Node(planMax, planMin, planMax.getEstadoJogo().evaluation());
 		}
 		
@@ -111,20 +112,16 @@ public class myAHTN extends AbstractionLayerAI {
 		//altera o ponteiro e muda para perspectiva de Min
 		int next = nextAction(planMax, ponteiroMax); 
 		if(next != -1){
-			print("AHTNMax nextaction");
 			return AHTNMin(planMax, next, planMin, ponteiroMin, deph-1); 
 		}//se não tiver acabou esse plano
 		else{
-			print("AHTNMax acabou o plano");
 			return new Node(planMax, planMin, planMax.getEstadoJogo().evaluation());
 		}
 	}
     
 	public Node AHTNMin(Plano planMax, int ponteiroMax, Plano planMin,  int ponteiroMin, int deph){
-		print("Entrei no AHTNMin");
 		//se o estado é terminal retorna os planos de max e min, e a utilidade do estado s
 		if(planMax.getEstadoJogo().evaluation() < 0 || planMin.getEstadoJogo().evaluation() < 0 || deph == 0){
-			print("ATHNMin Estado final");
 			return new Node(planMax, planMin, planMin.getEstadoJogo().evaluation());
 		}
 		
@@ -132,11 +129,9 @@ public class myAHTN extends AbstractionLayerAI {
 		//altera o ponteiro e muda para perspectiva de Min
 		int next = nextAction(planMin, ponteiroMin); 
 		if(next != -1){
-			print("AHTNMin nextaction");
 			return AHTNMax(planMax, ponteiroMax, planMin, next, deph -1); 
 		}//se não tiver -> acabou esse plano
 		else{
-			print("ATHNMin acabou o plano");
 			return new Node(planMax, planMin, planMin.getEstadoJogo().evaluation());
 		}
 	}
@@ -151,11 +146,61 @@ public class myAHTN extends AbstractionLayerAI {
 	 * Métodos para utilização do JSHOP 	
 	 */
 	
-	public static void setProblemJSHOP(State s, Player p){
-		getProblem(p, physicalgamestate, s);
+	private ArrayList<Plano> getPlanosInit(Player p){
+		switch(strategy){
+			case "HighLevel1":
+				return getPlanos(p, HighLevel1Problem.getPlans(p).toString());
+			case "HighLevel2":
+				return getPlanos(p, HighLevel2Problem.getPlans(p).toString());
+		}
+		
+		return null;
+		
+	}	
+	
+	private ArrayList<Plano> getPlanos(Player p, String jshop){
+		print(jshop);
+		String[] pla = jshop.split("\n");
+		Plano plan = null;
+		String[] aux;
+		ArrayList<Plano> planos = new ArrayList<>();
+		
+		for(int i = 0; i < pla.length ;i++){
+			//começa um novo plano
+			if(pla[i].contains("Plan cost")){
+				plan = new Plano();
+				aux = pla[i].split(" ");
+				plan.setCusto(Double.parseDouble(aux[aux.length-1]));
+				planos.add(plan);
+			}//cada operação salva
+			else if(pla[i].contains("(!")){
+				plan.addOperacao(pla[i]);
+			}
+		}
+		
+		//se planos for vazio, ou seja, não tem nenhum plano para executar, coloca um plano com avaliação -1, pois não tem o que o jogador fazer
+		if(planos.size() < 1){
+			Plano pl = new Plano();
+			pl.setCusto(-1.0);
+			planos.add(pl);
+		}
+		
+		return planos;
 	}
 	
-	private static void getProblem(Player player, PhysicalGameState pgs, State s){
+	public static void setProblemJSHOP(State s, Player p){
+		switch(strategy){
+			case "HighLevel1":
+				getProblemHighLevel1(p, physicalgamestate, s);		
+				break;
+			case "HighLevel2":
+				getProblemHighLevel1(p, physicalgamestate, s);
+				break;
+		}
+		
+	}
+	
+	private static void getProblemHighLevel1(Player player, PhysicalGameState pgs, State s){
 		//basicos para definição de recursos
 		s.add(new Predicate(5, 0, new TermList(TermConstant.getConstant(6), new TermList(TermConstant.getConstant(7), TermList.NIL))));
 		s.add(new Predicate(5, 0, new TermList(TermConstant.getConstant(8), new TermList(TermConstant.getConstant(9), TermList.NIL))));
@@ -215,43 +260,19 @@ public class myAHTN extends AbstractionLayerAI {
     		s.add(new Predicate(1, 0, new TermList(TermConstant.getConstant(11), TermList.NIL)));
 		}				
 	}
-	public ArrayList<Plano> getPlanos(Player p){
-		String jshop;
-		jshop = HighLevelProblem.getPlans(p).toString();
-		String[] pla = jshop.split("\n");
-		Plano plan = null;
-		String[] aux;
-		ArrayList<Plano> planos = new ArrayList<>();
-		
-		for(int i = 0; i < pla.length ;i++){
-			//começa um novo plano
-			if(pla[i].contains("Plan cost")){
-				plan = new Plano();
-				aux = pla[i].split(" ");
-				plan.setCusto(Double.parseDouble(aux[aux.length-1]));
-				planos.add(plan);
-			}//cada operação salva
-			else if(pla[i].contains("(!")){
-				plan.addOperacao(pla[i]);
-			}
-		}
-		
-		//se planos for vazio, ou seja, não tem nenhum plano para executar, coloca um plano com avaliação -1, pois não tem o que o jogador fazer
-		if(planos.size() < 1){
-			Plano pl = new Plano();
-			pl.setCusto(pl.getCusto()-1);
-			planos.add(pl);
-		}
-		
-		return planos;
-	}
-
+	
 	public static TaskList setObjetiveJSHOP(){
-		return getPlanObjective();
+		switch(strategy){
+			case "HighLevel1":
+				return getPlanObjectiveHighLevel1();
+			case "HighLevel2":
+				return getPlanObjectiveHighLevel1();
+		}		
+		
+		return null;
 	}
 	
-	//arrumar aqui
-	private static TaskList getPlanObjective(){
+	private static TaskList getPlanObjectiveHighLevel1(){
 		//                  tamanho dos objetivos
 		TaskList tl = new TaskList(1, true);		
 		tl.subtasks[0] = new TaskList(new TaskAtom(new Predicate(4, 0, new TermList(TermConstant.getConstant(12), TermList.NIL)), false, false));
@@ -280,13 +301,13 @@ public class myAHTN extends AbstractionLayerAI {
 			}
 			
 			//Gera os planos do Max
-			ArrayList<Plano> planosMax = getPlanos(meuPlayer);
+			ArrayList<Plano> planosMax = getPlanosInit(meuPlayer);
 			for(Plano p : planosMax){
 				setEstadoJogo(p, meuPlayer, physicalgamestate);
 			}			
 			
 			//Gera os planos do Min
-			ArrayList<Plano> planosMin = getPlanos(outroPlayer);			
+			ArrayList<Plano> planosMin = getPlanosInit(outroPlayer);			
 			for(Plano p : planosMin){
 				setEstadoJogo(p, outroPlayer, physicalgamestate);
 			}
@@ -325,6 +346,7 @@ public class myAHTN extends AbstractionLayerAI {
         }
 		
 		//executa o que o plano manda
+		print("Ação: " + action);
 		if(action.contains("!base")){
 			construirBase(worker, p, pgs);
 		}else if(action.contains("!quartel")){
@@ -336,6 +358,9 @@ public class myAHTN extends AbstractionLayerAI {
 		}else if(action.contains("!atacar")){
 			for(Unit u : unidadesAtaque) unidadeAtaca(u, p, pgs);
 		}else if(action.contains("!ranged")){
+			treinarUnidade(barrack, p, pgs, rangedType);
+		}else if(action.contains("!treina-ataca")){
+			for(Unit u : unidadesAtaque) unidadeAtaca(u, p, pgs);
 			treinarUnidade(barrack, p, pgs, rangedType);
 		}
 	}

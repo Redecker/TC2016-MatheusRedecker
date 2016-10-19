@@ -23,9 +23,18 @@ public class EstadoDoJogo{
 	private int light;
 	private int recurso;
 	
+	private int baseInimigo;
+	private int quartelInimigo;
+	private int workerInimigo;
+	private int rangedInimigo;
+	private int heavyInimigo;
+	private int lightInimigo;
+	private int recursoInimigo;
+	
 	private Player player;
 	private PhysicalGameState pgs;
 	
+	private static String evaluationType = "Recurso"; 
 	public EstadoDoJogo(Player p, PhysicalGameState pgs, UnitTypeTable a_utt){
 	    utt = a_utt;
 	    workerType = utt.getUnitType("Worker");
@@ -44,6 +53,15 @@ public class EstadoDoJogo{
 		ranged = 0;
 		heavy = 0;
 		light = 0;
+		
+		baseInimigo = 0;
+		quartelInimigo = 0;
+		workerInimigo = 0;
+		rangedInimigo = 0;
+		heavyInimigo = 0;
+		lightInimigo = 0;
+		recursoInimigo = 0;
+		
 		recurso = p.getResources();
 		setParametros();
 	}
@@ -83,9 +101,17 @@ public class EstadoDoJogo{
 	public int evaluation(){
 		//se não tiver base e não tiver recurso ou worker, o jogo está perdido
 		if(base < 1 && (player.getResources() < 10 || worker < 1)){return -1;}
-		//se não função de avaliação do jogo
-		//worker(1) + quartel(5) + base(10) + heavy(3) + light(3) + ranged(3) + recurso(1)
-		return (worker) + (quartel * 5) + (base * 10) + (heavy * 3) + (light * 3) + (ranged * 3) + (recurso);
+		
+		switch(evaluationType){
+			case "Recurso":
+			//worker(1) + quartel(5) + base(10) + heavy(3) + light(3) + ranged(3) + recurso(1)
+			return (worker) + (quartel * 5) + (base * 10) + (heavy * 3) + (light * 3) + (ranged * 3) + (recurso);
+			case "Inimigo":
+				return 1;
+		}
+		
+		return -1;
+		
 	}
 	
 	public String toString(){
