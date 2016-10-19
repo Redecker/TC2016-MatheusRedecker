@@ -2,24 +2,21 @@ package ai.abstraction;
 
 import ai.core.AI;
 import ai.abstraction.AbstractionLayerAI;
-import ai.abstraction.JSHOP.problem;
 import ai.abstraction.pathfinding.PathFinding;
 
-//import java.io.BufferedReader;
-//import java.io.BufferedWriter;
-//import java.io.FileInputStream;
-//import java.io.FileOutputStream;
-//import java.io.InputStream;
-//import java.io.InputStreamReader;
-//import java.io.OutputStreamWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import AHTN.*;
+import AHTN.HighLevel1.HighLevel1Problem;
+import AHTN.HighLevel2.HighLevel2Problem;
 import JSHOP2.Predicate;
 import JSHOP2.State;
+import JSHOP2.TaskAtom;
+import JSHOP2.TaskList;
 import JSHOP2.TermConstant;
 import JSHOP2.TermList;
 import rts.GameState;
@@ -48,157 +45,39 @@ public class myAHTN extends AbstractionLayerAI {
     static PhysicalGameState physicalgamestate;
     static Player meuPlayer;
     static Player outroPlayer;
-    
-    //private static String headProblem = "(defproblem problem ahtn ( (recurso b rb) (recurso q rq) (recurso w rw) (recurso r rr)";
+
     private int rounds = 0;
     private static int roundsToAction = 50;
     
-    private boolean print = false;
+    private boolean print = true;
     
-    public class Plano{
-    	
-    	private ArrayList<String> plano;
-    	private double custo;
-    	private EstadoDoJogo estado;
-    	
-    	public Plano(){
-    		plano = new ArrayList<>();
-    	}
-    	
-    	public void addOperacao(String o){
-    		plano.add(o);
-    	}
-    	
-    	public void setCusto(Double c){
-    		custo = c;
-    	}
-    	
-    	public double getCusto(){
-    		return custo;
-    	}
-    	
-    	public String getOperacaoPonteiro(int p){
-    		if(p < 0 || p > plano.size()-1) return null;
-    		return plano.get(p);
-    	}
-    	
-    	public void setEstadoJogo(EstadoDoJogo edj){
-    		estado = edj;
-    	}
-    	
-    	public EstadoDoJogo getEstadoJogo(){
-    		return estado;
-    	}
-    	
-    	public String toString(){
-    		String toReturn = "";
-    		for(String s : plano){
-    			toReturn += s + " \n"; 
-    		}
-    		return toReturn;
-    	}
-    }
+    private static String strategy = "HighLevel2";
     
-    public class EstadoDoJogo{
-    	
-    	private int base;
-    	private int quartel;
-    	private int worker;
-    	private int ranged;
-    	private int heavy;
-    	private int light;
-    	private int recurso;
-    	
-    	private Player player;
-    	private PhysicalGameState pgs;
-    	
-    	public EstadoDoJogo(Player p, PhysicalGameState pgs){
-    		player = p;
-    		this.pgs = pgs;
-    		base = 0;
-    		quartel = 0;
-    		worker = 0;
-    		ranged = 0;
-    		heavy = 0;
-    		light = 0;
-    		recurso = p.getResources();
-    		setParametros();
-    	}
-    	
-    	public void setParametros(){
-    		for (Unit u : pgs.getUnits()) {
-	   			if (u.getType() == workerType && u.getPlayer() == player.getID()) {            	
-	   	           	worker++;
-	   	        }else if (u.getType() == barracksType && u.getPlayer() == player.getID()) {            	
-	   	           	quartel++;
-	   	        }else if (u.getType() == baseType && u.getPlayer() == player.getID()) {       
-	   	           	base++;
-	   	        }else if (u.getType() == heavyType && u.getPlayer() == player.getID()) {            	
-	   	           	heavy++;
-	   	        }else if (u.getType() == lightType && u.getPlayer() == player.getID()) {            	
-	   	           	light++;
-	   	        }else if (u.getType() == rangedType && u.getPlayer() == player.getID()) {            	
-	   	           	ranged++;
-	   	        }
-    		}
-    	}
-    	
-    	public void mudaEstado(String action){
-    		if(action.contains("!base")){
-    			base++; recurso -= 10;
-    		}else if(action.contains("!quartel")){
-    			quartel++; recurso -= 5;
-    		}else if(action.contains("!worker")){
-    			worker++; recurso -=1;
-    		}else if(action.contains("!ranged")){
-    			ranged++; recurso -=3;
-    		}else if(action.contains("!obter")){
-    			recurso += 5;
-    		}
-    	}
-    	
-    	public int evaluation(){
-    		//se não tiver base e não tiver recurso ou worker, o jogo está perdido
-    		if(base < 1 && (player.getResources() < 10 || worker < 1)){return -1;}
-    		//se não função de avaliação do jogo
-    		//worker(1) + quartel(5) + base(10) + heavy(3) + light(3) + ranged(3) + recurso(1)
-    		return (worker) + (quartel * 5) + (base * 10) + (heavy * 3) + (light * 3) + (ranged * 3) + (recurso);
-    	}
-    	
-    	public String toString(){
-    		String toReturn = "base: " + base + " quartel: " + quartel + " worker: " + worker +
-    				          " ranged: " + ranged + " heavy: " + heavy + " light: " + light +
-    				          " recurso: " + recurso;
-    		
-    		return toReturn;
-    	}
-    	
-    }
+    /*
+     * Inicialização da classe
+     */
+
+	public myAHTN(UnitTypeTable a_utt, PathFinding a_pf) {
+		super(a_pf);
+	    utt = a_utt;
+	    workerType = utt.getUnitType("Worker");
+	    baseType = utt.getUnitType("Base");
+	    barracksType = utt.getUnitType("Barracks");
+	    rangedType = utt.getUnitType("Ranged");
+	    heavyType = utt.getUnitType("Heavy");
+        lightType = utt.getUnitType("Light");
+	}	
+
+	public void reset() {
+	}
+
+	public AI clone() {
+	        return new myAHTN(utt, null);
+	}
     
-    public class Node{
-    	
-    	private Plano planMax;
-    	private Plano planMin;
-    	private int avaliacao;
-    	
-    	public Node(Plano pmax, Plano pmin, int avali){
-    		planMax = pmax;
-    		planMin	= pmin;
-    		avaliacao = avali;
-    	}
-    	
-    	public int getAvaliacao(){
-    		return avaliacao;
-    	}
-    	
-    	public Plano getPlanoMin(){
-    		return planMin;
-    	}
-    	
-    	public Plano getPlanoMax(){
-    		return planMax;
-    	}
-    }
+    /*
+     * Métodos para utilização do algoritmo de AHTN
+     */
     
     //Faz com que dado um plano e um ponteiro, seja encontrado a proxima tarefa primitiva desse plano
     //retorna o ponteiro para a tarefa primitiva, se não houver retorna -1
@@ -220,15 +99,12 @@ public class myAHTN extends AbstractionLayerAI {
     			evaluation = aux;
     		}
     	}
-    	print("evaluation: " + evaluation.avaliacao);
     	return evaluation;
     }
 	
 	public Node AHTNMax(Plano planMax, int ponteiroMax, Plano planMin,  int ponteiroMin, int deph){
-		print("AHTNMax");
 		//se o estado é terminal retorna os planos de max e min, e a utilidade do estado s
 		if(planMax.getEstadoJogo().evaluation() < 0 || planMin.getEstadoJogo().evaluation() < 0 || deph == 0){
-			print("ATHNMax Estado final");
 			return new Node(planMax, planMin, planMax.getEstadoJogo().evaluation());
 		}
 		
@@ -236,20 +112,18 @@ public class myAHTN extends AbstractionLayerAI {
 		//altera o ponteiro e muda para perspectiva de Min
 		int next = nextAction(planMax, ponteiroMax); 
 		if(next != -1){
-			print("AHTNMax nextaction");
+			print("NodeMaxEvaluation: " + planMax.getEstadoJogo().evaluation());
+			print("PlanoMax: " + planMax.getEstadoJogo().toString());
 			return AHTNMin(planMax, next, planMin, ponteiroMin, deph-1); 
 		}//se não tiver acabou esse plano
 		else{
-			print("AHTNMax acabou o plano");
 			return new Node(planMax, planMin, planMax.getEstadoJogo().evaluation());
 		}
 	}
     
 	public Node AHTNMin(Plano planMax, int ponteiroMax, Plano planMin,  int ponteiroMin, int deph){
-		print("Entrei no AHTNMin");
 		//se o estado é terminal retorna os planos de max e min, e a utilidade do estado s
 		if(planMax.getEstadoJogo().evaluation() < 0 || planMin.getEstadoJogo().evaluation() < 0 || deph == 0){
-			print("ATHNMin Estado final");
 			return new Node(planMax, planMin, planMin.getEstadoJogo().evaluation());
 		}
 		
@@ -257,46 +131,38 @@ public class myAHTN extends AbstractionLayerAI {
 		//altera o ponteiro e muda para perspectiva de Min
 		int next = nextAction(planMin, ponteiroMin); 
 		if(next != -1){
-			print("AHTNMin nextaction");
+			print("NodeMinEvaluation: " + planMin.getEstadoJogo().evaluation());
+			print("PlanoMin: " + planMin.getEstadoJogo().toString());
 			return AHTNMax(planMax, ponteiroMax, planMin, next, deph -1); 
 		}//se não tiver -> acabou esse plano
 		else{
-			print("ATHNMin acabou o plano");
 			return new Node(planMax, planMin, planMin.getEstadoJogo().evaluation());
 		}
 	}
 	
-	public myAHTN(UnitTypeTable a_utt, PathFinding a_pf) {
-		super(a_pf);
-	    utt = a_utt;
-	    workerType = utt.getUnitType("Worker");
-	    baseType = utt.getUnitType("Base");
-	    barracksType = utt.getUnitType("Barracks");
-	    rangedType = utt.getUnitType("Ranged");
-	    heavyType = utt.getUnitType("Heavy");
-        lightType = utt.getUnitType("Light");
-	}
-
-	public void reset() {
-	}
-
-	public AI clone() {
-	        return new myAHTN(utt, null);
-	}
-	
 	private void setEstadoJogo(Plano plano, Player p, PhysicalGameState pgs) {
-		EstadoDoJogo edj = new EstadoDoJogo(p, pgs);
+		EstadoDoJogo edj = new EstadoDoJogo(p, pgs, utt);
 		plano.setEstadoJogo(edj);
 	}
 	
-	public static void setProblemJSHOP(State s, Player p){
-		getProblem(p, physicalgamestate, s);
-	}
-
-	public ArrayList<Plano> getPlanos(Player p){
+	
+	/*
+	 * Métodos para utilização do JSHOP 	
+	 */
+	
+	private ArrayList<Plano> getPlanosInit(Player p){
+		switch(strategy){
+			case "HighLevel1":
+				return getPlanos(p, HighLevel1Problem.getPlans(p).toString());
+			case "HighLevel2":
+				return getPlanos(p, HighLevel2Problem.getPlans(p).toString());
+		}
 		
-		String jshop;
-		jshop = problem.getPlans(p).toString();
+		return null;
+		
+	}	
+	
+	private ArrayList<Plano> getPlanos(Player p, String jshop){
 		String[] pla = jshop.split("\n");
 		Plano plan = null;
 		String[] aux;
@@ -318,14 +184,26 @@ public class myAHTN extends AbstractionLayerAI {
 		//se planos for vazio, ou seja, não tem nenhum plano para executar, coloca um plano com avaliação -1, pois não tem o que o jogador fazer
 		if(planos.size() < 1){
 			Plano pl = new Plano();
-			pl.custo = -1;
+			pl.setCusto(-1.0);
 			planos.add(pl);
 		}
 		
 		return planos;
 	}
 	
-	private static void getProblem(Player player, PhysicalGameState pgs, State s){
+	public static void setProblemJSHOP(State s, Player p){
+		switch(strategy){
+			case "HighLevel1":
+				getProblemHighLevel12(p, physicalgamestate, s);		
+				break;
+			case "HighLevel2":
+				getProblemHighLevel12(p, physicalgamestate, s);
+				break;
+		}
+		
+	}
+	
+	private static void getProblemHighLevel12(Player player, PhysicalGameState pgs, State s){
 		//basicos para definição de recursos
 		s.add(new Predicate(5, 0, new TermList(TermConstant.getConstant(6), new TermList(TermConstant.getConstant(7), TermList.NIL))));
 		s.add(new Predicate(5, 0, new TermList(TermConstant.getConstant(8), new TermList(TermConstant.getConstant(9), TermList.NIL))));
@@ -383,18 +261,73 @@ public class myAHTN extends AbstractionLayerAI {
 		}else if(player.getResources() >= 1){
 		 	//have rw
     		s.add(new Predicate(1, 0, new TermList(TermConstant.getConstant(11), TermList.NIL)));
-		}		
-		//por enquanto é sempre o mesmo plano!!! e isso não seria mais aqui!!!
-		//aqui tem que adicionar o que o plano quer alcançar
-		//getPlanObjective(s);
-		
+		}				
 	}
 	
-	//arrumar aqui
-	public String getPlanObjective(State s){
-		return "(ataque-ranged r)";
+	public static TaskList setObjetiveJSHOP(){
+		switch(strategy){
+			case "HighLevel1":
+				return getPlanObjectiveHighLevel12();
+			case "HighLevel2":
+				return getPlanObjectiveHighLevel12();
+		}		
+		
+		return null;
+	}
+	
+	private static TaskList getPlanObjectiveHighLevel12(){
+		//                  tamanho dos objetivos
+		TaskList tl = new TaskList(1, true);		
+		tl.subtasks[0] = new TaskList(new TaskAtom(new Predicate(4, 0, new TermList(TermConstant.getConstant(12), TermList.NIL)), false, false));
+		
+		return tl;
 	}
 		
+	/*
+	 * Método onde é gerada a proxima ação a ser executada
+	 */
+	
+	//metodo que é chamado para gerar as ações das unidades
+	public PlayerAction getAction(int player, GameState gs) throws IOException {
+	
+		if(rounds % roundsToAction == 0){					
+			//inicia as classes para controle do jogo
+			//inicia componentes do jogo global
+			gamestate = gs;
+			physicalgamestate = gs.getPhysicalGameState();
+			if(player == 0){
+				meuPlayer = gs.getPlayer(player);
+				outroPlayer = gs.getPlayer(player+1);
+			}else if(player == 1){
+				meuPlayer = gs.getPlayer(player);
+				outroPlayer = gs.getPlayer(player-1);
+			}
+			
+			//Gera os planos do Max
+			ArrayList<Plano> planosMax = getPlanosInit(meuPlayer);
+			for(Plano p : planosMax){
+				setEstadoJogo(p, meuPlayer, physicalgamestate);
+				p.getEstadoJogo().evaluation();
+			}			
+			
+			//Gera os planos do Min
+			ArrayList<Plano> planosMin = getPlanosInit(outroPlayer);			
+			for(Plano p : planosMin){
+				setEstadoJogo(p, outroPlayer, physicalgamestate);
+			}
+			
+			Node node = AHTNMax(planosMax, planosMin.get(0), 5);
+			perfromActions(node.getPlanoMax().getOperacaoPonteiro(0), gs, gs.getPhysicalGameState(), meuPlayer);
+		}
+		
+		rounds++;
+		return translateActions(player, gs);
+	}     
+	
+	/*
+	 * Métodos para executar as ações no MicroRTS 
+	 */
+	
 	//executa a ação
 	public void perfromActions(String action, GameState gs, PhysicalGameState pgs, Player p){
 		if(action == null){
@@ -417,6 +350,7 @@ public class myAHTN extends AbstractionLayerAI {
         }
 		
 		//executa o que o plano manda
+		print("Ação: " + action);
 		if(action.contains("!base")){
 			construirBase(worker, p, pgs);
 		}else if(action.contains("!quartel")){
@@ -429,47 +363,13 @@ public class myAHTN extends AbstractionLayerAI {
 			for(Unit u : unidadesAtaque) unidadeAtaca(u, p, pgs);
 		}else if(action.contains("!ranged")){
 			treinarUnidade(barrack, p, pgs, rangedType);
+		}else if(action.contains("!treina-ataca")){
+			for(Unit u : unidadesAtaque) unidadeAtaca(u, p, pgs);
+			treinarUnidade(barrack, p, pgs, rangedType);
 		}
 	}
 	
-	//metodo que é chamado para gerar as ações das unidades
-	public PlayerAction getAction(int player, GameState gs) throws IOException {
-	
-		if(rounds % roundsToAction == 0){					
-			//inicia as classes para controle do jogo
-			//inicia componentes do jogo global
-			gamestate = gs;
-			physicalgamestate = gs.getPhysicalGameState();
-			if(player == 0){
-				meuPlayer = gs.getPlayer(player);
-				outroPlayer = gs.getPlayer(player+1);
-			}else if(player == 1){
-				meuPlayer = gs.getPlayer(player);
-				outroPlayer = gs.getPlayer(player-1);
-			}
-			
-			//Gera os planos do Max
-			//String problemMax = headProblem + getProblem(max, pgs);
-			ArrayList<Plano> planosMax = getPlanos(meuPlayer);
-			for(Plano p : planosMax){
-				setEstadoJogo(p, meuPlayer, physicalgamestate);
-				//print(p.toString());
-			}			
-			
-			//Gera os planos do Min
-			ArrayList<Plano> planosMin = getPlanos(outroPlayer);			
-			for(Plano p : planosMin){
-				setEstadoJogo(p, outroPlayer, physicalgamestate);
-				//print(p.toString());
-			}
-			
-			Node node = AHTNMax(planosMax, planosMin.get(0), 5);
-			//System.out.println("Ação do " + meuPlayer.getID() + ": " + node.getPlanoMax().getOperacaoPonteiro(0));
-			perfromActions(node.getPlanoMax().getOperacaoPonteiro(0), gs, gs.getPhysicalGameState(), meuPlayer);
-		}
-		rounds++;
-		return translateActions(player, gs);
-	}     
+
 		
 	public void unidadeAtaca(Unit u, Player p, PhysicalGameState pgs) {
 		    Unit closestEnemy = null;

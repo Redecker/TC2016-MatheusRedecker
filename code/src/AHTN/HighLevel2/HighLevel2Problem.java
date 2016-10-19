@@ -1,10 +1,12 @@
-package ai.abstraction.JSHOP;
+package AHTN.HighLevel2;
 import java.util.LinkedList;
-import JSHOP2.*;
-import ai.abstraction.*;
-import rts.*;
 
-public class problem
+import AHTN.HighLevel1.HighLevel1Domain;
+import JSHOP2.*;
+import ai.abstraction.myAHTN;
+import rts.Player;
+
+public class HighLevel2Problem
 {
 	private static String[] defineConstants()
 	{
@@ -27,7 +29,7 @@ public class problem
 		LinkedList<Plan> returnedPlans = new LinkedList<Plan>();
 		TermConstant.initialize(14);
 
-		Domain d = new ahtn();
+		Domain d = new HighLevel2Domain();
 
 		d.setProblemConstants(defineConstants());
 
@@ -38,18 +40,15 @@ public class problem
 		TaskList tl;
 		SolverThread thread;
 
-		//aqui chamar um método proprio para gerar o problema
+		//aqui chama um método para gerar o problema
 		myAHTN.setProblemJSHOP(s, p);
-//		for(String string : s.getState()){
-//			System.out.println(string);
-//		}
-		//createState0(s);
 		
-		//aqui que é setado o objetivo, se for sempre o mesmo beleza
-		tl = new TaskList(1, true);
-		tl.subtasks[0] = new TaskList(new TaskAtom(new Predicate(4, 0, new TermList(TermConstant.getConstant(12), TermList.NIL)), false, false));
-
-		thread = new SolverThread(tl, 1);
+		//aqui que é setado o objetivo
+		tl =  myAHTN.setObjetiveJSHOP();
+		
+		
+		//        quantidade de planos a ser procurado
+		thread = new SolverThread(tl, 3);
 		thread.start();
 
 		try {

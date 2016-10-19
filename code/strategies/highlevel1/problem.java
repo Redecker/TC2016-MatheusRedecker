@@ -52,7 +52,7 @@ public class problem
 		tl = new TaskList(1, true);
 		tl.subtasks[0] = new TaskList(new TaskAtom(new Predicate(4, 0, new TermList(TermConstant.getConstant(12), TermList.NIL)), false, false));
 
-		thread = new SolverThread(tl, 1);
+		thread = new SolverThread(tl, 3);
 		thread.start();
 
 		try {
