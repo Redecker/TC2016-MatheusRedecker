@@ -112,6 +112,8 @@ public class myAHTN extends AbstractionLayerAI {
 		//altera o ponteiro e muda para perspectiva de Min
 		int next = nextAction(planMax, ponteiroMax); 
 		if(next != -1){
+			print("NodeMaxEvaluation: " + planMax.getEstadoJogo().evaluation());
+			print("PlanoMax: " + planMax.getEstadoJogo().toString());
 			return AHTNMin(planMax, next, planMin, ponteiroMin, deph-1); 
 		}//se não tiver acabou esse plano
 		else{
@@ -129,6 +131,8 @@ public class myAHTN extends AbstractionLayerAI {
 		//altera o ponteiro e muda para perspectiva de Min
 		int next = nextAction(planMin, ponteiroMin); 
 		if(next != -1){
+			print("NodeMinEvaluation: " + planMin.getEstadoJogo().evaluation());
+			print("PlanoMin: " + planMin.getEstadoJogo().toString());
 			return AHTNMax(planMax, ponteiroMax, planMin, next, deph -1); 
 		}//se não tiver -> acabou esse plano
 		else{
@@ -159,7 +163,6 @@ public class myAHTN extends AbstractionLayerAI {
 	}	
 	
 	private ArrayList<Plano> getPlanos(Player p, String jshop){
-		print(jshop);
 		String[] pla = jshop.split("\n");
 		Plano plan = null;
 		String[] aux;
@@ -191,16 +194,16 @@ public class myAHTN extends AbstractionLayerAI {
 	public static void setProblemJSHOP(State s, Player p){
 		switch(strategy){
 			case "HighLevel1":
-				getProblemHighLevel1(p, physicalgamestate, s);		
+				getProblemHighLevel12(p, physicalgamestate, s);		
 				break;
 			case "HighLevel2":
-				getProblemHighLevel1(p, physicalgamestate, s);
+				getProblemHighLevel12(p, physicalgamestate, s);
 				break;
 		}
 		
 	}
 	
-	private static void getProblemHighLevel1(Player player, PhysicalGameState pgs, State s){
+	private static void getProblemHighLevel12(Player player, PhysicalGameState pgs, State s){
 		//basicos para definição de recursos
 		s.add(new Predicate(5, 0, new TermList(TermConstant.getConstant(6), new TermList(TermConstant.getConstant(7), TermList.NIL))));
 		s.add(new Predicate(5, 0, new TermList(TermConstant.getConstant(8), new TermList(TermConstant.getConstant(9), TermList.NIL))));
@@ -264,15 +267,15 @@ public class myAHTN extends AbstractionLayerAI {
 	public static TaskList setObjetiveJSHOP(){
 		switch(strategy){
 			case "HighLevel1":
-				return getPlanObjectiveHighLevel1();
+				return getPlanObjectiveHighLevel12();
 			case "HighLevel2":
-				return getPlanObjectiveHighLevel1();
+				return getPlanObjectiveHighLevel12();
 		}		
 		
 		return null;
 	}
 	
-	private static TaskList getPlanObjectiveHighLevel1(){
+	private static TaskList getPlanObjectiveHighLevel12(){
 		//                  tamanho dos objetivos
 		TaskList tl = new TaskList(1, true);		
 		tl.subtasks[0] = new TaskList(new TaskAtom(new Predicate(4, 0, new TermList(TermConstant.getConstant(12), TermList.NIL)), false, false));
@@ -304,6 +307,7 @@ public class myAHTN extends AbstractionLayerAI {
 			ArrayList<Plano> planosMax = getPlanosInit(meuPlayer);
 			for(Plano p : planosMax){
 				setEstadoJogo(p, meuPlayer, physicalgamestate);
+				p.getEstadoJogo().evaluation();
 			}			
 			
 			//Gera os planos do Min

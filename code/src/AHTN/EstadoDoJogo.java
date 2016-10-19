@@ -29,12 +29,11 @@ public class EstadoDoJogo{
 	private int rangedInimigo;
 	private int heavyInimigo;
 	private int lightInimigo;
-	private int recursoInimigo;
 	
 	private Player player;
 	private PhysicalGameState pgs;
 	
-	private static String evaluationType = "Recurso"; 
+	private static String evaluationType = "Inimigo"; 
 	public EstadoDoJogo(Player p, PhysicalGameState pgs, UnitTypeTable a_utt){
 	    utt = a_utt;
 	    workerType = utt.getUnitType("Worker");
@@ -60,7 +59,6 @@ public class EstadoDoJogo{
 		rangedInimigo = 0;
 		heavyInimigo = 0;
 		lightInimigo = 0;
-		recursoInimigo = 0;
 		
 		recurso = p.getResources();
 		setParametros();
@@ -68,18 +66,42 @@ public class EstadoDoJogo{
 	
 	public void setParametros(){
 		for (Unit u : pgs.getUnits()) {
-   			if (u.getType() == workerType && u.getPlayer() == player.getID()) {            	
-   	           	worker++;
-   	        }else if (u.getType() == barracksType && u.getPlayer() == player.getID()) {            	
-   	           	quartel++;
-   	        }else if (u.getType() == baseType && u.getPlayer() == player.getID()) {       
-   	           	base++;
-   	        }else if (u.getType() == heavyType && u.getPlayer() == player.getID()) {            	
-   	           	heavy++;
-   	        }else if (u.getType() == lightType && u.getPlayer() == player.getID()) {            	
-   	           	light++;
-   	        }else if (u.getType() == rangedType && u.getPlayer() == player.getID()) {            	
-   	           	ranged++;
+   			if (u.getType() == workerType){
+   				if(u.getPlayer() == player.getID()) {
+   					worker++;
+   				}else{
+   					workerInimigo++;
+   				}
+   			}else if (u.getType() == barracksType){
+   				if(u.getPlayer() == player.getID()) {
+   	   	           	quartel++;
+   				}else{
+   	   	           	quartelInimigo++;
+   				}
+   	        }else if (u.getType() == baseType){
+   	        	if(u.getPlayer() == player.getID()) {
+   	        		base++;
+   	        	}else{
+   	        		baseInimigo++;
+   	        	}  	
+   	        }else if (u.getType() == heavyType){
+   	        	if(u.getPlayer() == player.getID()) {            	
+   	        		heavy++;
+   	        	}else{
+   	        		heavyInimigo++;
+   	        	}
+   	        }else if (u.getType() == lightType){
+   	        	if(u.getPlayer() == player.getID()) {
+   	        		light++;
+   	        	}else{
+   	        		lightInimigo++;
+   	        	}
+   	        }else if (u.getType() == rangedType){
+   	        	if(u.getPlayer() == player.getID()) {
+   	   	           	ranged++;
+   	        	}else{
+   	   	           	rangedInimigo++;
+   	        	}
    	        }
 		}
 	}
@@ -103,13 +125,15 @@ public class EstadoDoJogo{
 		if(base < 1 && (player.getResources() < 10 || worker < 1)){return -1;}
 		
 		switch(evaluationType){
+			//leva em consideração só as suas unidades
 			case "Recurso":
-			//worker(1) + quartel(5) + base(10) + heavy(3) + light(3) + ranged(3) + recurso(1)
-			return (worker) + (quartel * 5) + (base * 10) + (heavy * 3) + (light * 3) + (ranged * 3) + (recurso);
+				//worker(1) + quartel(5) + base(10) + heavy(3) + light(3) + ranged(3) + recurso(1)
+				return (worker) + (quartel * 5) + (base * 10) + (heavy * 3) + (light * 3) + (ranged * 3) + (recurso);
+			//unidades que o jogador possui menos as unidades que o outro jogador possui
 			case "Inimigo":
-				return 1;
-		}
-		
+				return ((worker) + (quartel * 5) + (base * 10) + (heavy * 3) + (light * 3) + (ranged * 3)) -
+						(workerInimigo) + (quartelInimigo * 5) + (baseInimigo * 10) + (heavyInimigo * 3) + (lightInimigo * 3) + (rangedInimigo * 3);
+		}		
 		return -1;
 		
 	}
