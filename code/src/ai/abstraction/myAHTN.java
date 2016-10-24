@@ -94,10 +94,12 @@ public class myAHTN extends AbstractionLayerAI {
 	public Node AHTNMax(ArrayList<Plano> planMax, Plano planMin, int deph){
     	Node evaluation = new Node(null,null, -999999);
     	for(Plano p : planMax){
+			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     		Node aux = AHTNMax(p, 0, planMin, 0, deph);
     		if(evaluation.getAvaliacao() < aux.getAvaliacao()){
     			evaluation = aux;
     		}
+			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     	}
     	return evaluation;
     }
@@ -105,6 +107,9 @@ public class myAHTN extends AbstractionLayerAI {
 	public Node AHTNMax(Plano planMax, int ponteiroMax, Plano planMin,  int ponteiroMin, int deph){
 		//se o estado é terminal retorna os planos de max e min, e a utilidade do estado s
 		if(planMax.getEstadoJogo().evaluation() < 0 || planMin.getEstadoJogo().evaluation() < 0 || deph == 0){
+			print("Acabou o jogo MAX");
+			print("Ação do plano: " + planMax.getOperacaoPonteiro(ponteiroMax));
+			print("Avaliação: " + planMax.getEstadoJogo().evaluation());
 			return new Node(planMax, planMin, planMax.getEstadoJogo().evaluation());
 		}
 		
@@ -112,11 +117,15 @@ public class myAHTN extends AbstractionLayerAI {
 		//altera o ponteiro e muda para perspectiva de Min
 		int next = nextAction(planMax, ponteiroMax); 
 		if(next != -1){
-			print("NodeMaxEvaluation: " + planMax.getEstadoJogo().evaluation());
-			print("PlanoMax: " + planMax.getEstadoJogo().toString());
+			print("mudei para MIN");
+			print("Ação do plano: " + planMax.getOperacaoPonteiro(ponteiroMax));
+			print("Avaliação: " + planMax.getEstadoJogo().evaluation());
 			return AHTNMin(planMax, next, planMin, ponteiroMin, deph-1); 
 		}//se não tiver acabou esse plano
 		else{
+			print("Acabou o plano MAX");
+			print("Ação do plano: " + planMax.getOperacaoPonteiro(ponteiroMax));
+			print("Avaliação: " + planMax.getEstadoJogo().evaluation());
 			return new Node(planMax, planMin, planMax.getEstadoJogo().evaluation());
 		}
 	}
@@ -124,6 +133,9 @@ public class myAHTN extends AbstractionLayerAI {
 	public Node AHTNMin(Plano planMax, int ponteiroMax, Plano planMin,  int ponteiroMin, int deph){
 		//se o estado é terminal retorna os planos de max e min, e a utilidade do estado s
 		if(planMax.getEstadoJogo().evaluation() < 0 || planMin.getEstadoJogo().evaluation() < 0 || deph == 0){
+			print("Acabou o jogo MIN");
+			print("Ação do plano: " + planMin.getOperacaoPonteiro(ponteiroMin));
+			print("Avaliação: " + planMin.getEstadoJogo().evaluation());
 			return new Node(planMax, planMin, planMin.getEstadoJogo().evaluation());
 		}
 		
@@ -131,11 +143,15 @@ public class myAHTN extends AbstractionLayerAI {
 		//altera o ponteiro e muda para perspectiva de Min
 		int next = nextAction(planMin, ponteiroMin); 
 		if(next != -1){
-			print("NodeMinEvaluation: " + planMin.getEstadoJogo().evaluation());
-			print("PlanoMin: " + planMin.getEstadoJogo().toString());
+			print("mudei para MAX");
+			print("Ação do plano: " + planMin.getOperacaoPonteiro(ponteiroMin));
+			print("Avaliação: " + planMin.getEstadoJogo().evaluation());
 			return AHTNMax(planMax, ponteiroMax, planMin, next, deph -1); 
 		}//se não tiver -> acabou esse plano
 		else{
+			print("Acabou o plano MIN");
+			print("Ação do plano: " + planMin.getOperacaoPonteiro(ponteiroMin));
+			print("Avaliação: " + planMin.getEstadoJogo().evaluation());
 			return new Node(planMax, planMin, planMin.getEstadoJogo().evaluation());
 		}
 	}
@@ -290,7 +306,8 @@ public class myAHTN extends AbstractionLayerAI {
 	//metodo que é chamado para gerar as ações das unidades
 	public PlayerAction getAction(int player, GameState gs) throws IOException {
 	
-		if(rounds % roundsToAction == 0){					
+		if(rounds % roundsToAction == 0){		
+			print("Novo round");
 			//inicia as classes para controle do jogo
 			//inicia componentes do jogo global
 			gamestate = gs;
@@ -307,7 +324,6 @@ public class myAHTN extends AbstractionLayerAI {
 			ArrayList<Plano> planosMax = getPlanosInit(meuPlayer);
 			for(Plano p : planosMax){
 				setEstadoJogo(p, meuPlayer, physicalgamestate);
-				p.getEstadoJogo().evaluation();
 			}			
 			
 			//Gera os planos do Min
@@ -350,7 +366,7 @@ public class myAHTN extends AbstractionLayerAI {
         }
 		
 		//executa o que o plano manda
-		print("Ação: " + action);
+		//print("Ação: " + action);
 		if(action.contains("!base")){
 			construirBase(worker, p, pgs);
 		}else if(action.contains("!quartel")){

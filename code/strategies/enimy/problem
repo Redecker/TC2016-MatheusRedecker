@@ -1,0 +1,16 @@
+(defproblem problem ahtn ( 
+							(recurso b rb) 
+							(recurso q rq)
+							(recurso w rw)
+							(recurso r rr)
+
+							(base b)
+							(worker w)
+							(quartel q)
+							
+							)
+
+							(
+								(ataque-ranged r)
+							)
+		)
