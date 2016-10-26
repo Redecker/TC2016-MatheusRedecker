@@ -1,6 +1,7 @@
 package AHTN.HighLevel2;
 import java.util.LinkedList;
 
+import AHTN.EstadoDoJogo;
 import AHTN.HighLevel1.HighLevel1Domain;
 import JSHOP2.*;
 import ai.abstraction.myAHTN;
@@ -24,7 +25,7 @@ public class HighLevel2Problem
 		return problemConstants;
 	}
 
-	public static LinkedList<Plan> getPlans(Player p)
+	public static LinkedList<Plan> getPlans(Player p, EstadoDoJogo edj)
 	{
 		LinkedList<Plan> returnedPlans = new LinkedList<Plan>();
 		TermConstant.initialize(14);
@@ -41,7 +42,7 @@ public class HighLevel2Problem
 		SolverThread thread;
 
 		//aqui chama um método para gerar o problema
-		myAHTN.setProblemJSHOP(s, p);
+		myAHTN.setProblemJSHOP(s, p, edj);
 		
 		//aqui que é setado o objetivo
 		tl =  myAHTN.setObjetiveJSHOP();
@@ -63,6 +64,6 @@ public class HighLevel2Problem
 	}
 
 	public static LinkedList<Predicate> getFirstPlanOps() {
-		return getPlans(null).getFirst().getOps();
+		return getPlans(null, null).getFirst().getOps();
 	}
 }

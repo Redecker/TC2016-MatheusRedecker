@@ -6,7 +6,8 @@ public class Plano{
 	
 	private ArrayList<String> plano;
 	private double custo;
-	private EstadoDoJogo estado;
+	private EstadoDoJogo meuEstado;
+	private EstadoDoJogo inimigoEstado;
 	
 	public Plano(){
 		plano = new ArrayList<>();
@@ -29,14 +30,21 @@ public class Plano{
 		return plano.get(p);
 	}
 	
-	public void setEstadoJogo(EstadoDoJogo edj){
-		estado = edj;
+	public void setMeuEstadoJogo(EstadoDoJogo edj){
+		meuEstado = edj;
 	}
 	
-	public EstadoDoJogo getEstadoJogo(){
-		return estado;
+	public EstadoDoJogo getMeuEstadoJogo(){
+		return meuEstado;
 	}
 	
+	public void setInimigoEstadoJogo(EstadoDoJogo edj){
+		inimigoEstado = edj;
+	}
+	
+	public EstadoDoJogo getInimigoEstadoJogo(){
+		return inimigoEstado;
+	}
 	public String toString(){
 		String toReturn = "";
 		for(String s : plano){

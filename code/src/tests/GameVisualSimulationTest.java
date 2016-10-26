@@ -40,19 +40,19 @@ public class GameVisualSimulationTest {
         boolean gameover = false;
         
         //myAHTN ai1 = new myAHTN(utt, new BFSPathFinding());
-        //AI ai2 = new RandomAI();
-        //AI ai2 = new RangedRush(utt, new BFSPathFinding());
-        //AI ai2 = new HeavyRush(utt, new BFSPathFinding());  
-        //AI ai2 = new LightRush(utt, new BFSPathFinding());
-        //AI ai2 = new WorkerRush(utt, new BFSPathFinding());
-        
-        
         AI ai1 = new RandomAI();
         //AI ai1 = new RangedRush(utt, new BFSPathFinding());
         //AI ai1 = new HeavyRush(utt, new BFSPathFinding());  
         //AI ai1 = new LightRush(utt, new BFSPathFinding());
         //AI ai1 = new WorkerRush(utt, new BFSPathFinding());
-        myAHTN ai2 = new myAHTN(utt, new BFSPathFinding());
+        
+        
+        //AI ai2 = new RandomAI();
+        AI ai2 = new RangedRush(utt, new BFSPathFinding());
+        //AI ai2 = new HeavyRush(utt, new BFSPathFinding());  
+        //AI ai2 = new LightRush(utt, new BFSPathFinding());
+        //AI ai2 = new WorkerRush(utt, new BFSPathFinding());
+        //myAHTN ai2 = new myAHTN(utt, new BFSPathFinding());
         
         JFrame w = PhysicalGameStatePanel.newVisualizer(gs,640,640,false,PhysicalGameStatePanel.COLORSCHEME_BLACK);
 //        JFrame w = PhysicalGameStatePanel.newVisualizer(gs,640,640,false,PhysicalGameStatePanel.COLORSCHEME_WHITE);

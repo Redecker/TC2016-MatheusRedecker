@@ -29,6 +29,7 @@ public class EstadoDoJogo{
 	private int rangedInimigo;
 	private int heavyInimigo;
 	private int lightInimigo;
+	private int recursoInimigo;
 	
 	private Player player;
 	private PhysicalGameState pgs;
@@ -61,10 +62,85 @@ public class EstadoDoJogo{
 		lightInimigo = 0;
 		
 		recurso = p.getResources();
-		setParametros();
+		
+		if(p.getID() == 0){
+			recursoInimigo = pgs.getPlayer(1).getResources();
+		}else if(p.getID() == 1){
+			recursoInimigo = pgs.getPlayer(0).getResources();
+		}else{
+			recursoInimigo = 0;
+		}
+		
+		iniciaParametros();
 	}
 	
-	public void setParametros(){
+	private EstadoDoJogo(){
+		
+	}
+	
+	public EstadoDoJogo clone(EstadoDoJogo edj){
+		EstadoDoJogo toReturn = new EstadoDoJogo();
+		toReturn.base = edj.getBase();
+		toReturn.quartel = edj.getQuartel();
+		toReturn.worker = edj.getWorker();
+		toReturn.ranged = edj.getInimigoRanged();
+		toReturn.heavy = 0;
+		toReturn.light = 0;
+		
+		toReturn.baseInimigo = edj.getInimigoBase();
+		toReturn.quartelInimigo = edj.getInimigoQuartel();
+		toReturn.workerInimigo = edj.getInimigoWorker();
+		toReturn.rangedInimigo = edj.getInimigoRanged();
+		toReturn.heavyInimigo = 0;
+		toReturn.lightInimigo = 0;
+		
+		toReturn.recurso = edj.getResources();
+		toReturn.recursoInimigo = edj.getInimigoResources();
+		
+		return toReturn;
+	}
+	
+	public int getBase(){
+		return base;
+	}
+	
+	public int getQuartel(){
+		return quartel;
+	}
+	
+	public int getWorker(){
+		return worker;
+	}
+	
+	public int getRanged(){
+		return ranged;
+	}
+	
+	public int getResources(){
+		return recurso;
+	}
+	
+	public int getInimigoBase(){
+		return baseInimigo;
+	}
+	
+	public int getInimigoQuartel(){
+		return quartelInimigo;
+	}
+	
+	public int getInimigoWorker(){
+		return workerInimigo;
+	}
+	
+	public int getInimigoRanged(){
+		return rangedInimigo;
+	}
+	
+	public int getInimigoResources(){
+		return recursoInimigo;
+	}
+
+	private void iniciaParametros(){
 		for (Unit u : pgs.getUnits()) {
    			if (u.getType() == workerType){
    				if(u.getPlayer() == player.getID()) {
