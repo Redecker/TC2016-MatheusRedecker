@@ -180,7 +180,7 @@ O algoritmo gera as ações na mesma ordem que serão executadas, então a cada 
 Nele são combinados técnicas de HTN com o algoritmo \textit{minimax search}. 
 O algoritmo assume jogos totalmente observáveis, baseados em turno e determinísticos. 
 
-O Algoritmo~\ref{alg:ahtn}~\cite{ontanon2015adversarial} é a representação da técnica de AHTN, e assume que existem dois jogadores, \textsc{Max} e \textsc{Min}, como no algoritmo de \textit{minimax search} apresentado no Capitulo~\ref{chap:busca}.
+O Algoritmo~\ref{alg:ahtn}~\cite{ontanon2015adversarial} é a representação da técnica de AHTN, e assume que existem dois jogadores, \textsc{Max} e \textsc{Min}, como no algoritmo de \textit{minimax search} apresentado no Capitulo~\ref{chap:busca}.\frm{Referencia a seção, já que tu tens uma seção só para isto}
 O algoritmo também assume uma busca em uma árvore com uma máxima profundidade $d$. 
 O intuito do algoritmo de AHTN é gerar os melhores plano para \textsc{Max} e para \text{Min}, junto com o resultado de uma função de avaliação para quando os planos chegam a um estado terminal. 
 
@@ -209,27 +209,32 @@ O intuito do algoritmo de AHTN é gerar os melhores plano para \textsc{Max} e pa
 	\end{algorithmic}
 \end{algorithm}
 
-Cada nodo da árvore das jogadas é definido por uma tupla $(s, N_{+}, N_{-}, t_{+}, t_{-})$, onde $s$ é o estado corrente do ambiente, $N_{+}$ e $N_{-}$ são a representação de planos HTN para os jogadores \textsc{Max} e \textsc{Min}, respectivamente, $t_{+}$ e $t_{-}$ representam ponteiros para qual parte do plano HTN está sendo executada, sendo $t_{+}$ para uma tarefa de $N_{+}$ e $t_{-}$ para uma tarefa de $N_{-}$ ~\cite{ontanon2015adversarial}.
+\frm[inline]{Não entendi a organização dos parágrafos abaixo, escreve abaixo os bullet points com o teu plano desta seção, por favor...}
 
-A função $nextAction(N,t)$ faz com que, dado uma representação de plano em HTN $N$ e um ponteiro $t$, seja encontrada a próxima tarefa primitiva que deve ser executada em $N$ após a tarefa $t$. Se $t = \perp$ então é retornado a primeira tarefa primitiva a ser executada em $N$. 
-Se existir em $N$ alguma tarefas não primitivas e não existir nenhuma tarefa primitiva em $N$ então $nextAction(N,t) = \perp$ \cite{ontanon2015adversarial}.
-Na linha~\ref{alg:ahtn:nexaction} é testado se existe alguma tarefa primitiva no plano atual, se existir ela é aplicada e passa para o próximo nível da árvore alternando para \textsc{Min}, através da função $AHTNMin$. 
+Cada nodo da árvore das jogadas é definido por uma tupla $(s, N_{+}, N_{-}, t_{+}, t_{-})$, onde $s$ é o estado corrente do ambiente, $N_{+}$ e $N_{-}$ são a representação de planos HTN para os jogadores \textsc{Max} e \textsc{Min}, respectivamente, $t_{+}$ e $t_{-}$ representam ponteiros para qual parte do plano HTN está sendo executada, sendo $t_{+}$ para uma tarefa de $N_{+}$ e $t_{-}$ para uma tarefa de $N_{-}$ ~\cite{ontanon2015adversarial}. \frm{Parágrafo solto}
 
-Um nodo \textsc{Max} $n = (s, N_{+}, N_{-}, t_{+}, t_{-})$ é consistente se as ações primitivas que já estão em $N_{+}$ e $N_{-}$ conseguem ser executadas dado um estado $s$ e uma transição $\gamma$. A definição de consistência de \textsc{Min} é análoga \cite{ontanon2015adversarial}.
+A função $nextAction(N,t)$ faz com que, dada uma representação de plano em HTN $N$ e um ponteiro $t$, seja encontrada a próxima tarefa primitiva que deve ser executada em $N$ após a tarefa $t$. \frm{Evite a voz passiva a todo o custo} 
+Se $t = \bot$ então é retornado a primeira tarefa primitiva a ser executada em $N$. \frm{Evite a voz passiva a todo o custo}
+Se existir em $N$ alguma tarefas não primitivas e não existir nenhuma tarefa primitiva em $N$ então $nextAction(N,t) = \bot$ \cite{ontanon2015adversarial}.
+Na linha~\ref{alg:ahtn:nexaction} é testado se existe alguma tarefa primitiva no plano atual, se existir ela é aplicada e passa para o próximo nível da árvore alternando para \textsc{Min}, através da função $AHTNMin$. \frm{Evite a voz passiva a todo o custo}
+
+Um nodo \textsc{Max} $n = (s, N_{+}, N_{-}, t_{+}, t_{-})$ é consistente se as ações primitivas que já estão em $N_{+}$ e $N_{-}$ conseguem ser executadas dado um estado $s$ e uma transição $\gamma$. 
+A definição de consistência de \textsc{Min} é análoga \cite{ontanon2015adversarial}. \frm{Análoga a que?}
 
 Para um nodo \textsc{Max} $n = (s, N_{+}, N_{-}, t_{+}, t_{-})$, $decompositions_{+}(s, N_{+}, N_{-}, t_{+}, t_{-})$ denota o conjunto das decomposições validas que adicionem apenas um novo método em $N_{+}$ (${decompositions(N_{+}, t, m) | m \in applicable(N_{+}, t)}$).
-A definição de $decompositions_{-}$ é análoga \cite{ontanon2015adversarial}.
-Na linha~\ref{alg:decompositions} é adicionado a $\aleph$ todas as possibilidades de continuação de planos a partir do ponto atual.
+A definição de $decompositions_{-}$ é análoga \cite{ontanon2015adversarial}. \frm{Idem}
+Na linha~\ref{alg:decompositions} é adicionado a $\aleph$ todas as possibilidades de continuação de planos a partir do ponto atual. \frm{Evite a voz passiva a todo o custo, olhar a concordância.}
 
-Uma função de avaliação $e$, quando aplicada sobre um estado $s \in S$, retorna a recompensa de \textsc{Max} em $s$ se ele for um estado terminal ou uma aproximação se $s$ for um estado não-terminal \cite{ontanon2015adversarial}. 
-Na linha~\ref{alg:ahtn:for} são comparados todos os possíveis planos pela função de avaliação e é retornado o melhor plano encontrado para os dois jogadores, junto com o resultado da função de avaliação. 
-Quando um estado terminal ou a profundidade for atingida os planos e a função de avaliação para o estado atual são retornados. É o que representa a Linha~\ref{alg:lin:firstLine}
+Uma função de avaliação $e$, quando aplicada sobre um estado $s \in S$, retorna a recompensa de \textsc{Max} em $s$ se ele for um estado terminal ou uma aproximação se $s$ for um estado não-terminal \cite{ontanon2015adversarial}. \frm{Esta questão da função de avaliação seria melhor tu ter falado lá na explicação do minimax (veja o \textsc{H-MiniMax} no Russel e Norvig). Daí isto facilitaria a tua referência} 
+Na linha~\ref{alg:ahtn:for} são comparados todos os possíveis planos pela função de avaliação e é retornado o melhor plano encontrado para os dois jogadores, junto com o resultado da função de avaliação. \frm{Evite a voz passiva a todo o custo}
+Quando um estado terminal ou a profundidade for atingida os planos e a função de avaliação para o estado atual são retornados. \frm{Evite a voz passiva a todo o custo}
+É o que representa a Linha~\ref{alg:lin:firstLine} \frm{Uh?}
 
 A grande diferença entre o algoritmo de $AHTN$ e o algoritmo do \textit{minimax search}, é que as chamadas recursivas nem sempre se alternam entre \textsc{Max} e \textsc{Min}. 
 O algoritmo troca de nodos \textsc{Max} para \textsc{Min} apenas quando os planos estão totalmente decompostos a ponto de gerar uma ação (Linha \ref{alg:ahtn:troca}) \cite{ontanon2015adversarial}.
 
-Para exemplificar o funcionamento do Algoritmo \ref{alg:ahtn}, é apresentado a Figura \ref{fig:ahtn}, que ilustra uma árvore gerada com profundidade $d = 2$. 
-Na raiz da árvore pode ser visto que, para os dois jogadores, apenas uma tarefa não primitiva \textit{win} precisa ser decomposta. 
+Para exemplificar o funcionamento do Algoritmo \ref{alg:ahtn}, é apresentado a Figura \ref{fig:ahtn}\frm{Usar uma figura vetorial! E a voz ativa}, que ilustra uma árvore gerada com profundidade $d = 2$. \frm{Evite a voz passiva a todo o custo. Concordância...}
+Na raiz da árvore pode ser visto que, para os dois jogadores, apenas uma tarefa não primitiva \textit{win} precisa ser decomposta. \frm{Evite a voz passiva a todo o custo}
 Há duas decomposições que o jogador \textsc{Max} pode aplicar para seu plano HTN, resultando nos nodos $n_{1}$ e $n_{5}$. 
 A decomposição de n1 não resulta em nenhuma ação primitiva, e por isso $n_{1}$ continua um nodo \textsc{Max}. 
 Uma vez que o jogador \textsc{Max} decompõe sua HTN para o ponto onde a primeira ação pode ser gerada(nodo $n_{2}$ e $n_{5}$), é o turno de \textsc{Min} decompor suas tarefas não primitivas. Quando \textsc{Min} pode gerar suas ações, a profundidade máxima foi atingida (nodos $n_{3}$ e $n_{4}$). 
@@ -237,11 +242,18 @@ A função de avaliação $e$ é aplicada para cada um dos estados do jogo para 
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.6\textwidth]{fig/ahtn.pdf}
+	\includegraphics[width=0.8\textwidth]{fig/ahtn.pdf} 
 	\caption{Árvore gerada pelo algoritmo de AHTN}
 	\label{fig:ahtn}
 \end{figure}
 
-Em jogos, um agente pode ter que seguir um objetivo, para isso é possível utilizar técnicas de planejamento. O grande problema, continua sendo o grande fator de ramificação e o pouco tempo para determinar a próxima ação do agente \cite{}. O algoritmo de AHTN tenta lidar com esses problemas. 
+Em jogos, um agente pode ter que seguir um objetivo, para isso é possível utilizar técnicas de planejamento. \frm{O objetivo não é ganhar o jogo? Não entendi esta frase}
+O grande problema, continua sendo o grande fator de ramificação e o pouco tempo para determinar a próxima ação do agente \cite{}. \frm{Citação vazia} 
+O algoritmo de AHTN tenta lidar com esses problemas.\frm{Quais problemas? É um problema o agente ter um objetivo? Na minha cabeça, se usa HTN/Planejamento para eliminar combinações de ações que não tem nenhuma chance de ser usadas em um jogo real (adicionar conhecimento de domínio), mas tu tens que verificar no paper} 
 
-Com o intuito de aumentar o desempenho do algoritmo, é possível utilizar técnicas de aprendizado de máquina na geração dos planos. No processo de geração do plano é possível ter mais de um método que decomponha a mesma tarefa não primitiva, nesses casos o planejador precisa escolher um dos métodos para tentar chegar ao fim da decomposição. Como dito anteriormente, se em algum ponto, não for possível decompor uma tarefa não primitiva, um retrocesso é feito até chegar a um ponto que outro método possa ser executado. Uma maneira de melhorar a decisão de escolha dos métodos é obtendo uma recompensa a cada decomposição de uma tarefa não primitiva, para que com as informações obtidas nas execuções, as recompensas possam auxiliem nas escolhas dos métodos, com o intuito de minimizar os retrocessos \cite{hogg2010learning}. 
+Com o intuito de aumentar o desempenho do algoritmo, é possível utilizar técnicas de aprendizado de máquina na geração dos planos. \frm{O que tem a ver aprendizado de máquina com o resto do parágrafo? Com planejamento?} 
+No processo de geração do plano é possível ter mais de um método que decomponha a mesma tarefa não primitiva, nesses casos o planejador precisa escolher um dos métodos para tentar chegar ao fim da decomposição. 
+Como dito anteriormente, se em algum ponto, não for possível decompor uma tarefa não primitiva, um retrocesso é feito até chegar a um ponto que outro método possa ser executado. \frm{Passivo!!} 
+Uma maneira de melhorar a decisão de escolha dos métodos é obtendo uma recompensa a cada decomposição de uma tarefa não primitiva, para que com as informações obtidas nas execuções, as recompensas auxiliem nas escolhas dos métodos, com o intuito de minimizar os retrocessos \cite{hogg2010learning}. 
+
+\frm[inline]{E o capítulo termina assim, no mais?}
