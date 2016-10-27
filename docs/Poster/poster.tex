@@ -15,25 +15,10 @@
 \usepackage{fancyvrb}
 \usepackage{xspace}
 \usepackage[svgnames,usenames,dvipsnames]{xcolor}
-\usepackage{algorithm}
-\usepackage[noend]{algorithmic}
 
-\renewcommand{\algorithmicrequire}{\textbf{Input:}}
-\renewcommand{\algorithmicensure}{\textbf{Output:}}
-\newcommand{\cetable}{CE~}
-
-\newcommand{\as}{AgentSpeak\xspace}
-\newcommand{\Jason}{\emph{Jason}\xspace}
-\newcommand{\pa}{planner agent\xspace}
-\newcommand{\ia}{interface agent\xspace}
-\newcommand{\pas}{planner agents\xspace}
-\newcommand{\ias}{interface agents\xspace}
-\newcommand{\PA}{Planner Agent\xspace}
-\newcommand{\IA}{Interface Agent\xspace}
-\newcommand{\Pa}{Planner agent\xspace}
-\newcommand{\Ia}{Interface agent\xspace}
-\newcommand{\Pas}{Planner agents\xspace}
-\newcommand{\Ias}{Interface agents\xspace}
+%\usepackage{algorithm}
+%\usepackage[noend]{algorithmic}
+\usepackage{algpseudocode}
 
 \def\texttts#1{\texttt{\large#1}}
 
@@ -46,19 +31,18 @@
 \veryHuge \color{NavyBlue} 
 \textbf{TITULO} 
 \color{Black}\\[2cm] % Subtitle
-\huge \textbf{Matheus de Souza Redecker e Felipe Meneguzzi}\\
+\huge \textbf{Matheus de Souza Redecker e Felipe Rech Meneguzzi}\\
 \Large Faculdade de Inform\'atica (FACIN) -- 
 Pontif\'icia Universidade Cat\'olica do Rio Grande do Sul (PUCRS)\\ 
 Porto Alegre -- RS -- Brasil\\ % University/organization
 \Large \Letter ~ \texttt{matheus.redecker@acad.pucrs.br}\\
 \Large \Letter ~ \texttt{felipe.meneguzzi@pucrs.br}\\
 \\
-% \Telefon ~ \large \texttt{+55\,(51)\,3353-8627}\\
 \end{minipage}
 \hspace*{-2cm}
 \begin{minipage}[t]{0.25\linewidth}
 \begin{center}
-\vspace{-12cm}
+\vspace{-15cm}%era 12
 \includegraphics[width=9cm]{logoPUCRS.pdf}%\\[-0.8cm]
 \hspace*{1cm}
 \end{center}
@@ -77,42 +61,80 @@ Porto Alegre -- RS -- Brasil\\ % University/organization
 
 \newcommand\itemadjust{\itemsep.5em \parskip0pt \parsep0pt}
 %---------------------------------------------------------------
-%	INTRODUCTION
+%	Motivação
 %---------------------------------------------------------------
 \color{NavyBlue}
 \section*{\huge Motiva\c{c}\~ao}
 \color{Black}
 
-%[leftmargin=2em]\itemadjust
 \begin{itemize}
-	\item Qual o problema?;
-	\item Pq é interessante?; e
-	\item O que tu te propoe a fazer?
+	[leftmargin=2em]\itemadjust
+	\item Jogos que utilizam t\'écnicas de Inteligência Artificial (IA) conseguem prover uma melhor intera\c{c}\~ao entre o jogador e o jogo, tornando o jogo mais real e assim prendendo a aten\c{c}\~ao do jogador.
+	\item Nos jogos de computador as rea\c{c}\~oes as jogadas devem ser quase que imediatas, por esse motivo t\'ecnicas que tentam explorar todas as possibilidades poss\'iveis de um jogo se tornam invi\'aveis para jogos com uma complexidade alta.
+	\item Por exemplo, no xadrez a quantidade aproximada de estados poss\'iveis \'e de $10^{40}$, isso mostra que o poder de processamento para gerar, de maneira r\'apida, uma a\c{c}\~ao precisa ser alto. 
+	\item O intuito deste trabalho é obter uma melhor performance na escolha das ações. Para isso, propomos a utilização do algoritmo de Adversarial Hierarchical-Task Network (AHTN) em conjunto com um algoritmo de aprendizado (\textit{Machine Learning}).
+	\item Para rodar os experimentos escolhemos a plataforma MicroRTS, que é um jogo de estratégia em tempo real. 
+	\item Com este trabalho pretendemos mostrar que um algoritmo de AHTN apresenta melhores resultados quando aplicado junto com técnicas de aprendizado. 
 \end{itemize}
 
+%Qual o problema?;
+%Pq é interessante?; e
+%O que tu te propoe a fazer?
+
+
 %---------------------------------------------------------------
-%   APPROACH
+%   Background
 %---------------------------------------------------------------
 \color{NavyBlue}
 \section*{\huge Background}
 \color{Black}
 
-\textbf{AHTN(escrever o nome inteiro)}
+\textbf{Adversarial Hierarchical-Task Network}
 
 \begin{itemize}
-	\item dasid
-	\item ehaushe
+	[leftmargin=2em]\itemadjust
+	\item O AHTN \'e um algoritmo desenvolvido para lidar com o problema do grande fator de ramifica\c{c}\~ao dos jogos em tempo real~\cite{ontanon2015adversarial};
+	\item Ele utiliza conhecimento de dom\'inio no estilo de planejamento hier\'arquico (HTN);
+	\item No algoritmo são combinados t\'ecnicas de HTN com o algoritmo \textit{minimax search}; e
+	\item O algoritmo assume jogos totalmente observáveis, baseados em turno e determinísticos. 
 \end{itemize}
 
 \vspace{10mm}
-\textbf{MicroRTS com figuras}
+
+\begin{algorithmic}[1]		
+	\Function {AHTNMax}{$s, N_{+}, N_{-}, t_{+}, t_{-}, d$}
+	\If {$terminal(s) \vee d \leq 0$}\label{alg:lin:firstLine}
+	\State	\Return $(N_{+}, N_{-}, e(s))$
+	\EndIf
+	\If {$nextAction(N_{+}, t_{+}) \neq \perp$} \label{alg:ahtn:nexaction}
+	\State $t = nextAction(N_{+}, t_{+})$ 
+	\State \Return $\Call{AHTNMin}{(\gamma(s,t), N_{+}, N_{-}, t, t_{-}, d-1)}$ \label{alg:ahtn:troca}
+	\EndIf
+	\State $N_{+}^{*} = \perp, N_{-}^{*} = \perp, v^{*} = -\infty$
+	\State $\aleph = decompositions_{+}(s, N_{+}, N_{-}, t_{+}, t_{-})$ \label{alg:decompositions}
+	\ForAll{$N \in \aleph$} \label{alg:ahtn:for}
+	\State $(N^{'}_{+}, N^{'}_{-}, v^{'}) = AHTNMax(s, N, N_{-}, t_{+}, t_{-}, d)$
+	\If{$v^{'} > v^{*}$}
+	\State $N_{+}^{*} = N^{'}_{+}, N_{-}^{*} = N^{'}_{-}, v^{*} = v^{'} $
+	\EndIf
+	\EndFor		
+	\State \Return $(N_{+}^{*}, N_{-}^{*}, v^{*} )$
+	\EndFunction
+\end{algorithmic}
+
+
+\vspace{10mm}
+\textbf{MicroRTS}
 
 
 \begin{itemize}
-	\item O MicroRTS é um jogo de estrategia em tempo real(RTS);
+	[leftmargin=2em]\itemadjust
+	\item O MicroRTS é um jogo de estrategia em tempo real (RTS);
 	\item Ele é uma simplificação do jogo Starcraft, feito por Santiago Ontañón \cite{ontanon2013combinatorial};
-	\item O MicroRTS foi desenvolvido para fins acadêmicos, com o intuito de aplicar e desenvolver técnicas de IA e para servir como prova de conceito para as técnicas criadas.
+	\item O MicroRTS foi desenvolvido para fins acadêmicos, com o intuito de aplicar e desenvolver técnicas de IA.
 \end{itemize}
+
+\vspace{10mm}
 
 \begin{center}
 	\includegraphics[width=0.6\linewidth]{microRts.pdf}
@@ -137,7 +159,7 @@ Falar alguma coisa aqui
 
 
 %---------------------------------------------------------------
-%	EXPERIMENTS AND RESULTS
+%	Experimentos e Resultados
 %---------------------------------------------------------------
 \color{NavyBlue}
 \section*{\huge Experimentos e resultados}
@@ -153,7 +175,7 @@ Falar alguma coisa aqui
 
 
 %---------------------------------------------------------------
-%	CONCLUSION
+% 	Conclusão
 %---------------------------------------------------------------
 \vspace{-12mm}
 \color{NavyBlue}
@@ -174,7 +196,7 @@ We have shown empirically that our approach yields not only superior accuracy re
 %\end{itemize}
 
 %---------------------------------------------------------------
-%	REFERENCES
+%	Referencias
 %---------------------------------------------------------------
 \vspace{-9mm}
 \large
@@ -186,7 +208,7 @@ We have shown empirically that our approach yields not only superior accuracy re
 
 \end{multicols}
 %---------------------------------------------------------------
-%	ACKNOWLEDGEMENTS
+%	Agradecimentos?
 %---------------------------------------------------------------
 \vspace{-0.5cm}
 \hrulefill
