@@ -3,3 +3,33 @@ Anotações do Felipe!
 \frm[inline]{Vi que tu utiliza bastante referências ao livro do Norvig~\cite{intelligence2003modern}, isto não é ideal para tudo, mas é aceitável em alguns lugares. \textbf{Só que}, quando referenciar um livro \textbf{sempre} usar o parâmetro opcional do \texttt{{\textbackslash}cite[opcional]\{key\}} para indicar o \textbf{capítulo} que tu te refere, senão a referência não ajuda o leitor em nada.} 
 
 \frm[inline]{Coloca o til entre o texto e a citação para ser um non-breakable space.} 
+
+
+
+
+
+
+
+
+
+
+
+Novos topicos para o TC
+- Modelagem - Jogo - HTN
+- Heuristica
+- Implementação e experimentos
+- Objetivos
+	- Execução do projeto
+	- Objetivos concluidos
+	- Objetivos mudados
+
+Fazer testes - tempo em cada round
+
+
+
+
+In order to do planning in a given planning domain, SHOP2 needs to be given knowledge
+about that domain. A SHOP2 knowledge base consists of operators and methods (plus,
+various non-action related facts and axioms). Each operator is a description of what needs
+to be done to accomplish some primitive task, and each method tells how to decompose
+some compound task into a set of partially ordered subtasks

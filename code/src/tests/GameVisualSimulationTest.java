@@ -39,8 +39,8 @@ public class GameVisualSimulationTest {
         int PERIOD = 20;
         boolean gameover = false;
         
-        //myAHTN ai1 = new myAHTN(utt, new BFSPathFinding());
-        AI ai1 = new RandomAI();
+        myAHTN ai1 = new myAHTN(utt, new BFSPathFinding());
+        //AI ai1 = new RandomAI();
         //AI ai1 = new RangedRush(utt, new BFSPathFinding());
         //AI ai1 = new HeavyRush(utt, new BFSPathFinding());  
         //AI ai1 = new LightRush(utt, new BFSPathFinding());
@@ -78,6 +78,9 @@ public class GameVisualSimulationTest {
             }
         }while(!gameover && gs.getTime()<MAXCYCLES);
         
+        //System.out.println("Tempo Medio de execução: " + ai2.tempoMedioAcoes());
+        //System.out.println("Rounds Passados: " + ai2.getRounds());
+        //System.out.println("Rounds Calculados " + ai2.getRoundsPerformed());
         System.out.println("Game Over");
     }    
 

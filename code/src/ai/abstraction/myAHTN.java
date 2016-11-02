@@ -53,6 +53,20 @@ public class myAHTN extends AbstractionLayerAI {
     
     private static String strategy = "HighLevel2";
     
+    private static long totalTime = 0;
+    private static long roundsPerformed = 0;
+    
+    public long tempoMedioAcoes(){
+    	return (totalTime/1000000)/roundsPerformed;
+    }
+    
+    public long getRoundsPerformed(){
+    	return roundsPerformed;
+    }
+    
+    public int getRounds(){
+    	return rounds;
+    }
     /*
      * Inicialização da classe
      */
@@ -352,6 +366,7 @@ public class myAHTN extends AbstractionLayerAI {
 	public PlayerAction getAction(int player, GameState gs) throws IOException {
 	
 		if(rounds % roundsToAction == 0){		
+			long startTime = System.nanoTime();
 			print("Novo round");
 			//inicia as classes para controle do jogo
 			//inicia componentes do jogo global
@@ -383,9 +398,15 @@ public class myAHTN extends AbstractionLayerAI {
 		    	}
 		    }	
 			
-			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			System.out.println("Essa ação que vou executar: " + evaluation.getAcao());
+			//print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			//System.out.println("Essa ação que vou executar: " + evaluation.getAcao());
 			perfromActions(evaluation.getAcao(), gs, gs.getPhysicalGameState(), meuPlayer);
+			
+			long endTime = System.nanoTime();			
+			roundsPerformed++;
+			totalTime+= (endTime -startTime);
+			System.out.println(rounds + ";" + (endTime-startTime)/1000000);
+			//System.out.println((endTime-startTime)/1000000);
 		}
 		
 		rounds++;
