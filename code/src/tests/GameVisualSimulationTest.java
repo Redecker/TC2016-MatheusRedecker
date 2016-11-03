@@ -31,7 +31,7 @@ public class GameVisualSimulationTest {
     public static void main(String args[]) throws Exception {
         UnitTypeTable utt = new UnitTypeTable();
         UnitTypeTable utt2 = new UnitTypeTable();
-        PhysicalGameState pgs = PhysicalGameState.load("maps/basesWorkers16x16.xml", utt);
+        PhysicalGameState pgs = PhysicalGameState.load("maps/basesWorkers8x8.xml", utt);
 //        PhysicalGameState pgs = MapGenerator.basesWorkers8x8Obstacle();
 
         GameState gs = new GameState(pgs, utt);
@@ -39,16 +39,16 @@ public class GameVisualSimulationTest {
         int PERIOD = 20;
         boolean gameover = false;
         
-        myAHTN ai1 = new myAHTN(utt, new BFSPathFinding());
+        //myAHTN ai1 = new myAHTN(utt, new BFSPathFinding());
         //AI ai1 = new RandomAI();
-        //AI ai1 = new RangedRush(utt, new BFSPathFinding());
+        AI ai1 = new RangedRush(utt, new BFSPathFinding());
         //AI ai1 = new HeavyRush(utt, new BFSPathFinding());  
         //AI ai1 = new LightRush(utt, new BFSPathFinding());
         //AI ai1 = new WorkerRush(utt, new BFSPathFinding());
         
         
-        //AI ai2 = new RandomAI();
-        AI ai2 = new RangedRush(utt, new BFSPathFinding());
+        AI ai2 = new RandomAI();
+        //AI ai2 = new RangedRush(utt, new BFSPathFinding());
         //AI ai2 = new HeavyRush(utt, new BFSPathFinding());  
         //AI ai2 = new LightRush(utt, new BFSPathFinding());
         //AI ai2 = new WorkerRush(utt, new BFSPathFinding());
