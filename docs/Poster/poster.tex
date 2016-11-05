@@ -123,7 +123,7 @@
 	
 	\begin{itemize}
 		%[leftmargin=2em]\itemadjust
-		\item As reações das jogadas, nos jogos de computador, devem ser quase que imediatas, por esse motivo técnicas que tentam explorar todas as possibilidades possíveis de um jogo se tornam inviáveis para jogos com uma complexidade alta.
+		\item As reações das jogadas, nos jogos de computador, devem ser quase que imediatas. Técnicas que tentam explorar todas as possibilidades possíveis de um jogo se tornam inviáveis para jogos de alta complexidade.
 		\item Por exemplo, no xadrez a quantidade aproximada de estados possíveis é de $10^{40}$, isso mostra que é preciso algoritmos eficientes para gerar uma ação de maneira rápida. 
 		\item O intuito deste trabalho é explorar eficientemente o espaço de ações disponíveis usando conhecimento de domínio, a fim de definir qual a próxima ação que deve ser executada. Para isso, propomos a utilização do algoritmo de Adversarial Hierarchical-Task Network (AHTN).
 		\item O MicroRTS foi o jogo escolhido como plataforma para a implementação do algoritmo.
@@ -136,6 +136,16 @@
 	\section*{\huge Background}
 	\color{Black}
 	
+	\textbf{Java Simple Hierarchical Ordered Planner 2}
+	\begin{itemize}
+		%[leftmargin=2em]\itemadjust
+		\item Java Simple Hierarchical Ordered Planner 2 (JSHOP2)~\cite{ilghami2006documentation} é um sistema de planejamento independente de domínio baseado em HTN desenvolvido em Java.
+		\item O planejamento HTN é feito a partir da decomposição de tarefas de alto nível para níveis mais baixos. 
+		\item O JSHOP2 precisa de uma descrição do domínio, que contém a formalização das ações dos agentes, tarefas e métodos para decompô-las. 
+	\end{itemize}
+		
+	\vspace{10mm}
+	
 	\textbf{Adversarial Hierarchical-Task Network}
 	\begin{itemize}
 		%[leftmargin=2em]\itemadjust
@@ -147,9 +157,9 @@
 	\end{itemize}
 	
 	\vspace{8mm}
-	
+	{\large	
 	\begin{flushleft}
-	{\large
+
 		\begin{algorithmic}[1]
 			\Function {AHTNMax}{$s, N_{+}, N_{-}, t_{+}, t_{-}, d$}
 			\If {$terminal(s) \vee d \leq 0$}\label{alg:lin:firstLine}
@@ -170,29 +180,18 @@
 			\State \Return $(N_{+}^{*}, N_{-}^{*}, v^{*} )$
 			\EndFunction
 		\end{algorithmic}
-	}
+	
 	\begin{center}
 		\textbf{Código 1:} Pseudocódigo do algoritmo de AHTN.
 	\end{center}
 	\end{flushleft}
-
-	\vspace{10mm}
-	
-	\textbf{Simple Hierarchical Ordered Planner 2}
-	\begin{itemize}
-		%[leftmargin=2em]\itemadjust
-		\item Simple Hierarchical Ordered Planner 2 (SHOP2)~\cite{nau2003shop2} é um sistema de planejamento independente de domínio baseado em HTN.
-		\item O SHOP2 precisa de uma descrição do domínio e uma descrição do problema para gerar os planos.
-		\item A descrição do domínio é equivalente a descrição do domínio de planejamento, onde estão descritos os métodos e operadores.
-		\item A descrição do problema, é onde está descrito o estado inicial e as tarefas que precisam ser alcançadas.
-	\end{itemize}
-	
+}
 	\vspace{10mm}
 	\textbf{MicroRTS}
 	\begin{itemize}
 		%[leftmargin=2em]\itemadjust
-		\item O MicroRTS~\cite{ontanon2013combinatorial} é um jogo de estratégia em tempo real (RTS).
-		\item Ele é uma simplificação do jogo Starcraft, feito por Santiago Ontañón.
+		\item O MicroRTS~\cite{ontanon2013combinatorial} é um jogo de estratégia em tempo real (RTS), feito por Santiago Ontañón.
+		\item Ele é uma simplificação de jogos como o Starcraft. 
 		\item O MicroRTS foi desenvolvido para fins acadêmicos, com o intuito de aplicar e desenvolver técnicas de Inteligência Artificial.
 		\item A Figura~\ref{fig:microrts} ilustra um exemplo de tela do jogo.
 	\end{itemize}
