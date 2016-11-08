@@ -123,7 +123,7 @@
 	
 	\begin{itemize}
 		%[leftmargin=2em]\itemadjust
-		\item As reações das jogadas, nos jogos de computador, devem ser quase que imediatas. Técnicas que tentam explorar todas as possibilidades possíveis de um jogo se tornam inviáveis para jogos de alta complexidade.
+		\item As reações das jogadas, nos jogos de computador, devem ser quase que imediatas. Técnicas que tentam explorar todas as possibilidades de um jogo se tornam inviáveis para jogos de alta complexidade.
 		\item Por exemplo, no xadrez a quantidade aproximada de estados possíveis é de $10^{40}$, isso mostra que é preciso algoritmos eficientes para gerar uma ação de maneira rápida. 
 		\item O intuito deste trabalho é explorar eficientemente o espaço de ações disponíveis usando conhecimento de domínio, a fim de definir qual a próxima ação que deve ser executada. Para isso, propomos a utilização do algoritmo de Adversarial Hierarchical-Task Network (AHTN).
 		\item O MicroRTS foi o jogo escolhido como plataforma para a implementação do algoritmo.
@@ -182,7 +182,9 @@
 		\end{algorithmic}
 	
 	\begin{center}
+		{\small
 		\textbf{Código 1:} Pseudocódigo do algoritmo de AHTN.
+		}
 	\end{center}
 	\end{flushleft}
 }
@@ -228,35 +230,36 @@
 		%[leftmargin=2em]\itemadjust
 		\item O MicroRTS possui técnicas de jogo implementadas para se jogar contra.
 		\item As técnicas presentes no MicroRTS são usadas como adversário do algoritmo de AHTN. 
-		\item Os experimentos foram executados em um mapa 16 por 16 e começando dos dois lados do jogo, o lado azul na parte superior, e o lado vermelho na parte inferior. Cada jogador inicia possuindo uma base, um trabalhador e dois recursos próximos a sua base.
+		\item Os experimentos foram executados em um mapa 16 por 16 e com o algoritmo começando dos dois lados do jogo, o lado azul na parte superior, e o lado vermelho na parte inferior. Cada jogador inicia possuindo uma base, um trabalhador e dois recursos próximos a sua base.
+		\item As técnicas do MicroRTS, usadas como adversário do algoritmo de AHTN, são determinísticas, fazendo com que o resultado do jogo seja sempre o mesmo. 
+		\item O lado vermelho possui vantagem, em relação ao azul, pois a construção que produz as tropas é posicionado em local propicio para tanto. 
 		\item A Tabela~\ref{tab:resultados} ilustra os resultados obtidos.
 	\end{itemize}
 	
 	\vspace{8mm}
+
 	{\large
 		\begin{center}
-			\begin{tabular}{|c|cc|cc|}
-				\hline
-				\textbf{}           & \multicolumn{2}{c|}{\textbf{Lado Azul}}                    & \multicolumn{2}{c|}{\textbf{Lado Vermelho}}                \\ \hline
-				\textbf{Adversário} & \multicolumn{1}{c|}{\textbf{Vitórias}} & \textbf{Derrotas} & \multicolumn{1}{c|}{\textbf{Vitórias}} & \textbf{Derrotas} \\ \hline
-				\multicolumn{5}{|c|}{\textbf{Estrat\'egia 1}}                                                                                                   \\ \hline
-				RandomAI              & 5                                      & 0                 & 5                                      & 0                 \\
-				RangedRush              & 0                                      & 5                 & 5                                      & 0                 \\
-				HeavyRush               & 0                                      & 5                 & 5                                      & 0                 \\
-				LightRush               & 0                                      & 5                 & 5                                      & 0                 \\
-				WorkerRush              & 0                                      & 5                 & 0                                      & 5                 \\ \hline
-				\multicolumn{5}{|c|}{\textbf{Estrategia 2}}                                                                                                   \\ \hline
-				RandomAI              & 5                                      & 0                 & 5                                      & 0                 \\
-				RangedRush              & 5                                      & 0                 & 5                                      & 0                 \\
-				HeavyRush               & 0                                      & 5                 & 5                                      & 0                 \\
-				LightRush               & 0                                      & 5                 & 5                                      & 0                 \\
-				WorkerRush              & 0                                      & 5                 & 0                                      & 5                 \\ \hline
-			\end{tabular}
-			\captionof{table}{Resultados do AHTN contra as técnicas do MicroRTS.}
-			\label{tab:resultados}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\multicolumn{3}{|c|}{\textbf{Estratégia 1}}                       \\ \hline
+			\textbf{Adversário} & \textbf{Lado Azul} & \textbf{Lado Vermelho} \\ \hline
+			RandomAI            & 100\%              & 100\%                  \\
+			RangedRush          & 0\%                & 100\%                  \\
+			HeavyRush           & 0\%                & 100\%                  \\
+			LightRush           & 0\%                & 100\%                  \\
+			Worker              & 0\%                & 0\%                    \\ \hline
+			\multicolumn{3}{|c|}{\textbf{Estratégia 2}}                       \\ \hline
+			RandomAI            & 100\%              & 100\%                  \\
+			RangedRush          & 100\%              & 100\%                  \\
+			HeavyRush           & 0\%                & 100\%                  \\
+			LightRush           & 0\%                & 100\%                  \\
+			WorkerRush          & 0\%                & 0\%                    \\ \hline
+		\end{tabular}
+		\captionof{table}{Porcentagem de vitórias do algoritmo AHTN contra as técnicas do MicroRTS.}
+		\label{tab:resultados}
 		\end{center}
 	}
-	
 	%---------------------------------------------------------------
 	%	Referencias
 	%---------------------------------------------------------------
