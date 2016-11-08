@@ -51,7 +51,7 @@ Por esse motivo os componentes são redefinidos como:
 	\item $actions(s)$, conjunto das ações possíveis em um estado $s$;
 	\item $result(s, a)$, um modelo de transição, que define o resultado da ação $a$ a aplicada ao estado $s$;
 	\item $terminal(s)$, verifica se o estado $s$ é um estado onde o jogo termina; e
-	\item $utility(s,p)$, define um valor numérico, representando o lucro do jogador $p$ ao atingir o estado terminal $s$.
+	\item $utility(s,p)$, define um valor numérico, representando o lucro do jogador $p$ ao atingir o estado terminal $s$. Também é chamado de função de avaliação.
 \end{itemize}
 
 Com esses componentes descritos é possível formalizar o que é uma árvore de jogadas. 
@@ -71,6 +71,7 @@ O estado inicial do jogo é o campo vazio, a cada nível da árvore todas as pos
 \end{figure} 
 
 \section{Minimax search}
+\label{sec:minimax}
 
 O \textit{minimax search} é um algoritmo de busca adversária. 
 O objetivo do algoritmo é retornar a melhor jogada para o estado atual. 
@@ -129,4 +130,4 @@ O algoritmo de \textit{minimax} deve explorar todo o espaço de estados para con
 A quantidade de estados possíveis, dependendo da situação, pode ser muito alta, no xadrez esse número chega a $10^{50}$, em um jogo de \textit{poker} no estilo \textit{texas holdem} esse número pode chegar a $10^{80}$. 
 Geralmente, as ações devem ser tomadas em uma quantidade de tempo muito pequena. 
 Por esse motivo, utilizar técnicas de busca para jogos pode ser um problema. 
-Existem algumas abordagens que utilizam busca adversaria com um nível de abstração mais alto para tentar minimax esse problema~\cite{ontanon2013survey}. \frm{E alpha-beta pruning?}
+Existem algumas abordagens que utilizam busca adversaria com um nível de abstração mais alto para tentar minimax esse problema~\cite{ontanon2013survey}. Outras abordagens diminuem o espaço de estados, cortando caminhos que não influenciam no resultado final~\cite[Capítulo 5]{intelligence2003modern}

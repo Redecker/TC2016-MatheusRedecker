@@ -1,15 +1,5 @@
 Anotações do Felipe!
 
-\frm[inline]{Vi que tu utiliza bastante referências ao livro do Norvig~\cite{intelligence2003modern}, isto não é ideal para tudo, mas é aceitável em alguns lugares. \textbf{Só que}, quando referenciar um livro \textbf{sempre} usar o parâmetro opcional do \texttt{{\textbackslash}cite[opcional]\{key\}} para indicar o \textbf{capítulo} que tu te refere, senão a referência não ajuda o leitor em nada.} 
-
-\frm[inline]{Coloca o til entre o texto e a citação para ser um non-breakable space.} 
-
-
-
-
-
-
-
 
 
 
