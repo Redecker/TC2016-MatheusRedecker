@@ -1529,12 +1529,12 @@ public class ahtn extends Domain
 		compoundTasks[4] = "ataque-ranged";
 
 		primitiveTasks = new String[6];
-		primitiveTasks[0] = "!base";
-		primitiveTasks[1] = "!worker";
-		primitiveTasks[2] = "!quartel";
-		primitiveTasks[3] = "!ranged";
-		primitiveTasks[4] = "!obter-recurso";
-		primitiveTasks[5] = "!atacar-ranged";
+		primitiveTasks[0] = "!build-base";
+		primitiveTasks[1] = "!train-worker";
+		primitiveTasks[2] = "!build-barrack";
+		primitiveTasks[3] = "!train-ranged";
+		primitiveTasks[4] = "!get-resource";
+		primitiveTasks[5] = "!attack-ranged";
 
 		methods = new Method[5][];
 

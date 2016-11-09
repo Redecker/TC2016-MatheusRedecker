@@ -1,42 +1,42 @@
 (defdomain ahtn
     (
-        (:operator (!base ?worker ?recursoBase)
+        (:operator (!build-base ?worker ?recursoBase)
                     ((worker ?worker) (have ?recursoBase))
                     ((have ?recursoBase))
                     ((base ?base))
         )
 
-        (:operator (!worker ?base ?recursoworker)
+        (:operator (!train-worker ?base ?recursoworker)
                     ((base ?base) (have ?recursoworker))
                     ((have ?recursoworker))
                     ((worker ?worker))
         )
 
-        (:operator (!quartel ?worker ?recursoQuartel)
+        (:operator (!build-barrack ?worker ?recursoQuartel)
                     ((worker ?worker) (have ?recursoQuartel))
                     ((have ?recursoQuartel))
                     ((quartel ?quartel))
         )
 
-        (:operator (!ranged ?quartel ?recursoRanged)
+        (:operator (!train-ranged ?quartel ?recursoRanged)
                     ((quartel ?quartel) (have ?recursoRanged))
                     ((have ?recursoRanged))
                     ((ranged ?ranged))
         )
 
-        (:operator (!obter-recurso ?worker ?base ?recurso)
+        (:operator (!get-resource ?worker ?base ?recurso)
                     ((worker ?worker) (base ?base))
                     ()
                     ((have ?recurso))
         )
 
-        (:operator (!atacar-ranged ?ranged)
+        (:operator (!attack-ranged ?ranged)
                     ((ranged ?ranged))
                     ()
                     ()
         )
 
-        (:operator (!treina-ataca-ranged ?ranged)
+        (:operator (!train-attack-ranged ?ranged)
                     ((ranged ?ranged) (quartel ?quartel) (have ?recursoRanged))
                     ((have ?recursoRanged))
                     ((ranged ?ranged))
@@ -44,22 +44,22 @@
 
         (:method (construir-base ?base)
                 ((not (base ?base)) (recurso ?base ?recursoBase) (have ?recursoBase) (worker ?worker))
-                ((!base ?worker ?recursoBase))
+                ((!build-base ?worker ?recursoBase))
         )
 
         (:method (treinar-worker ?worker)
                 ((not (worker ?worker)) (recurso ?worker ?recursoWorker) (have ?recursoWorker) (base ?base))
-                ((!worker ?base ?recursoWorker))
+                ((!train-worker ?base ?recursoWorker))
         )
 
         (:method (construir-quartel ?quartel)
                 ;caso simples não tenho quartel e tenho recurso e worker -> somente constroi
                 ((not (quartel ?quartel)) (recurso ?quartel ?recursoQuartel) (have ?recursoQuartel) (worker ?worker)) 
-                ((!quartel ?worker ?recursoQuartel))
+                ((!build-barrack ?worker ?recursoQuartel))
 
                 ;nao tem recurso para o quartel -> consegue recurso e constroi
                 ((not (quartel ?quartel)) (recurso ?quartel ?recursoQuartel) (not (have ?recursoQuartel)) (worker ?worker) (base ?base))
-                ((!obter-recurso ?worker ?base ?recursoQuartel) (construir-quartel ?quartel))
+                ((!get-resource ?worker ?base ?recursoQuartel) (construir-quartel ?quartel))
                 
                 ;nao tem worker mas tenho base e recurso para construir -> consegue um worker e tenta denovo 
                 ((not (quartel ?quartel)) (not (worker ?worker)) (base ?base))
@@ -77,11 +77,11 @@
 
                 ;caso nao tenha recurso para unidade
                 ((quartel ?quartel) (recurso ?ranged ?recursoRanged) (not (have ?recursoRanged)) (worker ?worker) (base ?base))
-                ((!obter-recurso ?worker ?base ?recursoRanged) (treinar-ranged ?ranged))
+                ((!get-resource ?worker ?base ?recursoRanged) (treinar-ranged ?ranged))
 
                 ;caso simples tenho quartel e recurso -> treina ranged
                 ((quartel ?quartel) (recurso ?ranged ?recursoRanged))
-                ((!ranged ?quartel ?recursoRanged))
+                ((!train-ranged ?quartel ?recursoRanged))
         )
 
         (:method (ataque-ranged ?ranged)
@@ -92,11 +92,11 @@
 
                 ;caso tenho um ranged, quartel e recurso, mando atacar e fazer outro ranged
                 ((ranged ?ranged) (quartel ?quartel) (recurso ?ranged ?recursoRanged) (have ?recursoRanged))
-                ((!treina-ataca-ranged ?ranged))
+                ((!train-attack-ranged ?ranged))
 
                 ;caso tenho um ranged e não tenho recurso para o outro, eu ataco e treino outro
                 ((ranged ?ranged) (recurso ?ranged ?recursoRanged) (not (have ?recursoRanged)))
-                ((!atacar-ranged ?ranged) (treinar-ranged ?ranged))
+                ((!attack-ranged ?ranged) (treinar-ranged ?ranged))
         )        
     )
 )

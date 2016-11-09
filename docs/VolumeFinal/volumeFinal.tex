@@ -66,6 +66,45 @@
 %\usepackage{algorithm}
 \newcommand\msr[2][noinline]{\todo[author=Matheus,color=blue!50,#1]{#2}}
 \newcommand\frm[2][noinline]{\todo[size=\tiny,author=Felipe,color=red!75,#1]{#2}}
+
+
+
+\usepackage{listings}
+\usepackage{listingsutf8}
+
+\lstset{literate=
+	{ã}{{\~a}}1 {ẽ}{{\~e}}1 {ĩ}{{\~i}}1 {õ}{{\~o}}1 {ũ}{{\~u}}1
+	{Ã}{{\~A}}1 {Ẽ}{{\~E}}1 {Ĩ}{{\~I}}1 {Õ}{{\~O}}1 {Ũ}{{\~U}}1	
+	{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+	{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+	{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+	{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+	{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+	{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+	{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+	{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+	{œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+	{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+	{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+	{€}{{\EUR}}1 {£}{{\pounds}}1
+}
+
+\lstdefinestyle{codeStyle}{
+	commentstyle=\color{black},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+
 %----------------------------------------------------------------
 % Autor (OBRIGATÓRIO)
 %----------------------------------------------------------------
@@ -77,15 +116,15 @@
 % escolhido. Os títulos são utilizados para a montagem da capa,
 % resumo e abstract mais tarde.
 %----------------------------------------------------------------
-\title{Adversarial Hierarchical-Task Network para jogos em tempo real}
+\title{Adversarial Hierarchical-Task Network para Jogos em Tempo Real}
       {Adversarial Hierarchical-Task Network for Real-Time Games}
 
 %----------------------------------------------------------------
 % Opções para o tipo de trabalho (OBRIGATÓRIO)
 %----------------------------------------------------------------
 %\tipotrabalho{\ptci}         % Proposta de Trabalho de Conclusão
-\tipotrabalho{\tci}         % Trabalho de Conclusão I
-%\tipotrabalho{\tcii}        % Trabalho de Conclusão II
+%\tipotrabalho{\tci}         % Trabalho de Conclusão I
+\tipotrabalho{\tcii}        % Trabalho de Conclusão II
 
 %----------------------------------------------------------------
 % Seleção do curso ("este trabalho é um requisito parcial para
@@ -126,7 +165,8 @@
 % A seguir, a página de agradecimentos (OPCIONAL):
 %----------------------------------------------------------------
 \begin{agradecimentos}
-.
+Inicialmente agradeço ao meu orientador prof. Felipe Rech Meneguzzi pela oportunidade de realizar este trabalho, sob sua orientação. 
+Agradeço aos meus pais, Ana e Hélio, pelo suporte oferecido ao longo da vida acadêmica. E como não poderia deixar de mencionar, minha companheira, Carolina, pelo apoio, carinho, e pela compreensão em relação ao meu esforço na elaboração deste trabalho.
 \end{agradecimentos}
 
 %----------------------------------------------------------------
@@ -182,6 +222,18 @@ We propose the utilization of this algorithm in one real-time strategy game.
 \include{busca}
 \include{planejamento}
 \include{jogos}
+\include{implementacao}
+\include{resultados}
+\include{objetivos}
+\include{conclusao}
+
+%----------------------------------------------------------------
+% Após \appendix, se iniciam os capítulos de Apêndice, com
+% numeração alfabética.
+%----------------------------------------------------------------
+\appendix
+\include{estrategia1}
+\include{estrategia2}
 
 %----------------------------------------------------------------
 % Aqui vai a bibliografia. Existem 3 estilos de citação: use
@@ -195,15 +247,7 @@ We propose the utilization of this algorithm in one real-time strategy game.
 \bibliographystyle{tcc-num}
 \bibliography{referencias}
 
-%----------------------------------------------------------------
-% Após \appendix, se iniciam os capítulos de Apêndice, com
-% numeração alfabética.
-%----------------------------------------------------------------
-\appendix
-\chapter{Domínio HTN da estratégia 1}
-%\include{estrategia1}
-\chapter{Domínio HTN da estratégia 2}
-%\include{estrategia2}
+
 
 %----------------------------------------------------------------
 % Aqui vão os "capítulos" de anexos. Cada anexo deve

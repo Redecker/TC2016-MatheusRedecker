@@ -12,9 +12,9 @@ construir-quartel
 treinar-ranged
 ataque-ranged
 6
-!base
-!worker
-!quartel
-!ranged
-!obter-recurso
-!atacar-ranged
+!build-base
+!train-worker
+!build-barrack
+!train-ranged
+!get-resource
+!attack-ranged

@@ -23,7 +23,7 @@ A lógica de primeira ordem (LPO) estende a lógica proposicional, e diferente d
 
 A descrição formal de sentenças em LPO é composta por um predicado seguido de uma lista de termos, denotada por $p(t_{0}, t_{1}, ..., t_{n})$. 
 Um predicado se refere a uma relação existente entre os termos. 
-Os termos são objetos que se referem a objetos definidos, indefinidos ou a funções \cite{intelligence2003modern}. 
+Os termos são objetos que se referem a objetos definidos, indefinidos ou a funções \cite[Capítulo 10]{intelligence2003modern}. 
 No exemplo da lâmpada, podemos dizer que a lâmpada da cozinha está apagada, representado por $apagada(cozinha)$. 
 Ou ainda podemos dizer que a lâmpada do quarto está apagada e a TV da sala está ligada, $apagada(quarto)~ \wedge~ ligada(sala)$.  
 
@@ -82,16 +82,15 @@ Uma heurística deve ser computacionalmente eficiente e ter precisão para que a
 \section{Planejamento hierárquico} 
 
 Embora que o planejamento clássico consiga gerar planos ótimos, o tratamento de problemas de grande complexidade ou com o espaço de estados grande pode se tornar intratável por conta do poder computacional necessário para que o plano consiga ser gerado.
-O planejamento clássico possui uma expressividade limitada, pois não é possível representar quando uma ação irá ocorrer, por exemplo~\cite{intelligence2003modern}.
+O planejamento clássico possui uma expressividade limitada, pois não é possível representar quando uma ação irá ocorrer, por exemplo~\cite[Capítulo 11]{intelligence2003modern}.
 Como alternativa para esses problemas foi proposto o planejamento hierárquico, chamado de \textit{Hierarchical Task Network} (HTN). 
 O planejamento HTN se diferencia do planejamento clássico na forma como os planos são gerados~\cite{ghallab2004automated}. 
-Enquanto no planejamento clássico é necessário ter heurísticas para a geração de planos, em planejamento HTN é possível expressar conhecimento de domínio junto com os operadores, isso faz com que as ações sejam tratadas em mais alto nível~\cite{intelligence2003modern}.  
-
-\frm[inline]{Se possível, fale um pouco mais sobre conhecimento de domínio}
+Enquanto no planejamento clássico é necessário ter heurísticas para a geração de planos, em planejamento HTN é possível expressar conhecimento de domínio junto com os operadores, isso faz com que as ações sejam tratadas em mais alto nível.  
+O conhecimento de domínio contém informações que determinam o espaço de estados possível para determinado ambiente. O planejador utiliza o conhecimento de domínio para percorrer entre os estados e encontrar os planos possíveis. Para isso o conhecimento de domínio deve conter informações relativas as ações, disponíveis no ambiente, e as possíveis transições de estados~\cite[Capítulo 11]{intelligence2003modern}.
 
 O objetivo do planejamento HTN é produzir uma sequência de ações que executam determinada tarefa $t$. 
 As tarefas são completadas decompondo tarefas não primitivas em tarefas menores até só restarem tarefas primitivas.  
-As tarefas primitivas são análogas as ações executáveis em planejamento clássico, e expressam uma atividade que o agente possa executar diretamente no ambiente~\cite{intelligence2003modern}. 
+As tarefas primitivas são análogas as ações executáveis em planejamento clássico, e expressam uma atividade que o agente possa executar diretamente no ambiente~\cite[Capítulo 11]{intelligence2003modern}. 
 Já as tarefa não primitiva representam objetivos que o agente deve alcançar com o intuito de decompor as tarefas não primitivas em primitivas. 
 O exemplo da seção anterior de mover um objeto de lugar é um exemplo de tarefa primitiva, pois altera o estado do ambiente, podendo ser representado em HTN como: $(move~ ?from~ ?to)$. 
 Um exemplo de tarefa não primitiva é realizar uma viagem de carro, para conseguir completar essa tarefa é necessário fazer a revisão do carro, arrumar as malas e colocar tudo dentro do carro, que pode ser representado por $(travelByCar ~?car~ ?stuffs))$. 
@@ -116,7 +115,7 @@ O conjunto de tarefas que faz parte da tarefa de ligação está representada pe
 Um problema de planejamento HTN $P$ é definido como $P = (d, I, D)$, onde $D$ é um domínio, $d$ é a tarefa de ligação inicial e $I$ é um estado inicial como no planejamento clássico. 
 O processo de geração de um plano utilizando planejamento HTN consistem em encontrar um método que consiga ser aplicado na primeira tarefa de $d$, isso faz com que seja gerado uma tarefa de ligação diferente $d'$, onde a primeira tarefa foi decomposta. 
 Esse processo continua, agora aplicado a $d'$, até que todas as tarefas sejam primitivas \cite{meneguzzi2015planning}. 
-Se em algum ponto, nenhum método consiga ser aplicado, o planejador deve realizar um retrocesso(\textit{backtracking}), que consiste em voltar a um $d$ anterior a ponto de conseguir aplicar outra decomposição \cite{intelligence2003modern}. 
+Se em algum ponto, nenhum método consiga ser aplicado, o planejador deve realizar um retrocesso(\textit{backtracking}), que consiste em voltar a um $d$ anterior a ponto de conseguir aplicar outra decomposição \cite[Capítulo 11]{intelligence2003modern}. 
 É possível representar a busca do plano por uma árvore $N$, na qual os nodos são tarefas ou métodos. 
 Cada tarefa não-primitiva pode ter apenas um filho, que deve ser um método. 
 Cada método deve ter um filho para cada uma das suas sub tarefas. 
@@ -168,7 +167,7 @@ O algoritmo gera as ações na mesma ordem que serão executadas, então a cada 
 	\end{algorithmic}
 \end{algorithm}
 
-\section{AHTN} 
+\section{Adversarial hierarchical-task network} 
 
 \textit{Adversarial hierarchical-task network} (AHTN) é um algoritmo desenvolvido para lidar com o problema do grande fator de ramificação dos jogos em tempo real~\cite{ontanon2015adversarial} utilizando conhecimento de domínio no estilo de planejamento HTN. 
 Nele são combinados técnicas de HTN com o algoritmo \textit{minimax search}. 
@@ -230,4 +229,3 @@ A função de avaliação $e$ é aplicada para cada um dos estados do jogo para 
 \end{figure}
 
 O problema que o algoritmo de AHTN tenta lidar é o grande fator de ramificação e o pouco tempo para determinar a próxima ação do agente. O algoritmo utiliza planejamento através do conhecimento de domínio para diminuir a combinação de ações que não tem nenhuma chance de ser usadas em um jogo real~\cite{ontanon2015adversarial}. 
-\frm[inline]{E o capítulo termina assim, no mais?}

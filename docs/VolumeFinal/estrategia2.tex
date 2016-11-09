@@ -1,0 +1,103 @@
+%!TEX root = volumeFinal.tex 
+
+\chapter{\label{apendiceB}Domínio HTN da estratégia 2}
+
+\section{Domínio}
+
+
+\lstset{style=codeStyle}
+\begin{lstlisting}[language=lisp]
+(defdomain ahtn-estrategia2
+	(
+		(:operator (!build-base ?worker ?recursoBase)
+			((worker ?worker) (have ?recursoBase))
+			((have ?recursoBase))
+			((base ?base))
+		)
+		
+		(:operator (!train-worker ?base ?recursoworker)
+			((base ?base) (have ?recursoworker))
+			((have ?recursoworker))
+			((worker ?worker))
+		)
+		
+		(:operator (!build-barrack ?worker ?recursoQuartel)
+			((worker ?worker) (have ?recursoQuartel))
+			((have ?recursoQuartel))
+			((quartel ?quartel))
+		)
+		
+		(:operator (!train-ranged ?quartel ?recursoRanged)
+			((quartel ?quartel) (have ?recursoRanged))
+			((have ?recursoRanged))
+			((ranged ?ranged))
+		)
+		
+		(:operator (!get-resource ?worker ?base ?recurso)
+			((worker ?worker) (base ?base))
+			()
+			((have ?recurso))
+		)
+		
+		(:operator (!attack-ranged ?ranged)
+			((ranged ?ranged))
+			()
+			()
+		)
+		
+		(:operator (!train-attack-ranged ?ranged)
+			((ranged ?ranged) (quartel ?quartel) (have ?recursoRanged))
+			((have ?recursoRanged))
+			((ranged ?ranged))
+		)
+		
+		(:method (construir-base ?base)
+			((not (base ?base)) (recurso ?base ?recursoBase) (have ?recursoBase) (worker ?worker))
+			((!build-base ?worker ?recursoBase))
+		)
+		
+		(:method (treinar-worker ?worker)
+			((not (worker ?worker)) (recurso ?worker ?recursoWorker) (have ?recursoWorker) (base ?base))
+			((!train-worker ?base ?recursoWorker))
+		)
+		
+		(:method (construir-quartel ?quartel)
+			((not (quartel ?quartel)) (recurso ?quartel ?recursoQuartel) (have ?recursoQuartel) (worker ?worker)) 
+			((!build-barrack ?worker ?recursoQuartel))
+			
+			((not (quartel ?quartel)) (recurso ?quartel ?recursoQuartel) (not (have ?recursoQuartel)) (worker ?worker) (base ?base))
+			((!get-resource ?worker ?base ?recursoQuartel) (construir-quartel ?quartel))
+			
+			((not (quartel ?quartel)) (not (worker ?worker)) (base ?base))
+			((treinar-worker ?worker) (construir-quartel ?quartel))
+		
+			((not (quartel ?quartel)) (not (base ?base)) (worker ?worker))
+			((construir-base ?base) (construir-quartel ?quartel))
+		)
+		
+		(:method (treinar-ranged ?ranged)
+			((not (quartel ?quartel)))	
+			((construir-quartel ?quartel) (treinar-ranged ?ranged))
+			
+			((quartel ?quartel) (recurso ?ranged ?recursoRanged) (not (have ?recursoRanged)) (worker ?worker) (base ?base))
+			((!get-resource ?worker ?base ?recursoRanged) (treinar-ranged ?ranged))
+			
+			((quartel ?quartel) (recurso ?ranged ?recursoRanged))
+			((!train-ranged ?quartel ?recursoRanged))
+		)
+		
+		(:method (ataque-ranged ?ranged)
+			((not (ranged ?ranged)))
+			((treinar-ranged ?ranged) (ataque-ranged ?ranged))
+			
+			((ranged ?ranged) (quartel ?quartel) (recurso ?ranged ?recursoRanged) (have ?recursoRanged))
+			((!train-attack-ranged ?ranged))
+			
+			((ranged ?ranged) (recurso ?ranged ?recursoRanged) (not (have ?recursoRanged)))
+			((!attack-ranged ?ranged) (treinar-ranged ?ranged))
+		)        
+	)
+)
+
+
+\end{lstlisting}

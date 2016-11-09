@@ -681,7 +681,7 @@ class Method0 extends Method
 	{
 		TaskList retVal;
 
-		retVal = new TaskList(1, false);
+		retVal = new TaskList(1, true);
 		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(0, 3, new TermList(TermVariable.getVariable(2), new TermList(TermVariable.getVariable(1), TermList.NIL))), false, true));
 
 		return retVal;
@@ -1229,7 +1229,7 @@ class Method2 extends Method
 	{
 		TaskList retVal;
 
-		retVal = new TaskList(2, false);
+		retVal = new TaskList(2, true);
 		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(4, 4, new TermList(TermVariable.getVariable(2), new TermList(TermVariable.getVariable(3), new TermList(TermVariable.getVariable(1), TermList.NIL)))), false, true));
 		retVal.subtasks[1] = new TaskList(new TaskAtom(new Predicate(2, 4, new TermList(TermVariable.getVariable(0), TermList.NIL)), false, false));
 
@@ -1481,7 +1481,7 @@ class Method3 extends Method
 	{
 		TaskList retVal;
 
-		retVal = new TaskList(2, false);
+		retVal = new TaskList(2, true);
 		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(2, 5, new TermList(TermVariable.getVariable(1), TermList.NIL)), false, false));
 		retVal.subtasks[1] = new TaskList(new TaskAtom(new Predicate(3, 5, new TermList(TermVariable.getVariable(0), TermList.NIL)), false, false));
 
@@ -1492,7 +1492,7 @@ class Method3 extends Method
 	{
 		TaskList retVal;
 
-		retVal = new TaskList(2, false);
+		retVal = new TaskList(2, true);
 		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(4, 5, new TermList(TermVariable.getVariable(3), new TermList(TermVariable.getVariable(4), new TermList(TermVariable.getVariable(2), TermList.NIL)))), false, true));
 		retVal.subtasks[1] = new TaskList(new TaskAtom(new Predicate(3, 5, new TermList(TermVariable.getVariable(0), TermList.NIL)), false, false));
 
@@ -1503,7 +1503,7 @@ class Method3 extends Method
 	{
 		TaskList retVal;
 
-		retVal = new TaskList(1, false);
+		retVal = new TaskList(1, true);
 		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(3, 5, new TermList(TermVariable.getVariable(1), new TermList(TermVariable.getVariable(2), TermList.NIL))), false, true));
 
 		return retVal;
@@ -1728,7 +1728,7 @@ class Method4 extends Method
 	{
 		TaskList retVal;
 
-		retVal = new TaskList(2, false);
+		retVal = new TaskList(2, true);
 		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(3, 3, new TermList(TermVariable.getVariable(0), TermList.NIL)), false, false));
 		retVal.subtasks[1] = new TaskList(new TaskAtom(new Predicate(4, 3, new TermList(TermVariable.getVariable(0), TermList.NIL)), false, false));
 
@@ -1749,7 +1749,7 @@ class Method4 extends Method
 	{
 		TaskList retVal;
 
-		retVal = new TaskList(2, false);
+		retVal = new TaskList(2, true);
 		retVal.subtasks[0] = new TaskList(new TaskAtom(new Predicate(5, 3, new TermList(TermVariable.getVariable(0), TermList.NIL)), false, true));
 		retVal.subtasks[1] = new TaskList(new TaskAtom(new Predicate(3, 3, new TermList(TermVariable.getVariable(0), TermList.NIL)), false, false));
 
