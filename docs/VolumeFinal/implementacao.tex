@@ -2,6 +2,46 @@
 
 \chapter{\label{chap:impl}Implementação}
 
-\begin{itemize}
-	\item implementação - como foi colocar o jshop dentro do java, tradução do problema na mão, algoritmo e modificações1
-\end{itemize}
+\section{Modelagem do domínio}
+
+Antes de realizar a implementação do algoritmo de AHTN, é preciso criar um domínio de planejamento. 
+O domínio de planejamento serve para que o JSHOP2 consiga gerar os planos que serão usados pelo algoritmo.
+
+Antes de iniciar a criação do domínio, foi preciso definir qual estratégia o domínio iria adotar.
+O primeiro domínio foi pensado em uma situação de jogo, onde o jogador quer treinar uma unidade de ataque para destruir o seu adversário.
+Sendo assim, o jogador precisar ter um \textit{worker}, para coletar recursos, um quartel para construir unidades de ataque, e uma base para conseguir guardar seus recursos. 
+Após ter um quartel, o jogador treina uma unidade de ataque, e manda ela atacar.
+A unidade \textit{ranged} foi a unidade de ataque escolhida para ser treinada.
+Apenas quando o \textit{ranged} morre que outro é criado.
+Este domínio precisa que o jogo comece com uma base, pois a base é necessária para treinar \textit{workers} e para guardar os recursos coletados.  
+O domínio foi pensado para ter apenas um \textit{worker} para realizar a coleta de recursos, e um quartel para treinar as unidades de ataque.
+
+Na camada de abstração do MicroRTS temos movimentos que podem ser aplicados dentro do jogo. 
+Cada movimento foi transcrito como um operador.
+Os métodos são usados para terminar quando esses operadores podem ser utilizados.
+
+
+
+Duas modelagens de domínio 
+dominio pensado para criar unidade e atacar
+estrategia 1
+apendice A
+
+\section{Heurística}
+
+Quando o minimax chega ao fim, deve decidir como mostrar o valor de utilidade pro estado
+duas heuristicas
+	-levando em conta um peso para cada tropa e edificação
+	-levando em conta as suas coisas menos a do outro
+
+\section{Implementação}
+
+algoritmo
+	-estado do jogo
+	-gera o plano e gera denovo a cada vez
+	-
+
+jshop dentro do java
+	-gera as classes uma vez e as traduz dentro do algoritmo na mão
+	-tradução do problema de planejamento
+	
