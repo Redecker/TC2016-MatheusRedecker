@@ -56,7 +56,7 @@ public class GameVisualSimulationTest {
         //AI ai2 = new HeavyRush(utt, new BFSPathFinding());  
         //AI ai2 = new LightRush(utt, new BFSPathFinding());
         //AI ai2 = new WorkerRush(utt, new BFSPathFinding());
-        //myAHTN ai2 = new myAHTN(utt, new BFSPathFinding());
+        myAHTN ai2 = new myAHTN(utt, new BFSPathFinding());
         
         //AI ai2 = new MonteCarlo(100, -1, 100, new RandomBiasedAI(), new SimpleEvaluationFunction());
         //AI ai2 = new IDRTMinimax(100, new SimpleEvaluationFunction());

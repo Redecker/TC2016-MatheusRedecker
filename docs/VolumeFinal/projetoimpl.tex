@@ -8,21 +8,20 @@ Este capítulo apresenta o jogo MicroRTS, que foi escolhido para ser utilizado c
 
 Jogos eletrônicos são muito populares, principalmente pela grande quantidade de gêneros, existem jogos de ação, aventura, esportes, estratégia, entre outros. Hoje em dia, os jogos buscam que quem jogue consiga ficar imerso no dentro do jogo, sem conseguir identificar um padrão nos jogadores fictícios, pois se não o jogo deixa de ser tão interessante. Para que isso aconteça, a IA é associada a diversos jogos, e é comum pensar que quanto mais complexa a IA aplicada dentro do jogo mais difícil jogo irá ficar, mas isso nem sempre é verdade. Não é sempre que uma IA complicada terá melhor desempenho do que uma mais simples. Uma boa IA, para jogos, é feita a partir do comportamento desejado para o jogo com os algoritmo certos~\cite{millington2009artificial}.
 
-Jogos de estratégia em tempo real, também conhecido por \textit{real-time strategy games} (RTS), é um subgênero de jogos de estratégia. Nesse gênero de jogo os jogadores precisam ter uma economia dentro do jogo, e com isso devem construir uma base, buscar recursos, construir edificações, treinar unidades de ataques e aprimorar suas tecnologias. Mas no final, o objetivo do jogo é destruir uma ou mais bases inimigas~\cite{ontanon2013survey, buro2012real}. Existem algumas diferenças entre jogos RTS e jogos de tabuleiro, como xadrez. Estas diferenças são~\cite{ontanon2013survey}:
+Jogos de estratégia em tempo real, também conhecidos por \textit{real-time strategy games} (RTS), é um subgênero de jogos de estratégia. 
+Nesse gênero de jogo os jogadores devem construir uma base, buscar recursos, construir edificações, treinar unidades de ataques e aprimorar suas tecnologias.
+O objetivo final do jogo é destruir uma ou mais bases inimigas. 
+Alguns fatores que dificultam o desenvolvimento de IAs para jogos RTS. 
+Os fatores estão relacionados com a complexidade dos jogos, pois os jogos RTS possuem um grande espaço de estados.
+Além disso os jogadores realizam as jogadas ao mesmo tempo, fazendo com que cada jogador tenha um curto espaço de tempo para realizar as suas ações.
+Por essa razão, não é possível traduzir automaticamente as técnicas de IA para jogos RTS sem algum tipo de abstração ou simplificação~\cite{ontanon2013survey, buro2012real}.
 
-\begin{itemize}
-	\item movimentos simultâneos, jogadores realizam jogadas ao mesmo tempo;
-	\item tempo real, cada jogador deve realizar suas ações em um curto espaço de tempo;
-	\item parcialmente observável, na maioria dos jogos RTS, o jogador só consegue enxergar parte do ambiente;
-	\item não-determinístico, nem sempre uma ação realizada resulta na saída esperada; e
-	\item complexidade, o espaço de estados e o número de ações possíveis é muito grande.
-\end{itemize} 
-
-Pelo fato de existirem essas diferenças, não é possível traduzir automaticamente as técnicas padrões dos jogos de tabuleiro para jogos RTS sem algum tipo de abstração ou simplificação~\cite{ontanon2013survey}.
-
-Um exemplo deste gênero é o MicroRTS\footnote{https://github.com/santiontanon/microrts}, uma simplificação de jogos como Starcraft\footnote{http://us.battle.net/sc2/pt/}. O MicroRTS foi feito por Santiago Ontañón~\cite{ontanon2013combinatorial} em Java. O MicroRTS foi desenvolvido para fins acadêmicos, com o intuito de aplicar e desenvolver técnicas de IA e para servir como prova de conceito para as técnicas criadas.
-
-O MicroRTS consiste em dois jogadores tentando destruir a base adversaria. Para destruir com o inimigo é preciso eliminar cada unidade e edificações adversarias. A Figura~\ref{fig:microrts} mostra um exemplo de tela do jogo.
+Um exemplo deste gênero é o MicroRTS\footnote{https://github.com/santiontanon/microrts}, uma simplificação de jogos como Starcraft\footnote{http://us.battle.net/sc2/pt/}. 
+O MicroRTS foi desenvolvido por Santiago Ontañón~\cite{ontanon2013combinatorial} em Java para fins acadêmicos, com o intuito de aplicar e desenvolver técnicas de IA e para servir como prova de conceito para as técnicas criadas.
+O MicroRTS consiste em dois jogadores tentando destruir a base adversaria. 
+Para ganhar o jogo é preciso eliminar cada unidade e edificação do adversário. 
+O jogo termina quando um dos dois jogadores não tem mais unidades, ou quando o jogo atinge o limite de tempo. 
+A Figura~\ref{fig:microrts} mostra um exemplo de tela do jogo.
 
 \begin{figure}[ht]
 	\centering
@@ -30,8 +29,6 @@ O MicroRTS consiste em dois jogadores tentando destruir a base adversaria. Para 
 	\caption{Um exemplo de tela do MicroRTS}
 	\label{fig:microrts}
 \end{figure} 
-
-O jogo termina quando um dos dois jogadores não tem mais unidades ou construções, ou quando o jogo atinge o limite de tempo. 
 
 \subsection{Unidades e construções}
 No MicroRTS existem quatro tipos de unidades no jogo, e cada uma foi descrita a seguir:
@@ -43,7 +40,13 @@ No MicroRTS existem quatro tipos de unidades no jogo, e cada uma foi descrita a 
 	\item \textit{ranged}, unidade que pode apenas atacar. Ela possui um ataque de longa distância. 
 \end{itemize} 
 
-Para treinar as unidades é preciso ter recursos e edificações. No MicroRTS é preciso ter uma base que é a edificação principal. Ela é responsável pela criação dos \textit{workers}, e nela também é guardado os recursos coletados pelos \textit{workers}. Ela é de grande importância, pois é apenas nela que é possível armazenar os recursos, que são necessários para treinar e construir tudo dentro do jogo. O quartel é responsável pela criação das unidades de ataque que podem apenas atacar. Ela pode ser construída apenas por \textit{workers} e é preciso utilizar uma quantidade de recurso para a sua construção. Os recursos são obtidos através dos \textit{workers}, que vão até a base de recurso, coletam uma unidade e levam para armazenar na base. As bases de recursos são finitas
+Para treinar as unidades é preciso ter recursos e edificações. 
+No MicroRTS é preciso ter uma base que é a edificação principal. 
+A base é responsável pela criação dos \textit{workers}.
+Ela também é responsável pelo armazenamento dos recursos, que são necessários para treinar e construir tudo dentro do jogo. 
+O quartel é responsável pela criação das unidades de ataque que podem apenas atacar. 
+Ela pode ser construída apenas por \textit{workers} e é preciso utilizar uma quantidade de recurso para a sua construção. 
+Os recursos são obtidos através dos \textit{workers}, que extraem recursos da base de recurso e armazenam na base. 
 
 \subsection{Arquitetura}
 
@@ -57,6 +60,7 @@ O diagrama de classes presente na Figura~\ref{fig:classes} ilustra como as class
 
 \begin{figure}[ht]
 	\centering
+	\frm[inline]{Nope, I want vector graphics, man! And text of a size that I can read.}
 	\includegraphics[width=1\textwidth]{fig/classes.png}
 	\caption{Classes do MicroRTS}
 	\label{fig:classes}
@@ -67,7 +71,7 @@ Essa camada se chama \textit{AbstractionLayerAI}.
 Ela apresenta métodos para treinar unidades, construir edificações, coletar recursos, atacar, e movimentar as unidades. 
 Esta camada oferece todos os recursos necessários para que seja implementado uma IA.
 
-Toda a IA que for implementada no MicroRTS deve conter o método $getAction$.
+Toda a IA que for implementada no MicroRTS deve conter o método $\mathit{getAction}$.
 Este método é responsável por determinar qual ação deve ser realizada pela IA em determinado momento do jogo.
 Cada IA pode assumir o lugar de um jogador no MicroRTS. 
 A classe responsável por gerenciar os jogadores inicializa os jogadores, e a cada período de tempo chama o método para cada jogador.
@@ -86,21 +90,21 @@ A Figura~\ref{fig:sequencia} ilustra o diagrama de sequência do funcionamento d
 
 \begin{figure}[ht]
 	\centering
+	\frm[inline]{Está em PDF, mas ainda não é vetorial. Isto me parece que seria masi legível se tu fizesse um pseudo-código (como o do AHTN) explicando no texto. Pode deixar o diagrama de sequencia, mas coloca este pseudo-código junto.}
 	\includegraphics[width=1\textwidth]{fig/diagramaSequencia.pdf}
 	\caption{Diagrama de sequência}
 	\label{fig:sequencia}
 \end{figure}
 
-%O MicroRTS fornece todas as ferramentas necessárias para a implementação de técnicas de IA para o jogo.
-
 \subsection{Técnicas de IA}
 
-O MicroRTS possuí algumas técnicas de IA já implementadas.
+O MicroRTS possui algumas técnicas de IA já implementadas.
 Algumas destas técnicas simulam algum comportamento dentro do jogo, sem ter um algoritmo de IA, essas técnicas são chamadas de estratégias Hard-Coded. 
 Dentro das estratégias Hard-Coded, existem duas técnicas que são baseadas em executar movimentos aleatórios, elas são chamadas de RandomAI e RandomBiasedAI.
 A RandomAI executa movimentos totalmente aleatórios.
 Já a RandomBiasedAI executa movimentos aleatórios mas com probabilidade maior de realizar movimentos de ataque, ou extração de recurso, ou criação de tropas.
-Ainda nas estratégias Hard-Coded, existe técnicas que utilizam uma mesma dinâmica. Elas utilizam um \textit{worker} para extrair recursos, e treinam unidades de ataque para atacar.
+Ainda dentre as estratégias Hard-Coded, existem técnicas que utilizam uma mesma dinâmica. 
+Elas utilizam um \textit{worker} para extrair recursos, e treinam unidades de ataque para atacar. 
 Essas técnicas se diferenciam no tipo de unidade de ataque que é criado. 
 As técnicas são chamadas de LightRush, HeavyRush, e RangedRush, elas utilizam as unidades \textit{light}, \textit{heavy}, e \text{ranged}, respectivamente.
 A ultima técnica deste tipo de categoria é chamada de WorkerRush, ela consiste ter um \textit{worker} para realizar a extração de recursos, mas ao invés de treinar unidades de ataque, ela treina outros \textit{workers} para realizar os ataques, isso faz com que a técnica consiga criar muitas unidades de maneira rápida.
