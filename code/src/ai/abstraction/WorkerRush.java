@@ -6,6 +6,7 @@ package ai.abstraction;
 
 import ai.core.AI;
 import ai.abstraction.AbstractionLayerAI;
+import ai.abstraction.pathfinding.BFSPathFinding;
 import ai.abstraction.pathfinding.PathFinding;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,6 +38,10 @@ public class WorkerRush extends AbstractionLayerAI {
         utt = a_utt;
         workerType = utt.getUnitType("Worker");
         baseType = utt.getUnitType("Base");
+    }
+    
+    public WorkerRush(UnitTypeTable a_utt) {
+        this(a_utt, new BFSPathFinding());
     }
     
     public void reset() {

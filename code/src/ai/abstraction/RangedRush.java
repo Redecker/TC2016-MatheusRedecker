@@ -6,6 +6,7 @@ package ai.abstraction;
 
 import ai.core.AI;
 import ai.abstraction.AbstractionLayerAI;
+import ai.abstraction.pathfinding.BFSPathFinding;
 import ai.abstraction.pathfinding.PathFinding;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,7 +43,11 @@ public class RangedRush extends AbstractionLayerAI {
         barracksType = utt.getUnitType("Barracks");
         rangedType = utt.getUnitType("Ranged");
     }
-
+    
+    public RangedRush(UnitTypeTable a_utt) {
+        this(a_utt, new BFSPathFinding());
+    }
+    
     public void reset() {
     }
 

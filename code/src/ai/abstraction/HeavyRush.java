@@ -6,6 +6,7 @@ package ai.abstraction;
 
 import ai.core.AI;
 import ai.abstraction.AbstractionLayerAI;
+import ai.abstraction.pathfinding.BFSPathFinding;
 import ai.abstraction.pathfinding.PathFinding;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,7 +36,11 @@ public class HeavyRush extends AbstractionLayerAI {
     // If we have a base: train worker until we have 1 workers
     // If we have a barracks: train heavy
     // If we have a worker: do this if needed: build base, build barracks, harvest resources
-
+    
+    public HeavyRush(UnitTypeTable a_utt) {
+        this(a_utt, new BFSPathFinding());
+    }
+    
     public HeavyRush(UnitTypeTable a_utt, PathFinding a_pf) {
         super(a_pf);
         utt = a_utt;
