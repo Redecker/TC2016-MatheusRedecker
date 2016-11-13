@@ -2,6 +2,11 @@
 
 \chapter{\label{chap:impl}Implementação}
 
+A implementação do algoritmo de AHTN dentro do MicroRTS foi feita em duas etapas.
+Primeiro foi feita a modelagem do domínio e criado qual heurística define o valor de utilidade para os estados.
+Na segunda etapa foi acoplado o JSHOP2 com o MicroRTS, e logo após foi feita a implementação do algoritmo.
+
+
 \section{Modelagem do domínio}
 
 Antes de realizar a implementação do algoritmo de AHTN, é preciso criar um domínio de planejamento. 
@@ -48,12 +53,33 @@ Essa heurística é chamada de heurística 2.
 
 \section{Implementação}
 
-O primeiro passo da implementação é conseguir gerar planos dentro do MicroRTS.
+\todo[inline]{escrever como é organizado a seção}
 
-jshop dentro do java
--gera as classes uma vez e as traduz dentro do algoritmo na mão
--tradução do problema de planejamento
+\subsection{Ações do MicroRTS}
 
+Antes de iniciar a implementação do algoritmo de AHTN, é preciso criar os métodos que executam as ações dentro do MicroRTS. 
+A camada de abstração fornece as classes que são responsáveis por exercer essas funções, mas ainda assim é preciso informar qual unidade está chamando o método.
+Para isso foram criados 6 métodos que utilizam as classes da camada.
+Cada método fica responsável por apenas um ação dentro do jogo.
+Os métodos realizam as seguintes ações: construir uma base, construir um quartel, treinar um \textit{worker}, um \textit{worker} coleta recursos, treinar unidade de ataque, e uma unidade de ataque procura unidades adversárias para atacar.
+
+\subsection{Geração dos planos}
+
+O algoritmo de AHTN decompõem todas as possibilidades de plano para um objetivo com determinada configuração do jogo.
+Para gerar os planos foi utilizado o planejador JSHOP2.
+O JSHOP2 gera duas classes java, uma representando o domínio, e outra representando o problema.
+A classe que representa o domínio não precisa ser alterada, pois são sempre os mesmo operadores e métodos que são utilizados pelo planejador para gerar o plano.
+Mas o problema muda a cada nova configuração do ambiente.
+Nesse caso a classe do problema deve ser alterado para que represente um novo estado.
+Essa mudança foi feita alterando a classe java originada pelo JSHOP2. 
+A mudança consistem em gerar novos predicados a cada nova configuração.
+Para isso foi preciso uma análise de como é guardado internamente cada um dos componentes do problema de planejamento na classe do JSHOP2.
+A partir dessa análise houve o mapeamento do estado do jogo para os predicados do problema.
+Uma classe chamada de $EstadoDoJogo$ foi criada para representar o estado em que o jogo está em determinado momento.
+A classe contém informações das unidades que cada jogador tem em determinada configuração do jogo, podendo ser alterada caso alguma ação seja executada.
+A cada novo estado é gerado um conjunto de predicados que representam o jogo, para que o planejador consiga gerar quais planos são possíveis de serem feitos.
+
+\subsection{Algoritmo de AHTN}
 
 algoritmo
 	-estado do jogo

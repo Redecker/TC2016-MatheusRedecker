@@ -198,7 +198,7 @@ public class EstadoDoJogo{
 	
 	public int evaluation(){
 		//se não tiver base e não tiver recurso ou worker, o jogo está perdido
-		if(base < 1 && (player.getResources() < 10 || worker < 1)){return -1;}
+		if(player == null || (base < 1 && (player.getResources() < 10 || worker < 1))){return -1;}
 		
 		switch(evaluationType){
 			//leva em consideração só as suas unidades

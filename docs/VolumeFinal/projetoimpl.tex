@@ -74,23 +74,44 @@ Esta camada oferece todos os recursos necessários para que seja implementado um
 Toda a IA que for implementada no MicroRTS deve conter o método $\mathit{getAction}$.
 Este método é responsável por determinar qual ação deve ser realizada pela IA em determinado momento do jogo.
 Cada IA pode assumir o lugar de um jogador no MicroRTS. 
-A classe responsável por gerenciar os jogadores inicializa os jogadores, e a cada período de tempo chama o método para cada jogador.
-A Figura~\ref{fig:sequencia} ilustra o diagrama de sequência do funcionamento da classe \textit{GameVisualSimulation}. E cada passo é descrito a seguir:
+A classe \textit{GameVisualSimulation}, que é responsável por gerenciar a simulação, inicializa os jogadores e a cada período de tempo chama o método realizar as ações dos jogadores.
+A Figura~\ref{fig:sequencia} ilustra o diagrama de sequência do funcionamento da classe \textit{GameVisualSimulation}. 
 
-\begin{itemize}
-	\item Os passos de 1 a 7 são utilizados para a criação dos objetos que serão utilizados ao longo do jogo;
-	\item Os passos de 8 a 13 fazem parte do laço do jogo;
-	\begin{itemize}
-		\item Os passos 8 e 9 são onde cada jogador escolhe a ação que deseja tomar no momento atual do jogo;
-		\item Os passos 10 e 11 são onde cada jogada é testada, esse passo é necessário para que nenhuma jogada viole alguma restrição do jogo; 
-		\item O passo 12 é necessário para verificar se o jogo não acabou; e
-		\item O passo 13 serve para desenhar novamente a tela com as jogadas executadas.
-	\end{itemize}
-\end{itemize}
+O algoritmo Algoritmo~\ref{alg:jogo} apresenta o pseudo código da classe. 
+A classe primeiro obtém as instâncias dos objetos necessários para a simulação do jogo, esse processo está representado a partir da linha~\ref{alg:jogo:instancia} até a linha~\ref{alg:jogo:instanciaend}.
+A linha~\ref{alg:jogo:desenha} é onde o algoritmo chama a classe da interface gráfica para desenhar a tela do jogo.
+Após isso, o jogo entra em um laço para que os jogadores façam suas jogadas. As linhas~\ref{alg:jogo:action1} e \ref{alg:jogo:action2} são onde os jogadores escolhem qual as suas jogadas.
+Nas linhas~\ref{alg:jogo:issue1} e \ref{alg:jogo:issue2} as jogadas são testadas para que não haja nenhuma violação quanto as restrições do jogo.
+Na linha~\ref{alg:jogo:gameover} é responsável por determinar se o jogo não acabou.
+A linha~\ref{alg:jogo:repaint} desenha a tela novamente com as jogadas executadas.
+Assim o laço da linha~\ref{alg:jogo:while} é executado até que o jogo termine com algum vencedor, ou quando o tempo de simulação acabar.
+
+\begin{algorithm}
+	\caption{Pseudo código da classe \textit{GameVisualSimulation}.}
+	\label{alg:jogo}
+	\begin{algorithmic}[1]		
+		\Function {main}{$String[]$}
+		\State $utt = UnitTypeTable()$ \label{alg:jogo:instancia}
+		\State $pgs = PhysicalGameState()$
+		\State $gs = GameState(pgs, utt)$
+		\State $player1 = Player1()$
+		\State $player2 = Player2()$ \label{alg:jogo:instanciaend}
+		\State $drawScreen()$  \label{alg:jogo:desenha}
+		\While{$!gameover() || endTime()$} \label{alg:jogo:while}
+			\State $action1 = player1.getAction()$ \label{alg:jogo:action1}
+			\State $action2 = player2.getAction()$ \label{alg:jogo:action2}
+			\State $issueSafe(action1)$ \label{alg:jogo:issue1}
+			\State $issueSafe(action2)$ \label{alg:jogo:issue2}
+			\State $gameover = gs.cycle()$ \label{alg:jogo:gameover} 
+			\State $repaintScreen()$ \label{alg:jogo:repaint}
+		\EndWhile
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
 
 \begin{figure}[ht]
 	\centering
-	\frm[inline]{Está em PDF, mas ainda não é vetorial. Isto me parece que seria masi legível se tu fizesse um pseudo-código (como o do AHTN) explicando no texto. Pode deixar o diagrama de sequencia, mas coloca este pseudo-código junto.}
+	\frm[inline]{Está em PDF, mas ainda não é vetorial.}
 	\includegraphics[width=1\textwidth]{fig/diagramaSequencia.pdf}
 	\caption{Diagrama de sequência}
 	\label{fig:sequencia}
@@ -111,9 +132,9 @@ A ultima técnica deste tipo de categoria é chamada de WorkerRush, ela consiste
 
 Outras técnicas utilizam algum algoritmo de IA para decidir qual ação deve ser realizada.
 Como é o caso das estratégias Minimax, Monte Carlo, e Portfolio Search.
-A estratégia de Minimax faz tal coisa. \\
-blablabla Monte Carlo \\
-mumumu Portfolio Search.
+A estratégia de Minimax utiliza o algoritmo de minimax para uma determinada profundidade. A profundidade não é em relação aos turnos, como no algoritmo comum de minimax, mas sim ao tempo disponível para tomar um decisão.
+A estratégia de Monte Carlo verifica todas as ações possíveis para o estado, e simula jogos aleatórios para aquela jogada até um determinado tempo. Uma heurística é utilizada para determinar qual foi a ação que obteve o melhor valor.
+Já estratégia de Portfolio Search possui um conjunto de estratégia e utiliza um algoritmo de busca para decidir qual a melhor estratégia para ser usada em determinado momento. O conjunto é composto pelas estratégias Hard-Coded.
 
 \section{Java Simple Hierarchical Ordered Planner 2}\label{sec:jshop}
 		

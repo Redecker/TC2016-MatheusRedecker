@@ -24,7 +24,7 @@ import rts.PhysicalGameState;
 import rts.Player;
 import rts.PlayerAction;
 import rts.units.*;
-
+	
 public class myAHTN extends AbstractionLayerAI {
 	
 	/**
@@ -172,6 +172,7 @@ public class myAHTN extends AbstractionLayerAI {
 			System.out.println("MIN DEU PAU!!!!");
 		}
 		//se o estado é terminal retorna os planos de max e min, e a utilidade do estado s
+		System.out.println(planMin);
 		if(planMin.getMeuEstadoJogo().evaluation() < 0 || deph == 0){
 			print("MIN Retornei porque o jogo acabou ou profundidade");
 			Node toReturn = new Node(planMax, planMin, planMin.getMeuEstadoJogo().evaluation());
@@ -405,7 +406,7 @@ public class myAHTN extends AbstractionLayerAI {
 			long endTime = System.nanoTime();			
 			roundsPerformed++;
 			totalTime+= (endTime -startTime);
-			System.out.println(rounds + ";" + (endTime-startTime)/1000000);
+			//System.out.println(rounds + ";" + (endTime-startTime)/1000000);
 			//System.out.println((endTime-startTime)/1000000);
 		}
 		
@@ -442,11 +443,11 @@ public class myAHTN extends AbstractionLayerAI {
 		if(action.contains("!base")){
 			construirBase(worker, p, pgs);
 		}else if(action.contains("!quartel")){
-			construirBarrack(worker, p, pgs);
+			construirQuartel(worker, p, pgs);
 		}else if(action.contains("!worker")){
-			construirWorkers(p, pgs, gs, 1);
+			treinarWorker(p, pgs, gs, 1);
 		}else if(action.contains("!obter-recurso")){
-			workersRecolhemRecursos(worker, p, pgs);
+			workerExtraiRecurso(worker, p, pgs);
 		}else if(action.contains("!atacar")){
 			for(Unit u : unidadesAtaque) unidadeAtaca(u, p, pgs);
 		}else if(action.contains("!ranged")){
@@ -503,7 +504,7 @@ public class myAHTN extends AbstractionLayerAI {
             }
 		}
 		
-	public void construirBarrack(Unit worker, Player p, PhysicalGameState pgs){            
+	public void construirQuartel(Unit worker, Player p, PhysicalGameState pgs){            
 			int nroBarracks = 0;
             for (Unit u : pgs.getUnits()) {
             	if (u.getType() == barracksType && u.getPlayer() == p.getID()) {
@@ -525,7 +526,7 @@ public class myAHTN extends AbstractionLayerAI {
 		}	
 		
     // Worker W colhe recurso.
-	public void workersRecolhemRecursos(Unit worker, Player p, PhysicalGameState pgs){
+	public void workerExtraiRecurso(Unit worker, Player p, PhysicalGameState pgs){
 	    	//for (Unit u : workers) {
 	        Unit closestBase = null;
 	        Unit closestResource = null;
@@ -565,7 +566,7 @@ public class myAHTN extends AbstractionLayerAI {
 	   }
 	    
 	//A base faz at� x workers
-	public void construirWorkers(Player p, PhysicalGameState pgs, GameState gs, int nw) {	    	
+	public void treinarWorker(Player p, PhysicalGameState pgs, GameState gs, int nw) {	    	
 	    	Unit base = null;		    
 	        int nworkers = 0;
 	    	
