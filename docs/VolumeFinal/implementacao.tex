@@ -7,41 +7,56 @@
 Antes de realizar a implementação do algoritmo de AHTN, é preciso criar um domínio de planejamento. 
 O domínio de planejamento serve para que o JSHOP2 consiga gerar os planos que serão usados pelo algoritmo.
 
-Antes de iniciar a criação do domínio, foi preciso definir qual estratégia o domínio iria adotar.
-O primeiro domínio foi pensado em uma situação de jogo, onde o jogador quer treinar uma unidade de ataque para destruir o seu adversário.
-Sendo assim, o jogador precisar ter um \textit{worker}, para coletar recursos, um quartel para construir unidades de ataque, e uma base para conseguir guardar seus recursos. 
+Antes de iniciar a modelagem do domínio, é preciso definir qual estratégia o domínio vai seguir.
+O primeiro domínio é pensado em uma situação de jogo, onde o jogador quer treinar uma unidade de ataque para destruir o seu adversário.
+Sendo assim, o jogador precisar ter um \textit{worker}, para coletar recursos, um quartel para construir unidades de ataque, e uma base para conseguir guardar seus recursos e criar o seu \textit{worker}. 
 Após ter um quartel, o jogador treina uma unidade de ataque, e manda ela atacar.
 A unidade \textit{ranged} foi a unidade de ataque escolhida para ser treinada.
-Apenas quando o \textit{ranged} morre que outro é criado.
+Apenas quando a unidade \textit{ranged} é destruída que outra unidade é criada.
 Este domínio precisa que o jogo comece com uma base, pois a base é necessária para treinar \textit{workers} e para guardar os recursos coletados.  
 O domínio foi pensado para ter apenas um \textit{worker} para realizar a coleta de recursos, e um quartel para treinar as unidades de ataque.
 
-Na camada de abstração do MicroRTS temos movimentos que podem ser aplicados dentro do jogo. 
-Cada movimento foi transcrito como um operador.
-Os métodos são usados para terminar quando esses operadores podem ser utilizados.
+A modelagem do domínio começa pela descrição dos operadores.
+Cada ação que pode ser executada dentro do jogo é descrita como um operador no domínio.
+Por exemplo, as ações de construir um quartel, e coletar recursos, são os operadores $!buildbarrack$ e $!getresource$ respectivamente.
+Já os métodos servem para determinar ações de mais alto nível, e devem respeitar a estratégia definida.
+Por exemplo, a estratégia define que apenas um quartel é construído, então o método deve ter uma precondição para verificar se não existe outro quartel no jogo, caso não tenha, ainda é preciso checar se há recursos suficientes para construir. 
+Cada método pode chamar outros métodos.
+Isso acontece pois pode ser necessário realizar outra ação antes de conseguir realizar a ação do método.
+Por exemplo, é necessário um quartel para treinar uma unidade de ataque, quando o método de treinar unidade é chamado, ele verifica que não há um quartel, e ele chama o método de construir o quartel.
 
-
-
-Duas modelagens de domínio 
-dominio pensado para criar unidade e atacar
-estrategia 1
-apendice A
+Para ganhar o jogo é preciso atacar o adversário, por essa razão o método utilizado como objetivo no problema de planejamento é o $ataqueranged$.
+Esse método desencadeia todas as outras chamadas de método dependendo do estado do ambiente.
+No Apêndice~\ref{ap:estra1} está a descrição deste domínio que é chamado de Estratégia 1.
 
 \section{Heurística}
 
-Quando o minimax chega ao fim, deve decidir como mostrar o valor de utilidade pro estado
-duas heuristicas
-	-levando em conta um peso para cada tropa e edificação
-	-levando em conta as suas coisas menos a do outro
+O algoritmo de AHTN requer uma função de avaliação para determinar o valor de utilidade para cada estado do jogo.
+Essa função utiliza uma heurística para determinar esse valor de utilidade.
+A primeira heurística criada leva em consideração apenas as unidades do jogador.
+Quanto maior o número de unidades disponíveis no ambiente melhor a função de avaliação do estado.
+As unidades são ponderadas pelo custo de treinamento ou de construção.
+Por exemplo, um quartel precisa de 5 unidades de recurso para ser construído, enquanto um \textit{worker} necessita só de 1 para ser treinado, por isso o quartel acaba tendo peso 5, e o \textit{worker} peso 1. 
+Essa heurística tem um problema, pois o jogador adversário pode estar com o dobro de unidades que isso não é levado em consideração, e nesse cenário o jogador adversário estaria na frente. 
+Essa heurística é chamada de heurística 1.
+
+Para resolver o problema das unidades do inimigo não serem levadas em consideração.
+A segunda heurística utiliza a mesma maneira de calcular da primeira heurística, mas também calcula esse valor para as unidades do adversário. 
+Com os dois valores, o valor das suas unidades é subtraído do valor das unidades do adversário. 
+Assim em um cenário onde o jogo está com mais tropas a favor, o valor de utilidade é positivo, e caso o contrario negativo.
+Essa heurística é chamada de heurística 2.
 
 \section{Implementação}
+
+
+jshop dentro do java
+-gera as classes uma vez e as traduz dentro do algoritmo na mão
+-tradução do problema de planejamento
+
 
 algoritmo
 	-estado do jogo
 	-gera o plano e gera denovo a cada vez
 	-
 
-jshop dentro do java
-	-gera as classes uma vez e as traduz dentro do algoritmo na mão
-	-tradução do problema de planejamento
 	
