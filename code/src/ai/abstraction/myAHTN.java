@@ -215,7 +215,6 @@ public class myAHTN extends AbstractionLayerAI {
 			Node toReturn = new Node(planMax, planMin, planMin.getMeuEstadoJogo().evaluation());
 			toReturn.setAcao(planMin.getOperacaoPonteiro(0));
 			return toReturn;
-			//2return new Node(planMax, planMin, planMin.getMeuEstadoJogo().evaluation());
 		}
 	}
 	

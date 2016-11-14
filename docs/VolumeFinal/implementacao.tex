@@ -51,9 +51,9 @@ Com os dois valores, o valor das suas unidades é subtraído do valor das unidad
 Assim em um cenário onde o jogo está com mais tropas a favor, o valor de utilidade é positivo, e caso o contrario negativo.
 Essa heurística é chamada de heurística 2.
 
-\section{Implementação}
+Se um jogador não tem uma base, e não tem recursos para construir uma, o jogo está perdido, pois a base é necessário para armazenar os recursos. Nesse caso, as duas heurísticas retornam um valor negativo, indicando o fim do jogo. 
 
-\todo[inline]{escrever como é organizado a seção}
+\section{Implementação}
 
 \subsection{Ações do MicroRTS}
 
@@ -81,9 +81,56 @@ A cada novo estado é gerado um conjunto de predicados que representam o jogo, p
 
 \subsection{Algoritmo de AHTN}
 
-algoritmo
-	-estado do jogo
-	-gera o plano e gera denovo a cada vez
-	-
+Para que o MicroRTS reconheça uma IA, ela deve ter o método $\mathit{getAction}$ implementado.
+Quando este método é invocado a técnica deve realizar a sua operação e retornar qual movimento deve ser executado.
+Sendo assim, a classe que implementa o algoritmo de AHTN deve utilizar este método para retornar a ação encontrada.
+O algoritmo de AHTN implementado seguiu o padrão do algoritmo apresentado na Seção~\ref{alg:ahtn}, mas com algumas alterações.
 
-	
+O JSHOP2 gera os planos apenas com os operadores utilizados para alcançar o objetivo.
+Com isso, o plano gerado não tem a informação de quais métodos foram utilizados para chegar aos operadores.
+Neste caso, o plano gerado contém os operadores até chegar ao objetivo.
+No algoritmo de AHTN original o plano vai sendo decomposto através dos métodos, e só realiza a troca de perspectiva entre \textsc{Max} e \textsc{Min} quando há uma tarefa primitiva a ser executada.
+No algoritmo de AHTN implementado há sempre a troca de perspectiva a cada rodada.
+A troca de perspectiva é feita para cada plano que é gerado a partir do estado do jogo.
+O Algoritmo~\ref{alg:meuahtn} ilustra o pseudo código do algoritmo de AHTN implementado.
+
+O algoritmo recebe um estado, representando qual a configuração do ambiente, um plano para a perspectiva \textsc{Max}, um plano para a perspectiva \textsc{Min}, e uma profundidade.
+A linha~\ref{alg:meuahtn:terminal} é responsável por verificar se o estado é uma configuração de final de jogo, ou ainda se a profundidade configurada não chegou ao fim.
+Caso uma das duas coisas aconteça, o algoritmo retorna o plano de cada perspectiva, e também a função de avaliação para a configuração em que o jogo se encontra.
+
+O algoritmo avança caso não haja uma configuração de final de jogo.
+Na linha~\ref{alg:meuahtn:nexaction} o algoritmo aplica a próxima ação primitiva do plano no estado.
+Neste ponto, o jogador, na perspectiva do \textsc{Max}, realiza uma ação no estado.
+Após alterar o estado, o algoritmo gera todos os planos para \textsc{Min} a partir do novo estado, e realiza a chamada para o método $\mathit{AHTNMin}$.
+O método de $\mathit{AHTNMin}$ realiza as mesmas operações que o método de $\mathit{AHTNMax}$ mas com a perspectiva de \textsc{Min}.
+Seguindo, na linha~\ref{alg:meuahtn:avali}, o algoritmo verifica qual dos planos obteve a melhor função de avaliação. 
+Com isso, o algoritmo decide qual a melhor opção de plano.
+O melhor plano é retornado na linha~\ref{alg:meuahtn:retorno}.
+
+
+\begin{algorithm}
+	\caption{Pseudo código do algoritmo de AHTN implementado.}
+	\label{alg:meuahtn}
+ 	\begin{algorithmic}[1]		
+ 		\Function {ATHNMax}{$estado, planoMax, planoMin, deph$}
+	 		\If {$terminal(estado) \vee d \leq 0$} \label{alg:meuahtn:terminal}
+		 		\State	\Return $(planoMax, planoMin, avaliacao(estado))$
+	 		\EndIf
+	 		\State {$nextAction(planoMax)$} \label{alg:meuahtn:nexaction}
+	 		\State $(Pmax', Pmin', ev') = \perp, \perp, -\infty$
+			\ForAll{$plano \in getPlanosMin(estadoDoJogo)$} \label{alg:meuahtn:for}
+		 		\State $(Pmax, Pmin, ev) = \Call{AHTNMin}{(estado, planoMax, planoMin, deph-1)}$ \label{alg:meuahtn:ahtnmin}
+			 	\If {$ev' > ev$} \label{alg:meuahtn:avali}
+					\State $(Pmax', Pmin', ev') = (Pmax, Pmin, ev)$
+				\EndIf		 		 		
+		 	\EndFor
+		 	\State \Return $(Pmax', Pmin', ev')$ \label{alg:meuahtn:retorno}
+ 		\EndFunction
+ 	\end{algorithmic}
+ \end{algorithm}
+ 
+ 
+O método $\mathit{getAction}$ é responsável pela chamada do algoritmo de AHTN. 
+Ele realiza a chamada para o método de $\mathit{AHTNMax}$ para todos os planos possíveis no estado atual.
+O retorno indica qual plano tem a melhor função de avaliação.
+A primeira ação do plano com a melhor função de avaliação é a escolhida para ser executada. 
