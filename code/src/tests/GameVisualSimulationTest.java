@@ -35,9 +35,9 @@ public class GameVisualSimulationTest {
     public static void main(String args[]) throws Exception {
         UnitTypeTable utt = new UnitTypeTable();
         UnitTypeTable utt2 = new UnitTypeTable();
-        PhysicalGameState pgs = PhysicalGameState.load("maps/basesWorkers16x16.xml", utt);
+        //PhysicalGameState pgs = PhysicalGameState.load("maps/basesWorkers16x16.xml", utt);
         //PhysicalGameState pgs = PhysicalGameState.load("maps/basesWorkers8x8Obstacle.xml", utt);
-        //PhysicalGameState pgs = PhysicalGameState.load("maps/basesWorkersBarracks8x8.xml", utt);
+        PhysicalGameState pgs = PhysicalGameState.load("maps/basesWorkersBarracks8x8.xml", utt);
 
         GameState gs = new GameState(pgs, utt);
         int MAXCYCLES = 5000;
@@ -48,32 +48,32 @@ public class GameVisualSimulationTest {
         //AI ai1 = null;
         //AI ai2 = null;
         
-        myAHTN ai1 = new myAHTN(utt, new BFSPathFinding());
+        //myAHTN ai1 = new myAHTN(utt, new BFSPathFinding());
         //AI ai1 = new RandomAI();
         //AI ai1 = new RandomBiasedAI();
         //AI ai1 = new RangedRush(utt, new BFSPathFinding());
         //AI ai1 = new HeavyRush(utt, new BFSPathFinding());  
         //AI ai1 = new LightRush(utt, new BFSPathFinding());
         //AI ai1 = new WorkerRush(utt, new BFSPathFinding());
-        //AI ai1 = new MonteCarlo(100, -1, 100, new RandomBiasedAI(), new SimpleEvaluationFunction());
+        AI ai1 = new MonteCarlo(100, -1, 100, new RandomBiasedAI(), new SimpleEvaluationFunction());
         //AI ai1 = new IDRTMinimax(100, new SimpleEvaluationFunction());
         //AI ai1 = new PortfolioAI(new AI[]{new WorkerRush(utt), new LightRush(utt), new RangedRush(utt), new RandomBiasedAI()}, new boolean[]{true,true,true,false}, 100, -1, 400, new SimpleEvaluationFunction());
         
 
-        //myAHTN ai2 = new myAHTN(utt, new BFSPathFinding());
+        myAHTN ai2 = new myAHTN(utt, new BFSPathFinding());
         //AI ai2 = new RandomAI();
         //AI ai2 = new RandomBiasedAI();
         //AI ai2 = new RangedRush(utt, new BFSPathFinding());
         //AI ai2 = new HeavyRush(utt, new BFSPathFinding());  
         //AI ai2 = new LightRush(utt, new BFSPathFinding());
         //AI ai2 = new WorkerRush(utt, new BFSPathFinding());
-        AI ai2 = new MonteCarlo(100, -1, 100, new RandomBiasedAI(), new SimpleEvaluationFunction());
+        //AI ai2 = new MonteCarlo(100, -1, 100, new RandomBiasedAI(), new SimpleEvaluationFunction());
         //AI ai2 = new IDRTMinimax(100, new SimpleEvaluationFunction());
         //AI ai2 = new PortfolioAI(new AI[]{new WorkerRush(utt), new LightRush(utt), new RangedRush(utt), new RandomBiasedAI()}, new boolean[]{true,true,true,false}, 100, -1, 400, new SimpleEvaluationFunction());
         
         JFrame w = PhysicalGameStatePanel.newVisualizer(gs,640,640,false,PhysicalGameStatePanel.COLORSCHEME_BLACK);
 //        JFrame w = PhysicalGameStatePanel.newVisualizer(gs,640,640,false,PhysicalGameStatePanel.COLORSCHEME_WHITE);
-
+        
         long nextTimeToUpdate = System.currentTimeMillis() + PERIOD;
         do{
             if (System.currentTimeMillis()>=nextTimeToUpdate) {
@@ -95,7 +95,7 @@ public class GameVisualSimulationTest {
             }
         }while(!gameover && gs.getTime()<MAXCYCLES);
         
-        //System.out.println("Tempo Medio de execução: " + ai2.tempoMedioAcoes());
+        System.out.println("Tempo Medio de execução: " + ai2.tempoMedioAcoes());
         //System.out.println("Rounds Passados: " + ai2.getRounds());
        // System.out.println("Rounds Calculados " + ai2.getRoundsPerformed());
         System.out.println("Game Over");

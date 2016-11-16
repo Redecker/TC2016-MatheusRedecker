@@ -12,23 +12,25 @@ Cada adversário foi utilizado dez vezes em cada mapa, e em cada lado do jogo.
 
 \section{Mapa 1}
 
-
-O mapa 1 tem o tamanho de 16 por 16
-Os experimentos foram executados em um mapa 16 por 16 e com o algoritmo começando dos dois lados do jogo, o lado azul na parte superior, e o lado vermelho na parte inferior. Cada jogador inicia possuindo uma base, um trabalhador e dois recursos próximos a sua base.
-
-
-descreve o mapa.
+No primeiro mapa, cada jogador inicia com uma base, um \textit{worker} e dois recursos próximos a sua base.
+O mapa é formado por 16x16 posições.
+O lado azul e o lado vermelho tem a mesma formação dos componentes iniciais.
+A Figura~\ref{fig:mapa16x16} ilustra a tela do jogo com a configuração inicial do mapa.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=.6\textwidth]{fig/map16x16.pdf}
+	\includegraphics[width=.5\textwidth]{fig/map16x16.pdf}
 	\caption{Configuração inicial do mapa 1.}
 	\label{fig:mapa16x16}
 \end{figure}
 
 
-explica a tabela
-
+A Tabela~\ref{tab:mapa1} ilustra os resultados obtidos com o algoritmo de AHTN contra as técnicas do MicroRTS.
+Quando o domínio 1 é executado do lado vermelho, ocorre a criação de duas unidades de ataque ao invés de uma.
+Isso ocorre porque o tempo de criação da unidade é maior que o da geração de outra ação do algoritmo.
+Quando o algoritmo é invocado novamente, ele não tem conhecimento da unidade que está preste a ser criada, e assim ocorre a duplicação dessa outra unidade.
+O tempo de espera para que o algoritmo gere outra ação foi alterado para tentar remover esse problema.
+Mas com um tempo maior, as outras ações eram afetadas, e o algoritmo se torna menos vitorioso.
 
 \begin{table}[ht]
 	\centering
@@ -36,7 +38,7 @@ explica a tabela
 	\label{tab:mapa1}
 	\begin{tabular}{|c|cc|cc|}
 		\hline
-		\textbf{}           & \multicolumn{2}{c|}{\textbf{Estratégia 1}}  & \multicolumn{2}{c|}{\textbf{Estratégia 2}}  \\ \hline
+		\textbf{}           & \multicolumn{2}{c|}{\textbf{Domínio 1}}  & \multicolumn{2}{c|}{\textbf{Domínio 2}}  \\ \hline
 		\textbf{Adversário} & \textbf{Lado Azul} & \textbf{Lado Vermelho} & \textbf{Lado Azul} & \textbf{Lado Vermelho} \\ \hline
 		RandomIA            & 100\%              & 100\%                  & 100\%              & 100\%                  \\ \hline
 		RandomBiasedIA      & 80\%               & 100\%                  & 100\%              & 100\%                  \\ \hline
@@ -50,17 +52,34 @@ explica a tabela
 	\end{tabular}
 \end{table}
 
-conclui alguma coisa
+A partir da análise dos resultados é possível observar que há um ganho do lado vermelho em relação ao azul nos dois domínios. 
+No domínio 1 o motivo foi a duplicação da unidade.
+Já no domínio 2, a ação de construir o quartel, gerada pela camada de abstração do MicroRTS, encontra uma posição mais favorável do lado vermelho.
+Fazendo com que o lado vermelho tenha uma melhor fluidez na hora da criação das tropas.
+
+O domínio 2 consegue melhores resultados do que o domínio 1.
+Adversários que não são vencidos no lado azul passam a ser vencidos com o segundo domínio, e os resultados do lado vermelho são consolidados.
 
 \section{Mapa 2}
 
+Neste mapa, cada jogador inicia com uma base, um \textit{worker}, um quartel e um recurso perto de sua base.
+O mapa é composto por 8x8 posições.
+O quartel está construído no limite superior do mapa para o jogador azul, e no limite inferior do mapa para o jogador vermelho.
+A Figura~\ref{fig:mapa8x8quartel} ilustra a tela do jogo com a configuração inicial do mapa.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=.6\textwidth]{fig/map8x8quartel.pdf}
+	\includegraphics[width=.5\textwidth]{fig/map8x8quartel.pdf}
 	\caption{Configuração inicial do mapa 2.}
 	\label{fig:mapa8x8quartel}
 \end{figure}
+
+A Tabela~\ref{tab:mapa2} ilustra os resultados obtidos neste mapa.
+Por conta do mapa ser pequeno em relação ao anterior, não há grande diferença entre os domínios.
+O jogo acaba rápido, pois as técnicas criam unidades e logo encontram as unidades adversárias.
+Mais uma vez o lado vermelho tem larga vantagem sobre o lado azul. 
+Isso acontece pelo fato de que, no lado vermelho, as técnicas do MicroRTS atacam rapidamente, o que não acontece quando as técnicas estão do lado azul.
+A técnica do Minimax por exemplo, no lado azul ela cria unidades de ataque mas não envia para atacar, no lado vermelho as tropas são imediatamente postas ao ataque.
 
 \begin{table}[ht]
 	\centering
@@ -68,7 +87,7 @@ conclui alguma coisa
 	\label{tab:mapa2}
 	\begin{tabular}{|c|cc|cc|}
 		\hline
-		\textbf{}           & \multicolumn{2}{c|}{\textbf{Estratégia 1}}  & \multicolumn{2}{c|}{\textbf{Estratégia 2}}  \\ \hline
+		\textbf{}           & \multicolumn{2}{c|}{\textbf{Domínio 1}}  & \multicolumn{2}{c|}{\textbf{Domínio 2}}  \\ \hline
 		\textbf{Adversário} & \textbf{Lado Azul} & \textbf{Lado Vermelho} & \textbf{Lado Azul} & \textbf{Lado Vermelho} \\ \hline
 		RandomIA            & 100\%              & 100\%                  & 100\%              & 100\%                  \\ \hline
 		RandomBiasedIA      & 40\%               & 80\%                   & 80\%               & 100\%                  \\ \hline
@@ -78,18 +97,30 @@ conclui alguma coisa
 		WorkerRush          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
 		MonteCarlo          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
 		Minimax             & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
-		Portfolio           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
+		Portfolio           & 0\%                & 60\%                  & 0\%                & 80\%                  \\ \hline
 	\end{tabular}
 \end{table}
 
+
 \section{Mapa 3}
+
+Neste mapa, cada jogador inicia com uma base, um \textit{worker}, e um recurso perto de sua base.
+O mapa é composto por 8x8 posições.
+Além dos componentes dos jogadores, há posições obstáculos no centro do mapa.
+Os obstáculos não são posições validas para os jogadores.
+A Figura~\ref{fig:mapa8x8obsta} ilustra a tela do jogo com a configuração inicial do mapa.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=.6\textwidth]{fig/map8x8obsta.pdf}
+	\includegraphics[width=.5\textwidth]{fig/map8x8obsta.pdf}
 	\caption{Configuração inicial do mapa 3.}
 	\label{fig:mapa8x8obsta}
 \end{figure}
+
+A Tabela~\ref{tab:mapa3} ilustra os resultados obtidos neste mapa.
+Os resultados mostrar, outra vez, a vantagem do lado vermelho no jogo.
+Do mesmo modo que no mapa 1, a construção do quartel é mais favorável do lado vermelho.
+A colocação de obstáculos no mapa não alterou a maneira com que as técnicas se comportam.
 
 \begin{table}[ht]
 	\centering
@@ -97,7 +128,7 @@ conclui alguma coisa
 	\label{tab:mapa3}
 	\begin{tabular}{|c|cc|cc|}
 		\hline
-		\textbf{}           & \multicolumn{2}{c|}{\textbf{Estratégia 1}}  & \multicolumn{2}{c|}{\textbf{Estratégia 2}}  \\ \hline
+		\textbf{}           & \multicolumn{2}{c|}{\textbf{Domínio 1}}  & \multicolumn{2}{c|}{\textbf{Domínio 2}}  \\ \hline
 		\textbf{Adversário} & \textbf{Lado Azul} & \textbf{Lado Vermelho} & \textbf{Lado Azul} & \textbf{Lado Vermelho} \\ \hline
 		RandomIA            & 100\%              & 100\%                  & 100\%              & 100\%                  \\ \hline
 		RandomBiasedIA      & 100\%              & 80\%                   & 100\%              & 80\%                   \\ \hline
@@ -106,7 +137,7 @@ conclui alguma coisa
 		LightRush           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
 		WorkerRush          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
 		MonteCarlo          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
-		Minimax             & 0\%                & 100\%                  & 100\%              & 80\%                   \\ \hline
+		Minimax             & 0\%                & 80\%                  & 80\%              & 80\%                   \\ \hline
 		Portfolio           & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
 	\end{tabular}
 \end{table}
@@ -114,15 +145,21 @@ conclui alguma coisa
 
 \section{Tamanho de cada IA}
 
+Algumas técnicas podem precisar de muito esforço de programação para serem implementadas, já outras podem ser feitas de maneira mais rápida e ter a mesma eficiência.
+Uma maneira de comparar as técnicas é através do tamanho do código.
+Assim é possível ver o esforço empregado na criação das técnicas.
+Pois quanto maior o tamanho, maior o número de linhas de código necessários para a implementação da técnica.
+A Tabela~\ref{tab:tamanho} ilustra o tamanho de cada técnica após aplicado um algoritmo de compressão de dados.
+
 \begin{table}[ht]
 	\centering
-	\caption{Tamanho  do código de cada técnica.}
+	\caption{Tamanho do código de cada técnica.}
 	\label{tab:tamanho}
 	\begin{tabular}{|c|c|}
 		\hline
 		\textbf{Adversário} & \textbf{Tamanho} \\ \hline
-		Domínio 1           & 11,3 kB          \\ \hline
-		Domínio 2           & 11,5 kB          \\ \hline
+		Domínio 1           & 19,9 kB          \\ \hline
+		Domínio 2           & 20,1 kB          \\ \hline
 		RandomIA            & 4,0 kB           \\ \hline
 		RandomBiasedIA      & 4,6 kB           \\ \hline
 		RangedRush          & 13,7 kB          \\ \hline
@@ -135,22 +172,29 @@ conclui alguma coisa
 	\end{tabular}
 \end{table}
 
-\section{tempo de geração das ações do algoritmo}
+A implementação do algoritmo de AHTN é a técnica com maior tamanho.
+Isso vem do fato de que é preciso integrar com o algoritmo as classes do JSHOP2 e a camada de abstração do MicroRTS.
+Fazendo com que o tamanho do código cressa.
+
+A técnica com maior tamanho do MicroRTS é a MonteCarlo.
+Contra o algoritmo de AHTN, essa técnica venceu sempre nos mapas 2 e 3, e perdeu no mapa 1 para o domínio 2.
+A técnica WorkerRush é a única que não perde em nenhum cenário de jogo.
+Ela possui tamanho perto da media dos tamanhos.
+As técnicas mais simples, que apenas utilizam movimentos aleatórios, são as técnicas de menor tamanho, e ainda em alguns casos conseguem vencer.
+
+\section{Tempo de geração das ações}
+
+Em jogos RTS, o tempo de geração de uma ação é fundamental.
+Técnicas que demoram muito tempo para gerar as ações tendem a ser superadas.
+Isso ocorre porque o jogador adversário tem mais tempo para executar suas ações.
+Todas as técnicas testadas do MicroRTS levam poucos milissegundos para gerar uma ação.
 
 Mostrar o tempo de gerar as ações que é alto no inicio e baixo no final
 colocar gráficos aqui 
 
 
-tempo para gerar as ações
-da pra fazer uma tabela aqui com o tempo de cada técnica
+Conclusão!!!!!
+O que era esperado pelo fato de que o domínio 2 treina mais unidades de ataque.
+As técnicas de WorkerRush e Portfolio não são vencidas em nenhum dos dois domínios.
 
-
-
-\begin{itemize}
-	\item BenchMark
-	\item explicação dos resultados
-	\item porcentagem de vitorias
-	\item tempo de gerar cada ação
-	\item tamanho de cada IA	
-\end{itemize}
 
