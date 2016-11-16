@@ -51,7 +51,7 @@ public class myAHTN extends AbstractionLayerAI {
     
     private boolean print = false;
     
-    private static String strategy = "HighLevel2";
+    private static String strategy = "HighLevel1";
     
     private static long totalTime = 0;
     private static long roundsPerformed = 0;
@@ -106,19 +106,16 @@ public class myAHTN extends AbstractionLayerAI {
     }    
 	
 	public Node AHTNMax(Plano planMax, int ponteiroMax, Plano planMin, int ponteiroMin, int deph){
-		print("Entrei MAX");
-		print("O estado do jogo é esse: ");
-		print(planMax.getMeuEstadoJogo().toString());
-		print("A profundidade é: " + deph);
-		print("Plano que eu to iterando: " + planMax.toString());
+		//print("Entrei MAX");
+		//print("O estado do jogo é esse: ");
+		//print(planMax.getMeuEstadoJogo().toString());
+		//print("A profundidade é: " + deph);
+		//print("Plano que eu to iterando: " + planMax.toString());
 		
-		if(planMax.getMeuEstadoJogo() == null){
-			System.out.println("MAX DEU PAU!!!!");
-		}
 		
 		//se o estado é terminal retorna os planos de max e min, e a utilidade do estado s
 		if(planMax.getMeuEstadoJogo().evaluation() < 0 || deph == 0){
-			print("MAX Retornei porque o jogo acabou ou profundidade");
+			//print("MAX Retornei porque o jogo acabou ou profundidade");
 			Node toReturn = new Node(planMax, planMin, planMax.getMeuEstadoJogo().evaluation());
 			toReturn.setAcao(planMax.getOperacaoPonteiro(0));
 			return toReturn;
@@ -128,16 +125,16 @@ public class myAHTN extends AbstractionLayerAI {
 		//altera o ponteiro e muda para perspectiva de Min
 		int next = nextAction(planMax, ponteiroMax); 
 		if(next != -1){		
-			print("MAX ação que eu fiz: " + planMax.getOperacaoPonteiro(ponteiroMax));
-			print("MAX Novo estado do jogo de acordo com a ação que eu fiz");
-			print(planMax.getMeuEstadoJogo().toString());
+			//print("MAX ação que eu fiz: " + planMax.getOperacaoPonteiro(ponteiroMax));
+			//print("MAX Novo estado do jogo de acordo com a ação que eu fiz");
+			//print(planMax.getMeuEstadoJogo().toString());
 			
-			print("Vou chamar para o MIN");
+			//print("Vou chamar para o MIN");
 			ArrayList<Plano> planosDeMin = getPlanosEstadoJogo(planMax.getInimigoEstadoJogo(), "MIN");
 			
 			Node evaluation = new Node(null,null, -999999);
 			for(Plano planoMin : planosDeMin){
-				print("Chamei para MIN");
+				//print("Chamei para MIN");
 				//setar o estadoDoJogo
 				planoMin.setMeuEstadoJogo(planMax.getInimigoEstadoJogo().clone(planMax.getInimigoEstadoJogo()));
 				planoMin.setInimigoEstadoJogo(planMax.getMeuEstadoJogo().clone(planMax.getMeuEstadoJogo()));
@@ -154,7 +151,7 @@ public class myAHTN extends AbstractionLayerAI {
 		}
 		//se não tiver acabou esse plano
 		else{
-			print("MAX Retornei porque acabou o plano");
+			//print("MAX Retornei porque acabou o plano");
 			Node toReturn = new Node(planMax, planMin, planMax.getMeuEstadoJogo().evaluation());
 			toReturn.setAcao(planMax.getOperacaoPonteiro(0));
 			return toReturn; 
@@ -162,19 +159,17 @@ public class myAHTN extends AbstractionLayerAI {
 	}
     
 	public Node AHTNMin(Plano planMax, int ponteiroMax, Plano planMin,  int ponteiroMin, int deph){
-		print("Entrei MIN");
-		print("O estado do jogo é esse: ");
-		print(planMin.getMeuEstadoJogo().toString());
-		print("A profundidade é: " + deph);
-		print("Plano que eu to iterando: " + planMin.toString());
+		//print("Entrei MIN");
+		//print("O estado do jogo é esse: ");
+		//print(planMin.getMeuEstadoJogo().toString());
+		//print("A profundidade é: " + deph);
+		//print("Plano que eu to iterando: " + planMin.toString());
 		
-		if(planMin.getMeuEstadoJogo() == null){
-			System.out.println("MIN DEU PAU!!!!");
-		}
+		
 		//se o estado é terminal retorna os planos de max e min, e a utilidade do estado s
-		System.out.println(planMin);
+		//System.out.println(planMin);
 		if(planMin.getMeuEstadoJogo().evaluation() < 0 || deph == 0){
-			print("MIN Retornei porque o jogo acabou ou profundidade");
+			//print("MIN Retornei porque o jogo acabou ou profundidade");
 			Node toReturn = new Node(planMax, planMin, planMin.getMeuEstadoJogo().evaluation());
 			toReturn.setAcao(planMin.getOperacaoPonteiro(0));
 			return toReturn;
@@ -184,16 +179,16 @@ public class myAHTN extends AbstractionLayerAI {
 		//altera o ponteiro e muda para perspectiva de Max
 		int next = nextAction(planMin, ponteiroMin); 
 		if(next != -1){			
-			print("MIN ação que eu fiz: " + planMin.getOperacaoPonteiro(ponteiroMin));
-			print("MAX Novo estado do jogo de acordo com a ação que eu fiz");
-			print(planMax.getMeuEstadoJogo().toString());
+			//print("MIN ação que eu fiz: " + planMin.getOperacaoPonteiro(ponteiroMin));
+			//print("MAX Novo estado do jogo de acordo com a ação que eu fiz");
+			//print(planMax.getMeuEstadoJogo().toString());
 			
-			print("Vou chamar para o MAX");
+			//print("Vou chamar para o MAX");
 			ArrayList<Plano> planosDeMax = getPlanosEstadoJogo(planMin.getInimigoEstadoJogo(), "MAX");
 			
 			Node evaluation = new Node(null,null, 999999);
 			for(Plano planoMax : planosDeMax){
-				print("Chamei para MAX");
+				//print("Chamei para MAX");
 				
 				//setar o estadoDoJogo
 				planoMax.setMeuEstadoJogo(planMin.getInimigoEstadoJogo().clone(planMin.getInimigoEstadoJogo()));
@@ -211,7 +206,7 @@ public class myAHTN extends AbstractionLayerAI {
 		}
 		//se não tiver acabou esse plano
 		else{
-			print("MIN Retornei porque acabou o plano");
+			//print("MIN Retornei porque acabou o plano");
 			Node toReturn = new Node(planMax, planMin, planMin.getMeuEstadoJogo().evaluation());
 			toReturn.setAcao(planMin.getOperacaoPonteiro(0));
 			return toReturn;
@@ -367,7 +362,7 @@ public class myAHTN extends AbstractionLayerAI {
 	
 		if(rounds % roundsToAction == 0){		
 			long startTime = System.nanoTime();
-			print("Novo round");
+			//print("Novo round");
 			//inicia as classes para controle do jogo
 			//inicia componentes do jogo global
 			gamestate = gs;

@@ -23,7 +23,7 @@ O domínio foi pensado para ter apenas um \textit{worker} para realizar a coleta
 
 A modelagem do domínio começa pela descrição dos operadores.
 Cada ação que pode ser executada dentro do jogo é descrita como um operador no domínio.
-Por exemplo, as ações de construir um quartel, e coletar recursos, são os operadores $!buildbarrack$ e $!getresource$ respectivamente.
+Por exemplo, as ações de construir um quartel, e coletar recursos, são transformadas nos operadores $!buildbarrack$ e $!getresource$, respectivamente.
 Já os métodos servem para determinar ações de mais alto nível, e devem respeitar a estratégia definida.
 Por exemplo, a estratégia define que apenas um quartel é construído, então o método deve ter uma precondição para verificar se não existe outro quartel no jogo, caso não tenha, ainda é preciso checar se há recursos suficientes para construir. 
 Cada método pode chamar outros métodos.
@@ -32,7 +32,14 @@ Por exemplo, é necessário um quartel para treinar uma unidade de ataque, quand
 
 Para ganhar o jogo é preciso atacar o adversário, por essa razão o método utilizado como objetivo no problema de planejamento é o $ataqueranged$.
 Esse método desencadeia todas as outras chamadas de método dependendo do estado do ambiente.
-No Apêndice~\ref{ap:estra1} está a descrição deste domínio que é chamado de Estratégia 1.
+No Apêndice~\ref{ap:estra1} está a descrição deste domínio, que é chamado de domínio 1.
+
+O domínio 1 treina apenas uma unidade de ataque, o que acaba limitando o poder de ataque da estratégia.
+Para tentar solucionar esse problema, outro domínio foi modelado.
+Esse domínio tem a mesma estratégia do domínio anterior, com a diferença de que mais de uma unidade de ataque é criada.
+Assim, enquanto uma unidade está atacando, outra pode estar sendo treinada.
+No Apêndice~\ref{ap:estra2} está a descrição deste domínio, que é chamado de domínio 2.
+
 
 \section{Heurística}
 
@@ -43,13 +50,12 @@ Quanto maior o número de unidades disponíveis no ambiente melhor a função de
 As unidades são ponderadas pelo custo de treinamento ou de construção.
 Por exemplo, um quartel precisa de 5 unidades de recurso para ser construído, enquanto um \textit{worker} necessita só de 1 para ser treinado, por isso o quartel acaba tendo peso 5, e o \textit{worker} peso 1. 
 Essa heurística tem um problema, pois o jogador adversário pode estar com o dobro de unidades que isso não é levado em consideração, e nesse cenário o jogador adversário estaria na frente. 
-Essa heurística é chamada de heurística 1.
 
 Para resolver o problema das unidades do inimigo não serem levadas em consideração.
 A segunda heurística utiliza a mesma maneira de calcular da primeira heurística, mas também calcula esse valor para as unidades do adversário. 
 Com os dois valores, o valor das suas unidades é subtraído do valor das unidades do adversário. 
 Assim em um cenário onde o jogo está com mais tropas a favor, o valor de utilidade é positivo, e caso o contrario negativo.
-Essa heurística é chamada de heurística 2.
+Esta heurística foi a escolhida para ser utilizada na implementação.
 
 Se um jogador não tem uma base, e não tem recursos para construir uma, o jogo está perdido, pois a base é necessário para armazenar os recursos. Nesse caso, as duas heurísticas retornam um valor negativo, indicando o fim do jogo. 
 
@@ -108,7 +114,7 @@ Com isso, o algoritmo decide qual a melhor opção de plano.
 O melhor plano é retornado na linha~\ref{alg:meuahtn:retorno}.
 
 
-\begin{algorithm}
+\begin{algorithm}[ht]
 	\caption{Pseudo código do algoritmo de AHTN implementado.}
 	\label{alg:meuahtn}
  	\begin{algorithmic}[1]		
@@ -134,3 +140,11 @@ O método $\mathit{getAction}$ é responsável pela chamada do algoritmo de AHTN
 Ele realiza a chamada para o método de $\mathit{AHTNMax}$ para todos os planos possíveis no estado atual.
 O retorno indica qual plano tem a melhor função de avaliação.
 A primeira ação do plano com a melhor função de avaliação é a escolhida para ser executada. 
+
+O método $\mathit{getAction}$ é chamado a todo o ciclo para decidir qual a jogada deve ser realizada.
+As ações geralmente não são realizadas em um clico.
+Por exemplo, treinar uma unidade leva alguns ciclos.
+Assim o algoritmo gera muitas vezes a mesma ação.
+Foi definido um tempo de 50 ciclos para gerar uma nova ação.
+Com isso o número de ações geradas repetidamente foi reduzido.
+
