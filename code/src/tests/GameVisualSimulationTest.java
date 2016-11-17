@@ -48,7 +48,7 @@ public class GameVisualSimulationTest {
         //AI ai1 = null;
         //AI ai2 = null;
         
-        myAHTN ai1 = new myAHTN(utt, new BFSPathFinding());
+        //myAHTN ai1 = new myAHTN(utt, new BFSPathFinding());
         //AI ai1 = new RandomAI();
         //AI ai1 = new RandomBiasedAI();
         //AI ai1 = new RangedRush(utt, new BFSPathFinding());
@@ -57,7 +57,7 @@ public class GameVisualSimulationTest {
         //AI ai1 = new WorkerRush(utt, new BFSPathFinding());
         //AI ai1 = new MonteCarlo(100, -1, 100, new RandomBiasedAI(), new SimpleEvaluationFunction());
         //AI ai1 = new IDRTMinimax(100, new SimpleEvaluationFunction());
-        //AI ai1 = new PortfolioAI(new AI[]{new WorkerRush(utt), new LightRush(utt), new RangedRush(utt), new RandomBiasedAI()}, new boolean[]{true,true,true,false}, 100, -1, 400, new SimpleEvaluationFunction());
+        AI ai1 = new PortfolioAI(new AI[]{new WorkerRush(utt), new LightRush(utt), new RangedRush(utt), new RandomBiasedAI()}, new boolean[]{true,true,true,false}, 100, -1, 400, new SimpleEvaluationFunction());
         
 
         //myAHTN ai2 = new myAHTN(utt, new BFSPathFinding());
@@ -66,9 +66,9 @@ public class GameVisualSimulationTest {
         //AI ai2 = new RangedRush(utt, new BFSPathFinding());
         //AI ai2 = new HeavyRush(utt, new BFSPathFinding());  
         //AI ai2 = new LightRush(utt, new BFSPathFinding());
-        //AI ai2 = new WorkerRush(utt, new BFSPathFinding());
+        AI ai2 = new WorkerRush(utt, new BFSPathFinding());
         //AI ai2 = new MonteCarlo(100, -1, 100, new RandomBiasedAI(), new SimpleEvaluationFunction());
-        AI ai2 = new IDRTMinimax(100, new SimpleEvaluationFunction());
+        //AI ai2 = new IDRTMinimax(100, new SimpleEvaluationFunction());
         //AI ai2 = new PortfolioAI(new AI[]{new WorkerRush(utt), new LightRush(utt), new RangedRush(utt), new RandomBiasedAI()}, new boolean[]{true,true,true,false}, 100, -1, 400, new SimpleEvaluationFunction());
         
         JFrame w = PhysicalGameStatePanel.newVisualizer(gs,640,640,false,PhysicalGameStatePanel.COLORSCHEME_BLACK);
@@ -78,10 +78,13 @@ public class GameVisualSimulationTest {
         do{
             if (System.currentTimeMillis()>=nextTimeToUpdate) {
                 PlayerAction pa1 = ai1.getAction(0, gs);
+
+                long startTime = System.currentTimeMillis();
                 PlayerAction pa2 = ai2.getAction(1, gs);
+                long endTime = System.currentTimeMillis();
+                System.out.println(endTime-startTime);
                 gs.issueSafe(pa1);
                 gs.issueSafe(pa2);
-                
                 // simulate:
                 gameover = gs.cycle();
                 w.repaint();

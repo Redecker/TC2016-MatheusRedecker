@@ -182,19 +182,16 @@ A técnica WorkerRush é a única que não perde em nenhum cenário de jogo.
 Ela possui tamanho perto da media dos tamanhos.
 As técnicas mais simples, que apenas utilizam movimentos aleatórios, são as técnicas de menor tamanho, e ainda em alguns casos conseguem vencer.
 
-\todo[inline]{está completo até aqui!!!!!}
-
 \section{Tempo de geração das ações}
 
 Em jogos RTS, o tempo de geração de uma ação é fundamental.
 Técnicas que demoram muito tempo para gerar as ações tendem a ser superadas.
 Isso ocorre porque o jogador adversário tem mais tempo para executar suas ações.
-Todas as técnicas testadas do MicroRTS levam poucos milissegundos para gerar uma ação.
 
 A técnica de LightRush foi escolhida como adversário para avaliar o tempo de geração das ações no algoritmo de AHTN.
 Essa técnica foi escolhida por ter o mesmo comportamento contra os dois domínios.
 O mapa 1 foi o mapa utilizado para este teste.
-A Figura~\ref{fig:tempo} ilustra o gráfico com os tempos obtidos para os dois domínios.
+A Figura~\ref{fig:tempo} ilustra o gráfico com os tempos obtidos para os domínios.
 
 \begin{figure}[ht]
 	\centering
@@ -203,8 +200,17 @@ A Figura~\ref{fig:tempo} ilustra o gráfico com os tempos obtidos para os dois d
 	\label{fig:tempo}
 \end{figure}
 
-O tempo de geração de uma ação no algoritmo de AHTN explicar o gráfico,
-picos altos são o começo do jogo, onde precisa fazer quartel e criar o ranged, como no dominio 1 só faz um o custo é menor, como o dominio 2 faz mais de um o custo é maior.....
+O gráfico mostra que no inicio do jogo o tempo para gerar uma ação é elevado.
+No inicio do jogo, o jogador tem apenas uma base e um \textit{worker}.
+Para conseguir vencer o adversário é preciso construir um quartel, e treinar unidades de ataque.
+Ao passar das jogadas, o tempo para gerar as jogadas diminui, isso ocorre porque nesse momento o cenário de jogo é diferente.
+Agora o jogador já tem tropas de ataque e precisar atacar.
+No domínio 1 o tempo de gerar a unidade de ataque é menor do que no domínio 2.
+Isso acontece, pelo fato de que no domínio 1, apenas uma unidade é criada, e com isso os planos gerados são diferentes, já no domínio 2 mais de uma unidade é criada.
+O tempo de geração ao final do jogo é semelhante, pois as duas abordagens estão atacando o adversário.
 
+As técnicas do MicroRTS conseguem gerar as ações em poucos milissegundos.
+O algoritmo implementado apresenta um custo para geração das ações maior.
+Isso vem do fato de que a cada troca de perspectiva do algoritmo os planos são gerados novamente.
 
 

@@ -2,10 +2,46 @@
 
 \chapter{\label{chap:ativ}Objetivos}
 
+Atualmente, há dificuldade na utilização de técnicas de IA para jogos em tempo real.
+Isso ocorre pelo fato que as IAs precisam ser capazes de resolver tarefas de maneira rápida e que façam sentido dentro do jogo.
+Geralmente, o espaço de estados dos jogos é enorme, isso faz com que não se tenha tempo de explorar todas as possibilidades de solução \cite{millington2009artificial}.
+
+\section{Objetivo Geral}
+O objetivo geral deste trabalho é implementar o algoritmo de planejamento AHTN \cite{ontanon2015adversarial} no jogo MicroRTS. O algoritmo de AHTN combina técnicas de HTN com o algoritmo de \textit{minimax serach}. Ao final da implementação, o objetivo é conseguir comparar o algoritmo com as demais técnicas presentes no MicroRTS.
+
+\section{Objetivos Específicos}\label{obj:esp}
+Os Objetivos são classificados em dois grupos, fundamentais e desejáveis. 
+Os objetivos fundamentais representam a base do projeto.
+Os objetivos desejáveis, representam objetivos destinados a tentar melhorar os resultados obtidos nos objetivos fundamentais. 
+
+\subsection{Objetivos fundamentais} \label{sec:objfunda}
 
 \begin{itemize}
-	\item - Objetivos
-	\item - Execução do projeto
-	\item - Objetivos concluidos
-	\item - Objetivos mudados
+	\item Implementar o algoritmo de AHTN no ambiente do jogo MicroRTS.
+	\item Comparar os resultados obtidos com as técnicas presentes no MicroRTS.
+	\item Enviar a implementação para o autor do MicroRTS como uma sugestão de IA para o jogo.
 \end{itemize}
+
+\subsection{Objetivos desejáveis} \label{sec:objdesej}
+\begin{itemize}
+	\item Integrar um algoritmo de aprendizado ao algoritmo de AHTN.
+	\item Comprar os resultados obtidos com a implementação do AHTN.
+	\item Escrever um artigo para um \textit{workshop} apresentando a unificação das técnicas de planejamento com aprendizado por reforço.
+\end{itemize}
+
+\section{Objetivos alcançados}
+
+Este trabalho seguiu o plano das atividades proposto no Trabalho de Conclusão 1.
+O objetivo de implementar o algoritmo de AHTN ao MicroRTS foi completo.
+Com isso, foi possível comprar os resultados com as técnicas já implementas na plataforma.
+O envio da implementação para o autor do MicroRTS será feita após a restruturação e organização do código para entrega do volume final.
+
+Muito tempo foi gasto na união do MicroRTS com o JSHOP2. 
+Com isso os objetivos desejáveis, descritos na Seção~\ref{sec:objdesej}, sofreram reajustes.
+Não foi possível acoplar ao algoritmo de AHTN um algoritmo de \textit{Machine Learning}.
+Por essa razão, também não foi possível comprar as duas abordagens.
+O objetivo de escrever um artigo será reavaliado.
+A reavaliação servirá para ver se este trabalho tem conteúdo para a publicação de um artigo.
+
+
+

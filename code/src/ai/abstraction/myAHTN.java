@@ -5,6 +5,7 @@ import ai.abstraction.AbstractionLayerAI;
 import ai.abstraction.pathfinding.PathFinding;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -361,7 +362,8 @@ public class myAHTN extends AbstractionLayerAI {
 	public PlayerAction getAction(int player, GameState gs) throws IOException {
 	
 		if(rounds % roundsToAction == 0){		
-			long startTime = System.nanoTime();
+			//long startTime = System.nanoTime();
+			long startTime = System.currentTimeMillis();
 			//print("Novo round");
 			//inicia as classes para controle do jogo
 			//inicia componentes do jogo global
@@ -397,10 +399,13 @@ public class myAHTN extends AbstractionLayerAI {
 			//System.out.println("Essa ação que vou executar: " + evaluation.getAcao());
 			perfromActions(evaluation.getAcao(), gs, gs.getPhysicalGameState(), meuPlayer);
 			
-			long endTime = System.nanoTime();			
+			//long endTime = System.nanoTime();
+			long endTime = System.currentTimeMillis();
 			roundsPerformed++;
 			totalTime+= (endTime -startTime);
-			System.out.println(rounds + ";" + (endTime-startTime)/1000000);
+			DecimalFormat df = new DecimalFormat("#.000");
+			System.out.println(rounds + ";" + (double) (endTime*1.0-startTime*1.0)/1000);///1000000000);
+			//System.out.println(rounds + ";" + (endTime-startTime)/1000000000);
 			//System.out.println((endTime-startTime)/1000000);
 		}
 		
