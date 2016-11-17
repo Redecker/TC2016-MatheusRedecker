@@ -400,7 +400,7 @@ public class myAHTN extends AbstractionLayerAI {
 			long endTime = System.nanoTime();			
 			roundsPerformed++;
 			totalTime+= (endTime -startTime);
-			//System.out.println(rounds + ";" + (endTime-startTime)/1000000);
+			System.out.println(rounds + ";" + (endTime-startTime)/1000000);
 			//System.out.println((endTime-startTime)/1000000);
 		}
 		

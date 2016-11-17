@@ -182,6 +182,8 @@ A técnica WorkerRush é a única que não perde em nenhum cenário de jogo.
 Ela possui tamanho perto da media dos tamanhos.
 As técnicas mais simples, que apenas utilizam movimentos aleatórios, são as técnicas de menor tamanho, e ainda em alguns casos conseguem vencer.
 
+\todo[inline]{está completo até aqui!!!!!}
+
 \section{Tempo de geração das ações}
 
 Em jogos RTS, o tempo de geração de uma ação é fundamental.
@@ -189,12 +191,20 @@ Técnicas que demoram muito tempo para gerar as ações tendem a ser superadas.
 Isso ocorre porque o jogador adversário tem mais tempo para executar suas ações.
 Todas as técnicas testadas do MicroRTS levam poucos milissegundos para gerar uma ação.
 
-Mostrar o tempo de gerar as ações que é alto no inicio e baixo no final
-colocar gráficos aqui 
+A técnica de LightRush foi escolhida como adversário para avaliar o tempo de geração das ações no algoritmo de AHTN.
+Essa técnica foi escolhida por ter o mesmo comportamento contra os dois domínios.
+O mapa 1 foi o mapa utilizado para este teste.
+A Figura~\ref{fig:tempo} ilustra o gráfico com os tempos obtidos para os dois domínios.
 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=.9\textwidth]{fig/graph.pdf}
+	\caption{Tempo de geração das ações para os dois domínios.}
+	\label{fig:tempo}
+\end{figure}
 
-Conclusão!!!!!
-O que era esperado pelo fato de que o domínio 2 treina mais unidades de ataque.
-As técnicas de WorkerRush e Portfolio não são vencidas em nenhum dos dois domínios.
+O tempo de geração de uma ação no algoritmo de AHTN explicar o gráfico,
+picos altos são o começo do jogo, onde precisa fazer quartel e criar o ranged, como no dominio 1 só faz um o custo é menor, como o dominio 2 faz mais de um o custo é maior.....
+
 
 
