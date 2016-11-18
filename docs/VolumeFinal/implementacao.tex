@@ -4,7 +4,7 @@
 
 A implementação do algoritmo de AHTN dentro do MicroRTS foi feita em duas etapas.
 Primeiro foi feita a modelagem do domínio e criado qual heurística define o valor de utilidade para os estados.
-Na segunda etapa foi acoplado o JSHOP2 com o MicroRTS, e logo após foi feita a implementação do algoritmo.
+Na segunda etapa foi acoplado o JSHOP2 com o MicroRTS, e logo após foi feita a implementação do algoritmo AHTN.
 
 
 \section{Modelagem do domínio}
@@ -12,6 +12,7 @@ Na segunda etapa foi acoplado o JSHOP2 com o MicroRTS, e logo após foi feita a 
 Antes de realizar a implementação do algoritmo de AHTN, é preciso criar um domínio de planejamento. 
 O domínio de planejamento serve para que o JSHOP2 consiga gerar os planos que serão usados pelo algoritmo.
 
+\frm[inline]{Reorganizar isto. Pensa em um estrutura de alto nível: unidades, recursos, construções ou algo assim. Tu estás indo de um para o outro para um terceiro, de volta pro segundo...}
 Antes de iniciar a modelagem do domínio, é preciso definir qual estratégia o domínio vai seguir.
 O primeiro domínio é pensado em uma situação de jogo, onde o jogador quer treinar uma unidade de ataque para destruir o seu adversário.
 Sendo assim, o jogador precisar ter um \textit{worker}, para coletar recursos, um quartel para construir unidades de ataque, e uma base para conseguir guardar seus recursos e criar o seu \textit{worker}. 
@@ -26,11 +27,11 @@ Cada ação que pode ser executada dentro do jogo é descrita como um operador n
 Por exemplo, as ações de construir um quartel, e coletar recursos, são transformadas nos operadores $!buildbarrack$ e $!getresource$, respectivamente.
 Já os métodos servem para determinar ações de mais alto nível, e devem respeitar a estratégia definida.
 Por exemplo, a estratégia define que apenas um quartel é construído, então o método deve ter uma precondição para verificar se não existe outro quartel no jogo, caso não tenha, ainda é preciso checar se há recursos suficientes para construir. 
-Cada método pode chamar outros métodos.
+Cada método pode chamar outros métodos.\frm{?? Organize...}
 Isso acontece pois pode ser necessário realizar outra ação antes de conseguir realizar a ação do método.
 Por exemplo, é necessário um quartel para treinar uma unidade de ataque, quando o método de treinar unidade é chamado, ele verifica que não há um quartel, e ele chama o método de construir o quartel.
 
-Para ganhar o jogo é preciso atacar o adversário, por essa razão o método utilizado como objetivo no problema de planejamento é o $ataqueranged$.
+Para ganhar o jogo é preciso atacar o adversário, por essa razão o método utilizado como objetivo no problema de planejamento é o $ataqueranged$.\frm{Apesar de deixar o código mesmo no apêndice, seria bom ter um diagraminha com esta estratégia.}
 Esse método desencadeia todas as outras chamadas de método dependendo do estado do ambiente.
 No Apêndice~\ref{ap:estra1} está a descrição deste domínio, que é chamado de domínio 1.
 
@@ -43,11 +44,11 @@ No Apêndice~\ref{ap:estra2} está a descrição deste domínio, que é chamado 
 
 \section{Heurística}
 
-O algoritmo de AHTN requer uma função de avaliação para determinar o valor de utilidade para cada estado do jogo.
+O algoritmo de AHTN requer uma função de avaliação para determinar o valor de utilidade para cada estado do jogo.\frm{Organiza!! Neste momento seria bom tu dizer que tu criaste duas heurísticas, antes de ir falando de uma ou de outra}
 Essa função utiliza uma heurística para determinar esse valor de utilidade.
 A primeira heurística criada leva em consideração apenas as unidades do jogador.
 Quanto maior o número de unidades disponíveis no ambiente melhor a função de avaliação do estado.
-As unidades são ponderadas pelo custo de treinamento ou de construção.
+As unidades são ponderadas pelo custo de treinamento ou de construção.\frm{Tu tens uma formula, então por que não formalizar numa formulinha?}
 Por exemplo, um quartel precisa de 5 unidades de recurso para ser construído, enquanto um \textit{worker} necessita só de 1 para ser treinado, por isso o quartel acaba tendo peso 5, e o \textit{worker} peso 1. 
 Essa heurística tem um problema, pois o jogador adversário pode estar com o dobro de unidades que isso não é levado em consideração, e nesse cenário o jogador adversário estaria na frente. 
 
@@ -57,13 +58,14 @@ Com os dois valores, o valor das suas unidades é subtraído do valor das unidad
 Assim em um cenário onde o jogo está com mais tropas a favor, o valor de utilidade é positivo, e caso o contrario negativo.
 Esta heurística foi a escolhida para ser utilizada na implementação.
 
-Se um jogador não tem uma base, e não tem recursos para construir uma, o jogo está perdido, pois a base é necessário para armazenar os recursos. Nesse caso, as duas heurísticas retornam um valor negativo, indicando o fim do jogo. 
+Se um jogador não tem uma base, e não tem recursos para construir uma, o jogo está perdido, pois a base é necessário para armazenar os recursos. 
+Nesse caso, as duas heurísticas retornam um valor negativo, indicando o fim do jogo. 
 
 \section{Implementação}
 
 \subsection{Ações do MicroRTS}
 
-Antes de iniciar a implementação do algoritmo de AHTN, é preciso criar os métodos que executam as ações dentro do MicroRTS. 
+Antes de iniciar a implementação do algoritmo de AHTN, é preciso criar os métodos que executam as ações dentro do MicroRTS.\frm{Encontrar alguma maneira de diferenciar métodos HTN de métodos em Java (como por exemplo dizer: precisamos criar métodos em Java para executar as ações geradas pelo JSHOP dentro do MicroRTS...)} 
 A camada de abstração fornece as classes que são responsáveis por exercer essas funções, mas ainda assim é preciso informar qual unidade está chamando o método.
 Para isso foram criados 6 métodos que utilizam as classes da camada.
 Cada método fica responsável por apenas um ação dentro do jogo.
@@ -73,14 +75,14 @@ Os métodos realizam as seguintes ações: construir uma base, construir um quar
 
 O algoritmo de AHTN decompõem todas as possibilidades de plano para um objetivo com determinada configuração do jogo.
 Para gerar os planos foi utilizado o planejador JSHOP2.
-O JSHOP2 gera duas classes java, uma representando o domínio, e outra representando o problema.
+O JSHOP2 gera duas classes java, uma representando o domínio, e outra representando o problema.\frm{E aqui tu repete isto...}
 A classe que representa o domínio não precisa ser alterada, pois são sempre os mesmo operadores e métodos que são utilizados pelo planejador para gerar o plano.
 Mas o problema muda a cada nova configuração do ambiente.
 Nesse caso a classe do problema deve ser alterado para que represente um novo estado.
 Essa mudança foi feita alterando a classe java originada pelo JSHOP2. 
 A mudança consistem em gerar novos predicados a cada nova configuração.
 Para isso foi preciso uma análise de como é guardado internamente cada um dos componentes do problema de planejamento na classe do JSHOP2.
-A partir dessa análise houve o mapeamento do estado do jogo para os predicados do problema.
+A partir dessa análise houve o mapeamento do estado do jogo para os predicados do problema.\frm{Faz um diagraminha desta comunicação do MicroRTS com o JSHOP, e te refere a isto}
 Uma classe chamada de $EstadoDoJogo$ foi criada para representar o estado em que o jogo está em determinado momento.
 A classe contém informações das unidades que cada jogador tem em determinada configuração do jogo, podendo ser alterada caso alguma ação seja executada.
 A cada novo estado é gerado um conjunto de predicados que representam o jogo, para que o planejador consiga gerar quais planos são possíveis de serem feitos.
@@ -92,6 +94,7 @@ Quando este método é invocado a técnica deve realizar a sua operação e reto
 Sendo assim, a classe que implementa o algoritmo de AHTN deve utilizar este método para retornar a ação encontrada.
 O algoritmo de AHTN implementado seguiu o padrão do algoritmo apresentado na Seção~\ref{alg:ahtn}, mas com algumas alterações.
 
+\frm[inline]{Eu não entendi o que tu queres me dizer aqui. Se lembrar dos métodos na decomposição é importante então? Ou só o plano serve?}
 O JSHOP2 gera os planos apenas com os operadores utilizados para alcançar o objetivo.
 Com isso, o plano gerado não tem a informação de quais métodos foram utilizados para chegar aos operadores.
 Neste caso, o plano gerado contém os operadores até chegar ao objetivo.
@@ -101,11 +104,11 @@ A troca de perspectiva é feita para cada plano que é gerado a partir do estado
 O Algoritmo~\ref{alg:meuahtn} ilustra o pseudo código do algoritmo de AHTN implementado.
 
 O algoritmo recebe um estado, representando qual a configuração do ambiente, um plano para a perspectiva \textsc{Max}, um plano para a perspectiva \textsc{Min}, e uma profundidade.
-A linha~\ref{alg:meuahtn:terminal} é responsável por verificar se o estado é uma configuração de final de jogo, ou ainda se a profundidade configurada não chegou ao fim.
+A Linha~\ref{alg:meuahtn:terminal} verifica se o estado é uma configuração de final de jogo, ou ainda se a profundidade configurada não chegou ao fim.
 Caso uma das duas coisas aconteça, o algoritmo retorna o plano de cada perspectiva, e também a função de avaliação para a configuração em que o jogo se encontra.
 
 O algoritmo avança caso não haja uma configuração de final de jogo.
-Na linha~\ref{alg:meuahtn:nexaction} o algoritmo aplica a próxima ação primitiva do plano no estado.
+Na linha~\ref{alg:meuahtn:nexaction}\frm{Linha, Algoritmo, Figura (tudo com ref) tem que ser em maiúscula} o algoritmo aplica a próxima ação primitiva do plano no estado.
 Neste ponto, o jogador, na perspectiva do \textsc{Max}, realiza uma ação no estado.
 Após alterar o estado, o algoritmo gera todos os planos para \textsc{Min} a partir do novo estado, e realiza a chamada para o método $\mathit{AHTNMin}$.
 O método de $\mathit{AHTNMin}$ realiza as mesmas operações que o método de $\mathit{AHTNMax}$ mas com a perspectiva de \textsc{Min}.

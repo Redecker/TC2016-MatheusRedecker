@@ -1,15 +1,18 @@
 %!TEX root = volumeFinal.tex 
-\chapter{\label{chap:planejamento}Planejamento}
+\chapter{Planejamento}
+\label{chap:planejamento}
 
 A atividade de planejar alguma coisa é feita muitas vezes por dia. Algumas vezes esse planejamento é muito simples, como organizar as tarefas que serão feitas no próximo dia, outras vezes pode ser mais complexa como organizar uma viagem de final de ano. Planejar implica em elaborar uma sequência de ações com o intuito de alcançar um objetivo, ou seja, o processo de planejar consiste em organizar as ações, antecipando os resultados esperados de cada ação, com o intuito de conquistar um objetivo. 
 
 O planejamento, na área da IA, é uma sub área de estudo, onde ele é usado para encontrar um plano que resolva um problema especifico. Como os ambientes nem sempre possuem as mesmas características, existem diferentes técnicas que são usadas para construir um plano.
 
 \section{Planejamento automatizado}
+\label{sec:classicalPlanning}
 
 Planejamento automatizado estuda o processo de geração de planos computacionalmente. O objetivo do planejamento é encontrar uma sequência de ações que solucione um problema, a sequência de ações encontrada é chamada de plano. Para construir um plano é utilizado um planejador. O planejador recebe uma descrição formal de um problema de planejamento, e tenta solucionar esse problema, para isso pode ser utilizado algoritmos de buscas e heurísticas~\cite{ghallab2004automated}\cite[Capítulo 10]{intelligence2003modern}.
 
 \subsection{Representação de um problema de planejamento}
+\label{subsec:classicalPlanningRep}
 
 Uma das maneiras de representar um problema de planejamento é utilizando lógica proposicional.
 A lógica proposicional é expressada através de sentenças atômicas, que são compostas de proposições. 
@@ -28,6 +31,7 @@ No exemplo da lâmpada, podemos dizer que a lâmpada da cozinha está apagada, r
 Ou ainda podemos dizer que a lâmpada do quarto está apagada e a TV da sala está ligada, $apagada(quarto)~ \wedge~ ligada(sala)$.  
 
 \subsection{Formalização de um problema de planejamento}
+\label{subsec:classicalPlanningForm}
 
 Alguns conceitos são importantes para entender a formalização de um problema de planejamento. 
 Os estados são um conjunto de átomos que não podem ser divididos em sub-fórmulas, esses átomos assumem valores de verdadeiro ou falso, dependendo da interpretação do ambiente.
@@ -80,6 +84,7 @@ Uma forma de gerar planos ótimos é utilizando técnicas de busca combinado com
 Uma heurística deve ser computacionalmente eficiente e ter precisão para que a geração do plano seja eficiente~\cite{helmert2007flexible}.
 
 \section{Planejamento hierárquico} 
+\label{sec:htnPlanning}
 
 Embora que o planejamento clássico consiga gerar planos ótimos, o tratamento de problemas de grande complexidade ou com o espaço de estados grande pode se tornar intratável por conta do poder computacional necessário para que o plano consiga ser gerado.
 O planejamento clássico possui uma expressividade limitada, pois não é possível representar quando uma ação irá ocorrer, por exemplo~\cite[Capítulo 11]{intelligence2003modern}.
