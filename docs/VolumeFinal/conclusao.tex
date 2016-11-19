@@ -1,16 +1,19 @@
 %!TEX root = volumeFinal.tex 
 
-\chapter{\label{concl}Conclusões}
+\chapter{\label{chap:concl}Conclusões}
 
-\frm{Eu esperava alguma conclusão mais profunda sobre o AHTN, sua aplicabilidade, a dificuldade de modelar domínios? Se tu for falar do teu aprendizado, fale também de como foi implementar e fazer a avaliação objetiva das coisas.}
 A realização deste trabalho foi de grande valor, pois me proporcionou grande aprendizado sobre agentes, técnicas de busca, planejamento, e jogos RTS.
 A implementação do MicroRTS está bem estruturada, por isso não houve dificuldades no entendimento da plataforma.
 O planejador JSHOP2 é de fácil acesso, e sua documentação é bem rica.
-Mas os exemplos de descrição do domínio e problema disponíveis com o planejador não cobrem todas as funcionalidades.
-Por essa razão a aplicação do planejador foi a grande dificuldade deste trabalho.
+Mas os exemplos de descrição do domínio e problema disponíveis com o planejador não cobrem todas as suas funcionalidades.
+Por essa razão a descrição do domínio foi a grande dificuldade deste trabalho.
+Mais tempo do que o previsto foi gasto na união do MicroRTS com o JSHOP2. 
+Por essa razão, não foi possível acoplar ao algoritmo de AHTN um algoritmo de \textit{Machine Learning}.
 
-A implementação do algoritmo de mostrou valida em relação as outra técnicas presentes no MicroRTS.
-Em todos os casos, o tempo de geração das ações é maior no algoritmo de AHTN do que nas outras técnicas.
+A avaliação dos resultados foi interessante, pois algumas técnicas que a principio não pareciam serem capazes de derrotar o algoritmo conseguiram ser bastante eficientes.
+Com tudo, a implementação do algoritmo de mostrou valida em relação as outra técnicas presentes no MicroRTS.
+Pois existem técnicas que são vencidas em todos as execuções.
+O grande problema foi que, em todos os casos, o tempo de geração das ações é maior no algoritmo de AHTN do que nas outras técnicas.
 Por exemplo, a técnica de WorkerRush, que não perdeu em nenhum dos teste, leva 1 milissegundo para determinar as suas ações.
 Além do tempo de geração das ações, os conhecimentos de domínio não avaliam todas as possibilidades relevantes do jogo, deixando o algoritmo limitado em relação as ações.
 
@@ -19,7 +22,10 @@ O que já era esperado devido ao treinamento de mais unidades de ataque.
 Um fator interessante na analise dos resultados foi o lado do jogo, pois ele influenciou bastante os resultados.
 Algumas técnicas do MicroRTS não realizavam as mesmas ações do lado azul, isso faz com que a vantagem do algoritmo de AHTN no lado vermelho seja alta.
 
+Para que o algoritmo de AHTN consiga ser utilizado de melhor forma em jogos RTS, é preciso de um mecanismo para limitar o tempo de busca para geração das ações.
+Pois técnicas mais simples necessitam de menos tempo para escolher uma ação.
+Outro fator que pode melhorar o desempenho do algoritmo é ter outras descrições de domínio.
+Talvez com domínios que avaliam melhor as possibilidades de ações, e que tenha uma visão mais completa do ambiente do jogo, consiga ser mais eficiente na escolha das ações. 
 
-Para trabalhos futuros pretende-se modelar outros conhecimentos de domínio, com o intuito de aumentar as possibilidades de jogadas do algoritmo. 
-Além disso, pretende-se realizar o acoplamento do algoritmo de AHTN com alguma técnica de \textit{Machine Learning}.
-
+Para trabalhos futuros pretende-se modelar outros conhecimentos de domínio, e implementar um tempo limite para que o algoritmo gere suas ações. 
+Além disso, pretende-se realizar o acoplamento do algoritmo de AHTN com alguma técnica de \textit{Machine Learning}. 
