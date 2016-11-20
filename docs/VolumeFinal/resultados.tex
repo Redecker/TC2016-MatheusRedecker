@@ -10,7 +10,6 @@ Em cada mapa é avaliado a porcentagem de vitórias para cada domínio.
 Os adversários, utilizados para testar o algoritmo, são as técnicas presentes no MicroRTS apresentadas na Seção~\ref{sec:tecn}.
 Cada adversário foi utilizado dez vezes em cada mapa, e em cada lado do jogo.
 
-\frm[inline]{As avaliações estão um pouco superficiais. Por que o portfolio ganha sempre em algumas? O quanto influi a tua descrição de domínio?}
 \section{Mapa 1}
 
 No primeiro mapa, cada jogador inicia com uma base, um \textit{worker} e dois recursos próximos a sua base.
@@ -54,8 +53,7 @@ Mas com um tempo maior, as outras ações eram afetadas, e o algoritmo se torna 
 \end{table}
 
 A partir dos dados da tabela é possível observar que há um ganho do lado vermelho em relação ao azul nos dois domínios. 
-No domínio 1 o motivo foi a duplicação da unidade.
-Já no domínio 2, a ação de construir o quartel, gerada pela camada de abstração do MicroRTS, encontra uma posição mais favorável do lado vermelho.
+A ação de construir o quartel, gerada pela camada de abstração do MicroRTS, encontra uma posição mais favorável do lado vermelho.
 Fazendo com que o lado vermelho tenha uma melhor fluidez na hora da criação das tropas.
 O domínio 2 consegue melhores resultados do que o domínio 1.
 Adversários que não são vencidos no lado azul passam a ser vencidos com o segundo domínio, e os resultados do lado vermelho são consolidados.
@@ -101,7 +99,6 @@ A técnica do Minimax por exemplo, no lado azul ela cria unidades de ataque mas 
 	\end{tabular}
 \end{table}
 
-
 \section{Mapa 3}
 
 Neste mapa, cada jogador inicia com uma base, um \textit{worker}, e um recurso perto de sua base.
@@ -142,6 +139,16 @@ A colocação de obstáculos no mapa não alterou a maneira com que as técnicas
 	\end{tabular}
 \end{table}
 
+A técnica de WorkerRush não é vencida em nenhuma configuração de jogo.
+Isso acontece porque, a técnica treina \textit{workers}, que é a unidade que custa menos no jogo, e logo as envia para atacar, por essa razão o algoritmo não tem tempo de ter algum tipo de reação.
+A técnica de Portfolio perde apenas no mapa 2, pois as tropas ficam um tempo parada antes de atacar, o que não acontece nos outros mapas.
+O tempo parado faz com que o algoritmo de AHTN consiga gerar as ações necessárias para que unidades de ataque sejam criadas.
+
+O grande problema dos domínios modelados é não ter um plano de contingencia.
+O adversário pode estar criando muitas tropas, mas o domínio segue o plano de criar suas unidades de ataque, o que leva o adversário a vitoria.
+Os domínios perdem contra técnicas que treinam unidades de ataque de forma rápida, por causa do tempo que leva para construir um quartel e revidar ao ataque.
+
+ 
 
 \section{Tamanho de cada IA}
 
