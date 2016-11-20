@@ -6,7 +6,10 @@ Este capítulo apresenta o jogo MicroRTS, que foi escolhido para ser utilizado c
 
 \section{MicroRTS}  \label{sec:microrts}
 
-Jogos eletrônicos são muito populares, principalmente pela grande quantidade de gêneros, existem jogos de ação, aventura, esportes, estratégia, entre outros. Hoje em dia, os jogos buscam que quem jogue consiga ficar imerso no dentro do jogo, sem conseguir identificar um padrão nos jogadores fictícios, pois se não o jogo deixa de ser tão interessante. Para que isso aconteça, a IA é associada a diversos jogos, e é comum pensar que quanto mais complexa a IA aplicada dentro do jogo mais difícil jogo irá ficar, mas isso nem sempre é verdade. Não é sempre que uma IA complicada terá melhor desempenho do que uma mais simples. Uma boa IA, para jogos, é feita a partir do comportamento desejado para o jogo com os algoritmo certos~\cite{millington2009artificial}.
+Jogos eletrônicos são muito populares, principalmente pela grande quantidade de gêneros, existem jogos de ação, aventura, esportes, estratégia, entre outros. Hoje em dia, os jogos buscam que os jogadores consigam ficar imersos dentro do jogo, sem conseguir identificar um padrão nos jogadores fictícios, pois se não o jogo deixa de ser tão interessante.
+Para que isso aconteça, a IA é associada a diversos jogos, e é comum pensar que quanto mais complexa a IA aplicada dentro do jogo mais difícil jogo irá ficar, mas isso nem sempre é verdade.
+Não é sempre que uma IA complicada terá melhor desempenho do que uma mais simples.
+Uma boa IA, para jogos, é feita a partir do comportamento desejado para o jogo com os algoritmo certos~\cite{millington2009artificial}.
 
 Jogos de estratégia em tempo real, também conhecidos por \textit{real-time strategy games} (RTS), é um subgênero de jogos de estratégia. 
 Nesse gênero de jogo os jogadores devem construir uma base, buscar recursos, construir edificações, treinar unidades de ataques e aprimorar suas tecnologias.
@@ -31,14 +34,13 @@ A Figura~\ref{fig:microrts} mostra um exemplo de tela do jogo.
 \end{figure} 
 
 \subsection{Unidades e construções}
-No MicroRTS existem quatro tipos de unidades no jogo, e cada uma foi descrita a seguir:
 
-\begin{itemize}
-	\item \textit{worker}, é responsável por coletar recursos e construir as edificações. Esta unidade também consegue lutar, mas possui um dano muito baixo;
-	\item \textit{heavy}, unidade que pode apenas atacar. Ela possui um alto poder de ataque, mas sua velocidade é lenta;
-	\item \textit{light}, unidade que pode apenas atacar. Ela possui um baixo poder de ataque, mas sua velocidade é rápida; e
-	\item \textit{ranged}, unidade que pode apenas atacar. Ela possui um ataque de longa distância. 
-\end{itemize} 
+No MicroRTS existem quatro tipos de unidades no jogo, um trabalhor chamado de \textit{worker}, e três unidades de ataque distintas.
+A unidade \textit{worker}, é responsável por coletar recursos e construir as edificações. Esta unidade também consegue lutar, mas possui um dano muito baixo.
+A unidade de ataque podem apenas atacar, custam a mesma quantidade de recursos para serem produzidas, mas possuem diferentes características. 
+A unidade \textit{heavy} possui um alto poder de ataque, mas sua velocidade é baixa.
+Já a unidade \textit{light} possui um baixo poder de ataque, mas sua velocidade é maior.
+Por fim, a unidade \textit{ranged} consegue atacar de longa distância. 
 
 Para treinar as unidades é preciso ter recursos e edificações. 
 No MicroRTS é preciso ter uma base que é a edificação principal. 
@@ -60,7 +62,7 @@ O diagrama de classes presente na Figura~\ref{fig:classes} ilustra como as class
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=1.05\textwidth]{fig/classes.pdf}
+	\includegraphics[width=1\textwidth]{fig/classes.pdf}
 	\caption{Classes principais do MicroRTS}
 	\label{fig:classes}
 \end{figure} 
@@ -110,7 +112,7 @@ Assim o laço da linha~\ref{alg:jogo:while} é executado até que o jogo termine
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=1.05\textwidth]{fig/diagramaSequencia.pdf}
+	\includegraphics[width=1\textwidth]{fig/diagramaSequencia.pdf}
 	\caption{Diagrama de sequência do método \texttt{main} da classe \textit{GameVisualSimulation}}
 	\label{fig:sequencia}
 \end{figure}

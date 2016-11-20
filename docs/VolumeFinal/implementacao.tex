@@ -150,7 +150,7 @@ O melhor plano é retornado na linha~\ref{alg:meuahtn:retorno}.
 	 		\EndIf
 	 		\State {$nextAction(planoMax)$} \label{alg:meuahtn:nexaction}
 	 		\State $(Pmax', Pmin', ev') = \perp, \perp, -\infty$
-			\ForAll{$plano \in getPlanosMin(estadoDoJogo)$} \label{alg:meuahtn:for}
+			\ForAll{$plano \in getPlanos(estado)$} \label{alg:meuahtn:for}
 		 		\State $(Pmax, Pmin, ev) = \Call{AHTNMin}{(estado, planoMax, planoMin, deph-1)}$ \label{alg:meuahtn:ahtnmin}
 			 	\If {$ev' > ev$} \label{alg:meuahtn:avali}
 					\State $(Pmax', Pmin', ev') = (Pmax, Pmin, ev)$
