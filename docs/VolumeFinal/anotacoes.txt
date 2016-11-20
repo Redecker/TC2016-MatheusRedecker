@@ -1,45 +1,20 @@
-\subsection{Arquitetura do MicroRTS}
 
-A arquitetura do MicroRTS é composta por 3 componentes principais. São eles:
+\frm[inline]{Listing te permite definir palavras reservadas e estilos de comentários, olha isto e adiciona algo para o JSHOP, fica bem mais bonito}
 
-\begin{itemize}
-	\item Logica do jogo, é onde todas as ações do jogo são validadas e interpretadas;
-	\item Unidades, é onde todas as unidades são acessadas; e
-	\item Interface gráfica, é onde todas as informações da logica do jogo e das unidades é apresentada de forma gráfica.
-\end{itemize}
-
-O MicroRTS permite que seja acoplado facilmente técnicas de IA. A IA deve obter informações do jogo através da logica do jogo e das unidades, e ter um método para geração das ações. A imagem \ref{fig:pacotes} representa os componentes e como eles devem se comunicam.
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.4\textwidth]{fig/pacotes.pdf}
-	\caption{Arquitetura MicroRTS}
-	\label{fig:pacotes}
-\end{figure}
-
-O MicroRTS conta com cinco classes principais para funcionamento do jogo e uma para controle da IA. O diagrama de classes presente na Figura~\ref{fig:classes} ilustra os principais métodos das classes originadas do MicroRTS. As funcionalidades de cada classe encontra-se à seguir: 
-
-\begin{itemize}
-	\item \textit{GameVisualSimulation} é a interface entre os componentes do jogo e o usuário;
-	\item \textit{GameState} e \textit{PhysicalGameState} são responsáveis pelo controle das ações das unidades dentro do mapa;
-	\item \textit{UnitTypeTable} é onde cada unidade está associada as ações possíveis no jogo;
-	\item \textit{PhysicalGameStatePanel} é responsável pela interface gráfica; e
-	\item \textit{IA} é onde a técnica de IA deve ser acoplada ao jogo.
-\end{itemize}
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=1\textwidth]{fig/classes.pdf}
-	\caption{Classes do MicroRTS}
-	\label{fig:classes}
-\end{figure} 
-
-\subsection{Técnicas de IA}
+\frm{Estilos diferentes (math mode para listing no texto inline). Se tu não quer aprender a usar listing inline, pelo menos usa texttt, tipo \texttt{path ?a ?b} }
 
 
+\frm{Eu esperava alguma conclusão mais profunda sobre o AHTN, sua aplicabilidade, a dificuldade de modelar domínios? Se tu for falar do teu aprendizado, fale também de como foi implementar e fazer a avaliação objetiva das coisas.}
 
-In order to do planning in a given planning domain, SHOP2 needs to be given knowledge
-about that domain. A SHOP2 knowledge base consists of operators and methods (plus,
-various non-action related facts and axioms). Each operator is a description of what needs
-to be done to accomplish some primitive task, and each method tells how to decompose
-some compound task into a set of partially ordered subtasks
+\frm{Encontrar alguma maneira de diferenciar métodos HTN de métodos em Java (como por exemplo dizer: precisamos criar métodos em Java para executar as ações geradas pelo JSHOP dentro do MicroRTS...)} 
+
+\frm[inline]{Este capítulo morre. Move os objetivos para a introdução, e comenta no que tu alcançaste na e como atingiste os objetivos na conclusão.}
+
+\frm[inline]{\large Verificar todas as referências bibliográficas!!:\\
+Baixa o http://www.jabref.org, e usa isto para editar o .bib, ele vai marcar em vermelho o que estiver incompleto:
+\cite{buro2012real} falta páginas, volume, edição, etc
+\cite{helmert2007flexible}, o nome da conferência está abreviado (tu tens outros que não estão), e assim por diante.
+\cite{meneguzzi2015planning}, falta volume, 
+\\ 
+Corrigi o \cite{agent1993oriented}, mas tu tens que ir atrás de cada uma, e não só se fiar no que vier no google scholar ou no citeseer.
+Se tu tiveres dúvida, segunda vem e pergunta pros mestrandos. Tu tens que ser consistente, se tu abrevia um nome de conferência abrevia todos...}

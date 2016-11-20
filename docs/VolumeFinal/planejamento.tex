@@ -99,8 +99,8 @@ O objetivo do planejamento HTN é produzir uma sequência de ações que executa
 As tarefas são completadas decompondo tarefas não primitivas em tarefas menores até só restarem tarefas primitivas.  
 As tarefas primitivas são análogas as ações executáveis em planejamento clássico, e expressam uma atividade que o agente possa executar diretamente no ambiente~\cite[Capítulo 11]{intelligence2003modern}. 
 Já as tarefa não primitiva representam objetivos que o agente deve alcançar com o intuito de decompor as tarefas não primitivas em primitivas. 
-O exemplo da seção anterior de mover um objeto de lugar é um exemplo de tarefa primitiva, pois altera o estado do ambiente, podendo ser representado em HTN como: $(move~ ?from~ ?to)$. 
-Um exemplo de tarefa não primitiva é realizar uma viagem de carro, para conseguir completar essa tarefa é necessário fazer a revisão do carro, arrumar as malas e colocar tudo dentro do carro, que pode ser representado por $(travelByCar ~?car~ ?stuffs))$. 
+O exemplo da seção anterior de mover um objeto de lugar é um exemplo de tarefa primitiva, pois altera o estado do ambiente, podendo ser representado em HTN como: \texttt{(move~ ?from~ ?to)}. 
+Um exemplo de tarefa não primitiva é realizar uma viagem de carro, para conseguir completar essa tarefa é necessário fazer a revisão do carro, arrumar as malas e colocar tudo dentro do carro, que pode ser representado por \texttt{(travelByCar ~?car~ ?stuffs)}. 
 
 Para iniciar a geração de um plano HTN, deve ser usado como início uma tarefa de ligação. 
 Uma tarefa de ligação HTN é definida como $w = (T, C)$, onde $T$ é um conjunto de tarefas a ser completadas e $C$ é um conjunto ordenado de restrições sobre as tarefas $T$. 
@@ -211,7 +211,7 @@ O intuito do algoritmo de AHTN é gerar os melhores plano para \textsc{Max} e pa
 
 O algoritmo de AHTN gera uma árvore das jogadas. Cada nodo da árvore é definido por uma tupla $(s, N_{+}, N_{-}, t_{+}, t_{-})$, onde $s$ é o estado corrente do ambiente, $N_{+}$ e $N_{-}$ são a representação de planos HTN para os jogadores \textsc{Max} e \textsc{Min}, respectivamente, $t_{+}$ e $t_{-}$ representam ponteiros para qual parte do plano HTN está sendo executada, sendo $t_{+}$ para uma tarefa de $N_{+}$ e $t_{-}$ para uma tarefa de $N_{-}$. Cada nodo da árvore representa um estado do jogo~\cite{ontanon2015adversarial}.
 
-O algoritmo alterna a perspectiva dos jogadores sempre que existir uma tarefa primitiva no plano atual, e assim avança na profundidade da árvore das jogadas. A função $AHTNMin$ é responsável pela mudança de perspectiva, e ela está presente no bloco que inicia na Linha~\ref{alg:ahtn:nexaction}. No mesmo bloco há a função $nextAction(N,t)$, que é responsável por verificar é possível a troca de perspectiva. Ela recebe como parâmetro um plano ($N$) e um ponteiro ($t$). Com isso ela retorna um ponteiro para a próxima tarefa primitiva, caso ainda não haja uma tarefa primitiva no plano, a função retorna $t = \bot$.
+O algoritmo alterna a perspectiva dos jogadores sempre que existir uma tarefa primitiva no plano atual, e assim avança na profundidade da árvore das jogadas. A função $AHTNMin$ é responsável pela mudança de perspectiva, e ela está presente no bloco que inicia na Linha~\ref{alg:ahtn:nexaction}. No mesmo bloco há a função \texttt{nextAction(N,t)}, que é responsável por verificar é possível a troca de perspectiva. Ela recebe como parâmetro um plano ($N$) e um ponteiro ($t$). Com isso ela retorna um ponteiro para a próxima tarefa primitiva, caso ainda não haja uma tarefa primitiva no plano, a função retorna $t = \bot$.
 
 Caso não seja possível trocar de perspectiva, o algoritmo de AHTN decompõe o plano. O método $decompositions$ é responsável por decompor o plano atual a partir do estado do jogo na árvore. O método apenas adiciona novos planos que utilizem apenas um novo método ao plano atual. A chamada deste método ocorre na Linha~\ref{alg:decompositions} do algoritmo gerando novos planos.
 O algoritmo utiliza as decomposições para comparar todos os planos gerados por uma função de avaliação. O plano que tiver a melhor função de avaliação é escolhido como melhor caminho. O plano escolhido é retornado junto com o resultado da função de avaliação. Este processo está presente na Linha~\ref{alg:ahtn:for}.
@@ -227,7 +227,6 @@ Na raiz da árvore há apenas uma tarefa não primitiva \textit{win} para ser de
 Há duas decomposições que o jogador \textsc{Max} pode aplicar para seu plano HTN, resultando nos nodos $n_{1}$ e $n_{5}$. A decomposição $n_{1}$ não resulta em nenhuma ação primitiva, e por isso $n_{1}$ continua um nodo \textsc{Max}. Uma vez que o jogador \textsc{Max} decompõe seus planos e há tarefas primitivas para serem executadas (nodos $n_{2}$ e $n_{5}$), é o turno de \textsc{Min} decompor suas tarefas não primitivas. Após \textsc{Min} gerar suas ações, a profundidade máxima ($d = 2$) foi atingida (nodos $n_{3}$ e $n_{4}$). 
 A função de avaliação $e$ é aplicada para cada um dos estados do jogo para determina o valor das folhas.
 
-\frm{Usar uma figura vetorial!}
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.8\textwidth]{fig/ahtn.pdf} 

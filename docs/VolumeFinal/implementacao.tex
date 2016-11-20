@@ -91,12 +91,24 @@ Nesse caso a classe do problema deve ser alterado para que represente um novo es
 Essa mudança foi feita alterando a classe java originada pelo JSHOP2. 
 A mudança consistem em gerar novos predicados a cada nova configuração.
 Para isso foi preciso uma análise de como é guardado internamente cada um dos componentes do problema de planejamento na classe do JSHOP2.
-A partir dessa análise houve o mapeamento do estado do jogo para os predicados do problema.
-\frm{Faz um diagraminha desta comunicação do MicroRTS com o JSHOP, e te refere a isto}
+A partir dessa análise houve o mapeamento dos estados do jogo para os predicados do problema.
 
 Uma classe chamada de $EstadoDoJogo$ foi criada para representar o estado em que o jogo está em determinado momento.
 A classe contém informações das unidades que cada jogador tem em determinada configuração do jogo, podendo ser alterada caso alguma ação seja executada.
 A cada novo estado é gerado um conjunto de predicados que representam o jogo, para que o planejador consiga gerar quais planos são possíveis de serem feitos.
+
+A Figura~\ref{fig:planos} ilustra a comunicação necessária para geração dos planos.
+A geração de um plano é feita a partir da chamada do método \texttt{getPlanos}.
+Para isso, é necessário informar qual o estado do jogo.
+A classe do problema, gerada pelo JSHOP2, pega as informações do domínio e gera os planos a partir do estado do jogo informado.
+Por fim, os planos gerados são retornados para a classe dentro do MicroRTS.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{fig/gerarPlano.pdf}
+	\caption{Comunicação entre o MicroRTS e as classes do JSHOP2}
+	\label{fig:planos}
+\end{figure}
 
 \subsection{Algoritmo de AHTN}
 
