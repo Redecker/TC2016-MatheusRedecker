@@ -3,18 +3,8 @@
 
 \frm{Estilos diferentes (math mode para listing no texto inline). Se tu não quer aprender a usar listing inline, pelo menos usa texttt, tipo \texttt{path ?a ?b} }
 
-
 \frm{Eu esperava alguma conclusão mais profunda sobre o AHTN, sua aplicabilidade, a dificuldade de modelar domínios? Se tu for falar do teu aprendizado, fale também de como foi implementar e fazer a avaliação objetiva das coisas.}
 
 \frm{Encontrar alguma maneira de diferenciar métodos HTN de métodos em Java (como por exemplo dizer: precisamos criar métodos em Java para executar as ações geradas pelo JSHOP dentro do MicroRTS...)} 
 
-\frm[inline]{Este capítulo morre. Move os objetivos para a introdução, e comenta no que tu alcançaste na e como atingiste os objetivos na conclusão.}
-
-\frm[inline]{\large Verificar todas as referências bibliográficas!!:\\
-Baixa o http://www.jabref.org, e usa isto para editar o .bib, ele vai marcar em vermelho o que estiver incompleto:
-\cite{buro2012real} falta páginas, volume, edição, etc
-\cite{helmert2007flexible}, o nome da conferência está abreviado (tu tens outros que não estão), e assim por diante.
-\cite{meneguzzi2015planning}, falta volume, 
-\\ 
-Corrigi o \cite{agent1993oriented}, mas tu tens que ir atrás de cada uma, e não só se fiar no que vier no google scholar ou no citeseer.
-Se tu tiveres dúvida, segunda vem e pergunta pros mestrandos. Tu tens que ser consistente, se tu abrevia um nome de conferência abrevia todos...}
+\frm{Apesar de deixar o código mesmo no apêndice, seria bom ter um diagraminha com esta estratégia.}
