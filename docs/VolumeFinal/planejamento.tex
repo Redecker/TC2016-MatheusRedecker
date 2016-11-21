@@ -5,7 +5,7 @@
 As pessoas realizam a atividade de planejar alguma coisa muitas vezes por dia.
 Algumas vezes esse planejamento é muito simples, como organizar as tarefas que serão feitas no próximo dia, outras vezes pode ser mais complexa como organizar uma viagem de final de ano. Planejar implica em elaborar uma sequência de ações com o intuito de alcançar um objetivo, ou seja, o processo de planejar consiste em organizar as ações, antecipando os resultados esperados de cada ação para conquistar um objetivo. 
 
-O planejamento na área da IA, é uma sub área de estudo, que se usa para encontrar um plano que resolva um problema especifico. Como os ambientes nem sempre possuem as mesmas características, existem diferentes técnicas que são usadas para construir um plano.
+O planejamento na área da IA, é uma subárea de estudo, que se usa para encontrar um plano que resolva um problema especifico. Como os ambientes nem sempre possuem as mesmas características, existem diferentes técnicas que são usadas para construir um plano.
 
 \section{Planejamento automatizado}
 \label{sec:classicalPlanning}
@@ -34,7 +34,7 @@ Ou ainda, que a lâmpada do quarto está apagada e a TV da sala está ligada, $a
 \label{subsec:classicalPlanningForm}
 
 Alguns conceitos são importantes para entender a formalização de um problema de planejamento. 
-Os estados são um conjunto de átomos que não podem ser divididos em sub-fórmulas, eles assumem valores de verdadeiro ou falso, dependendo da interpretação do ambiente.
+Os estados são um conjunto de átomos que não podem ser divididos em sub fórmulas, eles assumem valores de verdadeiro ou falso, dependendo da interpretação do ambiente.
 As ações alteram o estado do ambiente, e para que sejam aplicadas é preciso que um conjunto de precondições seja satisfeito, se for, é aplicado um conjunto de efeitos sobre o ambiente~\cite[Capítulo 10]{intelligence2003modern}.
 Por exemplo, mover um objeto de um lugar para o outro, é preciso de um predicado que defina que um objeto está em determinado lugar. Esse exemplo é representado abaixo:
 
@@ -95,7 +95,7 @@ O conhecimento de domínio contém informações que determinam o espaço de est
 
 O objetivo do planejamento HTN é produzir uma sequência de ações que executem determinada tarefa $t$, está tarefas está completa quando todas as tarefas não primitivas são decompostas em tarefas menores até só restarem tarefas primitivas.  
 As tarefas primitivas são análogas as ações executáveis em planejamento clássico, e expressam uma atividade que o agente possa executar diretamente no ambiente~\cite[Capítulo 11]{intelligence2003modern}. 
-Já as tarefa não primitiva representam objetivos que o agente deve alcançar com o intuito de decompor as tarefas não primitivas em primitivas. 
+Já as tarefas não primitivas representam objetivos que o agente deve alcançar com o intuito de decompor as tarefas não primitivas em primitivas. 
 O exemplo da seção anterior de mover um objeto de lugar é um exemplo de tarefa primitiva, pois altera o estado do ambiente, podendo ser representado em HTN como: \texttt{(move~ ?from~ ?to)}. 
 Um exemplo de tarefa não primitiva é realizar uma viagem de carro, para completar essa tarefa é necessário fazer a revisão do carro, arrumar as malas e colocar as bagagens dentro do carro, uma representação destas tarefas pode ser: \texttt{(travelByCar ~?car~ ?stuffs)}. 
 
@@ -231,4 +231,4 @@ A função de avaliação $e$ é aplicada para cada um dos estados do jogo para 
 	\label{fig:ahtn}
 \end{figure}
 
-O problema que o algoritmo de AHTN tenta lidar é o grande fator de ramificação e o pouco tempo para determinar a próxima ação do agente. O algoritmo utiliza planejamento através do conhecimento de domínio para diminuir a combinação de ações que não tem nenhuma chance de ser usadas em um jogo real~\cite{ontanon2015adversarial}. 
+O problema que o algoritmo de AHTN tenta lidar é o grande fator de ramificação e o pouco tempo para determinar a próxima ação do agente. O algoritmo utiliza planejamento através do conhecimento de domínio para diminuir a combinação de ações que não tem nenhuma chance de ser usadas em um jogo real~\cite{ontanon2015adversarial}.

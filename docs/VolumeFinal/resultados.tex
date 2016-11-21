@@ -3,7 +3,7 @@
 \chapter{\label{chap:results}Resultados - Avaliação de Desempenho}
 
 Foram utilizados três mapas para avaliar o desempenho do algoritmo.
-A avaliação dos resultados está divida por mapa.
+A avaliação dos resultados está dívida por mapa.
 Em cada mapa é possível jogar em dois lados.
 O lado azul começa o jogo na parte superior do mapa, e o lado vermelho começa na parte inferior.
 Em cada mapa é avaliado a porcentagem de vitórias para cada domínio.
@@ -14,7 +14,7 @@ Cada adversário foi utilizado dez vezes em cada mapa, e em cada lado do jogo.
 
 No primeiro mapa, cada jogador inicia com uma base, um \textit{worker} e dois recursos próximos a sua base.
 O mapa é formado por 16x16 posições.
-O lado azul e o lado vermelho tem a mesma formação dos componentes iniciais.
+O lado azul e o lado vermelho têm a mesma formação dos componentes iniciais.
 A Figura~\ref{fig:mapa16x16} ilustra a tela do jogo com a configuração inicial do mapa.
 
 \begin{figure}[ht]
@@ -77,7 +77,7 @@ Por conta do mapa ser pequeno em relação ao anterior, não há grande diferen�
 O jogo acaba rápido, pois as técnicas criam unidades e logo encontram as unidades adversárias.
 Mais uma vez o lado vermelho tem larga vantagem sobre o lado azul. 
 Isso acontece pelo fato de que, no lado vermelho, as técnicas do MicroRTS atacam rapidamente, o que não acontece quando as técnicas estão do lado azul, pois após as unidades serem criadas, elas ficam muito tempo paradas antes de atacar.
-A técnica do Minimax por exemplo, no lado azul ela cria unidades de ataque mas não envia para atacar, no lado vermelho as tropas são imediatamente postas ao ataque.
+A técnica do Minimax por exemplo, no lado azul ela cria unidades de ataque, mas não envia para atacar, no lado vermelho as tropas são imediatamente postas ao ataque.
 
 \begin{table}[ht]
 	\centering
@@ -145,7 +145,7 @@ A técnica de Portfolio perde apenas no mapa 2, pois as tropas ficam um tempo pa
 O tempo parado faz com que o algoritmo de AHTN consiga gerar as ações necessárias para que unidades de ataque sejam criadas.
 
 O grande problema dos domínios modelados é não ter um plano de contingência.
-O adversário pode estar criando muitas tropas, mas o domínio segue o plano de criar suas unidades de ataque, o que leva o adversário a vitoria.
+O adversário pode estar criando muitas tropas, mas o domínio segue o plano de criar suas unidades de ataque, o que leva o adversário a vitória.
 Os domínios perdem contra técnicas que treinam unidades de ataque de forma rápida, por causa do tempo que leva para construir um quartel e revidar ao ataque.
 
  
@@ -207,8 +207,8 @@ A Figura~\ref{fig:tempo} ilustra o gráfico com os tempos obtidos para os domín
 	\label{fig:tempo}
 \end{figure}
 
-O gráfico mostra que no inicio do jogo o tempo para gerar uma ação é elevado.
-No inicio do jogo, o jogador tem apenas uma base e um \textit{worker}.
+O gráfico mostra que no início do jogo o tempo para gerar uma ação é elevado.
+No início do jogo, o jogador tem apenas uma base e um \textit{worker}.
 Para conseguir vencer o adversário é preciso construir um quartel, e treinar unidades de ataque.
 Ao passar das jogadas, o tempo para gerar as jogadas diminui.
 Isso ocorre porque há menos ações que podem ser realizadas no jogo, o que implica em menos níveis na árvore de busca que o algoritmo tem que percorrer.
@@ -219,7 +219,7 @@ Isso acontece, pelo fato de que no domínio 1, apenas uma unidade é criada, e c
 O tempo de geração ao final do jogo é semelhante, pois as duas abordagens são parecidas, e se diferem apenas na maneira como as unidades são criadas.
 
 As técnicas do MicroRTS conseguem gerar as ações em poucos milissegundos.
-Já o algoritmo de AHTN implementado leva no minimo meio segundo para determinar qual ação deve ser realizada.
+Já o algoritmo de AHTN implementado leva no mínimo meio segundo para determinar qual ação deve ser realizada.
 Isso ocorre por causa de que a cada troca de perspectiva, o algoritmo tem que gerar os planos novamente.
 Pois a cada novo nível na árvore de busca algum componente do ambiente mudou.
 

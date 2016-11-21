@@ -11,7 +11,7 @@ Um problema pode ser definido por cinco componentes~\cite[Capítulo 3]{intellige
 	\item Ações, conjunto das possíveis ações disponíveis no agente;
 	\item $resultado(s, a)$, um modelo de transição, que define o estado resultante após a execução da ação $a$ no estado $s$;
 	\item $objetivo(s)$, uma função que verifica se o estado $s$ satisfaz o objetivo do agente e; 
-	\item Custo do caminho, uma função que define um valor numérico para cada ação realizada em um estado. O custo é definido dependendo do ambiente, pois o custo pode ser tanto a distancia entre duas localidades, ou o custo monetário de se locomover. 
+	\item Custo do caminho, uma função que define um valor numérico para cada ação realizada em um estado. O custo é definido dependendo do ambiente, pois o custo pode ser tanto a distância entre duas localidades, ou o custo monetário de se locomover. 
 \end{itemize}   
 
 Tais elementos são necessários como entrada para as técnicas de busca.
@@ -20,7 +20,7 @@ Existem diferentes estratégias de busca para encontrar uma solução.
 As diferentes técnicas podem encontrar caminhos diferentes para o mesmo problema, isso vem do fato de que o custo do caminho, quando levado em consideração, pode encontrar uma solução ótima, o que significa que a sequência de ações encontrada é a que tem o menor custo de caminho entre todas as soluções~\cite[Capítulo 3]{intelligence2003modern}.
 
 Considere o mapa apresentado na Figura~\ref{fig:mapabusca} para exemplificar um problema de busca.
-Cada círculo representa uma cidade, e as linhas entre as cidades são estradas que as ligam umas as outras. 
+Cada círculo representa uma cidade, e as linhas entre as cidades são estradas que as ligam umas às outras. 
 A ação possível neste problema é a de se locomover entre as cidades que tenham ligação.
 O estado inicial é a cidade de São Jerônimo. O resultado do modelo de transição, é a cidade resultante após se locomover. O objetivo do agente é chegar na cidade de Porto Alegre e o custo de cada ação é o valor definido em cima de cada transição. 
 

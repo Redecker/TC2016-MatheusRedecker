@@ -132,9 +132,9 @@ A WorkerRush consiste em ter um \textit{worker} para realizar a extração de re
 
 Outras técnicas utilizam algum algoritmo de IA para decidir qual ação deve ser realizada.
 Como é o caso das estratégias de Minimax\cite{ontanon2012minimax}, Monte Carlo, e Portfolio Search\footnote{https://github.com/santiontanon/microrts/wiki/Artificial-Intelligence}.
-A estratégia de Minimax utiliza o algoritmo de minimax para uma determinada profundidade. A profundidade não é em relação aos turnos, como no algoritmo comum de minimax, mas sim ao tempo disponível para tomar um decisão.
+A estratégia de Minimax utiliza o algoritmo de minimax para uma determinada profundidade. A profundidade não é em relação aos turnos, como no algoritmo comum de minimax, mas sim ao tempo disponível para tomar uma decisão.
 A estratégia de Monte Carlo verifica todas as ações possíveis para o estado, e simula jogos aleatórios para aquela jogada até um determinado tempo. Uma heurística é utilizada para determinar qual foi a ação que obteve o melhor valor.
-Já estratégia de Portfolio Search possui um conjunto de estratégias (o portfolio) e utiliza um algoritmo de busca para decidir qual a melhor estratégia para ser usada em determinado momento. 
+Já estratégia de Portfolio Search possui um conjunto de estratégias (o portfólio) e utiliza um algoritmo de busca para decidir qual a melhor estratégia para ser usada em determinado momento. 
 O conjunto é composto pelas estratégias Hard-Coded.
 
 \section{Java Simple Hierarchical Ordered Planner 2}\label{sec:jshop}
@@ -144,7 +144,7 @@ O JSHOP2 foi desenvolvido em Java por Dana Nau e sua equipe de pesquisa.
 O JSHOP2 recebe como entrada uma descrição do domínio e um problema de planejamento.
 A descrição do domínio contém a formalização das ações dos agentes, as tarefas e métodos que as decompõem.
 O planejador realiza a geração do plano decompondo os métodos até que só restem tarefas primitiva, a Seção~\ref{sec:htnPlanning} explica como é feita a decomposição. 
-Na descrição do domínio as tarefas primitivas são descrita como operadores. 
+Na descrição do domínio as tarefas primitivas são descritas como operadores. 
 Na descrição do domínio os operadores são compostos por um nome de operador, uma lista de precondições que deve ser verdadeira para a execução do operador, uma lista de elementos que serão removidos do estado, e uma lista de elementos que serão adicionados ao estado. 
 Por exemplo, um operador que representa o deslocamento de uma pessoa de um lugar origem para um lugar destino, para isso é preciso estar no lugar origem, e assim que a pessoa se locomover ela não está mais neste local e está no local destino. Este exemplo de operador é apresentado a seguir:
 
@@ -159,7 +159,7 @@ Por exemplo, um operador que representa o deslocamento de uma pessoa de um lugar
 
 Os métodos são utilizados para decompor tarefas de alto nível para níveis mais baixos. 
 No JSHOP2 os métodos são identificados por um nome de método, que é único para cada método. 
-Dentro de um método há uma lista de precondições, e uma lista de tarefas, que podem ser primitivas ou não primitivas, para quantos casos forem necessário. 
+Dentro de um método há uma lista de precondições, e uma lista de tarefas, que podem ser primitivas ou não primitivas, para quantos casos forem necessários. 
 Por exemplo, o problema de ir de um local para outro, se o local destino tem um caminho para o local origem, é possível se locomover para o local, mas se não houver caminho é preciso ir para outra cidade que tenha caminho para o local destino. 
 Este exemplo pode ser visto abaixo:
 
