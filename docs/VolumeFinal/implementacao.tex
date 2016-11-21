@@ -113,15 +113,15 @@ Por fim, os planos gerados são retornados para a classe dentro do MicroRTS.
 \subsection{Algoritmo de AHTN}
 
 Para que o MicroRTS reconheça uma IA, ela deve ter o método $\mathit{getAction}$ implementado.
-Quando este método é invocado a técnica deve realizar a sua operação e retornar qual movimento deve ser executado.
-Sendo assim, a classe que implementa o algoritmo de AHTN deve utilizar este método para retornar a ação encontrada.
+Quando este método é invocado, a técnica deve realizar a sua operação e retornar qual movimento deve ser realizado.
+Sendo assim, a classe que implementa o algoritmo de AHTN deve utilizar este método para retornar a ação encontrada pelo algoritmo de AHTN.
 O algoritmo de AHTN implementado seguiu o padrão do algoritmo apresentado na Seção~\ref{alg:ahtn}, mas com algumas alterações.
 
 O JSHOP2 gera os planos apenas com os operadores utilizados para alcançar o objetivo.
 Com isso, o plano gerado não tem a informação de quais métodos foram utilizados para chegar aos operadores.
 Neste caso, o plano contém os operadores ordenados que chegam ao objetivo.
 No algoritmo de AHTN original o plano vai sendo decomposto através dos métodos a medida que a arvore das jogadas está expandindo, e só realiza a troca de perspectiva entre \textsc{Max} e \textsc{Min} quando há uma tarefa primitiva a ser executada.
-No algoritmo de AHTN implementado há uma pequena diferença do algoritmo orignal.
+No algoritmo de AHTN implementado há uma pequena diferença do algoritmo original.
 No algoritmo implementado sempre ha troca de perspectiva a cada rodada.
 A troca de perspectiva é feita para cada plano que é gerado a partir do estado do jogo.
 O Algoritmo~\ref{alg:meuahtn} ilustra o pseudo código do algoritmo de AHTN implementado.
@@ -132,7 +132,7 @@ Caso uma das duas coisas aconteça, o algoritmo retorna o plano de cada perspect
 
 O algoritmo avança caso não haja uma configuração de final de jogo.
 Na linha~\ref{alg:meuahtn:nexaction} o algoritmo aplica a próxima ação primitiva do plano no estado.
-Neste ponto, o jogador, na perspectiva do \textsc{Max}, realiza uma ação no estado.
+Neste ponto, o jogador realiza uma ação no estado.
 Após alterar o estado, o algoritmo gera todos os planos para \textsc{Min} a partir do novo estado, e realiza a chamada para o método $\mathit{AHTNMin}$.
 O método de $\mathit{AHTNMin}$ realiza as mesmas operações que o método de $\mathit{AHTNMax}$ mas com a perspectiva de \textsc{Min}.
 Seguindo, na linha~\ref{alg:meuahtn:avali}, o algoritmo verifica qual dos planos obteve a melhor função de avaliação. 
