@@ -1,0 +1,546 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    begin{frame}{Introduction and Motivation}
+       	begin{itemize}
+       		item Plan recognition tasks by observing a single agent
+       			begin{itemize}
+       				item Plan (Goal) Recognition; and
+       				item Plan Abandonment Detection.
+       			end{itemize}
+       		item We do not use plan libraries, we use a planning domain definition;
+       		item Our recognition approaches use planning techniques, i.e, landmarks and domain-independent heuristics; and
+       		item The applicability of these approaches may include
+       		    begin{itemize}
+       				item Assisted Living;
+       				item Logistics;
+       				item Traffic Monitoring; and
+       				item Among others.
+       			end{itemize}
+		end{itemize}
+    end{frame}
+    
+%---------------------------------------------------------------------------------
+	{
+	setbeamercolor{background canvas}{bg=lightgray}
+    begin{frame}{Background}
+		vspace{5mm}
+       	begin{itemize}
+       		item textbf{Planning}
+			item textbf{Domain-Independent Heuristics}
+       		item textbf{Landmarks}       		
+       		item textbf{Plan Recognition}
+       		item textbf{Plan Abandonment Detection}
+       	end{itemize}
+    end{frame}
+    }
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+    begin{frame}{Planning}
+       	begin{itemize}
+       		item textbf{Planning} is the problem of finding a textbf{plan} to achieve a desired state.
+
+			begin{definition} [textbf{Planning Instance}]
+				textit{A planning instance is represented by a triple $Pi = langle Xi, mathcal{I}, Grangle$, in which
+				begin{itemize}
+					item $Xi$ $=$ $langle$$Sigma$, $mathcal{A}$$rangle$ is the textbf{domain definition}, and consists of a finite set of textbf{facts} (textbf{properties}) $Sigma$ and a finite set of textbf{actions} $mathcal{A}$; and
+					item $mathcal{I}$ and $G$ represent the textbf{planning problem}, in which $mathcal{I}$ $subseteq$ $Sigma$ is the textbf{initial state}, and $G$ $subseteq$ $Sigma$ is the textbf{goal state}.
+				end{itemize}}
+			end{definition}
+			item For solving a planning instance, it is necessary a textbf{planner}.
+       	end{itemize}
+    end{frame}
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+    begin{frame}{Domain-Independent Heuristics}
+       	begin{itemize}
+       		item Heuristics are used to textbf{estimate} the textbf{cost} to achieve a particular goal;
+       		item In planning, heuristics can be domain-dependent or textbf{domain-independent};
+       		
+       		item In this work, we use the following domain-independent heuristics
+       			begin{itemize}
+       				item textbf{Max Heuristic} (admissible), denoted as $h_{max}$; and
+       				item textbf{Fast Forward Heuristic} (inadmissible), denoted as $h_{ff}$.
+	       		end{itemize}
+		end{itemize}
+    end{frame}
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+    begin{frame}{Landmarks}
+		begin{definition}[textbf{Landmarks}]
+			textit{Given a planning instance $Pi = langle Xi, mathcal{I}, Grangle$, a textbf{fact} (or textbf{action}) $L$ is a landmark in $Pi$ iff $L$ 	must be textbf{satisfied} (or textbf{executed}) at some point along all valid plans that achieve $G$ from $mathcal{I}$.}
+		end{definition}
+		vspace{-3mm}
+       	%begin{figure}[here]
+			%includegraphics[width=0.55linewidth]{landmarks_robot-example.pdf}	end{figure}
+		vspace{-6mm}
+		begin{itemize}
+			setlength{itemsep}{0pt}
+			setlength{parskip}{0pt}
+			setlength{parsep}{0pt}		
+			item {footnotesize textbf{Fact Landmarks} texttt{(has Key)} $prec$ texttt{(unlock Lock)} $prec$ texttt{(has Battery)}; and}
+			item {footnotesize textbf{Action Landmarks} texttt{(pickup Key)} $prec$ texttt{(open Lock Key)} $prec$ texttt{(pickup Battery)}.}
+		end{itemize}		
+   end{frame}     
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+    begin{frame}{Plan Recognition}
+
+		begin{definition}[textbf{Plan Recognition}]
+textit{Plan recognition is textbf{the task of identifying how agents achieve their goals} by observing their interactions in an environment.}
+		end{definition}
+       	
+       	begin{figure}[here]
+			includegraphics[width=0.6linewidth]{planrecognition_robots-example.pdf}
+		end{figure}
+    end{frame}
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+    begin{frame}{Plan Abandonment Detection}
+		begin{definition}[textbf{Plan Abandonment Detection}]
+			textit{Plan abandonment is a textbf{situation} in which an agent textbf{switches from executing the actions of one plan to execute actions from another plan} due to some reason.}
+		end{definition}
+       	
+       	The reasons why an agent abandons its plans may include
+       	begin{itemize}
+       		item textbf{getting their attention drawn to something else};
+       		item textbf{being interrupted by an emergency}; and
+       		item textbf{conflicting plans and goals};
+		end{itemize}
+    end{frame}
+
+%---------------------------------------------------------------------------------
+	{
+	setbeamercolor{background canvas}{bg=lightgray}
+    begin{frame}{Extracting Recognition Information From Domain Analysis}
+    		vspace{5mm}
+       	begin{itemize}
+       		item textbf{Reachability Analysis}
+       		item textbf{Extracting Landmarks}
+       		item textbf{Fact Partitioning}
+		end{itemize}
+    end{frame}
+    }
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    
+    
+    begin{frame}{Reachability Analysis}
+       	begin{itemize}
+			item In planning, reachability analysis techniques can textbf{reduce the amount of facts and actions} of a planning instance;
+			item To reduce this amount, we use a Relaxed Planning Graph (RPG).
+				begin{itemize}
+					item An RPG structure represents a textbf{planning problem relaxation} by ignoring action delete-list effects.
+				end{itemize}
+       	end{itemize}
+    end{frame}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    
+    begin{frame}{Extracting Landmarks}
+       	begin{itemize}
+			item Using the concept of textbf{landmarks} it is possible to monitor textbf{waypoints} in a plan execution;
+			item We extract landmarks and orderings by textbf{back-chaining} using an RPG structure {footnotesize(textit{Hoffman et al., Ordered Landmarks in Planning})};
+			item The task of extracting exactly all landmarks and deciding about their ordering is textbf{PSPACE-complete}.
+			begin{itemize}
+				item We extract just a textbf{subset of landmarks} for a given planning problem.
+			end{itemize}
+       	end{itemize}
+    end{frame}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+%    begin{frame}{Extracting Landmarks}
+%	  	begin{figure}[here]
+%			includegraphics[width=0.6linewidth]{blocksworld-example.pdf}	  	
+%	  		vspace{5mm}
+%			includegraphics[width=1linewidth]{rpg-landmarks.png}
+%		end{figure}
+%
+%    end{frame}    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    
+    begin{frame}{Extracting Landmarks}    
+	  	begin{figure}[here]
+			includegraphics[width=0.5linewidth]{blocksworld-example.pdf} 
+			
+			includegraphics[width=0.6linewidth]{blocksworld-landmarks.pdf}
+		end{figure}
+    end{frame}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      
+	begin{frame}{Fact Partitioning}    
+		The fact partitions we use are
+       	begin{itemize}
+			item textbf{textit{Strictly Activating}} unless defined in the initial state, this fact can never be added.
+
+			item textbf{textit{Unstable Activating}} once deleted, this fact cannot be re-achieved.
+
+			item textbf{textit{Strictly Terminal}} once added, cannot be deleted.
+
+       	end{itemize}
+    end{frame}      
+
+%---------------------------------------------------------------------------------
+	{
+	setbeamercolor{background canvas}{bg=lightgray}
+    begin{frame}{Landmark-based Plan Recognition}
+	    vspace{5mm}
+       	begin{itemize}
+       		item textbf{Definition of Plan Recognition over Planning Theory}
+       		item textbf{Filtering Candidate Goals From Landmarks in Observations}
+       		item textbf{Heuristic Plan Recognition Using Landmarks}
+		end{itemize}
+    end{frame}
+	}
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+    begin{frame}{Definition of Plan Recognition over Planning Theory}
+		begin{definition}[textbf{Plan Recognition over Planning}]        
+       	begin{itemize}
+       		item Domain Definition (Properties and Actions) $Xi$ $=$ $langle Sigma, mathcal{A} rangle$;
+       		item Initial State textbf{$mathcal{I}$};
+       		item A Set of Candidate Goals textbf{$mathcal{G}$} (with a hidden goal $G$); and
+       		item Sequence of Observations (i.e, Actions) textbf{$O$}.
+       			begin{itemize}
+       				item This observation sequence can be textbf{full} or textbf{partial}.
+       			end{itemize}	
+       	end{itemize}
+       	end{definition}
+    end{frame}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+    begin{frame}{Filtering Candidate Goals From Landmarks in Observations}
+       	begin{itemize}
+       		item textbf{Filter candidate goals} based on the evidence of fact landmarks and partitioned facts in preconditions and effects of observed actions in a plan execution;
+       		item Select those goals that have achieved most of their associated landmarks.
+		end{itemize}
+    end{frame}
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    
+    
+    begin{frame}{Filtering Candidate Goals From Landmarks in Observations}
+		includegraphics[width=1linewidth]{planrecognition-filter.pdf}
+    end{frame}
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+	begin{frame}{Filtering Candidate Goals From Landmarks in Observations}
+       	begin{itemize}
+       		item As an example, consider the following plan recognition problem	
+		end{itemize}
+		begin{figure}[here]
+			centering
+			includegraphics[width=0.7linewidth]{blocksworld-example-pr.pdf}
+		end{figure}	 
+		begin{itemize}
+       		item Observation sequence
+       			begin{itemize}
+       				item texttt{(stack E D)}
+       					begin{itemize}
+       						item textbf{precondition} texttt{(and {color{blue}(holding E) (clear D)})}
+       						item textbf{effect} texttt{(and (not (holding E)) (not (clear D)) (clear E) {color{blue} (on E D)} (handempty))}
+       					end{itemize}
+       				item texttt{(pickup S)}
+       				    begin{itemize}
+       						item textbf{precondition} texttt{(and (clear S) (ontable S) (handempty))}
+       						item textbf{effect} texttt{(and (not (ontable S)) (not (clear S)) (not (handempty)) (holding S)))}
+       					end{itemize}
+				end{itemize}       		
+		end{itemize}
+    end{frame}
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+    begin{frame}{Filtering Candidate Goals From Landmarks in Observations}
+	  	begin{figure}[here]
+			includegraphics[width=0.47linewidth]{bed-landmarks-achieved-new.pdf} 
+			caption{Achieved landmarks for texttt{BED}, $frac{6}{8}$ $=$ 0.75.}
+		end{figure}
+		
+	  	begin{figure}[here]
+			includegraphics[width=0.47linewidth]{red-landmarks-achieved-new.pdf}
+			caption{Achieved landmarks for texttt{RED}, $frac{6}{8}$ $=$ 0.75.}
+		end{figure}		
+    end{frame}
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    
+    
+    begin{frame}{Heuristic Plan Recognition Using Landmarks}
+	  	begin{itemize}
+       		item Our textbf{landmark-based plan recognition heuristic} estimates the textbf{goal completion of every goal} in the set of filtered goals by analyzing the number of achieved landmarks for each goal provided by the filtering process.
+		end{itemize}
+
+centering
+$h_{prl}(G) = left(frac{sum_{g in G} frac{midmathcal{AL}_{g}mid}{midmathcal{L}_{g}mid}}{mid G mid}right)$
+
+    end{frame}    
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    
+    begin{frame}{Heuristic Plan Recognition Using Landmarks}
+	  	begin{itemize}
+       		item As an example, consider the goal texttt{DEB}, and the observation sequence
+       		vspace{-1mm}
+       		{footnotesize
+       		item texttt{(unstack B C)}
+				begin{itemize}
+					vspace{-1mm}
+					tiny
+       				item textbf{precondition} texttt{(and {color{blue} (on B C) (clear B) (handempty)})} 
+       				item textbf{effect} texttt{(and {color{blue}(holding B)} (clear C)
+               (not (on B C)) (not (clear B)) (not (handempty)))}
+       			end{itemize}
+       		vspace{-3mm}	
+       		item texttt{(pick-up R)} 
+				begin{itemize}
+					vspace{-1mm}
+					tiny
+       				item textbf{precondition} texttt{(and (clear R) (ontable R) (handempty))}
+       				item textbf{effect} texttt{(and (not (ontable R)) (not (clear R) (holding R) (not (handempty)))}
+       			end{itemize}       		
+       		vspace{-3mm}	
+       		item texttt{(stack D E)}
+				begin{itemize}
+					vspace{-1mm}
+					tiny
+       				item textbf{precondition} texttt{(and {color{blue} (clear E) (holding D)})}
+       				item textbf{effect} texttt{ (and (not (holding D)) (not (clear E)) {color{blue} (clear D) (on D E)} (handempty))}
+       			end{itemize}       		
+       		}
+		end{itemize}
+		vspace{-4mm}
+	  	begin{figure}[here]
+			includegraphics[width=0.8linewidth]{deb-landmarks.pdf}
+		end{figure}
+		
+		centering
+		{
+		footnotesize
+		$h_{prl}(G) = cfrac{1+frac{3}{3}+0+frac{2}{3}}{4} = 0.66$
+		}
+		
+    end{frame}     
+    
+%---------------------------------------------------------------------------------
+	{
+	setbeamercolor{background canvas}{bg=lightgray}
+    begin{frame}{Planning-based Plan Abandonment Detection}
+    		vspace{5mm}
+       	begin{itemize}
+       		item textbf{Definition of Plan Abandonment Detection over Planning Theory}
+       		item textbf{Pre-processing Key Information From Domain Analysis}
+       		item textbf{Behavior Analysis}
+       		item textbf{Detecting Plan Abandonment}
+		end{itemize}
+    end{frame}
+	}
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    
+    
+    begin{frame}{Definition of Plan Abandonment Detection over Planning Theory}
+
+		begin{definition}[textbf{Plan Abandonment Detection over Planning}]
+       	begin{itemize}
+       		item Domain Definition (Properties and Actions) $Xi$ $=$ $langle Sigma, mathcal{A} rangle$;
+       		item Initial State textbf{$mathcal{I}$};
+       		item Monitored Goal textbf{$G$}; and
+       		item Sequence of Observations (i.e, Actions) textbf{$O$}.
+       			begin{itemize}
+       				item This observation sequence is textbf{full}.
+       			end{itemize}	
+       	end{itemize}
+       	end{definition}
+    end{frame}
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    
+    
+    begin{frame}{Pre-processing Key Information From Domain Analysis}
+    
+		begin{enumerate}
+			item textbf{Reduce the amount of facts and actions} performing a planning graph-based reachability analysis technique;
+			item textbf{Extract fact and action landmarks}; and
+			item textbf{Classify particular types of predicates} by analyzing preconditions and effects in the domain operators definition.
+		end{enumerate}
+
+    end{frame}
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    
+    
+    begin{frame}{Behavior Analysis}
+       	begin{itemize}
+       		item textbf{Analyzing Plan Execution Variation}       	
+       		item textbf{Predicting Upcoming Actions from Landmarks}
+       	end{itemize}
+    end{frame}
+    
+    begin{frame}{Analyzing Plan Execution Variation}
+       	begin{itemize}
+			item For every observation we textbf{compute} and textbf{store} the textbf{estimated distance} to the monitored goal using a domain-independent heuristic -- $h_{ff}$.
+       	end{itemize}
+	  	begin{figure}[here]
+			includegraphics[width=0.5linewidth, angle=270]{planexecution-variation.eps}
+		end{figure}       	       	
+    end{frame}
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    
+    
+    begin{frame}{Predicting Upcoming Actions from Landmarks}
+       	begin{itemize}
+			item textbf{Ordered landmarks} provide to our approach what we consider as the textbf{``waypoints''} to the monitored goal.
+			vspace{1.5mm}
+			item To predict upcoming actions, we analyze the textbf{closest landmarks}
+				begin{itemize}
+					item fact landmarks in which the estimated distance is 0 and 1 (using $h_{max}$).
+				end{itemize}
+       	end{itemize}
+    end{frame}
+    
+    begin{frame}{Predicting Upcoming Actions from Landmarks}
+		For those fact landmarks which the textbf{estimated distance is 0} 
+			vspace{1.5mm}			
+			begin{figure}[here]
+				centering
+				includegraphics[width=0.8linewidth]{distance0.pdf}
+			end{figure}
+    end{frame} 
+    
+    begin{frame}{Predicting Upcoming Actions from Landmarks}
+		For those fact landmarks which the textbf{estimated distance is 1}
+			vspace{1.5mm}
+			begin{figure}[here]	
+				centering  	
+				includegraphics[width=0.77linewidth]{distance1.pdf}
+			end{figure}
+    end{frame}       
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    
+    
+    begin{frame}{Detecting Plan Abandonment}
+		includegraphics[width=1linewidth]{planabandonment-algorithm.pdf}
+    end{frame}            
+
+%---------------------------------------------------------------------------------
+	{
+	setbeamercolor{background canvas}{bg=lightgray}
+    begin{frame}{Experiments and Evaluation}
+    		vspace{5mm}
+       	begin{itemize}
+       		item textbf{Domains}
+       		item textbf{Evaluation Metrics}
+       		item textbf{Plan Recognition Experimental Results}
+       		item textbf{Plan Abandonment Detection Experimental Results}
+		end{itemize}
+    end{frame}
+    }
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    
+    
+    begin{frame}{Domains}
+    
+    		For experiments, we have selected textbf{12 PDDL domains}, such as
+       	begin{itemize}
+       		item textsc{Blocks-World}, textsc{Depots}, textsc{Dock-Worker-Robots}, ..., textsc{Logistics}, textsc{Miconic}, textsc{Rovers}, among others.
+		end{itemize}
+    end{frame}
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    
+    
+    begin{frame}{Evaluation Metrics}
+    		begin{itemize}
+			item textbf{Plan Recognition}
+				vspace{2mm}
+				begin{itemize}
+					item $textsc{Accuracy} = cfrac{sum True enspace positive + sum True enspace negative}{sum Total enspace population}$
+				end{itemize}    		
+			vspace{2mm}    		
+    			item textbf{Plan Abandonment Detection}
+    				vspace{2mm}
+    				begin{itemize}
+       				item $textsc{Precision} = cfrac{sum True enspace positive}{sum True enspace positive + sum False enspace positive}$
+       				vspace{3mm}
+					item $textsc{Recall} = cfrac{sum True enspace positive}{sum True enspace positive + sum False enspace negative}$
+					vspace{3mm}
+					item $textsc{F1-score} = 2 cdot cfrac{Precision cdot Recall}{Precision+Recall}$
+				end{itemize}
+    		end{itemize}
+    end{frame}  
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    
+    
+    begin{frame}{Plan Recognition Experimental Results}
+        	begin{itemize}
+        		item $mathcal{G}$ average of candidate goals;
+        		item textbf{% Obs} observability;
+    			item $O$ average of observed actions in a plan execution;
+    		end{itemize}
+		begin{figure}[here]
+			centering
+			includegraphics[width=1linewidth]{PlanRecognitionResults.png}
+		end{figure}	
+    end{frame}            
+    
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    
+    
+    begin{frame}{Plan Abandonment Detection Experimental Results}
+    		begin{itemize}
+    			item $O$ average of observed actions in a plan execution;
+    		end{itemize}
+		begin{figure}[here]
+			centering
+			includegraphics[width=1linewidth]{PlanAbandonmentResults.png}
+		end{figure}	
+    end{frame}     
+    
+%---------------------------------------------------------------------------------
+
+    begin{frame}{Related Work}
+       	begin{itemize}
+       		item textbf{Plan Recognition}
+       			begin{itemize}
+       				item {footnotesize Ramirez and Geffner.} “textbf{Plan Recognition as Planning}”. In IJCAI, 2009;
+       				item {footnotesize Ramirez and Geffner.} “textbf{Probabilistic Plan Recognition using off-the-shelf Classical Planners}”. In AAAI, 2010; and
+       				item {footnotesize Pattison and Long.} “textbf{Domain Independent Goal Recognition}”. In STAIRS, 2010.
+       			end{itemize}
+       		
+       		item textbf{Plan Abandonment Detection}
+       			begin{itemize}
+       				item {footnotesize Geib and Goldman.} “textbf{Recognizing PlanGoal Abandonment}”. In IJCAI, 2003.
+       			end{itemize}
+		end{itemize}
+    end{frame}
+    
+%---------------------------------------------------------------------------------
+
+    begin{frame}{Conclusion}
+		begin{itemize}
+        		item textbf{Contributions}
+        			begin{itemize}
+        			    item Landmark-based (planning-based) approaches for plan recognition tasks; and
+       				item Good results for both plan recognition and plan abandonment detection.
+        			end{itemize}        			
+        		item textbf{Limitations}
+        			begin{itemize}
+        				item Our plan recognition approach is limited when dealing with highly incomplete observations (e.g, 10% and 30% of observability); and 
+        				item We do not have a standard data-set of domains for experiments.
+        			end{itemize}
+       		item textbf{Future Work}
+       			begin{itemize}
+       				item Improve our experiments using other IPC domains;
+       				item Explore landmarks in a different way (e.g, disjunctive landmarks);
+       				item Research on other planning techniques (e.g, sub-goal ordering); 
+       				item Deal with incomplete domains; and
+       				item Apply these techniques for multi-agents.
+       			end{itemize}
+        end{itemize}
+    end{frame}
+    
+	{
+	setbeamercolor{background canvas}{bg=lightgray}
+    begin{frame}{}
+    		centering
+    		Thank you!
+    end{frame}
+    }    
+    
+%---------------------------------------------------------------------------------
