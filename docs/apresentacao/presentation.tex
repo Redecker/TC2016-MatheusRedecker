@@ -68,6 +68,20 @@
 	    \item MicroRTS
     \end{itemize}
 \end{frame}
+%A IA em jogos faz com que os computadores sejam capazes de jogar jogos como xadrez e jogo da velha sem intervenção humana.
+%As técnicas são usadas para ter uma melhor interação com o usuario, e ele não perceber que está jogando contra uma maquina
+%Mas as vezes as técnicas utilizadas nos jogos não são interamente de IA, pois elas podem utilizam conhecimentos proveniente do controle do jogo para tomar suas decisões.
+%Outro fator é o tempo de tomada das ações, muitas vezes não há um tempo grande para decidir qual o proximo passo a ser tomado, com isso técnicas que tentam explorar todas as possibilidaes de um jogo se tornam ineficazes.
+% O Xadrez por exemplo tem 10^40 estados possíveis do jogo
+% é preciso algoritmos eficientes para gerar uma ação de forma rapida.
+
+%O algoritmo de AHTN foi proposto para mitigar as limitações computacionais de abordagens tradicionais de raciocionio em jogos.
+%O algoritmo foi proposto por Santiago Ortanon  e combina técnicas de planejamento e busca adversária.
+
+%O MicroRTS é uma simplificação de jogos como Stracraft e Age of Empires.
+%Ele é um jogo RTS e foi desenvolvido em Java, para facilitar a codificação de técnicas de IA e servir de prova de conceito para as técnicas criadas
+
+% O intuito deste trabalho é explorar eficientemente o espaço de ações disponíveis no MicroRTS utilizando conhecimento de domínio, a fim de definir qual a próxima ação que deve ser executada.
 
 %Background
 {
@@ -83,18 +97,23 @@
 	\end{frame}
 }
 %BUSCA
-\begin{frame}{Busca}
+\begin{frame}{Busca adversária}
 	\begin{itemize}
 		\item Árvore das jogadas (\textit{game tree})
 		\item Estado terminal
 		\item Função de avaliação
-		\item Busca Adversária
 	\end{itemize}
 	
 	\begin{figure}[here]
 		\includegraphics[width=0.45\linewidth]{fig/jogodavelha.pdf}	
 	\end{figure}
 \end{frame}
+%Técnicas de busca tem como objetivo encontrar uma sequência de passos para que um agente alcance um determinado objetivo.
+%Já a busca adversária é utiliza em ambientes competitivas que possuam mais de um agente 
+%As técnicas utilizam a arvore das jogadas para percorrer o espaço de estados dos jogos
+%Por exemplo, no jogo da velha, cada possibilidade de jogada deve ser percorrida para que o algoritmo possa determinar qual a melhor jogada
+%O estado terminal indica quando o jogo chegou ao fim, e nele deve ser possivel obter um valor através da função de avaliação, para que seja possivel ver o quão bom foi a sequencia de ações para chegar a esse estado
+
 %Minimax
 \begin{frame}{Minimax}
 	\begin{itemize}
@@ -107,6 +126,11 @@
 		\includegraphics[width=0.8\linewidth]{fig/gametree.pdf}	
 	\end{figure}	
 \end{frame}
+%O algoritmo de Minimax é um algoritmo de busca adversária que tem como objetivo determinar qual a melhor jogada para o estado atual.
+%Este método considera dois agentes que estão competindo entre si
+%O agente Max representa a perspectiva que está tentando aumentar as recompenças das suas ações.
+%Já o agente Min é com quem o Max está jogando contra, e suas ações estão tentando ser minimizadas.
+%Por exemplo, quando Min tem duas possibilidades de jogadas, uma boa e uma ruim, o algoritmo seleciona a ruim como melhor opção para Max, pois quanto menor a chance de Min ter uma jogada de sucesso, melhor para ele.
 
 %Planejamento
 \begin{frame}{Planejamento}
@@ -116,10 +140,15 @@
 		\includegraphics[width=0.6\linewidth]{fig/modelo.pdf}	
 	\end{figure}	
 \end{frame}
+%Planejamento estuda o processo de geração de planos de forma computacional.
+%Para isso é preciso um planejador, ele tem com o objetivo encotnrar um plano que solucione um problema.
+%O planejador utiliza uma representação do problema, que contém informações das ações disponiveis no ambiente. E apartir de um estado inicial, e um objetivo que se deseja alcaçar, o planejador encontra a sequencia de ações que parte do estado inicial e alcança seus objetivos. 
+
 %Planejamento Hierárquico
 \begin{frame}{Planejamento Hierárquico (HTN)}
 	\begin{itemize}
 		\item Tarefas alto nível
+		\item Conhecimento de domínio
 		\item Decomposições
 	\end{itemize}
 	\vspace{-3mm}
@@ -127,6 +156,12 @@
 		\includegraphics[width=0.7\linewidth]{fig/htnmethodresult.pdf}	
 	\end{figure}	
 \end{frame}
+%Problemas de grande complexidade acabam demorando muito com planejamento clássico.
+%Como alternativa para isso, foi proposto o planejamento hierarquico, ou HTN.
+%Ele se diferencia do anterior pelo fato de que as tarefas são tratadas em mais alto nivel, ou seja, as ações são decompostas em ações menores e assim por diante até que restem ações simples que possam ser realizadas no ambiente.
+%Para isso, é preciso um conhecimento de domínio que contém informações relativas as ações disponiveis e transições que são feitas no ambiente.
+%Por exemplo, para realizar uma viajem de carro, não é só pegar o carro e dirigir, é preciso ir ao mecanico, fazer as malas, colocar as malas no carro, e então viajar.
+
 %Algoritmo de AHTN
 \begin{frame}{Adversarial Hierarchical-Task Network}
 	\begin{itemize}
@@ -134,29 +169,14 @@
 		\item Minimax + planejamento hierárquico
 	\end{itemize}
 	
-	{\tiny				
-		\begin{algorithmic}[1]
-				\Function {AHTNMax}{$s, N_{+}, N_{-}, t_{+}, t_{-}, d$}
-				\If {$terminal(s) \vee d \leq 0$}\label{alg:lin:firstLine}
-				\State	\Return $(N_{+}, N_{-}, e(s))$
-				\EndIf
-				\If {$nextAction(N_{+}, t_{+}) \neq \perp$} \label{alg:ahtn:nexaction}
-				\State $t = nextAction(N_{+}, t_{+})$ 
-				\State \Return $\Call{AHTNMin}{(\gamma(s,t), N_{+}, N_{-}, t, t_{-}, d-1)}$ \label{alg:ahtn:troca}
-				\EndIf
-				\State $N_{+}^{*} = \perp, N_{-}^{*} = \perp, v^{*} = -\infty$
-				\State $\aleph = decompositions_{+}(s, N_{+}, N_{-}, t_{+}, t_{-})$ \label{alg:decompositions}
-				\ForAll{$N \in \aleph$} \label{alg:ahtn:for}
-				\State $(N^{'}_{+}, N^{'}_{-}, v^{'}) = AHTNMax(s, N, N_{-}, t_{+}, t_{-}, d)$
-				\If{$v^{'} > v^{*}$}
-				\State $N_{+}^{*} = N^{'}_{+}, N_{-}^{*} = N^{'}_{-}, v^{*} = v^{'} $
-				\EndIf
-				\EndFor		
-				\State \Return $(N_{+}^{*}, N_{-}^{*}, v^{*} )$
-				\EndFunction
-		\end{algorithmic}
-	}
+	\begin{figure}[here]
+		\includegraphics[width=0.4\linewidth]{fig/ahtn.pdf}	
+	\end{figure}	
 \end{frame}
+%O algoritmo de AHTN é uma combinação do algoritmo de Minimax com o conhecimento de domínio do planejamento hierarquico
+%No AHTN os planos de cada um das perspectivas vão sendo decompostos.
+%O algoritmo pode ir até uma determinada profundidade, ou decompor todo os espaço de estados
+%A grande diferença do algoritmo é que a troca de perspectivas é feita apenas quando há uma tarefa primitiva a ser realizada no ambiente, caso o contrario o algoritmo decompoe as tarefas não primitivas e segue na mesma perspectiva
 
 %MicroRTS+JSHOP2
 {
@@ -175,7 +195,7 @@
 		\item O que é?
 		\item Construções
 		\item Unidades
-		\item Técnicas de IA
+		\item Técnicas
 	\end{itemize}
 	\vspace{-3mm}
 	\begin{figure}[here]
