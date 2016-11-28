@@ -24,7 +24,7 @@
 
 \usetheme{Madrid}
 \usecolortheme{seagull}
-\title[\fontsize{0.08cm}{1em}\selectfont Adversarial Hierarchical-Task Network para Jogos]{Adversarial Hierarchical-Task Network para Jogos em Tempo Real}
+\title[\fontsize{0.08cm}{1em}\selectfont AHTN para Jogos em Tempo Real]{Adversarial Hierarchical-Task Network para Jogos em Tempo Real}
 \author[Matheus de Souza Redecker]{Matheus de Souza Redecker
 \\{\footnotesize Orientador: Prof. Dr. Felipe R. Meneguzzi}
 }
@@ -196,6 +196,7 @@
 		\item Construções
 		\item Unidades
 		\item Técnicas
+		\item Camada de abstração
 	\end{itemize}
 	\vspace{-3mm}
 	\begin{figure}[here]
@@ -227,9 +228,10 @@
 
 %Ações
 \begin{frame}{Ações do MicroRTS}
-	\begin{itemize}
-		\item (diagrama com as ações)
-	\end{itemize}
+
+	\begin{figure}[here]
+		\includegraphics[width=1\linewidth]{fig/acoesmicro.png}	
+	\end{figure}
 \end{frame}
 %Modelagem do Domínio
 \begin{frame}{Modelagem do Domínio}
@@ -257,7 +259,7 @@
 	\end{figure}	
 \end{frame}
 %Implementação
-\begin{frame}{Implementação}
+\begin{frame}{Algoritmo de AHTN}
 	\vspace{5mm}
 	{\footnotesize
 	\begin{algorithmic}[1]		
@@ -285,97 +287,95 @@
 	\begin{frame}{Resultados}
 		\vspace{5mm}
 		\begin{itemize}
-			\item \textbf{Três mapas}
+			\item \textbf{Mapas}
 			\item \textbf{Tamanho das técnicas}
 			\item \textbf{Tempo de geração das ações}
 		\end{itemize}
 	\end{frame}
 }
-%Mapa 1
-\begin{frame}{Mapa 1}
-	
-	{\footnotesize
-	\begin{tabular}{|c|cc|cc|}
-		\hline
-		\textbf{}           & \multicolumn{2}{c|}{\textbf{Domínio 1}}  & \multicolumn{2}{c|}{\textbf{Domínio 2}}  \\ \hline
-		\textbf{Adversário} & \textbf{Lado Azul} & \textbf{Lado Vermelho} & \textbf{Lado Azul} & \textbf{Lado Vermelho} \\ \hline
-		RandomIA            & 100\%              & 100\%                  & 100\%              & 100\%                  \\ \hline
-		RandomBiasedIA      & 80\%               & 100\%                  & 100\%              & 100\%                  \\ \hline
-		RangedRush          & 0\%                & 100\%                  & 100\%              & 100\%                  \\ \hline
-		HeavyRush           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
-		LightRush           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
-		WorkerRush          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
-		MonteCarlo          & 60\%               & 80\%                   & 100\%              & 100\%                  \\ \hline
-		Minimax             & 100\%              & 100\%                  & 100\%              & 100\%                  \\ \hline
-		Portfolio           & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
-	\end{tabular}
-	}
+\begin{frame}{Mapas}
+	\begin{itemize}
+		\item Mapa 1
+		\item Mapa 2
+		\item Mapa 3
+		\item Lados do jogo
+	\end{itemize}
 \end{frame}
-%Mapa 2
-\begin{frame}{Mapa 2}
-	
-	{\footnotesize
-			\begin{tabular}{|c|cc|cc|}
-				\hline
-				\textbf{}           & \multicolumn{2}{c|}{\textbf{Domínio 1}}  & \multicolumn{2}{c|}{\textbf{Domínio 2}}  \\ \hline
-				\textbf{Adversário} & \textbf{Lado Azul} & \textbf{Lado Vermelho} & \textbf{Lado Azul} & \textbf{Lado Vermelho} \\ \hline
-				RandomIA            & 100\%              & 100\%                  & 100\%              & 100\%                  \\ \hline
-				RandomBiasedIA      & 40\%               & 80\%                   & 80\%               & 100\%                  \\ \hline
-				RangedRush          & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
-				HeavyRush           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
-				LightRush           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
-				WorkerRush          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
-				MonteCarlo          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
-				Minimax             & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
-				Portfolio           & 0\%                & 60\%                  & 0\%                & 80\%                  \\ \hline
-			\end{tabular}
-	}
-\end{frame}
-%Mapa 3
-\begin{frame}{Mapa 3}
-	
-	{\footnotesize
-			\begin{tabular}{|c|cc|cc|}
-				\hline
-				\textbf{}           & \multicolumn{2}{c|}{\textbf{Domínio 1}}  & \multicolumn{2}{c|}{\textbf{Domínio 2}}  \\ \hline
-				\textbf{Adversário} & \textbf{Lado Azul} & \textbf{Lado Vermelho} & \textbf{Lado Azul} & \textbf{Lado Vermelho} \\ \hline
-				RandomIA            & 100\%              & 100\%                  & 100\%              & 100\%                  \\ \hline
-				RandomBiasedIA      & 100\%              & 80\%                   & 100\%              & 80\%                   \\ \hline
-				RangedRush          & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
-				HeavyRush           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
-				LightRush           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
-				WorkerRush          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
-				MonteCarlo          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
-				Minimax             & 0\%                & 80\%                  & 80\%              & 80\%                   \\ \hline
-				Portfolio           & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
-			\end{tabular}
-	}
-\end{frame}
+%Mapa 1- 16x16, há diferença dos domínios, há técnica que não ganahva e agora ganha
+%Mapa 2- 8x8 com quartel, principal diferença é no lado do jogo, o dominio não tem influencia porque já tem o quartel, e o jogo é rapido
+%Mapa 3- 8x8 com obstaculo, parecido, o lado azul no domínio 2 ganha contra uma técnica que não ganhava antes.
+
+%%Mapa 1
+%\begin{frame}{Mapa 1}
+%	
+%	{\footnotesize
+%	\begin{tabular}{|c|cc|cc|}
+%		\hline
+%		\textbf{}           & \multicolumn{2}{c|}{\textbf{Domínio 1}}  & \multicolumn{2}{c|}{\textbf{Domínio 2}}  \\ \hline
+%		\textbf{Adversário} & \textbf{Lado Azul} & \textbf{Lado Vermelho} & \textbf{Lado Azul} & \textbf{Lado Vermelho} \\ \hline
+%		RandomIA            & 100\%              & 100\%                  & 100\%              & 100\%                  \\ \hline
+%		RandomBiasedIA      & 80\%               & 100\%                  & 100\%              & 100\%                  \\ \hline
+%		RangedRush          & 0\%                & 100\%                  & 100\%              & 100\%                  \\ \hline
+%		HeavyRush           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
+%		LightRush           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
+%		WorkerRush          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
+%		MonteCarlo          & 60\%               & 80\%                   & 100\%              & 100\%                  \\ \hline
+%		Minimax             & 100\%              & 100\%                  & 100\%              & 100\%                  \\ \hline
+%		Portfolio           & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
+%	\end{tabular}
+%	}
+%\end{frame}
+%%Mapa 2
+%\begin{frame}{Mapa 2}
+%	
+%	{\footnotesize
+%			\begin{tabular}{|c|cc|cc|}
+%				\hline
+%				\textbf{}           & \multicolumn{2}{c|}{\textbf{Domínio 1}}  & \multicolumn{2}{c|}{\textbf{Domínio 2}}  \\ \hline
+%				\textbf{Adversário} & \textbf{Lado Azul} & \textbf{Lado Vermelho} & \textbf{Lado Azul} & \textbf{Lado Vermelho} \\ \hline
+%				RandomIA            & 100\%              & 100\%                  & 100\%              & 100\%                  \\ \hline
+%				RandomBiasedIA      & 40\%               & 80\%                   & 80\%               & 100\%                  \\ \hline
+%				RangedRush          & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
+%				HeavyRush           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
+%				LightRush           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
+%				WorkerRush          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
+%				MonteCarlo          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
+%				Minimax             & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
+%				Portfolio           & 0\%                & 60\%                  & 0\%                & 80\%                  \\ \hline
+%			\end{tabular}
+%	}
+%\end{frame}
+%%Mapa 3
+%\begin{frame}{Mapa 3}
+%	
+%	{\footnotesize
+%			\begin{tabular}{|c|cc|cc|}
+%				\hline
+%				\textbf{}           & \multicolumn{2}{c|}{\textbf{Domínio 1}}  & \multicolumn{2}{c|}{\textbf{Domínio 2}}  \\ \hline
+%				\textbf{Adversário} & \textbf{Lado Azul} & \textbf{Lado Vermelho} & \textbf{Lado Azul} & \textbf{Lado Vermelho} \\ \hline
+%				RandomIA            & 100\%              & 100\%                  & 100\%              & 100\%                  \\ \hline
+%				RandomBiasedIA      & 100\%              & 80\%                   & 100\%              & 80\%                   \\ \hline
+%				RangedRush          & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
+%				HeavyRush           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
+%				LightRush           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
+%				WorkerRush          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
+%				MonteCarlo          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
+%				Minimax             & 0\%                & 80\%                  & 80\%              & 80\%                   \\ \hline
+%				Portfolio           & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
+%			\end{tabular}
+%	}
+%\end{frame}
 %Tamanho da IA
 \begin{frame}{Tamanho das técnicas}
-	
-	{\footnotesize
-		\begin{center}
-			\begin{tabular}{|c|c|}
-				\hline
-				\textbf{Adversário}     & \textbf{Tamanho} \\ \hline
-				Domínio HTN 1           & 19,9 kB          \\ \hline
-				Domínio HTN 2           & 20,1 kB          \\ \hline
-				RandomIA                & 4,0 kB           \\ \hline
-				RandomBiasedIA          & 4,6 kB           \\ \hline
-				RangedRush              & 13,7 kB          \\ \hline
-				HeavyRush               & 14,0 kB          \\ \hline
-				LightRush               & 14,0 kB          \\ \hline
-				WorkerRush              & 13,6 kB          \\ \hline
-				MonteCarlo              & 18,1 kB          \\ \hline
-				Minimax                 & 12,9 kB          \\ \hline
-				Portfolio               & 14,4 kB          \\ \hline
-			\end{tabular}
-		\end{center}
-	}
+	\begin{itemize}
+		\item Domínios HTN
+		\item WorkerRush
+		\item MonteCarlo
+		\item Random
+	\end{itemize}
 \end{frame}
 %Geração das ações
-\begin{frame}{Tamanho das técnicas}
+\begin{frame}{Tempo de geração das ações}
 	\begin{figure}[here]
 		\includegraphics[width=0.9\linewidth]{fig/graph.pdf}
 	\end{figure}
