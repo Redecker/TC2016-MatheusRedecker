@@ -12,14 +12,6 @@
 
 \renewcommand{\lstlistingname}{Listing}
 \interfootnotelinepenalty=10000
-\lstset{
-    %numbers=left,
-    numberblanklines=false,
-    captionpos=b,
-    breaklines=true,
-    frameshape={RYRYN}{ny}{yn}{RYRYN},
-    literate={~} {$\sim$}{1}
-}
 
 \usepackage{pgfpages}
 \setbeameroption{show notes on second screen=right}
@@ -277,6 +269,10 @@
 		\item Domínio
 		\item Problema
 	\end{itemize}	
+	\vspace{-6mm}
+	\begin{figure}[here]
+		\includegraphics[width=0.6\linewidth]{fig/jshop2.pdf}	
+	\end{figure}
 	\note{
 		O JSHOP2 é um sistema de planejamento independente de domínio baseado em HTN. \\
 		O JSHOP2 foi desenvolvido em Java por Dana Nau e sua equipe de pesquisa.
@@ -455,7 +451,7 @@
 			\item 8x8, base, trabalhador e obstáculos
 			\item Domínio HTN 2
 		\end{itemize}
-		\item Lado do jogo
+		\item Lados do jogo
 	\end{itemize}
 	
 	\begin{figure}[here]
@@ -515,8 +511,21 @@
 \begin{frame}{Conclusão}
 	\begin{itemize}
 		\item Problemas
+		\begin{itemize}
+			\item Machine Learning
+			\item Tempo
+		\end{itemize}
 		\item Influência do domínio
+		\begin{itemize}
+			\item Contingencia
+			\item Troca
+		\end{itemize}
 		\item Trabalhos futuros
+		\begin{itemize}
+			\item Machine Learning
+			\item Limitador de tempo
+			\item Domínios
+		\end{itemize}
 	\end{itemize}
 	\note{
 		O objetivo inicial era integar uma técnica de Machine Learning ao algoritmo para tentar melhorar os resultados.
