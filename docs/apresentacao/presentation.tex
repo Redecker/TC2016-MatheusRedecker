@@ -107,7 +107,6 @@
 				\item \textbf{AHTN}
 			\end{itemize}
 		\end{itemize}
-		\note{Vou fornecer um background para vocês e era isso!}
 	\end{frame}
 }
 %Agentes
@@ -445,20 +444,18 @@
 		\item Mapa 1
 		\begin{itemize}
 			\item 16x16, base e trabalhador
-			\item Domínio HTN 2 com melhor desempenho
+			\item Domínio HTN 2
 		\end{itemize}
 		\item Mapa 2
 		\begin{itemize}
 			\item 8x8, base, trabalhador e quartel
-			\item Algoritmo perde
-			\item Lado do jogo
 		\end{itemize}
 		\item Mapa 3
 		\begin{itemize}
 			\item 8x8, base, trabalhador e obstáculos
-			\item Domínio HTN 2 melhora os resultados
-			\item Lado do jogo
+			\item Domínio HTN 2
 		\end{itemize}
+		\item Lado do jogo
 	\end{itemize}
 	
 	\begin{figure}[here]
@@ -466,27 +463,52 @@
 		\includegraphics[width=0.25\linewidth]{fig/map8x8quartel.pdf} \quad
 		\includegraphics[width=0.25\linewidth]{fig/map8x8obsta.pdf} 
 	\end{figure}
+	\note{
+		A avaliação dos resultados foi feita em três mapas e com 10 jogos 
+		
+		O mapa 1 e 3 apresentam melhor desempenho no domínio 2, pelo fato de que varias tropas são criadas e técnicas que não ganhavam passam a ganhar no outro domínio
+		
+		O mapa 2 perde rapido pois as técnicas são muito violentas
+		
+		O lado do jogo influencia muito nos resultados, pois no lado vermelho no mapa 1 é posicionado em melhor local para criação das tropas\\
+		Nos demais mapas, as técnicas no MicroRTS não se comportam da mesma maneira que no outro lado\\
+		Elas demoram um pouco para atacar e com isso dão tempo do AHTN criar tropas
+	}
 \end{frame}
 
 %Tamanho da IA
 \begin{frame}{Tamanho das técnicas}
 	\begin{center}
-		\begin{tabular}{|c|c|l|}
+		\begin{tabular}{|c|c|c|}
 			\hline
-			\textbf{Adversário} & \textbf{Tamanho} & Vitórias (\%) \\ \hline
-			Domínio 1           & 11,3 kB          &               \\ \hline
-			Domínio 2           & 11,5 kB          &               \\ \hline
-			RandomBiasedIA      & 4,6 kB           &               \\ \hline
-			WorkerRush          & 13,6 kB          &               \\ \hline
-			MonteCarlo          & 18,1 kB          &               \\ \hline
+			\textbf{Adversário} & \textbf{Tamanho} & Porcentagem de vitórias \\ \hline
+			Domínio 1           & 19,9 kB          & -             \\ \hline
+			Domínio 2           & 20,1 kB          & -           \\ \hline
+			RandomBiasedIA      & 4,6 kB           & 80\%             \\ \hline
+			WorkerRush          & 13,6 kB          & 0\%             \\ \hline
+			MonteCarlo          & 18,1 kB          & 30\%             \\ \hline
 		\end{tabular}
 	\end{center}
+	\note{
+		Foi utilizado o algoritmo de compressão do zip para medir o tamanho de código das técnicas\\
+		A maior técnica presente no MicroRTS é a MonteCarlo, o algoritmo ocnsegue ganhar 30\% dela.
+		
+		A técnica de WorkerRush não perdeu em nenhum teste, e ela apersente um tamanho mediano em relação as demais técnicas
+		
+		Uma das técnicas mais simples é a Random, e ela em alguns casos consegue vencer 
+		
+		Os domínios ficaram pesados pela integração do JSHOP2 na geração dos planos, por essa razão eles acabaram ficando com o maior peso entre as técnicas	
+	}
 \end{frame}
 %Geração das ações
 \begin{frame}{Tempo de geração das ações}
 	\begin{figure}[here]
 		\includegraphics[width=0.9\linewidth]{fig/graph.pdf}
 	\end{figure}
+	\note{
+		isso ocorre porque há menos ações que podem ser realizadas no jogo, o que implica em menos níveis na árvore de busca que o algoritmo tem que percorrer.\\
+		No final do jogo, o jogador já tem tropas de ataque e apenas manda elas atacar.	
+	}
 \end{frame}
 
 %Conclusao
@@ -496,6 +518,16 @@
 		\item Influência do domínio
 		\item Trabalhos futuros
 	\end{itemize}
+	\note{
+		O objetivo inicial era integar uma técnica de Machine Learning ao algoritmo para tentar melhorar os resultados\\
+		Devido ao tempo perdido na integração do JSHOP2 com o MicroRTS e na criação do domínio, isso não foi possível
+		
+		O principal problema do algoritmo é no tempo de geração das ações, pois todas as outras técnicas do microRTS levam 1 milissegundo para gerar uma ação, enquanto o algoritmo leva no minimo meio segundo, isso prejudica o desempenho em jogos RTS 
+		
+		O domínio tem influencia nos resultados, pois como ele não possui um plano de contingencia, por exemplo, nas técnicas que criam trabalhadores para atacar, o domínio segue criando seu quartel para criar suas unidades de ataque, com isso ele acaba sendo destruido muito rapido, pois não há tempo de reagir.	
+		
+		Como trabalhos futuros- Acoplar uma técnica de Machine Learning - Implementar um mecanismo de tempo de procura por uma ação - Criar domínios mais abrangentes
+	}
 \end{frame}
 
 	{
