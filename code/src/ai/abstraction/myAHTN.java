@@ -52,7 +52,7 @@ public class myAHTN extends AbstractionLayerAI {
     
     private boolean print = false;
     
-    private static String strategy = "HighLevel1";
+    private static String strategy = "HighLevel2";
     
     private static long totalTime = 0;
     private static long roundsPerformed = 0;

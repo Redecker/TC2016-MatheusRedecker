@@ -64,16 +64,17 @@
     \note{
     	{\footnotesize
     	A IA em jogos faz com que os computadores sejam capazes de jogar sem intervenção humana. 
-    	As técnicas são usadas para ter uma melhor interação com o usuario, e ele não perceber que está jogando contra uma maquina 
-    	Mas as vezes as técnicas utilizadas nos jogos não são interamente de IA, pois elas podem utilizam conhecimentos proveniente do controle do jogo para tomar suas decisões. 
+    	Esse tipo de técnica é utilizada para o jogador humano não perceber que está jogando contra uma maquina 
     	
-    	Muitas vezes não há um tempo grande para decidir qual o proximo passo a ser tomado, com isso técnicas que tentam explorar todas as possibilidaes de um jogo se tornam ineficazes.
-    	O Xadrez por exemplo tem $10^40$ estados possíveis do jogo é preciso algoritmos eficientes para gerar uma ação de forma rapida.
+		Os jogos de estrategia em tempo real são jogos onde os jogadores devem construir tropas, coletar recursos, construir edificações, para tentar derrotar o seu adversário.
+		O desenvolvimento de técnicas de IA para esse genero de jogos possuem algumas dificuldades, pois existe muito pouco tempo para a tomada de decisão, pois existem muitas possibilidades de jogadas dentro do jogo.
+		Com isso técnicas que tentam explorar todas as possibilidaes de um jogo se tornam ineficazes.
+    	Então é preciso algoritmos eficientes para gerar uma ação de forma rapida.
     	
-    	O algoritmo de AHTN foi proposto para mitigar as limitações computacionais de abordagens tradicionais de raciocionio em jogos.
+    	O algoritmo de AHTN foi proposto para mitigar as limitações computacionais das abordagens de raciocionio em jogos.
     	O algoritmo foi proposto por Santiago Ortanon  e combina técnicas de planejamento e busca adversária.
    	
-    	 O intuito deste trabalho é explorar eficientemente o espaço de ações disponíveis no MicroRTS utilizando conhecimento de domínio, a fim de definir qual a próxima ação que deve ser executada.
+    	 O intuito deste trabalho é explorar eficientemente o espaço de ações de um jogo RTS utilizando conhecimento de domínio, a fim de definir qual a próxima ação que deve ser executada.
 	    }
     }
 \end{frame}
@@ -103,30 +104,26 @@
 }
 %Agentes
 \begin{frame}{Agentes}
-	\begin{itemize}
-		\item Ambiente
-		\item Percepções
-		\item Sensores
-		\item Atuadores
-		\item Ação
-	\end{itemize}
+	
 	\begin{figure}[here]
-		\includegraphics[width=0.45\linewidth]{fig/agente.pdf}	
+		\includegraphics[width=0.65\linewidth]{fig/agente.pdf}	
 	\end{figure}
 	\note{
-		agentes são entidades que agem de forma continua e autônoma em um ambiente, sendo capazes de receber estímulos do ambiente através de sensores, e assim responder aos estímulos por intermédio de atuadores. Para os agentes os estímulos do ambiente são recebidos como percepções. Os atuadores por sua vez, geram uma ação considerando as percepções 	
+		agentes são entidades que agem de forma autônoma em um ambiente\\
+		No ambiente é informado os estados que o agente consegue alcançar.\\
+		recebem estímulos do ambiente através de sensores, e assim responder aos estímulos por intermédio de atuadores. Para os agentes os estímulos do ambiente são recebidos como percepções. Os atuadores por sua vez, geram uma ação considerando as percepções 	
 	}
 \end{frame}
 %BUSCA
 \begin{frame}{Busca}
 \begin{itemize}
 	\item Ações
-	\item Função de transição
 	\item Objetivo
+	\item Função de transição
 \end{itemize}
-
+\vspace*{-5mm}
 \begin{figure}[here]
-	\includegraphics[width=0.3\linewidth]{fig/mapabusca.pdf}
+	\includegraphics[width=0.5\linewidth]{fig/mapabusca.pdf}
 \end{figure}
 \note{
 	Técnicas de busca tem como objetivo encontrar uma sequência de ações para que um agente alcance um determinado objetivo.\\	
@@ -179,7 +176,7 @@
 		\includegraphics[width=0.6\linewidth]{fig/modelo.pdf}	
 	\end{figure}	
 	\note{
-		Planejamento estuda o processo de geração de planos de forma computacional. \\
+		Planejamento é o processo de geração de planos de forma computacional. \\
 		O planejador utiliza uma representação do domínio, que contém informações das ações disponíveis no ambiente. E apartir de um estado inicial, e um objetivo que o agente deseja alcançar, o planejador encontra a sequencia de ações que parte do estado inicial e alcança seus objetivos. 	
 	}
 \end{frame}
@@ -212,9 +209,9 @@
 		\item Como funciona o algoritmo?
 		\item Minimax + planejamento hierárquico
 	\end{itemize}
-	
+	\vspace*{-3mm}
 	\begin{figure}[here]
-		\includegraphics[width=0.4\linewidth]{fig/ahtn.pdf}	
+		\includegraphics[width=0.55\linewidth]{fig/ahtn.pdf}	
 	\end{figure}	
 	
 	\note{
@@ -304,7 +301,7 @@
 \begin{frame}{Ações do MicroRTS}
 
 	\begin{figure}[here]
-		\includegraphics[width=1\linewidth]{fig/acoesmicro.png}	
+		\includegraphics[width=\linewidth]{fig/acoesmicro.png}	
 	\end{figure}
 	\note{
 		A camada de abstração fornece essas classes \\
@@ -477,7 +474,7 @@
 	\begin{center}
 		\begin{tabular}{|c|c|c|}
 			\hline
-			\textbf{Adversário} & \textbf{Tamanho} & Porcentagem de vitórias \\ \hline
+			\textbf{Adversário} & \textbf{Tamanho} & Porcentagem de derrotas \\ \hline
 			Domínio 1           & 19,9 kB          & -             \\ \hline
 			Domínio 2           & 20,1 kB          & -           \\ \hline
 			RandomBiasedIA      & 4,6 kB           & 80\%             \\ \hline
@@ -513,12 +510,12 @@
 		\item Problemas
 		\begin{itemize}
 			\item Machine Learning
-			\item Tempo
+			\item Tempo de geração das ações
 		\end{itemize}
 		\item Influência do domínio
 		\begin{itemize}
-			\item Contingencia
-			\item Troca
+			\item Planos de contingência
+			\item Troca do domínio
 		\end{itemize}
 		\item Trabalhos futuros
 		\begin{itemize}
@@ -539,11 +536,12 @@
 	}
 \end{frame}
 
-	{
+	{\huge
 		\setbeamercolor{background canvas}{bg=lightgray}
 		\begin{frame}{}
-			\centering
-			Obrigado!
+			\begin{center}
+				Obrigado
+			\end{center}
 		\end{frame}
 	}  
 
