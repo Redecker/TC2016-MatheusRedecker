@@ -2,25 +2,24 @@
 
 \chapter{\label{chap:concl}Conclusões}
 
-A realização deste trabalho me proporcionou aprendizado sobre agentes, técnicas de busca, planejamento, e jogos RTS.
+A realização deste trabalho proporcionou aprendizado sobre agentes, técnicas de busca, planejamento, e jogos RTS.
 A implementação do MicroRTS está bem estruturada, por isso não houve dificuldades no entendimento da plataforma.
 O planejador JSHOP2 é de fácil acesso, e sua documentação é bem rica.
 Mas os exemplos de descrição do domínio e problema disponíveis com o planejador não cobrem todas as suas funcionalidades.
-Por essa razão a descrição do domínio foi a grande dificuldade deste trabalho.
-O tempo na união do MicroRTS com o JSHOP2 foi maior do que o previsto, e por essa razão, não foi possível acoplar ao algoritmo de AHTN um algoritmo de \textit{Machine Learning}.
+Por essa razão a descrição do domínio foi uma dificuldade deste trabalho.
+O tempo na união do MicroRTS com o JSHOP2 foi maior do que o previsto e por essa razão não foi possível acoplar ao algoritmo de AHTN um algoritmo de \textit{Machine Learning}.
 
 A avaliação dos resultados mostrou que algumas técnicas que a princípio não pareciam ser capazes de derrotar o algoritmo conseguiram ser bastante eficientes.
-Com tudo, a implementação do algoritmo se mostrou valida em relação as outras técnicas do MicroRTS.
+Contudo, a implementação do algoritmo se mostrou válida em relação as outras técnicas do MicroRTS.
 O grande problema foi que, em todos os casos, o tempo de geração das ações é maior no algoritmo de AHTN do que nas outras técnicas.
 Por exemplo, a técnica de WorkerRush, que não perdeu em nenhum dos testes, leva 1 milissegundo para determinar as suas ações.
 Além do tempo de geração das ações, os conhecimentos de domínio não avaliam todas as possibilidades relevantes do jogo, deixando o algoritmo limitado em relação as ações.
 
-O algoritmo de AHTN como alternativa para abordagens tradicionais de raciocínio em jogos se mostrou uma alternativa viável para que o jogador ganhe a partida.
+O algoritmo de AHTN como alternativa para abordagens tradicionais de raciocínio em jogos se mostrou uma abordagem promissora. 
 Entretanto, o algoritmo não foi tão eficiente quanto a mitigar as limitações de eficiência computacional.
-Para que o algoritmo de AHTN consiga ser utilizado de melhor forma em jogos RTS, é preciso de um mecanismo para limitar o tempo de busca para geração das ações.
-Pois técnicas que vencem o algoritmo necessitam de menos tempo para escolher uma ação.
+Para que o algoritmo de AHTN consiga ser utilizado de melhor forma em jogos RTS, é preciso de um mecanismo para limitar o tempo de busca para geração das ações, pois técnicas que vencem o algoritmo necessitam de menos tempo para escolher uma ação.
 Outro fator que pode melhorar o desempenho do algoritmo é ter outras descrições de domínio.
-Talvez com domínios que avaliam melhor as possibilidades de ações, e que tenha uma visão mais completa do ambiente do jogo, consiga ser mais eficiente na escolha das ações. 
+Talvez com domínios que avaliam melhor as possibilidades de ações, e que tenham uma visão mais completa do ambiente do jogo, consiga-se ser mais eficiente na escolha das ações. 
 
 Para trabalhos futuros pretende-se modelar outros conhecimentos de domínio, e implementar um tempo limite para que o algoritmo gere suas ações. 
 Além disso, pretende-se realizar o acoplamento do algoritmo de AHTN com alguma técnica de \textit{Machine Learning}.

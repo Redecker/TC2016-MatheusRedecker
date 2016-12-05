@@ -17,12 +17,12 @@ Um problema pode ser definido por cinco componentes~\cite[Capítulo 3]{intellige
 Tais elementos são necessários como entrada para as técnicas de busca.
 A solução é obtida quando o agente iniciando no estado inicial do ambiente $s_{0}$ utiliza o modelo de transição $resultado(s, a)$, através das ações aplicadas nos estados, para chegar a um estado onde satisfaça o objetivo do agente $objetivo(s)$.
 Existem diferentes estratégias de busca para encontrar uma solução.
-As diferentes técnicas podem encontrar caminhos diferentes para o mesmo problema, isso vem do fato de que o custo do caminho, quando levado em consideração, pode encontrar uma solução ótima, o que significa que a sequência de ações encontrada é a que tem o menor custo de caminho entre todas as soluções~\cite[Capítulo 3]{intelligence2003modern}.
+As diferentes técnicas podem encontrar caminhos diferentes para o mesmo problema, alguma soluções encontram a sequência de ações com o menor custo do caminho entre todas as soluções, isso significa que uma solução ótima foi encontrada~\cite[Capítulo 3]{intelligence2003modern}.
 
 Considere o mapa apresentado na Figura~\ref{fig:mapabusca} para exemplificar um problema de busca.
-Cada círculo representa uma cidade, e as linhas entre as cidades são estradas que as ligam umas às outras. 
+Cada círculo representa uma cidade e as linhas entre as cidades são estradas que as ligam umas às outras. 
 A ação possível neste problema é a de se locomover entre as cidades que tenham ligação.
-O estado inicial é a cidade de São Jerônimo. O resultado do modelo de transição, é a cidade resultante após se locomover. O objetivo do agente é chegar na cidade de Porto Alegre e o custo de cada ação é o valor definido em cima de cada transição. 
+O estado inicial é a cidade de São Jerônimo. O resultado do modelo de transição é a cidade resultante após se locomover. O objetivo do agente é chegar na cidade de Porto Alegre e o custo de cada ação é o valor definido em cima de cada transição. 
 
 \begin{figure}[ht]
 	\centering
@@ -36,10 +36,10 @@ Digamos que o agente comece sua viagem indo para a cidade de Triunfo, para nós 
 
 \section{Busca adversária}
 
-Jogos são difíceis de resolver com técnicas de IA, pois eles requerem a habilidade de tomar algum tipo de decisão, e as técnicas comuns as vezes não são satisfatórias, seja pelo fato do conjunto de estados possíveis de se atingir ser muito grande, ou pelo curto espaço de tempo para tomar essa decisão.
-A busca adversaria pode ser utilizada nos jogos que estão situados em ambientes competitivos e de multi agentes.
-Em um jogo, o jogador não informa suas jogadas previamente, mas está sempre buscando vencer o jogo, por essa razão é possível prever as suas ações.
-No xadrez, os jogadores alternam jogadas até que um jogador ganha, e o outro perde. Uma maneira de representar uma vitória é atribuindo um valor de utilidade positivo para aquela configuração do jogo, e consequentemente um valor de utilidade negativo para uma derrota. Isto faz com que no final do jogo, quando os valores de utilidade dos agentes forem somados, a sua soma seja sempre zero. 
+Jogos são difíceis de resolver com técnicas de IA, pois eles requerem a habilidade de tomar algum tipo de decisão e as técnicas comuns as vezes não são satisfatórias, seja pelo fato do conjunto de estados possíveis de se atingir ser muito grande, ou pelo curto espaço de tempo para tomar essa decisão.
+A busca adversária pode ser utilizada nos jogos situados em ambientes competitivos e de multi agentes.
+Em um jogo, o jogador não necessariamente informa suas jogadas antes de realizar-las, mas está sempre em tentando vencer o jogo, por essa razão é possível antecipar as suas ações.
+No xadrez, os jogadores alternam jogadas até que um jogador ganha e o outro perde. Uma maneira de representar uma vitória é atribuindo um valor de utilidade positivo para aquela configuração do jogo, e consequentemente um valor de utilidade negativo para uma derrota. Isto faz com que no final do jogo quando os valores de utilidade dos agentes forem somados, a sua soma seja sempre zero. 
 Com o intuito de resolver esse problema, é possível gerar uma solução de contingência para tentar antecipar as jogadas do adversário~\cite[Capítulo 5]{intelligence2003modern}. 
 
 As técnicas de busca adversária utilizam uma variação da definição de um problema de busca comum. 
@@ -50,18 +50,19 @@ Por esse motivo os componentes são redefinidos como:
 	\item $s_{0}$, sendo o estado inicial, que especifica como o jogo se configura no início;
 	\item $players(s)$, define qual jogador tem o movimento no estado $s$;
 	\item $actions(s)$, conjunto das ações possíveis em um estado $s$;
-	\item $result(s, a)$, um modelo de transição, que define o resultado da ação $a$ a aplicada ao estado $s$;
+	\item $result(s, a)$, um modelo de transição, que define o resultado da ação $a$ aplicada ao estado $s$;
 	\item $terminal(s)$, verifica se o estado $s$ é um estado onde o jogo termina; e
 	\item $utility(s,p)$, define um valor numérico, representando o lucro do jogador $p$ ao atingir o estado terminal $s$. Também é chamado de função de avaliação.
 \end{itemize}
 
 Com estes componentes descritos é possível formalizar o que é uma árvore de jogadas. 
-A árvore de jogados, ou \textit{game tree}, contém os estados do jogo e os movimentos possíveis em cada estado. 
-A \textit{game tree} é composta pelo estado inicial ($s_{0}$), as ações (\texttt{action(s)}) e o modelo de transição (\texttt{result(s, a)}), e possui uma profundidade ($d$), que indica o nível máximo da árvore. 
+A árvore de jogadas, ou \textit{game tree}, contém os estados do jogo e os movimentos possíveis em cada estado. 
+A \textit{game tree} é composta pelo estado inicial ($s_{0}$), as ações (\texttt{action(s)}) e o modelo de transição (\texttt{result(s, a)}), e possui uma profundidade ($d$). 
 Cada nodo da árvore representa um estado do jogo. 
 Os nodos tem uma ligação para cada ação possível. As ligações representam as ações, o nodo resultante da ligação é o novo estado do jogo após a execução da ação.
-Um nodo folha é alcançado quando há uma configuração de fim de jogo.
-Considerando o jogo de jogo da velha, onde cada jogador realiza uma jogada de cada vez, uma \textit{game tree} que mostra parte das jogadas do jogo da velha é ilustrada na Figura~\ref{fig:jogodavelha}. 
+A profundidade ($d$) indica o nível máximo que a árvore pode chegar.
+Um nodo folha é alcançado quando há uma configuração de fim de jogo ou a profundidade é alcançada.
+Considerando o jogo da velha, onde cada jogador realiza uma jogada de cada vez, uma \textit{game tree} que mostra parte das jogadas é ilustrada na Figura~\ref{fig:jogodavelha}. 
 O estado inicial do jogo é o campo vazio, a cada nível da árvore todas as possibilidades de jogadas são testadas, a profundidade $d$ dessa árvore chega a 9 quando ela estiver completa, pois a cada nível da árvore uma jogada é marcada no campo. 
 
 \begin{figure}[ht]
@@ -76,13 +77,16 @@ O estado inicial do jogo é o campo vazio, a cada nível da árvore todas as pos
 
 O \textit{minimax search} é um algoritmo de busca adversária, seu objetivo é retornar a melhor jogada para o estado atual. 
 Este método considera dois agentes, chamados de \textsc{Max} e \textsc{Min}, onde o jogador \textsc{Max} representa a perspectiva do agente que está tentando maximizar a recompensa de suas ações em relação ao agente \textsc{Min}, que representa o agente adversário do jogador \textsc{Max}. 
-O algoritmo alterna entre jogadas de \textsc{Max}, e \textsc{Min}~\cite[Capítulo 5]{intelligence2003modern}. 
+O algoritmo alterna entre jogadas de \textsc{Max} e \textsc{Min}~\cite[Capítulo 5]{intelligence2003modern}. 
 
-O algoritmo utiliza a \textit{game tree} para analisar todos os estados possíveis do jogo, e assim decidir qual a ação que quando aplicada ao seu estado atual, trará um melhor benefício no futuro, se caracterizando a melhor jogada. 
+O algoritmo utiliza a \textit{game tree} para analisar todos os estados possíveis do jogo e assim decidir qual a ação que quando aplicada ao seu estado atual trará um melhor benefício no futuro, se caracterizando a melhor jogada. 
 Os nodos folhas da árvore, que representam o final do jogo, contém um valor de utilidade, obtido pela função de avaliação. 
 Os valores mais altos são as melhores jogadas para \textsc{Max}, e consequentemente, os valores menores são melhores para \textsc{Min}. 
-Ao chegar no final da árvore, o algoritmo consegue o valor de utilidade para aquele cenário do jogo, quando isso acontece, o algoritmo faz o caminho inverso na árvore, analisando os outros possíveis cenários~\cite[Capítulo 5]{intelligence2003modern}. 
-A Figura~\ref{fig:gametree} ilustra uma árvore de jogo, que simula o comportamento do algoritmo de \textit{minimax search}. Nessa árvore é possível observar que os nodos folhas contém o valor de utilidade para as configurações de final de jogo de cada estado, e nos nodos superiores é escolhida a jogada que minimiza as chances do jogador \textsc{Min} ganhar, e aumenta as chances do jogador \textsc{Max} ganhar.
+Ao chegar no final da árvore o algoritmo consegue o valor de utilidade para aquele cenário do jogo.
+Quando isso acontece, o algoritmo faz o caminho inverso na árvore, analisando os outros possíveis cenários~\cite[Capítulo 5]{intelligence2003modern}. 
+A Figura~\ref{fig:gametree} ilustra uma árvore de jogo, que simula o comportamento do algoritmo de \textit{minimax search}. 
+Nessa árvore é possível observar que os nodos folhas contém o valor de utilidade para as configurações de final de jogo de cada estado, e nos nodos superiores é escolhida a jogada para a perspectiva do nível da árvore.
+Na perspectiva \textsc{Min} é minimizado as chances de vitoria, e na perspectiva de \textsc{Max} as chances do jogador \textsc{Max} ganhar são maximizadas.
 
 \begin{figure}[ht]
 	\centering
@@ -113,6 +117,7 @@ A função presente na linha~\ref{alg:minimax:minimax} é utilizada para iniciar
 		\ForAll{$action \in actions(state)$}
 		\State $v = max(v, min\_value(result(state,action)))$
 		\EndFor	
+		\State	\Return $v$
 		\EndFunction \\
 		\Function {Min\_Value}{$state$}\label{alg:minimax:min}
 		\If {$terminal(state)$}
@@ -122,13 +127,14 @@ A função presente na linha~\ref{alg:minimax:minimax} é utilizada para iniciar
 		\ForAll{$action \in actions(state)$}
 		\State $v = min(v, max\_value(result(state,action)))$
 		\EndFor	
+		\State	\Return $v$
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
 
 
 O algoritmo de \textit{minimax} deve explorar todo o espaço de estados para conseguir encontrar a ação que deve ser executada. 
-A quantidade de estados possíveis, dependendo da situação, pode ser muito alta, no xadrez esse número chega a $10^{50}$, em um jogo de \textit{poker} no estilo \textit{texas holdem} esse número pode chegar a $10^{80}$. 
+A quantidade de estados possíveis, dependendo da situação, pode ser muito alta: no xadrez esse número chega a $10^{40}$, em um jogo de \textit{poker} no estilo \textit{texas holdem} esse número pode chegar a $10^{80}$. 
 Geralmente, as ações devem ser tomadas em um curto período de tempo. 
 Por esse motivo, utilizar técnicas de busca para jogos pode ser um problema. 
-Existem algumas abordagens que utilizam busca adversaria com um nível de abstração mais alto para tentar minimax esse problema~\cite{ontanon2013survey}. Outras abordagens diminuem o espaço de estados, cortando caminhos que não influenciam no resultado final~\cite[Capítulo 5]{intelligence2003modern}
+Existem algumas abordagens que utilizam busca adversária com um nível de abstração mais alto para tentar minimizar esse problema~\cite{ontanon2013survey}. Outras abordagens diminuem o espaço de estados, cortando caminhos que não influenciam no resultado final~\cite[Capítulo 5]{intelligence2003modern}

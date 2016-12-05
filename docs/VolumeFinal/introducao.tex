@@ -1,23 +1,24 @@
 %!TEX root = volumeFinal.tex 
 \chapter{\label{chap:intro}Introdução}
 
-A Inteligência artificial (IA) possui aplicação em jogos, fazendo com que os computadores sejam capazes de jogar jogos como xadrez e jogo da velha sem intervenção humana. 
-Os Jogos de computador muitas vezes não utilizam algoritmos para simular o comportamento dos jogadores, utilizando ao invés disso, técnicas que passam a ilusão de que as decisões estão sendo realizadas de forma autônomas, ou ainda, aproveitam das informações provenientes do controle do jogo para tomar as suas decisões. Esse tipo de técnicas não pode ser caracterizado como uma técnica de IA totalmente autônoma~\cite{millington2009artificial}.
+A Inteligência Artificial (IA) possui aplicação em jogos, fazendo com que os computadores sejam capazes de jogar jogos como xadrez e jogo da velha sem intervenção humana. 
+Os jogos de computador muitas vezes não utilizam algoritmos de IA para simular o comportamento dos jogadores, utilizando ao invés disso, técnicas que passam a ilusão de que as decisões estão sendo realizadas de forma autônoma, ou ainda, aproveitam as informações provenientes do controle do jogo para tomar as suas decisões. Esse tipo de técnica não pode ser caracterizado como uma técnica de IA totalmente autônoma~\cite{millington2009artificial}.
 
-Jogos que utilizam técnicas de IA conseguem prover uma melhor interação entre o jogador e o jogo, e assim prendendo a atenção do jogador.
-Entretanto, os métodos utilizados, são geralmente mais simples do que os utilizados no meio acadêmico, pelo fato de que o tempo de resposta dos algoritmos é superior ao tempo que se tem para tomar uma ação ótima dentro do jogo, e também pelo fato das ações geradas serem previsíveis~\cite{millington2009artificial}.
-Nos jogos de computador as reações das jogadas devem ser quase que imediatas, por esse motivo técnicas que tentam explorar todo o espaço de estados possíveis de um jogo se tornam inviáveis para jogos com uma complexidade maior.
-Por exemplo, no xadrez a quantidade aproximada de estados possíveis é de $10^{40}$, isso mostra que é preciso algoritmos eficientes para gerar uma ação de maneira rápida~\cite{millington2009artificial}. 
-Em alguns casos, são gerados ações sub ótimas para que o tempo de resposta não seja muito alto~\cite[Capítulo 3]{intelligence2003modern}. 
+Jogos que utilizam técnicas de IA conseguem prover uma melhor interação entre o jogador e o jogo, assim prendendo a atenção do jogador.
+Entretanto, os métodos utilizados são geralmente mais simples do que os utilizados no meio acadêmico, pelo fato de que o tempo de resposta dos algoritmos é superior ao tempo que se tem para tomar uma ação ótima dentro do jogo, e também pelo fato das ações geradas serem previsíveis~\cite{millington2009artificial}.
+Nos jogos de computador as reações das jogadas devem ser quase imediatas, por esse motivo técnicas que tentam explorar todo o espaço de estados de um jogo se tornam inviáveis para jogos com uma complexidade maior.
+Por exemplo, no xadrez a quantidade aproximada de estados possíveis é de $10^{40}$, isso mostra que são precisos algoritmos eficientes para gerar uma ação de maneira rápida~\cite{millington2009artificial}. 
+Em alguns casos, são geradas ações sub ótimas para que o tempo de resposta não seja muito alto~\cite[Capítulo 3]{intelligence2003modern}. 
 
-Os jogos de estratégia em tempo real são jogos onde os jogadores devem construir uma base, coletar recursos e traçar batalhas que tem com o objetivo derrotar os seus oponentes.
+Os jogos de estratégia em tempo real são jogos onde os jogadores devem construir uma base, coletar recursos e travar batalhas que tem como objetivo derrotar os seus oponentes, ou realizar alguma missão.
 Jogos muito conhecidos como \textit{StarCraft}\footnote{http://us.battle.net/sc2/pt/} e \textit{Age of Empires}\footnote{http://www.ageofempires.com/} são exemplos de jogos desse gênero~\cite{ontanon2013survey}.
-Uma maneira de decidir quais ações precisam ser tomadas, é utilizando técnicas de busca.
-As técnicas de busca almejam definir qual a ação deve ser escolhida através de uma busca pelas possibilidades disponíveis para o jogo. 
+Uma maneira de decidir quais ações precisam ser tomadas é utilizando técnicas de busca.
+As técnicas de busca almejam definir qual ação deve ser escolhida através de uma busca pelas possibilidades disponíveis para o jogo. 
 O problema dessas técnicas é que elas devem explorar pelo menos uma parte do espaço de estados, e com isso o tempo que é preciso para gerar uma ação é alto~\cite{ontanon2012minimax}.
-Outra maneira de escolher uma jogada é pensando em como conquistar um objetivo por vez, por exemplo, para ganhar do adversário é preciso criar tropas ofensivas, mas antes de ter tropas é preciso ter um quartel para as treinar.
+Outra maneira de escolher uma jogada é pensando em como conquistar um objetivo por vez.
+Por exemplo, para ganhar do adversário é preciso criar tropas ofensivas, mas antes de ter tropas é preciso ter um quartel para as treinar.
 Então, planejar as ações pensando em algum objetivo é uma maneira de determinar qual ação deve ser escolhida no momento. 
-Técnicas de planejamento podem ser utilizadas para gerar planos para alcançar esses objetivos. 
+As técnicas de planejamento podem ser utilizadas para gerar planos para alcançar esses objetivos. 
 
 Na busca de mitigar as limitações de eficiência computacional de abordagens tradicionais de raciocínio em jogos, Ontañón e Buro propuseram o algoritmo chamado \textit{Adversarial Hierarchical Task Network (AHTN)}~\cite{ontanon2015adversarial}. 
 Neste algoritmo são combinadas técnicas de planejamento hierárquico com as de busca adversária. 
@@ -25,9 +26,9 @@ O intuito deste trabalho é explorar eficientemente o espaço de ações dispon�
 A plataforma escolhida foi o MicroRTS\footnote{https://github.com/santiontanon/microrts}, que é um jogo de estratégia em tempo real. 
 
 Este documento constitui a parte final do trabalho de conclusão de curso, relatando o desenvolvimento do que foi proposto no Trabalho de Conclusão I. 
-O documento está organizado da seguinte forma: No Capítulo~\ref{chap:agentes} é apresentado o conceito de agentes e como podemos representar ele dentro dos diferentes problemas existentes.
+O documento está organizado da seguinte forma: no Capítulo~\ref{chap:agentes} é apresentado o conceito de agentes e como podemos representa-los dentro dos diferentes problemas existentes.
 O Capítulo~\ref{chap:busca} apresenta como podemos utilizar busca dentro do contexto de jogos, o Capítulo~\ref{chap:planejamento} trata o conceito básico de planejamento automatizado e planejamento hierárquico, junto com a explicação do algoritmo de AHTN. 
 O Capítulo~\ref{chap:proj} apresenta os recursos necessários para a realização deste trabalho.
-No Capítulo~\ref{chap:impl} é apresentado como foi feita a implementação do trabalho.
+No Capítulo~\ref{chap:impl} é apresentada a implementação do trabalho.
 O Capítulo~\ref{chap:results} apresenta a avaliação dos resultados.
 Finalmente, no Capítulo~\ref{chap:concl} é feita a conclusão do trabalho, junto com os trabalhos futuros.

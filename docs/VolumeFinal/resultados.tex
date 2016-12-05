@@ -3,12 +3,11 @@
 \chapter{\label{chap:results}Resultados - Avaliação de Desempenho}
 
 Foram utilizados três mapas para avaliar o desempenho do algoritmo.
-A avaliação dos resultados está dívida por mapa.
 Em cada mapa é possível jogar em dois lados.
 O lado azul começa o jogo na parte superior do mapa, e o lado vermelho começa na parte inferior.
-Em cada mapa é avaliado a porcentagem de vitórias para cada domínio.
+Em cada mapa é avaliada a porcentagem de vitórias para cada domínio.
 Os adversários, utilizados para testar o algoritmo, são as técnicas presentes no MicroRTS apresentadas na Seção~\ref{sec:tecn}.
-Cada adversário foi utilizado dez vezes em cada mapa, e em cada lado do jogo.
+Cada adversário foi utilizado dez vezes em cada mapa e em cada lado do jogo.
 
 \section{Mapa 1}
 
@@ -30,7 +29,7 @@ Quando o domínio 1 é executado do lado vermelho, ocorre a criação de duas un
 Isso ocorre porque o tempo de criação da unidade é maior que o da geração de outra ação do algoritmo.
 Quando o algoritmo é invocado novamente, ele não tem conhecimento da unidade que está prestes a ser criada, e assim ocorre a duplicação dessa outra unidade.
 O tempo de espera para que o algoritmo gere outra ação foi alterado para tentar remover esse problema.
-Mas com um tempo maior, as outras ações eram afetadas, e o algoritmo se torna menos vitorioso.
+Mas com um tempo maior, as outras ações eram afetadas e o algoritmo se torna menos vitorioso.
 
 \begin{table}[ht]
 	\centering
@@ -53,8 +52,7 @@ Mas com um tempo maior, as outras ações eram afetadas, e o algoritmo se torna 
 \end{table}
 
 A partir dos dados da tabela é possível observar que há um ganho do lado vermelho em relação ao azul nos dois domínios. 
-A ação de construir o quartel, gerada pela camada de abstração do MicroRTS, encontra uma posição mais favorável do lado vermelho.
-Fazendo com que o lado vermelho tenha uma melhor fluidez na hora da criação das tropas.
+A ação de construir o quartel, gerada pela camada de abstração do MicroRTS, encontra uma posição mais favorável do lado vermelho, fazendo com que o lado vermelho tenha uma melhor fluidez na hora da criação das tropas.
 O domínio 2 consegue melhores resultados do que o domínio 1.
 Adversários que não são vencidos no lado azul passam a ser vencidos com o segundo domínio, e os resultados do lado vermelho são consolidados.
 
@@ -62,7 +60,7 @@ Adversários que não são vencidos no lado azul passam a ser vencidos com o seg
 
 Neste mapa, cada jogador inicia com uma base, um \textit{worker}, um quartel e um recurso perto de sua base.
 O mapa é composto por 8x8 posições.
-O quartel está construído no limite superior do mapa para o jogador azul, e no limite inferior do mapa para o jogador vermelho.
+O quartel está construído no limite superior do mapa para o jogador azul e no limite inferior do mapa para o jogador vermelho.
 A Figura~\ref{fig:mapa8x8quartel} ilustra a tela do jogo com a configuração inicial do mapa.
 
 \begin{figure}[ht]
@@ -76,8 +74,8 @@ A Tabela~\ref{tab:mapa2} ilustra os resultados obtidos neste mapa.
 Por conta do mapa ser pequeno em relação ao anterior, não há grande diferença entre os domínios.
 O jogo acaba rápido, pois as técnicas criam unidades e logo encontram as unidades adversárias.
 Mais uma vez o lado vermelho tem larga vantagem sobre o lado azul. 
-Isso acontece pelo fato de que, no lado vermelho, as técnicas do MicroRTS atacam rapidamente, o que não acontece quando as técnicas estão do lado azul, pois após as unidades serem criadas, elas ficam muito tempo paradas antes de atacar.
-A técnica do Minimax por exemplo, no lado azul ela cria unidades de ataque, mas não envia para atacar, no lado vermelho as tropas são imediatamente postas ao ataque.
+Isso acontece pelo fato de que, no lado vermelho, as técnicas do MicroRTS atacam rapidamente, o que não acontece quando as técnicas estão do lado azul, pois após as unidades serem criadas ficam um tempo paradas antes de atacar.
+A técnica do Minimax por exemplo, no lado azul cria unidades de ataque, mas não envia para atacar de imediato, já no lado vermelho as tropas são imediatamente postas ao ataque.
 
 \begin{table}[ht]
 	\centering
@@ -103,8 +101,8 @@ A técnica do Minimax por exemplo, no lado azul ela cria unidades de ataque, mas
 
 Neste mapa, cada jogador inicia com uma base, um \textit{worker}, e um recurso perto de sua base.
 O mapa é composto por 8x8 posições.
-Além dos componentes dos jogadores, há posições obstáculos no centro do mapa.
-Os obstáculos não são posições validas para os jogadores.
+Além dos componentes dos jogadores, há obstáculos no centro do mapa.
+Os obstáculos não são posições válidas para os jogadores.
 A Figura~\ref{fig:mapa8x8obsta} ilustra a tela do jogo com a configuração inicial do mapa.
 
 \begin{figure}[ht]
@@ -140,8 +138,8 @@ A colocação de obstáculos no mapa não alterou a maneira com que as técnicas
 \end{table}
 
 A técnica de WorkerRush não é vencida em nenhuma configuração de jogo.
-Isso acontece porque, a técnica treina \textit{workers}, que é a unidade que custa menos recurso no jogo, e logo as envia para atacar, por essa razão o algoritmo não tem tempo de ter algum tipo de reação.
-A técnica de Portfolio perde apenas no mapa 2, pois as tropas ficam um tempo parada antes de atacar, o que não acontece nos outros mapas.
+Isso acontece porque a técnica treina \textit{workers}, a unidade que custa menos recursos no jogo, e logo as envia para atacar, por essa razão o algoritmo não tem tempo de ter algum tipo de reação.
+A técnica de Portfolio perde apenas no mapa 2, pois as tropas ficam um tempo paradas antes de atacar, o que não acontece nos outros mapas.
 O tempo parado faz com que o algoritmo de AHTN consiga gerar as ações necessárias para que unidades de ataque sejam criadas.
 
 O grande problema dos domínios modelados é não ter um plano de contingência.
@@ -186,8 +184,8 @@ Fazendo com que o tamanho do código cresça.
 A técnica com maior tamanho do MicroRTS é a MonteCarlo.
 Contra o algoritmo de AHTN, essa técnica venceu sempre nos mapas 2 e 3, e perdeu apenas no mapa 1 para o domínio 2.
 A técnica WorkerRush é a única que não perde em nenhum cenário de jogo.
-Ela possui tamanho perto da media dos tamanhos.
-As técnicas mais simples, que apenas utilizam movimentos aleatórios, são as técnicas de menor tamanho, e ainda em alguns casos conseguem vencer.
+Ela possui tamanho perto da média dos tamanhos.
+As técnicas mais simples, que apenas utilizam movimentos aleatórios, são as técnicas de menor tamanho e ainda em alguns casos conseguem vencer.
 
 \section{Tempo de geração das ações}
 
@@ -197,7 +195,7 @@ Isso ocorre porque o jogador adversário tem mais tempo para executar suas açõ
 
 A técnica de LightRush foi escolhida como adversário para avaliar o tempo de geração das ações no algoritmo de AHTN.
 Essa técnica foi escolhida por ter o mesmo comportamento contra os dois domínios.
-O mapa 1 foi o mapa utilizado para este teste.
+O mapa 1 foi escolhido para este teste.
 A Figura~\ref{fig:tempo} ilustra o gráfico com os tempos obtidos para os domínios.
 
 \begin{figure}[ht]
@@ -212,15 +210,14 @@ No início do jogo, o jogador tem apenas uma base e um \textit{worker}.
 Para conseguir vencer o adversário é preciso construir um quartel, e treinar unidades de ataque.
 Ao passar das jogadas, o tempo para gerar as jogadas diminui.
 Isso ocorre porque há menos ações que podem ser realizadas no jogo, o que implica em menos níveis na árvore de busca que o algoritmo tem que percorrer.
-No final do jogo, o jogador já tem tropas de ataque e apenas manda elas atacar.
+No final do jogo, o jogador já tem tropas de ataque e apenas manda elas atacarem.
 
 No domínio 1 o tempo de gerar a unidade de ataque é menor do que no domínio 2.
-Isso acontece, pelo fato de que no domínio 1, apenas uma unidade é criada, e com isso os planos gerados são diferentes, já no domínio 2 mais de uma unidade é criada.
-O tempo de geração ao final do jogo é semelhante, pois as duas abordagens são parecidas, e se diferem apenas na maneira como as unidades são criadas.
+Isso acontece, pelo fato de que no domínio 1 apenas uma unidade é criada e com isso os planos gerados são diferentes, já no domínio 2 mais de uma unidade é criada.
+O tempo de geração ao final do jogo é semelhante, pois as duas abordagens são parecidas, e diferem apenas na maneira como as unidades são criadas.
 
 As técnicas do MicroRTS conseguem gerar as ações em poucos milissegundos.
 Já o algoritmo de AHTN implementado leva no mínimo meio segundo para determinar qual ação deve ser realizada.
-Isso ocorre por causa de que a cada troca de perspectiva, o algoritmo tem que gerar os planos novamente.
-Pois a cada novo nível na árvore de busca algum componente do ambiente mudou.
+Isso ocorre por que a cada troca de perspectiva o algoritmo tem que gerar os planos novamente, pois a cada novo nível na árvore de busca algum componente do ambiente mudou.
 
 
