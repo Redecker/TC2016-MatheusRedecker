@@ -122,7 +122,7 @@ Com isso, o plano gerado não tem a informação de quais métodos foram utiliza
 Neste caso, o plano contém os operadores ordenados que chegam ao objetivo.
 No algoritmo de AHTN original o plano vai sendo decomposto através dos métodos à medida que a árvore das jogadas está expandindo e só realiza a troca de perspectiva entre \textsc{Max} e \textsc{Min} quando há uma tarefa primitiva a ser executada.
 No algoritmo de AHTN implementado há uma pequena diferença do algoritmo original.
-No algoritmo implementado sempre acontece a troca de perspectiva a cada rodada.
+No algoritmo implementado a troca de perspectiva sempre acontece a cada novo nível da árvore.
 A troca de perspectiva é feita para cada plano que é gerado a partir do estado do jogo.
 O Algoritmo~\ref{alg:meuahtn} ilustra o pseudo código do algoritmo de AHTN implementado.
 
