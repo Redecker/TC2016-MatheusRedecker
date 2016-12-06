@@ -144,14 +144,14 @@ O melhor plano é retornado na linha~\ref{alg:meuahtn:retorno}.
 	\caption{Pseudo código do algoritmo de AHTN implementado.}
 	\label{alg:meuahtn}
  	\begin{algorithmic}[1]		
- 		\Function {ATHNMax}{$estado, planoMax, planoMin, deph$}
-	 		\If {$terminal(estado) \vee d \leq 0$} \label{alg:meuahtn:terminal}
+ 		\Function {ATHNMax}{$estado, planoMax, planoMin, prof$}
+	 		\If {$terminal(estado) \vee prof \leq 0$} \label{alg:meuahtn:terminal}
 		 		\State	\Return $(planoMax, planoMin, avaliacao(estado))$
 	 		\EndIf
-	 		\State {$nextAction(planoMax)$} \label{alg:meuahtn:nexaction}
+	 		\State {$nextAction(estado, planoMax)$} \label{alg:meuahtn:nexaction}
 	 		\State $(Pmax', Pmin', ev') = \perp, \perp, -\infty$
 			\ForAll{$plano \in getPlanos(estado)$} \label{alg:meuahtn:for}
-		 		\State $(Pmax, Pmin, ev) = \Call{AHTNMin}{(estado, planoMax, planoMin, deph-1)}$ \label{alg:meuahtn:ahtnmin}
+		 		\State $(Pmax, Pmin, ev) = \Call{AHTNMin}{(estado, planoMax, plano, prof-1)}$ \label{alg:meuahtn:ahtnmin}
 			 	\If {$ev' > ev$} \label{alg:meuahtn:avali}
 					\State $(Pmax', Pmin', ev') = (Pmax, Pmin, ev)$
 				\EndIf		 		 		

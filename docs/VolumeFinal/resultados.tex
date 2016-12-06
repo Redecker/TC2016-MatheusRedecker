@@ -132,7 +132,7 @@ A colocação de obstáculos no mapa não alterou a maneira com que as técnicas
 		LightRush           & 0\%                & 100\%                  & 0\%                & 100\%                  \\ \hline
 		WorkerRush          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
 		MonteCarlo          & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
-		Minimax             & 0\%                & 80\%                  & 80\%              & 80\%                   \\ \hline
+		Minimax             & 0\%                & 80\%                   & 80\%               & 80\%                   \\ \hline
 		Portfolio           & 0\%                & 0\%                    & 0\%                & 0\%                    \\ \hline
 	\end{tabular}
 \end{table}
@@ -145,6 +145,13 @@ O tempo parado faz com que o algoritmo de AHTN consiga gerar as ações necessá
 O grande problema dos domínios modelados é não ter um plano de contingência.
 O adversário pode estar criando muitas tropas, mas o domínio segue o plano de criar suas unidades de ataque, o que leva o adversário a vitória.
 Os domínios perdem contra técnicas que treinam unidades de ataque de forma rápida, por causa do tempo que leva para construir um quartel e revidar ao ataque.
+
+Os lados do jogo, apesar de serem espelhados, influenciam no resultado do jogo.
+A camada de abstração do MicroRTS fornece um local mais propicio para a construção do quartel no lado vermelho, fazendo com que ele consiga treinar tropas em mais direções do que o lado azul.
+Por exemplo, no mapa 1 o quartel, no lado azul, é posicionado entre o recurso limite do jogo superior, enquanto no lado vermelho ele é feito uma posição abaixo da base.
+Outra diferença proporcionada pelos lados do jogo é o comportamento das unidades de ataque nas técnicas presentes no MicroRTS, quando estão jogando no lado vermelho há um impeto de ataque, as tropas no momento em que são treinadas são enviadas para o ataque.
+No lado azul isso não acontece, as tropas após serem criadas esperam um tempo antes de serem submetidas a batalha.
+Esses fatores fazem com que os resultados obtidos no lado vermelho sejam melhores do que no lado azul.
 
  \section{Tamanho de cada IA}
 
