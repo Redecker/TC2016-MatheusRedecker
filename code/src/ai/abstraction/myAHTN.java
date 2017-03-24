@@ -5,7 +5,6 @@ import ai.abstraction.AbstractionLayerAI;
 import ai.abstraction.pathfinding.PathFinding;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,9 +48,7 @@ public class myAHTN extends AbstractionLayerAI {
 
     private int rounds = 0;
     private static int roundsToAction = 50;
-    
-    private boolean print = false;
-    
+        
     private static String strategy = "HighLevel2";
     
     private static long totalTime = 0;
@@ -107,13 +104,6 @@ public class myAHTN extends AbstractionLayerAI {
     }    
 	
 	public Node AHTNMax(Plano planMax, int ponteiroMax, Plano planMin, int ponteiroMin, int deph){
-		//print("Entrei MAX");
-		//print("O estado do jogo é esse: ");
-		//print(planMax.getMeuEstadoJogo().toString());
-		//print("A profundidade é: " + deph);
-		//print("Plano que eu to iterando: " + planMax.toString());
-		
-		
 		//se o estado é terminal retorna os planos de max e min, e a utilidade do estado s
 		if(planMax.getMeuEstadoJogo().evaluation() < 0 || deph == 0){
 			//print("MAX Retornei porque o jogo acabou ou profundidade");
@@ -126,16 +116,10 @@ public class myAHTN extends AbstractionLayerAI {
 		//altera o ponteiro e muda para perspectiva de Min
 		int next = nextAction(planMax, ponteiroMax); 
 		if(next != -1){		
-			//print("MAX ação que eu fiz: " + planMax.getOperacaoPonteiro(ponteiroMax));
-			//print("MAX Novo estado do jogo de acordo com a ação que eu fiz");
-			//print(planMax.getMeuEstadoJogo().toString());
-			
-			//print("Vou chamar para o MIN");
 			ArrayList<Plano> planosDeMin = getPlanosEstadoJogo(planMax.getInimigoEstadoJogo(), "MIN");
 			
 			Node evaluation = new Node(null,null, -999999);
 			for(Plano planoMin : planosDeMin){
-				//print("Chamei para MIN");
 				//setar o estadoDoJogo
 				planoMin.setMeuEstadoJogo(planMax.getInimigoEstadoJogo().clone(planMax.getInimigoEstadoJogo()));
 				planoMin.setInimigoEstadoJogo(planMax.getMeuEstadoJogo().clone(planMax.getMeuEstadoJogo()));
@@ -152,7 +136,6 @@ public class myAHTN extends AbstractionLayerAI {
 		}
 		//se não tiver acabou esse plano
 		else{
-			//print("MAX Retornei porque acabou o plano");
 			Node toReturn = new Node(planMax, planMin, planMax.getMeuEstadoJogo().evaluation());
 			toReturn.setAcao(planMax.getOperacaoPonteiro(0));
 			return toReturn; 
@@ -160,17 +143,8 @@ public class myAHTN extends AbstractionLayerAI {
 	}
     
 	public Node AHTNMin(Plano planMax, int ponteiroMax, Plano planMin,  int ponteiroMin, int deph){
-		//print("Entrei MIN");
-		//print("O estado do jogo é esse: ");
-		//print(planMin.getMeuEstadoJogo().toString());
-		//print("A profundidade é: " + deph);
-		//print("Plano que eu to iterando: " + planMin.toString());
-		
-		
 		//se o estado é terminal retorna os planos de max e min, e a utilidade do estado s
-		//System.out.println(planMin);
 		if(planMin.getMeuEstadoJogo().evaluation() < 0 || deph == 0){
-			//print("MIN Retornei porque o jogo acabou ou profundidade");
 			Node toReturn = new Node(planMax, planMin, planMin.getMeuEstadoJogo().evaluation());
 			toReturn.setAcao(planMin.getOperacaoPonteiro(0));
 			return toReturn;
@@ -180,17 +154,10 @@ public class myAHTN extends AbstractionLayerAI {
 		//altera o ponteiro e muda para perspectiva de Max
 		int next = nextAction(planMin, ponteiroMin); 
 		if(next != -1){			
-			//print("MIN ação que eu fiz: " + planMin.getOperacaoPonteiro(ponteiroMin));
-			//print("MAX Novo estado do jogo de acordo com a ação que eu fiz");
-			//print(planMax.getMeuEstadoJogo().toString());
-			
-			//print("Vou chamar para o MAX");
 			ArrayList<Plano> planosDeMax = getPlanosEstadoJogo(planMin.getInimigoEstadoJogo(), "MAX");
 			
 			Node evaluation = new Node(null,null, 999999);
-			for(Plano planoMax : planosDeMax){
-				//print("Chamei para MAX");
-				
+			for(Plano planoMax : planosDeMax){				
 				//setar o estadoDoJogo
 				planoMax.setMeuEstadoJogo(planMin.getInimigoEstadoJogo().clone(planMin.getInimigoEstadoJogo()));
 				planoMax.setInimigoEstadoJogo(planMin.getMeuEstadoJogo().clone(planMin.getMeuEstadoJogo()));
@@ -207,7 +174,6 @@ public class myAHTN extends AbstractionLayerAI {
 		}
 		//se não tiver acabou esse plano
 		else{
-			//print("MIN Retornei porque acabou o plano");
 			Node toReturn = new Node(planMax, planMin, planMin.getMeuEstadoJogo().evaluation());
 			toReturn.setAcao(planMin.getOperacaoPonteiro(0));
 			return toReturn;
@@ -362,9 +328,7 @@ public class myAHTN extends AbstractionLayerAI {
 	public PlayerAction getAction(int player, GameState gs) throws IOException {
 	
 		if(rounds % roundsToAction == 0){		
-			//long startTime = System.nanoTime();
 			long startTime = System.currentTimeMillis();
-			//print("Novo round");
 			//inicia as classes para controle do jogo
 			//inicia componentes do jogo global
 			gamestate = gs;
@@ -395,18 +359,12 @@ public class myAHTN extends AbstractionLayerAI {
 		    	}
 		    }	
 			
-			//print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			//System.out.println("Essa ação que vou executar: " + evaluation.getAcao());
 			perfromActions(evaluation.getAcao(), gs, gs.getPhysicalGameState(), meuPlayer);
 			
-			//long endTime = System.nanoTime();
 			long endTime = System.currentTimeMillis();
 			roundsPerformed++;
 			totalTime+= (endTime -startTime);
-			DecimalFormat df = new DecimalFormat("#.000");
-			System.out.println(rounds + ";" + (double) (endTime*1.0-startTime*1.0)/1000);///1000000000);
-			//System.out.println(rounds + ";" + (endTime-startTime)/1000000000);
-			//System.out.println((endTime-startTime)/1000000);
+			System.out.println(rounds + ";" + (double) (endTime*1.0-startTime*1.0)/1000);
 		}
 		
 		rounds++;
@@ -515,8 +473,8 @@ public class myAHTN extends AbstractionLayerAI {
             if (nroBarracks < 1) {
 			    if (p.getResources() >= barracksType.cost) {
 			        int pos = findBuildingPosition(reservedPositions, worker, p, pgs);
-			        if((pos % pgs.getWidth()) /*+ 2*/ < pgs.getHeight()) build(worker, barracksType, (pos % pgs.getWidth()) /*+ 2*/, pos / pgs.getWidth());
-			        else if((pos / pgs.getWidth()) /*+ 2*/ < pgs.getWidth()) build(worker, barracksType, (pos % pgs.getWidth()), pos / pgs.getWidth()/*+2*/);
+			        if((pos % pgs.getWidth()) < pgs.getHeight()) build(worker, barracksType, (pos % pgs.getWidth()) , pos / pgs.getWidth());
+			        else if((pos / pgs.getWidth()) < pgs.getWidth()) build(worker, barracksType, (pos % pgs.getWidth()), pos / pgs.getWidth());
 			        else{
 			        	build(worker, barracksType, (pos % pgs.getWidth()), pos / pgs.getWidth());
 			        }
@@ -607,10 +565,5 @@ public class myAHTN extends AbstractionLayerAI {
 
         return bestPos;
     }
-	
-	//metodo de print
-	private void print(String message){
-	    	if (print) System.out.println(message);
-	    }
 	    
 }

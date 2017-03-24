@@ -7,20 +7,9 @@ package tests;
 import ai.core.AI;
 import ai.evaluation.SimpleEvaluationFunction;
 import ai.minimax.RTMiniMax.IDRTMinimax;
-import ai.montecarlo.MonteCarlo;
-import ai.portfolio.PortfolioAI;
-import ai.*;
 import ai.abstraction.*;
 import ai.abstraction.pathfinding.BFSPathFinding;
 import gui.PhysicalGameStatePanel;
-
-//import java.io.BufferedReader;
-//import java.io.BufferedWriter;
-//import java.io.File;
-//import java.io.FileOutputStream;
-//import java.io.InputStream;
-//import java.io.InputStreamReader;
-//import java.io.OutputStreamWriter;
 import javax.swing.JFrame;
 import rts.GameState;
 import rts.PhysicalGameState;
@@ -34,9 +23,6 @@ import rts.units.UnitTypeTable;
 public class GameVisualSimulationTest {
     public static void main(String args[]) throws Exception {
         UnitTypeTable utt = new UnitTypeTable();
-        UnitTypeTable utt2 = new UnitTypeTable();
-        //PhysicalGameState pgs = PhysicalGameState.load("maps/basesWorkers16x16.xml", utt);
-        //PhysicalGameState pgs = PhysicalGameState.load("maps/basesWorkers8x8Obstacle.xml", utt);
         PhysicalGameState pgs = PhysicalGameState.load("maps/basesWorkersBarracks8x8.xml", utt);
 
         GameState gs = new GameState(pgs, utt);
@@ -72,7 +58,6 @@ public class GameVisualSimulationTest {
         //AI ai2 = new PortfolioAI(new AI[]{new WorkerRush(utt), new LightRush(utt), new RangedRush(utt), new RandomBiasedAI()}, new boolean[]{true,true,true,false}, 100, -1, 400, new SimpleEvaluationFunction());
         
         JFrame w = PhysicalGameStatePanel.newVisualizer(gs,640,640,false,PhysicalGameStatePanel.COLORSCHEME_BLACK);
-//        JFrame w = PhysicalGameStatePanel.newVisualizer(gs,640,640,false,PhysicalGameStatePanel.COLORSCHEME_WHITE);
         
         long nextTimeToUpdate = System.currentTimeMillis() + PERIOD;
         do{
@@ -97,10 +82,6 @@ public class GameVisualSimulationTest {
                 }
             }
         }while(!gameover && gs.getTime()<MAXCYCLES);
-        
-        //System.out.println("Tempo Medio de execução: " + ai2.tempoMedioAcoes());
-        //System.out.println("Rounds Passados: " + ai2.getRounds());
-       // System.out.println("Rounds Calculados " + ai2.getRoundsPerformed());
         System.out.println("Game Over");
     }    
 
